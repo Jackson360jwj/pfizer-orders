@@ -163,28 +163,11 @@ textarea{height:72px;resize:vertical;}
   <div class="app-header">
     <div class="logo-text">REALITY<span>◆</span>ENGINEERING</div>
     <div class="sub">Pfizer Symposia — Quote Generator</div>
-    <div style="margin-top:14px;">
-      <button onclick="openImport()" style="padding:9px 20px;background:#27ae60;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">📥 Import Order</button>
-    </div>
   </div>
 
   <!-- EDIT HINT — shown after import -->
   <div id="edit-hint-banner" style="display:none;background:#e8f5e9;border:1px solid #4caf50;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#1b5e20;">
     ✏️ <strong>Order imported — all fields below are editable.</strong> Adjust quantities, scanner type (with/without data), API cost, and add-ons before clicking Generate Quote.
-  </div>
-
-  <!-- IMPORT DIALOG -->
-  <div id="import-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:none;align-items:center;justify-content:center;">
-    <div style="background:#fff;border-radius:10px;padding:28px;max-width:540px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,.2);">
-      <h2 style="font-size:16px;font-weight:700;color:#1a3a5c;margin-bottom:8px;">📥 Import Order from Form</h2>
-      <p style="font-size:13px;color:#555;margin-bottom:12px;">Paste the Import Code from the bottom of the order submission email:</p>
-      <textarea id="import-input" style="width:100%;height:100px;border:1px solid #ddd;border-radius:5px;padding:8px;font-family:monospace;font-size:11px;resize:vertical;" placeholder="Paste import code here…"></textarea>
-      <div id="import-error" style="display:none;color:#e74c3c;font-size:12px;margin-top:6px;">⚠️ Invalid code. Please paste the full import code from the order email.</div>
-      <div style="display:flex;gap:10px;margin-top:14px;">
-        <button onclick="doImport()" style="padding:10px 24px;background:#1a3a5c;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:700;cursor:pointer;">Import</button>
-        <button onclick="closeImport()" style="padding:10px 20px;background:#fff;border:2px solid #1a3a5c;color:#1a3a5c;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;">Cancel</button>
-      </div>
-    </div>
   </div>
 
   <!-- IMPORT SUCCESS BANNER -->
@@ -929,19 +912,11 @@ function updateGrandTotal(){
   $id('q_grand').textContent = fmt(sum);
 }
 
-// ── Import Order ──
-function openImport(){
-  $id('import-overlay').style.display='flex';
-  $id('import-input').value='';
-  $id('import-error').style.display='none';
-}
-function closeImport(){
-  $id('import-overlay').style.display='none';
-}
-function doImport(){
-  const raw = $id('import-input').value.trim();
+// ── Import Order (called automatically via URL ?import= parameter from Order Management) ──
+function doImport(raw){
+  if(!raw) raw = '';
   let d;
-  try { d = JSON.parse(atob(raw)); } catch(e){ $id('import-error').style.display='block'; return; }
+  try { d = JSON.parse(atob(raw)); } catch(e){ console.error('Import failed: invalid code', e); return; }
 
   _importedData = d;
 
@@ -1011,7 +986,6 @@ function doImport(){
   if(d.api_cost && $id('api_cost')) $id('api_cost').value = d.api_cost;
   // Set today's quote date
   $id('f_qdate').value = new Date().toISOString().split('T')[0];
-  closeImport();
   $id('import-banner').style.display='block';
   const editHint = $id('edit-hint-banner');
   if(editHint) editHint.style.display = 'block';
@@ -1196,12 +1170,8 @@ function newOrder(){
   const params = new URLSearchParams(location.search);
   const code = params.get('import');
   if(!code) return;
-  const inp = $id('import-input');
-  if(inp){
-    inp.value = decodeURIComponent(code);
-    // Small delay to ensure DOM is ready
-    setTimeout(doImport, 100);
-  }
+  // Small delay to ensure DOM is ready
+  setTimeout(() => doImport(decodeURIComponent(code)), 100);
 })();
 </script>
 </body>
