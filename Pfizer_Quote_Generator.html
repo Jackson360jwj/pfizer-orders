@@ -1106,7 +1106,7 @@ function backToEdit(){
 
 // Business type map based on service selected (use first/primary selection for OTIS)
 function otisBusinessType(){
-  const map = { app:'Scan iPhone', scanner:'Scan iPhone', qr:'QR Code', image:'Image Capture', list:'List Import' };
+  const map = { app:'Mobile App', scanner:'Scanner', qr:'QR Code', image:'Image Capture', list:'List Import' };
   // Use the first selected service type as the primary OTIS business type
   for(const s of ['app','scanner','qr','image','list']){
     if(selectedSvcs.has(s)) return map[s] || s;
@@ -1136,18 +1136,13 @@ async function createOTISOrder(){
 
   $id('otis_status').textContent = '⏳ Creating quote in OTIS…';
 
-  // QuotationDate: use manual override if set, otherwise today in YYYY-MM-DD format
-  const qdate = val('f_qdate') || new Date().toISOString().split('T')[0];
-
   const payload = {
-    ProjectTitle:   otisProjectTitle(),
-    AccountOwner:   'justinjackson',
-    AccountManager: 'michelle',
-    Status:         'Quoted',
-    CompanyName:    'Pfizer Amex',
-    ContactName:    val('f_mgr') || val('f_pfz') || '',
-    BusinessType:   'Pfizer symposia AMEX',
-    QuotationDate:  qdate,
+    ProjectTitle:  otisProjectTitle(),
+    AccountOwner:  'justinjackson',
+    Status:        'Quoted',
+    CompanyName:   'Pfizer Amex',
+    ContactName:   val('f_mgr') || val('f_pfz') || '',
+    BusinessType:  otisBusinessType() || 'Mobile App',
   };
 
   const payloadStr = JSON.stringify(payload, null, 2);
