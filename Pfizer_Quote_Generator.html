@@ -1124,17 +1124,29 @@ async function createOTISOrder(){
   const qdate = val('f_qdate') || new Date().toISOString().split('T')[0];
 
   const payload = {
-    ProjectTitle:  otisProjectTitle(),
-    AccountOwner:  'justinjackson',   // OTIS username string (confirmed from API)
-    AccountManager: 'michelle',
-    Status:        'Quoted',
-    CompanyName:   'Pfizer Amex',
-    ContactName:   val('f_mgr') || '',
-    BusinessType:  otisBusinessType(),
-    QuotationDate: qdate,
+    // Core identifiers
+    ProjectTitle:    otisProjectTitle(),
+    AccountOwner:    'justinjackson',
+    AccountManager:  'michelle',
+    Status:          'Quoted',
+    CompanyName:     'Pfizer Amex',
+    // Contact
+    ContactName:     val('f_mgr')       || '',
+    ContactEmail:    val('f_mgr_email') || '',
+    // Event details
+    EventName:       val('f_name')   || val('f_acronym') || '',
+    EventStartDate:  val('f_date')   || '',
+    EventEndDate:    val('f_date_end') || val('f_date') || '',
+    EventLocation:   val('f_addr')   || '',
+    EventType:       val('f_etype')  || '',
+    // Service
+    BusinessType:    otisBusinessType(),
+    QuotationDate:   qdate,
+    // Optional context
+    Notes:           val('f_notes')  || '',
   };
 
-  console.log('OTIS quote payload:', payload);
+  console.log('OTIS quote payload:', JSON.stringify(payload, null, 2));
 
   // Call Cloudflare Worker (holds OTIS credentials securely — zero secrets in this file)
   try {
