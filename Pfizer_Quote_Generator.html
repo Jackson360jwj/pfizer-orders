@@ -1150,9 +1150,8 @@ async function createOTISOrder(){
     QuotationDate:  qdate,
   };
 
-  // Show exact payload on screen so we can debug without Cloudflare logs
-  $id('otis_status').innerHTML = '⏳ Sending to OTIS…<br><pre style="font-size:10px;text-align:left;background:#f0f4f8;padding:8px;border-radius:4px;margin-top:6px;white-space:pre-wrap;">' + JSON.stringify(payload, null, 2) + '</pre>';
-  console.log('OTIS quote payload:', JSON.stringify(payload, null, 2));
+  const payloadStr = JSON.stringify(payload, null, 2);
+  console.log('OTIS quote payload:', payloadStr);
 
   // Call Cloudflare Worker (holds OTIS credentials securely — zero secrets in this file)
   try {
@@ -1167,7 +1166,13 @@ async function createOTISOrder(){
     try { data = JSON.parse(txt); } catch(e){}
 
     if(!resp.ok){
-      $id('otis_status').innerHTML = '❌ OTIS error ' + resp.status + ':<br><pre style="font-size:10px;text-align:left;background:#fff0f0;padding:8px;border-radius:4px;margin-top:6px;white-space:pre-wrap;">' + txt + '</pre>';
+      // Show BOTH the payload sent AND the error response — neither disappears
+      $id('otis_status').innerHTML =
+        '❌ OTIS error ' + resp.status + '<br>' +
+        '<b style="font-size:11px;">Payload sent:</b>' +
+        '<pre style="font-size:10px;text-align:left;background:#f0f4f8;padding:8px;border-radius:4px;margin:4px 0;white-space:pre-wrap;">' + payloadStr + '</pre>' +
+        '<b style="font-size:11px;">OTIS response:</b>' +
+        '<pre style="font-size:10px;text-align:left;background:#fff0f0;padding:8px;border-radius:4px;margin:4px 0;white-space:pre-wrap;">' + txt + '</pre>';
       console.error('OTIS create quote response:', resp.status, txt);
       return;
     }
