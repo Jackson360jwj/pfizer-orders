@@ -1137,12 +1137,13 @@ async function createOTISOrder(){
   $id('otis_status').textContent = '⏳ Creating quote in OTIS…';
 
   const payload = {
-    ProjectTitle:  otisProjectTitle(),
-    AccountOwner:  'justinjackson',
-    Status:        'Quoted',
-    CompanyName:   'Pfizer Amex',
-    ContactName:   val('f_mgr') || val('f_pfz') || '',
-    BusinessType:  otisBusinessType() || 'Mobile App',
+    ProjectTitle:   otisProjectTitle(),
+    AccountOwner:   'justinjackson',
+    AccountManager: 'michelle',
+    Status:         1,   // 1 = Quoted (OTIS uses numeric status values, not strings)
+    CompanyName:    'Pfizer Amex',
+    ContactName:    val('f_mgr') || val('f_pfz') || '',
+    BusinessType:   otisBusinessType() || 'Mobile App',
   };
 
   const payloadStr = JSON.stringify(payload, null, 2);
