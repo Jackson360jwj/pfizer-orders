@@ -1204,13 +1204,42 @@ function newOrder(){
   }
 })();
 
-// ── Auto-import from URL ?import= parameter (called from Order Management) ──
+// ── Auto-import from Order Management ────────────────────────────────────────
+// Supports two modes:
+//   ?order_id=<id>   — fetch full order from Worker by ID (preferred, no URL length limit)
+//   ?import=<base64> — legacy: full order base64-encoded in URL (kept for compatibility)
 (function(){
-  const params = new URLSearchParams(location.search);
-  const code = params.get('import');
-  if(!code) return;
-  // Small delay to ensure DOM is ready
-  setTimeout(() => doImport(decodeURIComponent(code)), 100);
+  const params  = new URLSearchParams(location.search);
+  const orderId = params.get('order_id');
+  const code    = params.get('import');
+
+  if (orderId) {
+    // New mode: wait for login, then fetch the order from the Worker
+    function tryFetch() {
+      if (!sessionToken) {
+        // Not logged in yet — retry after login overlay is dismissed
+        setTimeout(tryFetch, 500);
+        return;
+      }
+      fetch(WORKER_URL + '/order/' + encodeURIComponent(orderId), {
+        headers: authHeaders()
+      })
+      .then(r => {
+        if (!r.ok) throw new Error('Order not found (' + r.status + ')');
+        return r.json();
+      })
+      .then(orderObj => {
+        const base64 = btoa(unescape(encodeURIComponent(JSON.stringify(orderObj))));
+        doImport(base64);
+      })
+      .catch(e => console.error('[Auto-import] Failed to fetch order:', e));
+    }
+    setTimeout(tryFetch, 300);
+
+  } else if (code) {
+    // Legacy mode: base64-encoded order in URL
+    setTimeout(() => doImport(decodeURIComponent(code)), 100);
+  }
 })();
 </script>
 </body>

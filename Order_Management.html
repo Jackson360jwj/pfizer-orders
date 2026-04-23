@@ -501,13 +501,9 @@ function renderStatusActions(o){
 }
 
 function openInQuoteGen(orderId){
-  const o = allOrders.find(x => x.order_id === orderId);
-  if(!o) return;
-  try {
-    const code = btoa(unescape(encodeURIComponent(JSON.stringify(o))));
-    // Open Quote Generator — update this URL to wherever Pfizer_Quote_Generator.html is hosted
-    window.open('Pfizer_Quote_Generator.html?import=' + encodeURIComponent(code), '_blank');
-  } catch(e){ alert('Could not encode order data: ' + e.message); }
+  // Pass only the order_id — Quote Generator fetches the full order from the Worker
+  // (avoids "URI Too Long" error that happened when we encoded the entire order in the URL)
+  window.open('Pfizer_Quote_Generator.html?order_id=' + encodeURIComponent(orderId), '_blank');
 }
 
 async function updateStatus(orderId, newStatus){
