@@ -943,11 +943,22 @@ function updateGrandTotal(){
 }
 
 // ── Import Order (called automatically via URL ?import= parameter from Order Management) ──
+// doImport — legacy base64 path (used by ?import= URL param)
 function doImport(raw){
   if(!raw) raw = '';
   let d;
-  try { d = JSON.parse(decodeURIComponent(escape(atob(raw)))); } catch(e){ console.error('Import failed: invalid code', e); return; }
+  try {
+    // TextDecoder correctly handles UTF-8 multi-byte chars (bullet points, em-dashes, etc.)
+    const bytes = Uint8Array.from(atob(raw), c => c.charCodeAt(0));
+    d = JSON.parse(new TextDecoder().decode(bytes));
+  } catch(e){ console.error('Import failed: invalid code', e); return; }
+  doImportObject(d);
+}
 
+// doImportObject — fills the form from a plain JS object (no base64 involved)
+// Called directly when fetching order from Worker to avoid any encoding issues
+function doImportObject(d){
+  if(!d) return;
   _importedData = d;
 
   // Fill event fields — map both old and new field names
@@ -1034,8 +1045,8 @@ function doImport(raw){
   liveCalc();
   window.scrollTo({top:0,behavior:'smooth'});
 
-  // Save to proxy
-  saveOrderToProxy(d, raw);
+  // Save to proxy (import_code not needed — order already exists in Worker KV)
+  saveOrderToProxy(d, d.order_id || '');
 }
 
 async function saveOrderToProxy(d, importCode){
@@ -1139,6 +1150,8 @@ async function createOTISOrder(){
     QuotationDate:  qdate,
   };
 
+  // Show exact payload on screen so we can debug without Cloudflare logs
+  $id('otis_status').innerHTML = '⏳ Sending to OTIS…<br><pre style="font-size:10px;text-align:left;background:#f0f4f8;padding:8px;border-radius:4px;margin-top:6px;white-space:pre-wrap;">' + JSON.stringify(payload, null, 2) + '</pre>';
   console.log('OTIS quote payload:', JSON.stringify(payload, null, 2));
 
   // Call Cloudflare Worker (holds OTIS credentials securely — zero secrets in this file)
@@ -1154,7 +1167,7 @@ async function createOTISOrder(){
     try { data = JSON.parse(txt); } catch(e){}
 
     if(!resp.ok){
-      $id('otis_status').textContent = '❌ OTIS error ' + resp.status + ': ' + txt.substring(0,150);
+      $id('otis_status').innerHTML = '❌ OTIS error ' + resp.status + ':<br><pre style="font-size:10px;text-align:left;background:#fff0f0;padding:8px;border-radius:4px;margin-top:6px;white-space:pre-wrap;">' + txt + '</pre>';
       console.error('OTIS create quote response:', resp.status, txt);
       return;
     }
@@ -1234,8 +1247,8 @@ function newOrder(){
         return r.json();
       })
       .then(orderObj => {
-        const base64 = btoa(unescape(encodeURIComponent(JSON.stringify(orderObj))));
-        doImport(base64);
+        // Pass the object directly — no base64 encoding needed, avoids UTF-8 garbling
+        doImportObject(orderObj);
       })
       .catch(e => console.error('[Auto-import] Failed to fetch order:', e));
     }
