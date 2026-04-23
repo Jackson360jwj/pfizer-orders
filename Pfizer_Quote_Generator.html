@@ -1136,14 +1136,21 @@ async function createOTISOrder(){
 
   $id('otis_status').textContent = '⏳ Creating quote in OTIS…';
 
+  // Build QuotationDate in ISO format (YYYY-MM-DD) — OTIS API expects ISO internally
+  const now = new Date();
+  const qdate = now.getFullYear() + '-' +
+                (now.getMonth()+1).toString().padStart(2,'0') + '-' +
+                now.getDate().toString().padStart(2,'0');
+
   const payload = {
+    OrganizationId: 825,            // Pfizer's org ID in OTIS (confirmed from GET /orders)
     ProjectTitle:   otisProjectTitle(),
     AccountOwner:   'justinjackson',
-    AccountManager: 'michelle',
-    Status:         1,   // 1 = Quoted (OTIS uses numeric status values, not strings)
-    CompanyName:    'Pfizer Amex',
+    Status:         'Quoted',
+    CompanyName:    val('f_name') || 'Pfizer Amex',
     ContactName:    val('f_mgr') || val('f_pfz') || '',
     BusinessType:   otisBusinessType() || 'Mobile App',
+    QuotationDate:  qdate,
   };
 
   const payloadStr = JSON.stringify(payload, null, 2);
