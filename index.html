@@ -218,6 +218,7 @@ textarea{height:72px;resize:vertical;}
             <option>Product Theater</option>
             <option>Symposia</option>
             <option>Education Reception</option>
+            <option>Congress</option>
           </select>
         </div>
         <div class="fgroup fw">
@@ -300,6 +301,7 @@ textarea{height:72px;resize:vertical;}
           <label class="lbl">Survey Type <span class="req">*</span></label>
           <select id="f_survey_type" onchange="onSurveyChange()">
             <option value="">— Select —</option>
+            <option>Standard TOV Questions</option>
             <option>Scan and Go (No Survey)</option>
             <option>Attendee Type Survey</option>
             <option>Attendee Type with Notes</option>
@@ -324,6 +326,10 @@ textarea{height:72px;resize:vertical;}
         <div class="fgroup">
           <label class="lbl">Association Contact Name</label>
           <input type="text" id="f_assoc_contact_name" placeholder="e.g. Jane Smith">
+        </div>
+        <div class="fgroup">
+          <label class="lbl">Association Contact Phone</label>
+          <input type="tel" id="f_assoc_contact_phone" placeholder="e.g. 571-319-4312">
         </div>
         <div class="fgroup">
           <label class="lbl">Association Contact Email</label>
@@ -563,6 +569,7 @@ function buildData(){
     product_program_details: val('f_product_details'),
     clinical_internal_name: val('f_clinical_name'),
     assoc_contact_name: val('f_assoc_contact_name'),
+    assoc_contact_phone: val('f_assoc_contact_phone'),
     assoc_contact_email: val('f_assoc_contact_email'),
     assoc_vendor_name:  val('f_assoc_vendor_name'),
     badge_api_available: badgeAPI,
