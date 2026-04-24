@@ -1106,7 +1106,7 @@ function backToEdit(){
 
 // Business type map based on service selected (use first/primary selection for OTIS)
 function otisBusinessType(){
-  const map = { app:'Mobile App', scanner:'Scanner', qr:'QR Code', image:'Image Capture', list:'List Import' };
+  const map = { app:'app', scanner:'scanners', qr:'qr', image:'image', list:'list' }; // lowercase, matches OTIS API values
   // Use the first selected service type as the primary OTIS business type
   for(const s of ['app','scanner','qr','image','list']){
     if(selectedSvcs.has(s)) return map[s] || s;
@@ -1136,21 +1136,20 @@ async function createOTISOrder(){
 
   $id('otis_status').textContent = '⏳ Creating quote in OTIS…';
 
-  // Build QuotationDate in ISO format (YYYY-MM-DD) — OTIS API expects ISO internally
+  // Payload — field names/values confirmed from GET /quotes/13228 (last working quote)
   const now = new Date();
   const qdate = now.getFullYear() + '-' +
                 (now.getMonth()+1).toString().padStart(2,'0') + '-' +
-                now.getDate().toString().padStart(2,'0');
+                now.getDate().toString().padStart(2,'0') + 'T00:00:00';
 
   const payload = {
-    OrganizationId: 825,            // Pfizer's org ID in OTIS (confirmed from GET /orders)
     ProjectTitle:   otisProjectTitle(),
-    AccountOwner:   'justinjackson',
-    Status:         'Quoted',
-    CompanyName:    val('f_name') || 'Pfizer Amex',
+    SalesPerson:    'justinjackson',               // correct field name (NOT AccountOwner)
+    Status:         1,                             // 1 = Quoted (confirmed from working quote)
+    CompanyName:    val('f_name') || 'Pfizer',
     ContactName:    val('f_mgr') || val('f_pfz') || '',
-    BusinessType:   otisBusinessType() || 'Mobile App',
-    QuotationDate:  qdate,
+    BusinessType:   otisBusinessType() || 'app',
+    QuotationDate:  qdate,                         // "YYYY-MM-DDTHH:00:00" (confirmed format)
   };
 
   const payloadStr = JSON.stringify(payload, null, 2);
