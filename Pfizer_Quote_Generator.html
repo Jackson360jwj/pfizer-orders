@@ -127,6 +127,7 @@ textarea{height:72px;resize:vertical;}
 @media print{
   body{background:#fff;}
   .app-header,.card,.total-banner,.btn-row,.quote-controls{display:none!important;}
+  #edit-hint-banner,#import-banner{display:none!important;}
   #qpreview{display:block!important;box-shadow:none;padding:0;margin:0;}
   #qedit-hint{display:none!important;}
 }
@@ -1265,6 +1266,29 @@ function newOrder(){
     // Legacy mode: base64-encoded order in URL
     setTimeout(() => doImport(decodeURIComponent(code)), 100);
   }
+})();
+
+// ── Hide screen-only banners when printing ──────────────────────────────────
+(function(){
+  const HIDE_IDS = ['edit-hint-banner', 'import-banner'];
+  const saved = {};
+
+  window.addEventListener('beforeprint', function(){
+    HIDE_IDS.forEach(function(id){
+      const el = document.getElementById(id);
+      if(el){
+        saved[id] = el.style.display;
+        el.style.setProperty('display', 'none', 'important');
+      }
+    });
+  });
+
+  window.addEventListener('afterprint', function(){
+    HIDE_IDS.forEach(function(id){
+      const el = document.getElementById(id);
+      if(el) el.style.display = saved[id] || '';
+    });
+  });
 })();
 </script>
 </body>
