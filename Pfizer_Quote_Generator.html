@@ -377,6 +377,18 @@ textarea{height:72px;resize:vertical;}
           <button class="qbtn" onclick="adj('scanner_qty_data',1)">+</button>
         </div>
       </div>
+      <div class="svc-row" style="background:#fff8e1;border:1px solid #f9a825;">
+        <div>
+          <div class="svc-name">API Connection Passthrough <span style="color:#e67e22;font-size:11px;">(if required)</span></div>
+          <div class="svc-desc" style="color:#c0392b;">Event venue API cost — estimate shown. Katherine to verify exact amount before finalizing.</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <label class="opt" style="margin:0;"><input type="checkbox" id="opt_api_scanner" onchange="liveCalc()"> Include</label>
+          <span style="font-size:12px;color:#555;margin-left:8px;">$</span>
+          <input type="number" id="scanner_api_cost" value="500" min="0" style="width:80px;text-align:center;padding:5px 6px;border:1px solid #f9a825;border-radius:4px;font-size:13px;font-weight:700;" oninput="liveCalc()">
+          <span style="font-size:10px;color:#888;font-style:italic;">est.</span>
+        </div>
+      </div>
     </div>
 
     <!-- QR -->
@@ -769,6 +781,10 @@ function calcPrices(){
     const apiIsEst = (apiCost === 1200);
     lines.push({desc:'API Connection Passthrough' + (apiIsEst ? ' <em style="font-size:10px;color:#e67e22;">(estimate — Katherine to verify exact cost)</em>' : ''), qty:null, unit:null, total:apiCost});
     api += apiCost;
+  }
+  if(selectedSvcs.has('scanner') && $id('opt_api_scanner') && $id('opt_api_scanner').checked){
+    const scanApiCost = parseFloat($id('scanner_api_cost').value)||500;
+    lines.push({desc:'API Connection Passthrough',qty:null,unit:null,total:scanApiCost}); api+=scanApiCost;
   }
   if(selectedSvcs.has('image') && $id('opt_api_img') && $id('opt_api_img').checked){
     lines.push({desc:'API connection cost passthrough',qty:null,unit:null,total:500}); api+=500;

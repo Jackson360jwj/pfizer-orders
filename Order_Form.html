@@ -277,9 +277,10 @@ textarea{height:72px;resize:vertical;}
       <div class="fg">
         <div class="fgroup fw">
           <label class="lbl">Product / Program <span class="req">*</span></label>
-          <select id="f_product_program" onchange="onProductChange()">
-            <option value="">— Select —</option>
-          </select>
+          <input type="text" id="f_product_program" list="product_program_options"
+                 placeholder="Type or select a product…" autocomplete="off"
+                 oninput="onProductChange()" onchange="onProductChange()">
+          <datalist id="product_program_options"></datalist>
         </div>
         <div class="fgroup fw conditional-field" id="product_details_wrap">
           <label class="lbl">Product / Program Details <span class="req">*</span></label>
@@ -402,18 +403,18 @@ textarea{height:72px;resize:vertical;}
 // ── Product List (easy to maintain) ──
 const PRODUCT_LIST = [
   'Abrysvo','Braftovi / Mektovi','Bosulif','Cibinqo','Daurismo','Elrexfio',
-  'Emblaveo','Ibrance','Inlyta','Litfulo','Lorbrena','Ngenla','Padcev',
+  'Emblaveo','Ibrance','Inlyta','Litfulo','Lorbrena','Ngenla','Nurtec','Padcev',
   'Paxlovid','Prevnar 13','Prevnar 20','Talzenna','Tivdak','Tukysa','Xtandi',
   'Above Brand / Clinical Development','Other'
 ];
 
-// Populate product dropdown
+// Populate product datalist (combo box — allows both selection and free text)
 (function(){
-  const sel = document.getElementById('f_product_program');
+  const dl = document.getElementById('product_program_options');
   PRODUCT_LIST.forEach(p => {
     const o = document.createElement('option');
-    o.value = p; o.textContent = p;
-    sel.appendChild(o);
+    o.value = p;
+    dl.appendChild(o);
   });
 })();
 
@@ -454,8 +455,11 @@ function updateQuantityFields(){
 
 function onProductChange(){
   const v = val('f_product_program');
-  $id('product_details_wrap').style.display = (v === 'Other') ? 'block' : 'none';
-  $id('clinical_name_wrap').style.display = (v === 'Above Brand / Clinical Development') ? 'block' : 'none';
+  const isKnown = PRODUCT_LIST.includes(v);
+  const isAboveBrand = (v === 'Above Brand / Clinical Development');
+  // Show details box if they typed something custom (not in the list) or explicitly chose "Other"
+  $id('product_details_wrap').style.display = (!isKnown && v !== '') || v === 'Other' ? 'block' : 'none';
+  $id('clinical_name_wrap').style.display = isAboveBrand ? 'block' : 'none';
 }
 
 function onSurveyChange(){
@@ -512,9 +516,10 @@ function validate(){
     $id('badge_api_group').style.outline = '';
   }
 
-  // Conditional: product details
+  // Conditional: product details required when custom/unknown product entered
   const prod = val('f_product_program');
-  if(prod === 'Other'){
+  const prodIsKnown = PRODUCT_LIST.includes(prod);
+  if(prod && (!prodIsKnown || prod === 'Other')){
     const el = $id('f_product_details');
     el.classList.remove('error');
     if(!el.value.trim()){ el.classList.add('error'); ok = false; }
