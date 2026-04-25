@@ -910,6 +910,9 @@ function buildQuote(){
   const sentStatus = $id('quote_sent_status');
   if(sentStatus){ sentStatus.style.display='none'; }
 
+  // Save current form state back to KV so changes persist when reopened
+  saveCurrentFormState();
+
   // PATCH order status to "Quote Generated"
   patchOrderStatus('Quote Generated', {quote_generated_at: new Date().toISOString()});
 }
@@ -995,8 +998,9 @@ function doImportObject(d){
     assocCard.style.display = 'block';
   }
 
-  // Product field — new form uses 'product_program', old used 'f_product'
-  const prod = d.product_program || d.f_product || '';
+  // Product field — if product_program is "Other", use the details field (actual product name)
+  let prod = d.product_program || d.f_product || '';
+  if(prod === 'Other' && d.product_program_details) prod = d.product_program_details;
   if($id('f_product') && prod) $id('f_product').value = prod;
 
   // Service type — new form sends comma-separated string e.g. "Mobile App, Scanner"
@@ -1064,6 +1068,68 @@ function doImportObject(d){
 
   // Save to proxy (import_code not needed — order already exists in Worker KV)
   saveOrderToProxy(d, d.order_id || '');
+}
+
+// Save the current form state back to KV so changes made in the Quote Generator persist
+async function saveCurrentFormState(){
+  if(!savedOrderId) return; // no order loaded, nothing to save
+  const qbtn = (id) => { const el=$id(id); return el ? el.checked : false; };
+  const qnum = (id) => { const el=$id(id); return el ? parseFloat(el.value)||0 : 0; };
+
+  const patch = {
+    order_id:        savedOrderId,
+    // Event info
+    f_mgr:           val('f_mgr'),
+    f_mgr_email:     val('f_mgr_email'),
+    f_pfz:           val('f_pfz'),
+    f_entity:        val('f_entity'),
+    f_name:          val('f_name'),
+    f_acronym:       val('f_acronym'),
+    f_etype:         val('f_etype'),
+    f_addr:          val('f_addr'),
+    f_date:          val('f_date'),
+    f_time:          val('f_time'),
+    f_meal:          val('f_meal'),
+    f_att:           val('f_att'),
+    f_therapy:       val('f_therapy'),
+    f_product:       val('f_product'),
+    f_owner:         val('f_owner'),
+    f_td:            val('f_td'),
+    f_notes:         val('f_notes'),
+    // Quote details
+    f_qnum:          val('f_qnum'),
+    f_qdate:         val('f_qdate'),
+    // Services selected
+    service_type:    [...selectedSvcs].map(k => ({app:'Mobile App',scanner:'Scanner',qr:'QR Code',image:'Image Capture',list:'List Import'}[k]||k)).join(', '),
+    // Quantities
+    app_qty:         qnum('app_qty'),
+    scanner_qty_nodata: qnum('scanner_qty_nodata'),
+    scanner_qty_data:   qnum('scanner_qty_data'),
+    qr_qty:          qnum('qr_qty'),
+    img_qty:         qnum('img_qty'),
+    list_qty:        qnum('list_qty'),
+    // Pricing options
+    api_cost:        val('api_cost'),
+    scanner_api_cost: val('scanner_api_cost'),
+    tov:             document.querySelector('input[name="tov"]:checked')?.value || '',
+    payment_method:  document.querySelector('input[name="payment"]:checked')?.value || '',
+    // Checkboxes
+    opt_prereg_app:     qbtn('opt_prereg_app')   ? '1' : '0',
+    opt_expedite_app:   qbtn('opt_expedite_app') ? '1' : '0',
+    opt_api_scanner:    qbtn('opt_api_scanner')  ? '1' : '0',
+    opt_api_img:        qbtn('opt_api_img')       ? '1' : '0',
+    opt_prereg_img:     qbtn('opt_prereg_img')    ? '1' : '0',
+    opt_expedite_img:   qbtn('opt_expedite_img')  ? '1' : '0',
+    opt_expedite_list:  qbtn('opt_expedite_list') ? '1' : '0',
+  };
+
+  try {
+    await fetch(WORKER_URL + '/update-order', {
+      method: 'PATCH',
+      headers: authHeaders(),
+      body: JSON.stringify(patch),
+    });
+  } catch(e){ console.error('saveCurrentFormState failed:', e); }
 }
 
 async function saveOrderToProxy(d, importCode){
