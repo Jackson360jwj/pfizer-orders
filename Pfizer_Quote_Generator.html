@@ -1268,7 +1268,7 @@ async function createOTISOrder(){
     ProjectTitle:   otisProjectTitle(),
     SalesPerson:    'justinjackson',               // correct field name (NOT AccountOwner)
     Status:         1,                             // 1 = Quoted (confirmed from working quote)
-    CompanyName:    val('f_name') || 'Pfizer',
+    CompanyName:    'Pfizer AMEX',
     ContactName:    val('f_mgr') || val('f_pfz') || '',
     BusinessType:   otisBusinessType() || 'app',
     QuotationDate:  qdate,                         // "YYYY-MM-DDTHH:00:00" (confirmed format)
