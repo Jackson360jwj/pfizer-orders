@@ -800,13 +800,21 @@ function calcPrices(){
 
   // ── API passthrough (Mobile App requires it) ──
   if(selectedSvcs.has('app')){
-    const apiCost = parseFloat($id('api_cost').value)||1200;
+    const apiRaw  = $id('api_cost') ? $id('api_cost').value.trim() : '';
+    const apiCost = (apiRaw === '' || isNaN(parseFloat(apiRaw))) ? 1200 : parseFloat(apiRaw);
     const apiIsEst = !($id('api_cost_actual') && $id('api_cost_actual').checked);
-    lines.push({desc:'API Connection Passthrough' + (apiIsEst ? ' <em style="font-size:10px;color:#e67e22;">(estimate — Katherine to verify exact cost)</em>' : ''), qty:null, unit:null, total:apiCost});
-    api += apiCost;
+    if(apiCost > 0){
+      lines.push({desc:'API Connection Passthrough' + (apiIsEst ? ' <em style="font-size:10px;color:#e67e22;">(estimate — Katherine to verify exact cost)</em>' : ''), qty:null, unit:null, total:apiCost});
+      api += apiCost;
+    }
+    // If cost is 0 and confirmed actual, show a $0 / no-charge line so it's explicit on the quote
+    if(apiCost === 0 && !apiIsEst){
+      lines.push({desc:'API Connection Passthrough <em style="font-size:10px;color:#27ae60;">(no charge)</em>', qty:null, unit:null, total:0});
+    }
   }
   if(selectedSvcs.has('scanner') && $id('opt_api_scanner') && $id('opt_api_scanner').checked){
-    const scanApiCost = parseFloat($id('scanner_api_cost').value)||500;
+    const scanRaw     = $id('scanner_api_cost') ? $id('scanner_api_cost').value.trim() : '';
+    const scanApiCost = (scanRaw === '' || isNaN(parseFloat(scanRaw))) ? 500 : parseFloat(scanRaw);
     lines.push({desc:'API Connection Passthrough',qty:null,unit:null,total:scanApiCost}); api+=scanApiCost;
   }
   if(selectedSvcs.has('image') && $id('opt_api_img') && $id('opt_api_img').checked){
