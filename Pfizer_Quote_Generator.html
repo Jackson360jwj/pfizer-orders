@@ -1000,7 +1000,9 @@ function doImport(raw){
 
 // doImportObject — fills the form from a plain JS object (no base64 involved)
 // Called directly when fetching order from Worker to avoid any encoding issues
-function doImportObject(d){
+// alreadyInKV=true → order was fetched from Worker KV, just set savedOrderId (skip re-POST)
+// alreadyInKV=false/undefined → fresh import from Order Form, needs POST /save-order
+function doImportObject(d, alreadyInKV){
   if(!d) return;
   _importedData = d;
 
@@ -1059,26 +1061,30 @@ function doImportObject(d){
     if(sec) sec.style.display = 'block';
   }
 
-  // Quantities — new field names from order form
-  if(d.qty_app_licenses && $id('app_qty')) $id('app_qty').value = d.qty_app_licenses;
-  // Scanner qty from order form goes to "without data" by default (can adjust in quote)
-  if(d.qty_scanners && $id('scanner_qty_nodata')) $id('scanner_qty_nodata').value = d.qty_scanners;
-
-  // Legacy quantity fields
-  if(d.app_qty   && $id('app_qty'))     $id('app_qty').value     = d.app_qty;
-  if(d.qr_qty    && $id('qr_qty'))      $id('qr_qty').value      = d.qr_qty;
-  if(d.img_qty   && $id('img_qty'))     $id('img_qty').value     = d.img_qty;
+  // Quantities — prefer saved Quote Generator values; fall back to original order-form values
+  if($id('app_qty'))            $id('app_qty').value            = d.app_qty            || d.qty_app_licenses || 0;
+  if($id('scanner_qty_nodata')) $id('scanner_qty_nodata').value = d.scanner_qty_nodata || d.qty_scanners     || 0;
+  if($id('scanner_qty_data'))   $id('scanner_qty_data').value   = d.scanner_qty_data   || 0;
+  if($id('qr_qty'))             $id('qr_qty').value             = d.qr_qty             || 0;
+  if($id('img_qty'))            $id('img_qty').value            = d.img_qty            || 0;
+  if($id('list_qty'))           $id('list_qty').value           = d.list_qty           || 0;
 
   // TOV
   if(d.tov){ const r=document.querySelector(`input[name="tov"][value="${d.tov}"]`); if(r) r.checked=true; }
-  // Checkboxes
-  const cbMap = {opt_prereg_app:'opt_prereg_app',opt_expedite_app:'opt_expedite_app',
-    opt_api_img:'opt_api_img',opt_prereg_img:'opt_prereg_img',opt_expedite_img:'opt_expedite_img',
-    opt_expedite_list:'opt_expedite_list'};
+  // Payment method
+  if(d.payment_method){ const r=document.querySelector(`input[name="payment"][value="${d.payment_method}"]`); if(r) r.checked=true; }
+  // Checkboxes — includes opt_api_scanner so scanner API state is restored
+  const cbMap = {opt_prereg_app:'opt_prereg_app', opt_expedite_app:'opt_expedite_app',
+    opt_api_scanner:'opt_api_scanner',
+    opt_api_img:'opt_api_img', opt_prereg_img:'opt_prereg_img',
+    opt_expedite_img:'opt_expedite_img', opt_expedite_list:'opt_expedite_list'};
   Object.keys(cbMap).forEach(k => { const el=$id(cbMap[k]); if(el) el.checked=(d[k]==='1'); });
-  // API cost from import
-  if(d.api_cost && $id('api_cost')) $id('api_cost').value = d.api_cost;
+  // API costs
+  if(d.api_cost         && $id('api_cost'))         $id('api_cost').value         = d.api_cost;
+  if(d.scanner_api_cost && $id('scanner_api_cost')) $id('scanner_api_cost').value = d.scanner_api_cost;
   if($id('api_cost_actual')){ $id('api_cost_actual').checked = (d.api_cost_actual === '1'); onApiActualToggle(); }
+  // Quote number — restore if previously saved
+  if(d.f_qnum && $id('f_qnum')) $id('f_qnum').value = d.f_qnum;
   // Set today's quote date
   $id('f_qdate').value = new Date().toISOString().split('T')[0];
   $id('import-banner').style.display='block';
@@ -1090,8 +1096,16 @@ function doImportObject(d){
   liveCalc();
   window.scrollTo({top:0,behavior:'smooth'});
 
-  // Save to proxy (import_code not needed — order already exists in Worker KV)
-  saveOrderToProxy(d, d.order_id || '');
+  // If order already lives in Worker KV (loaded via ?order_id=), just capture the ID —
+  // no need to re-POST and risk resetting order_status or overwriting saved changes.
+  // For fresh imports from Order Form, POST /save-order to create the KV record.
+  if(alreadyInKV && d.order_id){
+    savedOrderId = d.order_id;
+    const statusEl = $id('save-order-status');
+    if(statusEl) statusEl.textContent = `✅ Loaded order ${savedOrderId}`;
+  } else {
+    saveOrderToProxy(d, d.order_id || '');
+  }
 }
 
 // Save the current form state back to KV so changes made in the Quote Generator persist
@@ -1362,8 +1376,8 @@ function newOrder(){
         return r.json();
       })
       .then(orderObj => {
-        // Pass the object directly — no base64 encoding needed, avoids UTF-8 garbling
-        doImportObject(orderObj);
+        // alreadyInKV=true: skip re-POSTing; just set savedOrderId and restore all fields
+        doImportObject(orderObj, true);
       })
       .catch(e => console.error('[Auto-import] Failed to fetch order:', e));
     }
