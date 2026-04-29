@@ -941,11 +941,13 @@ function buildQuote(){
   const sentStatus = $id('quote_sent_status');
   if(sentStatus){ sentStatus.style.display='none'; }
 
-  // Save current form state back to KV so changes persist when reopened
-  saveCurrentFormState();
-
-  // PATCH order status to "Quote Generated"
-  patchOrderStatus('Quote Generated', {quote_generated_at: new Date().toISOString()});
+  // Single combined PATCH: save all form changes + update status in one request.
+  // Critical: never fire two simultaneous PATCHes — the Worker does read→merge→write
+  // and concurrent requests will overwrite each other (last writer wins, other changes lost).
+  saveCurrentFormState({
+    order_status:        'Quote Generated',
+    quote_generated_at:  new Date().toISOString(),
+  });
 }
 
 // ── Editable cell recalculation ──
@@ -1116,11 +1118,14 @@ function doImportObject(d, alreadyInKV){
   }
 }
 
-// Save the current form state back to KV so changes made in the Quote Generator persist
-async function saveCurrentFormState(){
+// Save the current form state back to KV so changes made in the Quote Generator persist.
+// Pass extraFields (e.g. {order_status, quote_generated_at}) to merge into the same single
+// PATCH — this avoids a race condition where two simultaneous PATCHes overwrite each other.
+async function saveCurrentFormState(extraFields){
   if(!savedOrderId) return; // no order loaded, nothing to save
   const qbtn = (id) => { const el=$id(id); return el ? el.checked : false; };
-  const qnum = (id) => { const el=$id(id); return el ? parseFloat(el.value)||0 : 0; };
+  const qnum = (id) => { const el=$id(id); return el ? (parseFloat(el.value) || 0) : 0; };
+  const product = val('f_product');
 
   const patch = {
     order_id:        savedOrderId,
@@ -1138,22 +1143,25 @@ async function saveCurrentFormState(){
     f_meal:          val('f_meal'),
     f_att:           val('f_att'),
     f_therapy:       val('f_therapy'),
-    f_product:       val('f_product'),
+    f_product:       product,
+    // Keep product_program in sync so Order Management dashboard shows the correct product
+    product_program: product,
     f_owner:         val('f_owner'),
     f_td:            val('f_td'),
     f_notes:         val('f_notes'),
     // Quote details
     f_qnum:          val('f_qnum'),
+    otis_quote_number: val('f_qnum'),  // keep OTIS quote number field in sync
     f_qdate:         val('f_qdate'),
-    // Services selected
+    // Services selected — keep service_type in sync with Order Management
     service_type:    [...selectedSvcs].map(k => ({app:'Mobile App',scanner:'Scanner',qr:'QR Code',image:'Image Capture',list:'List Import'}[k]||k)).join(', '),
     // Quantities
-    app_qty:         qnum('app_qty'),
+    app_qty:            qnum('app_qty'),
     scanner_qty_nodata: qnum('scanner_qty_nodata'),
     scanner_qty_data:   qnum('scanner_qty_data'),
-    qr_qty:          qnum('qr_qty'),
-    img_qty:         qnum('img_qty'),
-    list_qty:        qnum('list_qty'),
+    qr_qty:             qnum('qr_qty'),
+    img_qty:            qnum('img_qty'),
+    list_qty:           qnum('list_qty'),
     // Pricing options
     api_cost:        val('api_cost'),
     api_cost_actual: ($id('api_cost_actual') && $id('api_cost_actual').checked) ? '1' : '0',
@@ -1168,6 +1176,9 @@ async function saveCurrentFormState(){
     opt_prereg_img:     qbtn('opt_prereg_img')    ? '1' : '0',
     opt_expedite_img:   qbtn('opt_expedite_img')  ? '1' : '0',
     opt_expedite_list:  qbtn('opt_expedite_list') ? '1' : '0',
+    // Merge any caller-supplied fields (e.g. order_status, timestamps) into the same PATCH
+    // so we never have two concurrent PATCH calls racing against each other in the Worker.
+    ...(extraFields || {}),
   };
 
   try {
