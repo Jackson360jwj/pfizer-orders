@@ -293,27 +293,23 @@ textarea{height:72px;resize:vertical;}
       </div>
     </div>
 
-    <!-- STEP 4: SURVEY TYPE -->
+    <!-- STEP 4: TOV / COMPLIANCE REPORTING -->
     <div class="card">
-      <div class="card-title"><span class="step-badge">4</span>Survey Type</div>
+      <div class="card-title"><span class="step-badge">4</span>TOV / Compliance Reporting</div>
       <div class="fg">
         <div class="fgroup fw">
-          <label class="lbl">Survey Type <span class="req">*</span></label>
-          <select id="f_survey_type" onchange="onSurveyChange()">
-            <option value="">— Select —</option>
-            <option>Scan and Go (No Survey)</option>
-            <option>Attendee Type Survey</option>
-            <option>Attendee Type with Notes</option>
-            <option>Paxlovid Survey</option>
-            <option>Prevnar Survey</option>
-            <option>Nurtec Survey</option>
-            <option>Custom Survey</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="fgroup fw conditional-field" id="survey_details_wrap">
-          <label class="lbl">Survey Details <span class="req">*</span></label>
-          <textarea id="f_survey_details" placeholder="Please describe the survey requirements…"></textarea>
+          <label class="lbl">Is Transfer of Value (TOV) reporting required for this event?</label>
+          <p style="font-size:12px;color:#666;margin:0 0 10px;">TOV is required by default for Pfizer AMEX events. Selecting "Not Required" reduces the price by $500.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <label style="display:flex;align-items:center;gap:10px;padding:12px 16px;border:2px solid #1a3a5c;border-radius:8px;cursor:pointer;background:#f0f4f8;">
+              <input type="radio" name="f_tov" id="f_tov_yes" value="yes" checked onchange="onTOVChange()">
+              <span><strong>TOV Required (standard)</strong> — Compliance data transfer included</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;padding:12px 16px;border:2px solid #ddd;border-radius:8px;cursor:pointer;">
+              <input type="radio" name="f_tov" id="f_tov_no" value="no" onchange="onTOVChange()">
+              <span><strong>TOV Not Required</strong> — Reduces quote by $500</span>
+            </label>
+          </div>
         </div>
       </div>
     </div>
@@ -462,9 +458,13 @@ function onProductChange(){
   $id('clinical_name_wrap').style.display = isAboveBrand ? 'block' : 'none';
 }
 
-function onSurveyChange(){
-  const v = val('f_survey_type');
-  $id('survey_details_wrap').style.display = (v === 'Custom Survey' || v === 'Other') ? 'block' : 'none';
+function onTOVChange(){
+  // Highlight the selected radio card
+  document.querySelectorAll('input[name="f_tov"]').forEach(r => {
+    const card = r.closest('label');
+    if(card) card.style.borderColor = r.checked ? '#1a3a5c' : '#ddd';
+    if(card) card.style.background  = r.checked ? '#f0f4f8' : '';
+  });
 }
 
 function onBadgeAPIChange(val_){
@@ -481,7 +481,7 @@ function fmtDate(d){
 }
 
 function validate(){
-  const required = ['f_mgr','f_mgr_email','f_pfz','f_name','f_etype','f_addr','f_date','f_meal','f_therapy','f_owner','f_product_program','f_survey_type'];
+  const required = ['f_mgr','f_mgr_email','f_pfz','f_name','f_etype','f_addr','f_date','f_meal','f_therapy','f_owner','f_product_program'];
   let ok = true;
   required.forEach(id => {
     const el = $id(id);
@@ -525,14 +525,6 @@ function validate(){
     if(!el.value.trim()){ el.classList.add('error'); ok = false; }
   }
 
-  // Conditional: survey details
-  const surv = val('f_survey_type');
-  if(surv === 'Custom Survey' || surv === 'Other'){
-    const el = $id('f_survey_details');
-    el.classList.remove('error');
-    if(!el.value.trim()){ el.classList.add('error'); ok = false; }
-  }
-
   $id('error-box').style.display = ok ? 'none' : 'block';
   return ok;
 }
@@ -562,8 +554,9 @@ function buildData(){
     service_type:       Array.from(selectedServiceTypes).join(', '),
     qty_app_licenses:   val('f_qty_app'),
     qty_scanners:       val('f_qty_scanner'),
-    survey_type:        val('f_survey_type'),
-    survey_details:     val('f_survey_details'),
+    tov:                document.querySelector('input[name="f_tov"]:checked')?.value || 'yes',
+    survey_type:        '',
+    survey_details:     '',
     product_program:    val('f_product_program'),
     product_program_details: val('f_product_details'),
     clinical_internal_name: val('f_clinical_name'),
@@ -592,7 +585,7 @@ function buildSummaryHTML(d){
     ['App Licenses', d.qty_app_licenses],
     ['Scanners', d.qty_scanners],
     ['Product / Program', d.product_program],
-    ['Survey Type', d.survey_type],
+    ['TOV Required', d.tov === 'no' ? 'No (−$500)' : 'Yes (standard)'],
     ['Badge / API Available', d.badge_api_available],
   ];
   let html = '<h3>Order Summary</h3>';
@@ -635,8 +628,7 @@ async function submitOrder(){
     'TD_Contact':             d.f_td,
     'Notes':                  d.f_notes,
     'Service_Type':           d.service_type,
-    'Survey_Type':            d.survey_type,
-    'Survey_Details':         d.survey_details,
+    'TOV_Required':           d.tov === 'no' ? 'No (−$500)' : 'Yes (standard)',
     'Product_Program':        d.product_program,
     'Product_Program_Details': d.product_program_details,
     'Clinical_Internal_Name': d.clinical_internal_name,
