@@ -236,7 +236,6 @@ textarea{height:72px;resize:vertical;}
           <option>Dinner</option>
           <option>Coffee + Tea</option>
           <option>Snacks</option>
-          <option>No TOV (no compliance tracking)</option>
         </select>
       </div>
       <div class="fgroup">
@@ -466,10 +465,17 @@ textarea{height:72px;resize:vertical;}
     <!-- SHARED: TOV (hidden until svc selected) — Payment always Credit Card for Pfizer/AMEX -->
     <div id="shared_opts" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid #eee;">
       <div id="tov_block">
-        <label class="lbl" style="display:block;margin-bottom:8px;">TOV / Compliance Reporting</label>
+        <label class="lbl" style="display:block;margin-bottom:4px;">TOV / Compliance Reporting</label>
+        <p style="font-size:11px;color:#888;margin:0 0 10px;">Default is TOV Required. Select "No TOV Needed" to remove $500 from the quote total.</p>
         <div style="display:flex;flex-direction:column;gap:8px;">
-          <label class="opt"><input type="radio" name="tov" value="yes" checked onchange="liveCalc()"> TOV Required (standard)</label>
-          <label class="opt"><input type="radio" name="tov" value="no" onchange="liveCalc()"> No TOV Needed (−$500)</label>
+          <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;border:2px solid #1a3a5c;border-radius:8px;cursor:pointer;background:#f0f4f8;font-size:13px;" id="tov_yes_card">
+            <input type="radio" name="tov" value="yes" checked onchange="liveCalc();onTovToggle()">
+            <span><strong>TOV Required</strong> (standard)</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;border:2px solid #ddd;border-radius:8px;cursor:pointer;font-size:13px;" id="tov_no_card">
+            <input type="radio" name="tov" value="no" onchange="liveCalc();onTovToggle()">
+            <span><strong>No TOV Needed</strong> <span style="color:#c0392b;font-weight:600;">−$500</span></span>
+          </label>
         </div>
       </div>
     </div>
@@ -678,6 +684,13 @@ function fmtDate(d){
   return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
 }
 function noTOV(){ return document.querySelector('input[name="tov"]:checked')?.value === 'no'; }
+function onTovToggle(){
+  const isNo = noTOV();
+  const yesCard = $id('tov_yes_card');
+  const noCard  = $id('tov_no_card');
+  if(yesCard){ yesCard.style.borderColor = isNo ? '#ddd' : '#1a3a5c'; yesCard.style.background = isNo ? '' : '#f0f4f8'; }
+  if(noCard) { noCard.style.borderColor  = isNo ? '#c0392b' : '#ddd'; noCard.style.background  = isNo ? '#fff5f5' : ''; }
+}
 function isCC(){ return true; } // Pfizer/AMEX always pays by credit card
 function adj(id, delta){
   const el = $id(id); if(!el) return;
@@ -1079,8 +1092,9 @@ function doImportObject(d, alreadyInKV){
   if($id('img_qty'))            $id('img_qty').value            = d.img_qty            || 0;
   if($id('list_qty'))           $id('list_qty').value           = d.list_qty           || 0;
 
-  // TOV
+  // TOV — restore radio selection and update card highlight
   if(d.tov){ const r=document.querySelector(`input[name="tov"][value="${d.tov}"]`); if(r) r.checked=true; }
+  onTovToggle();
   // Payment method
   if(d.payment_method){ const r=document.querySelector(`input[name="payment"][value="${d.payment_method}"]`); if(r) r.checked=true; }
   // Checkboxes — includes opt_api_scanner so scanner API state is restored
