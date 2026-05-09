@@ -595,6 +595,8 @@ function buildSummaryHTML(d){
   return html;
 }
 
+const WORKER_URL = 'https://pfizer-order-api.realityengineeringops.workers.dev';
+
 async function submitOrder(){
   if(!validate()){
     $id('error-box').scrollIntoView({behavior:'smooth', block:'start'});
@@ -608,49 +610,21 @@ async function submitOrder(){
   const d = buildData();
   const code = btoa(JSON.stringify(d));
 
-  const payload = new URLSearchParams({
-    'form-name':              'pfizer-order',
-    'bot-field':              '',
-    'Meeting_Manager':        d.f_mgr,
-    'Manager_Email':          d.f_mgr_email,
-    'Pfizer_Meeting_Number':  d.f_pfz,
-    'Legal_Entity':           d.f_entity,
-    'Meeting_Full_Name':      d.f_name,
-    'Meeting_Acronym':        d.f_acronym,
-    'Event_Type':             d.f_etype,
-    'Meeting_Address':        d.f_addr,
-    'Meeting_Date':           fmtDate(d.f_date),
-    'Meeting_Time':           d.f_time,
-    'Meal_Type':              d.f_meal,
-    'Estimated_Attendees':    d.f_att,
-    'Therapeutic_Area':       d.f_therapy,
-    'Pfizer_Project_Owner':   d.f_owner,
-    'TD_Contact':             d.f_td,
-    'Notes':                  d.f_notes,
-    'Service_Type':           d.service_type,
-    'TOV_Required':           d.tov === 'no' ? 'No (−$500)' : 'Yes (standard)',
-    'Product_Program':        d.product_program,
-    'Product_Program_Details': d.product_program_details,
-    'Clinical_Internal_Name': d.clinical_internal_name,
-    'Assoc_Contact_Name':     d.assoc_contact_name,
-    'Assoc_Contact_Email':    d.assoc_contact_email,
-    'Assoc_Vendor_Name':      d.assoc_vendor_name,
-    'Badge_API_Available':    d.badge_api_available,
-    'Provider_Reg_Company':   d.provider_reg_company,
-    'API_Badge_Contact_Name': d.api_badge_contact_name,
-    'API_Badge_Contact_Email': d.api_badge_contact_email,
-    'API_Badge_Notes':        d.api_badge_notes,
-    'Qty_App_Licenses':       d.qty_app_licenses,
-    'Qty_Scanners':           d.qty_scanners,
-    'Import_Code':            code,
-  });
-
   try {
-    const res = await fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: payload.toString() });
-    if(!res.ok) throw new Error('Network response not ok');
+    const res = await fetch(WORKER_URL + '/submit-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...d, company_name: 'Pfizer AMEX' }),
+    });
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.error || `Server error ${res.status}`);
+    }
     showSuccess(d, code);
   } catch(err) {
-    showSuccess(d, code);
+    btn.textContent = '✉️ Submit Order Request';
+    btn.disabled = false;
+    alert('Submission failed: ' + err.message + '\n\nPlease try again or contact Reality Engineering directly.');
   }
 }
 
