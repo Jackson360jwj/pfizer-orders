@@ -121,7 +121,8 @@ tr.selected td{background:#e8f0fe;}
     <div class="topbar-right">
       <span class="count-badge" id="order-count">Loading…</span>
       <button class="btn-refresh" onclick="loadOrders()">↻ Refresh</button>
-      <a href="Pfizer_Quote_Generator.html" style="padding:7px 14px;background:#27ae60;color:#fff;border-radius:5px;font-size:12px;font-weight:700;text-decoration:none;">📄 Quote Generator</a>
+      <a id="btn-quote-gen" href="#" onclick="return false;" title="Select an order first"
+         style="padding:7px 14px;background:#aaa;color:#fff;border-radius:5px;font-size:12px;font-weight:700;text-decoration:none;cursor:not-allowed;opacity:0.6;">📄 Quote Generator</a>
     </div>
   </div>
 
@@ -371,6 +372,17 @@ function openDetail(orderId){
   });
   renderTable();
 
+  // Activate Quote Generator button with this order's ID
+  const qbtn = document.getElementById('btn-quote-gen');
+  if(qbtn){
+    qbtn.href = 'Pfizer_Quote_Generator.html?order_id=' + encodeURIComponent(orderId);
+    qbtn.onclick = null;
+    qbtn.title = 'Open Quote Generator for this order';
+    qbtn.style.background = '#27ae60';
+    qbtn.style.cursor = 'pointer';
+    qbtn.style.opacity = '1';
+  }
+
   document.getElementById('detail-title').textContent = o.event_name || o.order_id;
   document.getElementById('detail-pane').classList.add('open');
 
@@ -555,6 +567,17 @@ function closeDetail(){
   selectedOrderId = null;
   document.getElementById('detail-pane').classList.remove('open');
   document.querySelectorAll('#order-tbody tr').forEach(tr => tr.classList.remove('selected'));
+
+  // Grey out Quote Generator button — no order selected
+  const qbtn = document.getElementById('btn-quote-gen');
+  if(qbtn){
+    qbtn.href = '#';
+    qbtn.onclick = function(){ return false; };
+    qbtn.title = 'Select an order first';
+    qbtn.style.background = '#aaa';
+    qbtn.style.cursor = 'not-allowed';
+    qbtn.style.opacity = '0.6';
+  }
 }
 
 // Boot: if we have a saved token try to load immediately; otherwise show login
