@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RE – Pfizer Symposia Quote Generator</title>
+<title>RE – Pfizer SPIRO Quote Generator</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:Arial,sans-serif;font-size:14px;color:#222;background:#eef2f7;}
@@ -143,6 +143,15 @@ textarea{height:72px;resize:vertical;}
 .login-card button{width:100%;padding:11px;background:#1a3a5c;color:#fff;border:none;border-radius:7px;font-size:14px;font-weight:700;cursor:pointer;}
 .login-card button:hover{background:#142e4a;}
 .login-error{color:#dc2626;font-size:12px;margin-top:8px;min-height:16px;}
+
+/* ── STATION SCANNER CONFIGURATION ── */
+.station-row{background:#f7f9fc;border:1px solid #dde4ef;border-radius:8px;padding:16px 18px;margin-bottom:12px;}
+.station-row-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.station-num-badge{background:#1a3a5c;color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:12px;letter-spacing:.5px;text-transform:uppercase;}
+.station-remove-btn{background:none;border:1px solid #e0e0e0;color:#c0392b;font-size:12px;font-weight:700;cursor:pointer;padding:3px 10px;border-radius:5px;}
+.station-remove-btn:hover{background:#fdecea;border-color:#c0392b;}
+.add-station-btn{width:100%;padding:11px;background:#fff;border:2px dashed #1a3a5c;border-radius:7px;color:#1a3a5c;font-weight:700;font-size:13px;cursor:pointer;transition:background .15s;margin-top:4px;}
+.add-station-btn:hover{background:#eef2f7;}
 </style>
 </head>
 <body>
@@ -163,7 +172,7 @@ textarea{height:72px;resize:vertical;}
   <!-- HEADER -->
   <div class="app-header">
     <div class="logo-text">REALITY<span>◆</span>ENGINEERING</div>
-    <div class="sub">Pfizer Symposia — Quote Generator</div>
+    <div class="sub">Pfizer SPIRO — Quote Generator</div>
   </div>
 
   <!-- EDIT HINT — shown after import -->
@@ -181,85 +190,83 @@ textarea{height:72px;resize:vertical;}
   <div class="card">
     <div class="card-title"><span class="step-badge">1</span>Event Information</div>
     <div class="fg">
-      <div class="fgroup">
-        <label class="lbl">AMEX Meeting Manager Name *</label>
-        <input type="text" id="f_mgr" placeholder="e.g. Lida Wilkinson" oninput="liveCalc()">
+      <!-- RE Internal -->
+      <div class="fgroup" style="background:#f0f4f8;border-radius:6px;padding:8px 10px;">
+        <label class="lbl" style="color:#1a3a5c;">Account Manager (RE) *</label>
+        <input type="text" id="f_acct_mgr" placeholder="e.g. Kylene Pastorius" oninput="liveCalc()">
       </div>
-      <div class="fgroup">
-        <label class="lbl">AMEX Meeting Manager Email</label>
-        <input type="email" id="f_mgr_email" placeholder="manager@amex.com" oninput="liveCalc()">
+      <div class="fgroup" style="background:#f0f4f8;border-radius:6px;padding:8px 10px;">
+        <label class="lbl" style="color:#1a3a5c;">AE (RE)</label>
+        <input type="text" id="f_ae" placeholder="e.g. Ashley Simmons" oninput="liveCalc()">
       </div>
+      <!-- Pfizer Contact -->
       <div class="fgroup">
-        <label class="lbl">Pfizer Meeting # *</label>
-        <input type="text" id="f_pfz" placeholder="e.g. PFZ159560" oninput="liveCalc()">
-      </div>
-      <div class="fgroup">
-        <label class="lbl">Legal Entity</label>
-        <input type="text" id="f_entity" value="1400: Pfizer Inc." oninput="liveCalc()">
-      </div>
-      <div class="fgroup fw">
-        <label class="lbl">Meeting Full Name *</label>
-        <input type="text" id="f_name" placeholder="e.g. American College of Osteopathic Family Physicians" oninput="liveCalc()">
+        <label class="lbl">Congress Manager *</label>
+        <input type="text" id="f_congress_mgr" placeholder="e.g. Kathy Deneen" oninput="liveCalc()">
       </div>
       <div class="fgroup">
-        <label class="lbl">Meeting Acronym (Short Name)</label>
-        <input type="text" id="f_acronym" placeholder="e.g. ACOFP" oninput="liveCalc()">
+        <label class="lbl">Congress Manager Email</label>
+        <input type="email" id="f_congress_email" placeholder="manager@pfizer.com" oninput="liveCalc()">
       </div>
-      <div class="fgroup">
-        <label class="lbl">Event Type *</label>
-        <select id="f_etype" onchange="liveCalc()">
-          <option value="">— Select —</option>
-          <option>Product Theater</option>
-          <option>Symposia</option>
-          <option>Education Reception</option>
-          <option>Congress</option>
-        </select>
-      </div>
-      <div class="fgroup fw">
-        <label class="lbl">Meeting Site / Address *</label>
-        <textarea id="f_addr" placeholder="e.g. Signia by Hilton Orlando Bonnet Creek Resort" oninput="liveCalc()"></textarea>
-      </div>
-      <div class="fgroup">
-        <label class="lbl">Meeting Date *</label>
-        <input type="date" id="f_date" oninput="liveCalc()">
-      </div>
-      <div class="fgroup">
-        <label class="lbl">Meeting Time</label>
-        <input type="text" id="f_time" placeholder="e.g. 12:15 PM – 1:15 PM" oninput="liveCalc()">
-      </div>
-      <div class="fgroup">
-        <label class="lbl">Meal Type</label>
-        <select id="f_meal" onchange="liveCalc()">
-          <option value="">— Select —</option>
-          <option>Breakfast</option>
-          <option>Lunch</option>
-          <option>Dinner</option>
-          <option>Coffee + Tea</option>
-          <option>Snacks</option>
-        </select>
-      </div>
-      <div class="fgroup">
-        <label class="lbl">Estimated # Attendees</label>
-        <input type="number" id="f_att" placeholder="e.g. 100" oninput="liveCalc()">
-      </div>
+      <!-- Event -->
       <div class="fgroup">
         <label class="lbl">Therapeutic Area</label>
-        <input type="text" id="f_therapy" placeholder="e.g. Oncology" oninput="liveCalc()">
+        <input type="text" id="f_therapy" placeholder="e.g. Vaccines" oninput="liveCalc()">
       </div>
       <div class="fgroup">
-        <label class="lbl">Product Associated *</label>
-        <input type="text" id="f_product" placeholder="e.g. Elrantamab" oninput="liveCalc()">
+        <label class="lbl">Primary Product *</label>
+        <input type="text" id="f_product" placeholder="e.g. Paxlovid" oninput="liveCalc()">
       </div>
       <div class="fgroup fw">
-        <label class="lbl">Pfizer Project Owner (Name &amp; Email)</label>
-        <input type="text" id="f_owner" placeholder="e.g. Todd.A.Bugbee@pfizer.com" oninput="liveCalc()">
+        <label class="lbl">Show Name *</label>
+        <input type="text" id="f_show_name" placeholder="e.g. AAPA 2026" oninput="liveCalc()">
       </div>
       <div class="fgroup fw">
-        <label class="lbl">TD Contact (Name, Phone / Email) <span style="font-weight:400;color:#999;font-size:10px;text-transform:none;letter-spacing:0;">— Optional, can fill in later</span></label>
-        <textarea id="f_td" placeholder="Fill in later if not yet known — e.g. Shameka Allen-Lane — shameka@catalysteventcoaching.com" oninput="liveCalc()"></textarea>
+        <label class="lbl">Location / Venue *</label>
+        <textarea id="f_location" placeholder="e.g. Ernest N Morial Convention Center" oninput="liveCalc()"></textarea>
       </div>
       <div class="fgroup fw">
-        <label class="lbl">Notes</label>
+        <label class="lbl">Delivery Address</label>
+        <div style="display:flex;gap:8px;margin-bottom:8px;">
+          <label style="display:flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid #c5d3e8;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;color:#1a3a5c;background:#f5f8fc;flex:1;justify-content:center;" id="ship_booth_lbl">
+            <input type="radio" name="ship_type" id="ship_booth" value="booth" onchange="updateDeliveryUI()" style="accent-color:#1a3a5c;"> 🏛 Direct to Event Booth
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid #c5d3e8;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;color:#1a3a5c;background:#f5f8fc;flex:1;justify-content:center;" id="ship_hotel_lbl">
+            <input type="radio" name="ship_type" id="ship_hotel" value="hotel" onchange="updateDeliveryUI()" style="accent-color:#1a3a5c;"> 🏨 Ship to Hotel
+          </label>
+        </div>
+        <textarea id="f_delivery_addr" placeholder="Select shipping type above…" oninput="liveCalc()"></textarea>
+      </div>
+      <div class="fgroup">
+        <label class="lbl">Open Date *</label>
+        <input type="date" id="f_open_date" oninput="liveCalc()">
+      </div>
+      <div class="fgroup">
+        <label class="lbl">Close Date</label>
+        <input type="date" id="f_close_date" oninput="liveCalc()">
+      </div>
+      <div class="fgroup">
+        <label class="lbl">Exhibit Size</label>
+        <input type="text" id="f_exhibit_size" placeholder="e.g. 20x40" oninput="liveCalc()">
+      </div>
+      <div class="fgroup">
+        <label class="lbl">Booth #</label>
+        <input type="text" id="f_booth" placeholder="e.g. 3727" oninput="liveCalc()">
+      </div>
+      <div class="fgroup">
+        <label class="lbl">Report Recipient Email</label>
+        <input type="email" id="f_pfz_mktg_email" placeholder="Where final reports should be sent — e.g. finley.hutchinson@pfizer.com" oninput="liveCalc()">
+      </div>
+      <div class="fgroup">
+        <label class="lbl">On-Site Contact (Name &amp; Phone) <span style="font-weight:400;color:#999;font-size:10px;text-transform:none;letter-spacing:0;">— Optional, can fill in later</span></label>
+        <input type="text" id="f_onsite_contact" placeholder="e.g. Rob Loughran 404-717-3985" oninput="liveCalc()">
+      </div>
+      <div class="fgroup">
+        <label class="lbl">Delivery Date</label>
+        <input type="date" id="f_delivery_date" oninput="liveCalc()">
+      </div>
+      <div class="fgroup fw">
+        <label class="lbl">Special Instructions / Notes</label>
         <textarea id="f_notes" placeholder="Special notes or instructions…" oninput="liveCalc()"></textarea>
       </div>
     </div>
@@ -308,9 +315,17 @@ textarea{height:72px;resize:vertical;}
     </div>
   </div>
 
-  <!-- ── STEP 2: SERVICES ── -->
+  <!-- ── STEP 2: STATION SCANNER CONFIGURATION ── -->
   <div class="card">
-    <div class="card-title"><span class="step-badge">2</span>Services &amp; Pricing</div>
+    <div class="card-title"><span class="step-badge">2</span>Station Scanner Configuration</div>
+    <p style="font-size:12px;color:#888;margin-bottom:16px;">Add each station in the booth. Each station gets its own survey type, product/brand and therapy tagging, scanner count, and market manager.</p>
+    <div id="stations-container"></div>
+    <button class="add-station-btn" onclick="addStation()">＋ Add Station</button>
+  </div>
+
+  <!-- ── STEP 3: SERVICES ── -->
+  <div class="card">
+    <div class="card-title"><span class="step-badge">3</span>Services &amp; Pricing</div>
 
     <label class="lbl" style="display:block;margin-bottom:6px;">Service Type * <span style="font-size:10px;font-weight:400;color:#888;text-transform:none;letter-spacing:0;">— select all that apply</span></label>
     <div class="svc-tabs">
@@ -325,7 +340,7 @@ textarea{height:72px;resize:vertical;}
     <div id="svc_app" class="svc-section">
       <div class="svc-row">
         <div><div class="svc-name">RE:nvent Mobile App</div><div class="svc-desc">Custom iPhone or Android setup instructions to primary TD</div></div>
-        <span class="svc-price">$300 / unit</span>
+        <span class="svc-price">$350 / unit</span>
         <div class="qty-wrap">
           <button class="qbtn" onclick="adj('app_qty',-1)">−</button>
           <input class="qinput" type="number" id="app_qty" value="1" min="0" oninput="liveCalc()">
@@ -366,7 +381,7 @@ textarea{height:72px;resize:vertical;}
     <div id="svc_scanner" class="svc-section">
       <div class="svc-row">
         <div><div class="svc-name">RE:nvent Mobile Scanner — <em>Without Data</em></div><div class="svc-desc">iPhone Scanner, badge scan only — no attendee data lookup</div></div>
-        <span class="svc-price">$350 / unit</span>
+        <span class="svc-price">$400 / unit</span>
         <div class="qty-wrap">
           <button class="qbtn" onclick="adj('scanner_qty_nodata',-1)">−</button>
           <input class="qinput" type="number" id="scanner_qty_nodata" value="0" min="0" oninput="liveCalc()">
@@ -375,11 +390,20 @@ textarea{height:72px;resize:vertical;}
       </div>
       <div class="svc-row">
         <div><div class="svc-name">RE:nvent Mobile Scanner — <em>With Data</em></div><div class="svc-desc">iPhone Scanner with attendee data lookup and matching</div></div>
-        <span class="svc-price">$400 / unit</span>
+        <span class="svc-price">$450 / unit</span>
         <div class="qty-wrap">
           <button class="qbtn" onclick="adj('scanner_qty_data',-1)">−</button>
           <input class="qinput" type="number" id="scanner_qty_data" value="0" min="0" oninput="liveCalc()">
           <button class="qbtn" onclick="adj('scanner_qty_data',1)">+</button>
+        </div>
+      </div>
+      <div class="svc-row">
+        <div><div class="svc-name">Internet/PAX Router</div><div class="svc-desc">On-site wireless router for scanner internet connectivity</div></div>
+        <span class="svc-price">$1,550 / unit</span>
+        <div class="qty-wrap">
+          <button class="qbtn" onclick="adj('internet_qty',-1)">−</button>
+          <input class="qinput" type="number" id="internet_qty" value="0" min="0" oninput="liveCalc()">
+          <button class="qbtn" onclick="adj('internet_qty',1)">+</button>
         </div>
       </div>
       <div class="svc-row" style="background:#fff8e1;border:1px solid #f9a825;">
@@ -462,7 +486,7 @@ textarea{height:72px;resize:vertical;}
       </div>
     </div>
 
-    <!-- SHARED: TOV (hidden until svc selected) — Payment always Credit Card for Pfizer/AMEX -->
+    <!-- SHARED: TOV (hidden until svc selected) — Payment always Credit Card for Pfizer/SPIRO -->
     <div id="shared_opts" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid #eee;">
       <div id="tov_block">
         <label class="lbl" style="display:block;margin-bottom:4px;">TOV / Compliance Reporting</label>
@@ -483,7 +507,7 @@ textarea{height:72px;resize:vertical;}
 
   <!-- ── STEP 3: QUOTE DETAILS ── -->
   <div class="card" id="qdetails_card" style="display:none;">
-    <div class="card-title"><span class="step-badge">3</span>Quote Details</div>
+    <div class="card-title"><span class="step-badge">4</span>Quote Details</div>
     <div class="fg">
       <div class="fgroup">
         <label class="lbl">Quote Number <span style="font-weight:400;color:#999;font-size:10px;text-transform:none;letter-spacing:0;">— auto-filled from OTIS, or enter manually</span></label>
@@ -530,7 +554,7 @@ textarea{height:72px;resize:vertical;}
     <div class="qhdr">
       <img src="data:image/png;base64,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" alt="Reality Engineering" style="height:56px;width:auto;">
       <div class="qtitle-area">
-        <div class="doc-title" id="q_doctitle">RE QUOTE PFIZER SYMPOSIA</div>
+        <div class="doc-title" id="q_doctitle">RE QUOTE PFIZER SPIRO</div>
         <div class="doc-date" id="q_docdate">Date</div>
       </div>
     </div>
@@ -557,37 +581,37 @@ textarea{height:72px;resize:vertical;}
       <!-- EVENT INFO header -->
       <tr>
         <td colspan="2" class="qhbar" style="width:60%">EVENT INFO</td>
-        <td colspan="2" class="qhbar" style="text-align:center">TD Contact</td>
+        <td colspan="2" class="qhbar" style="text-align:center">Delivery Address</td>
       </tr>
-      <!-- Rows 1–9 share TD contact cell (rowspan) -->
+      <!-- Rows 1–9 share Delivery Address cell (rowspan=9) -->
       <tr>
-        <td class="qlbl">Meeting Manager</td>
-        <td class="qval" id="q_mgr">—</td>
-        <td class="qtd-area" colspan="2" rowspan="9" id="q_td" style="padding:8px;"></td>
+        <td class="qlbl">Account Manager (RE)</td>
+        <td class="qval" id="q_acct_mgr">—</td>
+        <td class="qtd-area" colspan="2" rowspan="9" id="q_delivery_addr" style="padding:8px;white-space:pre-line;color:#c0392b;font-weight:600;"></td>
       </tr>
-      <tr><td class="qlbl">Pfizer Meeting #</td><td id="q_pfz">—</td></tr>
-      <tr><td class="qlbl">Legal Entity</td><td class="qhighlight" id="q_entity">—</td></tr>
-      <tr><td class="qlbl">Meeting Full Name</td><td id="q_name">—</td></tr>
-      <tr><td class="qlbl">Meeting Acronym (Short Name)</td><td id="q_acronym">—</td></tr>
-      <tr><td class="qlbl">Event Type</td><td id="q_etype">—</td></tr>
-      <tr><td class="qlbl">Meeting Site/Address</td><td id="q_addr" style="white-space:pre-line;">—</td></tr>
-      <tr><td class="qlbl">Meeting Date</td><td id="q_date">—</td></tr>
-      <tr><td class="qlbl">Meeting Time</td><td id="q_time">—</td></tr>
+      <tr><td class="qlbl">AE (RE)</td><td id="q_ae">—</td></tr>
+      <tr><td class="qlbl">Congress Manager</td><td id="q_congress_mgr">—</td></tr>
+      <tr><td class="qlbl">Therapeutic Area</td><td id="q_therapy">—</td></tr>
+      <tr><td class="qlbl">Primary Product</td><td class="qhighlight" id="q_product">—</td></tr>
+      <tr><td class="qlbl">Show Name</td><td id="q_show_name">—</td></tr>
+      <tr><td class="qlbl">Location / Venue</td><td id="q_location" style="white-space:pre-line;">—</td></tr>
+      <tr><td class="qlbl">Open Date</td><td id="q_open_date">—</td></tr>
+      <tr><td class="qlbl">Close Date</td><td id="q_close_date">—</td></tr>
 
-      <!-- Meal type row — Note panel starts here (rowspan) -->
+      <!-- Exhibit Size row — Special Instructions panel starts here -->
       <tr>
-        <td class="qlbl">Meal Type</td>
-        <td id="q_meal">—</td>
-        <td class="qhbar" colspan="2" style="text-align:center">Note</td>
+        <td class="qlbl">Exhibit Size</td>
+        <td id="q_exhibit_size">—</td>
+        <td class="qhbar" colspan="2" style="text-align:center">Special Instructions</td>
       </tr>
       <tr>
-        <td class="qlbl">Therapy</td>
-        <td id="q_therapy">—</td>
-        <td class="qnote-area" colspan="2" rowspan="5" id="q_notes" style="padding:8px;"></td>
+        <td class="qlbl">Booth #</td>
+        <td id="q_booth">—</td>
+        <td class="qnote-area" colspan="2" rowspan="4" id="q_notes" style="padding:8px;"></td>
       </tr>
-      <tr><td class="qlbl">Product Associated</td><td class="qhighlight" id="q_product">—</td></tr>
-      <tr><td class="qlbl">Pfizer Project Owner</td><td id="q_owner">—</td></tr>
-      <tr id="q_att_row" style="visibility:collapse;"><td class="qlbl">Estimated # Attendees</td><td id="q_att">—</td></tr>
+      <tr><td class="qlbl">Report Recipient Email</td><td id="q_pfz_mktg_email">—</td></tr>
+      <tr><td class="qlbl">On-Site Contact</td><td id="q_onsite_contact">—</td></tr>
+      <tr><td class="qlbl">Delivery Date</td><td id="q_delivery_date">—</td></tr>
       <tr id="q_badge_row" style="visibility:collapse;"><td class="qlbl">Badge Scannable?</td><td>for image capture</td></tr>
 
       <!-- SERVICES header -->
@@ -633,7 +657,7 @@ textarea{height:72px;resize:vertical;}
 
 <script>
 // ── Worker URL — update after deploying Cloudflare Worker ────────────────────
-const WORKER_URL = 'https://pfizer-order-api.realityengineeringops.workers.dev';
+const WORKER_URL = 'https://spiro-order-api.realityengineeringops.workers.dev';
 
 // ── Auth ─────────────────────────────────────────────────────────────────────
 let sessionToken = sessionStorage.getItem('pfizer_token') || null;
@@ -674,6 +698,26 @@ document.getElementById('f_qdate').value = new Date().toISOString().split('T')[0
 // ── Helpers ──
 function $id(id){ return document.getElementById(id); }
 function val(id){ return ($id(id)||{}).value || ''; }
+
+function updateDeliveryUI(){
+  const type = document.querySelector('input[name="ship_type"]:checked')?.value;
+  const ta   = $id('f_delivery_addr');
+  const boothLbl = $id('ship_booth_lbl');
+  const hotelLbl = $id('ship_hotel_lbl');
+  const activeStyle = 'background:#1a3a5c;color:#fff;border-color:#1a3a5c;';
+  const idleStyle   = 'background:#f5f8fc;color:#1a3a5c;border-color:#c5d3e8;';
+  if(boothLbl) boothLbl.style.cssText += type==='booth' ? activeStyle : idleStyle;
+  if(hotelLbl) hotelLbl.style.cssText += type==='hotel' ? activeStyle : idleStyle;
+  if(!ta) return;
+  if(type === 'booth'){
+    ta.placeholder = 'Booth # and hall/location within venue\ne.g. Booth 1234, Hall B — Ernest N Morial Convention Center';
+  } else if(type === 'hotel'){
+    ta.placeholder = 'Hotel name, street address, city, state, zip\nAttn: [Contact Name] [Phone]\ne.g. Le Meridien New Orleans, 333 Poydras St, New Orleans, LA 70130\nAttn: Rob Loughran 404-717-3985';
+  } else {
+    ta.placeholder = 'Select shipping type above…';
+  }
+  liveCalc();
+}
 function fmt(n){
   if(typeof n === 'string') return n;
   return '$' + Number(n).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});
@@ -691,7 +735,7 @@ function onTovToggle(){
   if(yesCard){ yesCard.style.borderColor = isNo ? '#ddd' : '#1a3a5c'; yesCard.style.background = isNo ? '' : '#f0f4f8'; }
   if(noCard) { noCard.style.borderColor  = isNo ? '#c0392b' : '#ddd'; noCard.style.background  = isNo ? '#fff5f5' : ''; }
 }
-function isCC(){ return true; } // Pfizer/AMEX always pays by credit card
+function isCC(){ return true; } // Pfizer/SPIRO always pays by credit card
 function adj(id, delta){
   const el = $id(id); if(!el) return;
   el.value = Math.max(0, (parseInt(el.value)||0) + delta);
@@ -749,35 +793,39 @@ function calcPrices(){
   if(selectedSvcs.size === 0) return {subtotal:0, api:0, ccFee:0, grand:0, lines:[]};
   const notov = noTOV();
   const cc = isCC();
-  let ccBase = 0;   // amount subject to 3% CC fee
-  let api = 0;      // passthrough — not in CC base
-  const lines = []; // {desc, qty, unit, total, included}
+  let ccBase = 0;
+  let api = 0;
+  const lines = [];
 
-  const setupFull = notov
-    ? 'Event Set-up: Symposia Survey, Post Show Summary Report and Export sent to Pfizer project owner. Manage DLU Compliance Data Transfer of Value for disclosure reporting for these (13) countries: Brazil, Colombia, Croatia, France, Italy, Netherlands, Pakistan, Philippines, Portugal, Saudi Arabia, Slovakia, Turkey, United States. Pfizer Customer Data Match Service run 3x weekly. For No TOV needed (−$500).'
-    : 'Event Set-up: Symposia Survey, Post Show Summary Report and Export sent to Pfizer project owner. Manage DLU Compliance Data Transfer of Value for disclosure reporting for these (13) countries: Brazil, Colombia, Croatia, France, Italy, Netherlands, Pakistan, Philippines, Portugal, Saudi Arabia, Slovakia, Turkey, United States. Pfizer Customer Data Match Service run 3x weekly.';
+  const setupDesc = notov
+    ? 'Lead Service Event Set-up: Symposia Survey, Post Show Summary Report and Export sent to Pfizer project owner. Manage DLU Compliance Data Transfer of Value for disclosure reporting for these (13) countries: Brazil, Colombia, Croatia, France, Italy, Netherlands, Pakistan, Philippines, Portugal, Saudi Arabia, Slovakia, Turkey, United States. Pfizer Customer Data Match Service run 3x weekly. For No TOV needed (−$500).'
+    : 'Lead Service Event Set-up: Symposia Survey, Post Show Summary Report and Export sent to Pfizer project owner. Manage DLU Compliance Data Transfer of Value for disclosure reporting for these (13) countries: Brazil, Colombia, Croatia, France, Italy, Netherlands, Pakistan, Philippines, Portugal, Saudi Arabia, Slovakia, Turkey, United States. Pfizer Customer Data Match Service run 3x weekly.';
 
   const setupSimple = 'Event Set-up: Symposia Survey, Post Show Summary Report and Export Access sent to Brand Manager. Pfizer Customer Data Match Service run Thursdays therefore final reports sent ASAP after match is run unless otherwise requested. Manage DLU Compliance Data Transfer of Value for Monthly Disclosure reporting.';
 
-  const setupPrice = notov ? 1350 : 1850;
-
-  // ── Per-unit lines for each selected service type ──
+  // ── Per-unit hardware lines ──
   if(selectedSvcs.has('app')){
     const q = parseInt(val('app_qty'))||0;
-    lines.push({desc:'<strong>RE:nvent Mobile App:</strong> Custom iPhone or Android set up instructions to primary TD', qty:q, unit:300, total:q*300});
-    ccBase += q*300;
+    lines.push({desc:'<strong>RE:nvent Mobile App:</strong> Custom iPhone or Android set up instructions to primary TD', qty:q, unit:350, total:q*350});
+    ccBase += q*350;
   }
 
   if(selectedSvcs.has('scanner')){
     const qNoData = parseInt(val('scanner_qty_nodata'))||0;
     const qData   = parseInt(val('scanner_qty_data'))||0;
     if(qNoData > 0){
-      lines.push({desc:'<strong>RE:nvent Mobile Scanner — Without Data:</strong> iPhone Scanner, badge scan only', qty:qNoData, unit:350, total:qNoData*350});
-      ccBase += qNoData*350;
+      lines.push({desc:'<strong>RE:nvent Mobile Scanner — Without Data:</strong> iPhone Scanner, badge scan only', qty:qNoData, unit:400, total:qNoData*400});
+      ccBase += qNoData*400;
     }
     if(qData > 0){
-      lines.push({desc:'<strong>RE:nvent Mobile Scanner — With Data:</strong> iPhone Scanner with attendee data lookup', qty:qData, unit:400, total:qData*400});
-      ccBase += qData*400;
+      lines.push({desc:'<strong>RE:nvent Mobile Scanner — With Data:</strong> iPhone Scanner with attendee data lookup', qty:qData, unit:450, total:qData*450});
+      ccBase += qData*450;
+    }
+    // Internet/PAX routers
+    const qInternet = parseInt(val('internet_qty'))||0;
+    if(qInternet > 0){
+      lines.push({desc:'<strong>Internet/PAX Router:</strong> On-site wireless router for scanner connectivity', qty:qInternet, unit:1550, total:qInternet*1550});
+      ccBase += qInternet*1550;
     }
   }
 
@@ -789,8 +837,8 @@ function calcPrices(){
 
   if(selectedSvcs.has('image')){
     const q = parseInt(val('img_qty'))||0;
-    lines.push({desc:'<strong>RE:nvent Mobile App:</strong> Custom iPhone or Android set up instructions to primary TD',qty:q,unit:300,total:q*300});
-    ccBase += q*300;
+    lines.push({desc:'<strong>RE:nvent Mobile App:</strong> Custom iPhone or Android set up instructions to primary TD',qty:q,unit:350,total:q*350});
+    ccBase += q*350;
     lines.push({desc:'<strong>Badge Image transcription</strong> and reg list match if available',qty:null,unit:null,total:650});
     ccBase += 650;
   }
@@ -800,18 +848,74 @@ function calcPrices(){
     ccBase += 1250;
   }
 
-  // ── ONE Event Set-up fee for the whole event (not per service type) ──
+  // ── SPIRO Event Set-up: driven by distinct brands in station rows ──
   const needsSetup = selectedSvcs.has('app') || selectedSvcs.has('scanner') || selectedSvcs.has('image');
   const needsSimpleSetup = selectedSvcs.has('qr');
+
   if(needsSetup){
-    lines.push({desc:setupFull, qty:null, unit:null, total:setupPrice});
-    ccBase += setupPrice;
-  } else if(needsSimpleSetup && !needsSetup){
+    // Collect (brand, therapy) → ordered list of survey types from station rows.
+    // Brand-level setup is priced per distinct brand (preserves first-seen order),
+    // but the "New Configuration" $250 line items trigger when the same brand+therapy
+    // pair has more than one survey type — each additional survey is its own line.
+    const groups = {};        // { "brand||therapy": { brand, therapy, surveys: [] } }
+    const brandsOrder = [];   // distinct brands, first-seen order
+    document.querySelectorAll('#stations-container .station-row').forEach(row => {
+      const id = row.id.replace('station-row-','');
+      const brandEl  = $id('st'+id+'_brand');
+      const brandOth = $id('st'+id+'_brand_oth');
+      const survEl   = $id('st'+id+'_survey');
+      const survOth  = $id('st'+id+'_survey_oth');
+      const therEl   = $id('st'+id+'_therapy');
+      const therOth  = $id('st'+id+'_therapy_oth');
+      const brand   = (brandEl?.value === 'Other' ? (brandOth?.value||'Other') : (brandEl?.value||'')).trim();
+      const survey  = (survEl?.value  === 'Other' ? (survOth?.value||'Other')  : (survEl?.value||'')).trim();
+      const therapy = (therEl?.value  === 'Other' ? (therOth?.value||'Other')  : (therEl?.value||'')).trim();
+      if(!brand) return;
+      if(!brandsOrder.includes(brand)) brandsOrder.push(brand);
+      const key = brand + '||' + therapy;
+      if(!groups[key]) groups[key] = { brand, therapy, surveys: [] };
+      if(survey && !groups[key].surveys.includes(survey)) groups[key].surveys.push(survey);
+    });
+
+    const setupPrice = notov ? 1650 : 2150; // first brand setup ($2,150; −$500 no-TOV = $1,650)
+    const extraSetupPrice = notov ? 1050 : 1550; // additional brand ($1,550; −$500 no-TOV)
+
+    if(brandsOrder.length === 0){
+      // No stations yet — show a single setup line as placeholder
+      lines.push({desc:setupDesc, qty:null, unit:null, total:setupPrice});
+      ccBase += setupPrice;
+    } else {
+      brandsOrder.forEach((brand, idx) => {
+        const price = idx === 0 ? setupPrice : extraSetupPrice;
+        const label = idx === 0 ? 'Lead Service Event Set-up' : 'Extra Event Set-up (Additional Brand)';
+        const brandTag = brand ? ` — <em>${brand}</em>` : '';
+        lines.push({desc:`<strong>${label}${brandTag}:</strong> ${idx===0 ? setupDesc.replace('Lead Service Event Set-up: ','') : 'Symposia Survey, Post Show Report, Export, Compliance Tracking, CDW delivery — additional brand tagging in Pfizer Data Warehouse.'}`, qty:null, unit:null, total:price});
+        ccBase += price;
+
+        // New Configuration: for each (brand, therapy) group under this brand,
+        // every survey type beyond the first is a separate $250 line item.
+        Object.values(groups)
+          .filter(g => g.brand === brand)
+          .forEach(g => {
+            const therapyTag = g.therapy ? ` · ${g.therapy}` : '';
+            g.surveys.slice(1).forEach(surveyName => {
+              lines.push({
+                desc: `<strong>New Configuration "${surveyName}":</strong> Additional survey type for ${brand}${therapyTag}`,
+                qty: 1,
+                unit: 250,
+                total: 250
+              });
+              ccBase += 250;
+            });
+          });
+      });
+    }
+  } else if(needsSimpleSetup){
     lines.push({desc:setupSimple, qty:null, unit:null, total:1250});
     ccBase += 1250;
   }
 
-  // ── API passthrough (Mobile App requires it) ──
+  // ── API passthrough ──
   if(selectedSvcs.has('app')){
     const apiRaw  = $id('api_cost') ? $id('api_cost').value.trim() : '';
     const apiCost = (apiRaw === '' || isNaN(parseFloat(apiRaw))) ? 1200 : parseFloat(apiRaw);
@@ -820,7 +924,6 @@ function calcPrices(){
       lines.push({desc:'API Connection Passthrough' + (apiIsEst ? ' <em style="font-size:10px;color:#e67e22;">(estimate — Katherine to verify exact cost)</em>' : ''), qty:null, unit:null, total:apiCost});
       api += apiCost;
     }
-    // If cost is 0 and confirmed actual, show a $0 / no-charge line so it's explicit on the quote
     if(apiCost === 0 && !apiIsEst){
       lines.push({desc:'API Connection Passthrough <em style="font-size:10px;color:#27ae60;">(no charge)</em>', qty:null, unit:null, total:0});
     }
@@ -834,23 +937,34 @@ function calcPrices(){
     lines.push({desc:'API connection cost passthrough',qty:null,unit:null,total:500}); api+=500;
   }
 
+  // ── Shipping & Handling ──
+  if(selectedSvcs.has('scanner')){
+    const qInternet = parseInt(val('internet_qty'))||0;
+    const qNoData   = parseInt(val('scanner_qty_nodata'))||0;
+    const qData     = parseInt(val('scanner_qty_data'))||0;
+    const hasScanner = (qNoData + qData) > 0;
+    if(hasScanner || qInternet > 0){
+      const shCost = qInternet > 0 ? 550 : 250;
+      const shDesc = qInternet > 0 ? 'Shipping and Handling — Scanners and Internet' : 'Shipping and Handling — Scanners';
+      lines.push({desc:`<strong>${shDesc}</strong>`, qty:null, unit:null, total:shCost});
+      ccBase += shCost;
+    }
+  }
+
   // ── Shared add-ons ──
-  // Shipping auto-included for scanners (physical hardware) — all other services are digital
-  if(selectedSvcs.has('scanner')){ lines.push({desc:'Shipping and Handling',qty:null,unit:null,total:250}); ccBase+=250; }
   if($id('opt_prereg_app')&& $id('opt_prereg_app').checked){ lines.push({desc:'Pre-Registration Attendee List Import into RE:nvent Mobile App for attendee look-up',qty:null,unit:null,total:500}); ccBase+=500; }
   if($id('opt_prereg_img')&& $id('opt_prereg_img').checked){ lines.push({desc:'Pre-Registration Attendee List Import into RE:nvent Mobile App for attendee look-up',qty:null,unit:null,total:500}); ccBase+=500; }
   if($id('opt_expedite_app')&&$id('opt_expedite_app').checked){ lines.push({desc:'Expedite Service: order received less than 5 business days prior to event',qty:null,unit:null,total:500}); ccBase+=500; }
   if($id('opt_expedite_img')&&$id('opt_expedite_img').checked){ lines.push({desc:'Expedite Service: order received less than 5 business days prior to event',qty:null,unit:null,total:500}); ccBase+=500; }
   if($id('opt_expedite_list')&&$id('opt_expedite_list').checked){ lines.push({desc:'Expedite Service: order received less than 5 business days prior to event',qty:null,unit:null,total:500}); ccBase+=500; }
 
-  // Remote Training included for app and image only (not scanner — hardware only)
+  // Remote Training included for app and image only
   if(selectedSvcs.has('app') || selectedSvcs.has('image')){
     lines.push({desc:'<strong>Remote Training:</strong> pre-scheduled 15 minute call with TD to review application set-up on their cell',qty:null,unit:null,total:'Included',included:true});
   }
-  // No remote training for QR Code or Scanner — app/image only
 
   // ── Totals ──
-  const ccFee   = cc ? Math.round(ccBase * 0.03 * 100) / 100 : 0;
+  const ccFee    = cc ? Math.round(ccBase * 0.03 * 100) / 100 : 0;
   const subtotal = ccBase + api;
   const grand    = subtotal + ccFee;
 
@@ -870,33 +984,29 @@ function buildQuote(){
   const {lines, ccFee, grand} = calcPrices();
 
   // Header info
-  $id('q_doctitle').textContent = 'RE QUOTE PFIZER SYMPOSIA';
+  $id('q_doctitle').textContent = 'RE QUOTE PFIZER SPIRO';
   $id('q_docdate').textContent = fmtDate(val('f_qdate'));
   $id('q_num').textContent = val('f_qnum') || '—';
 
   // Event fields
-  $id('q_mgr').textContent = val('f_mgr') || '—';
-  $id('q_pfz').textContent = val('f_pfz') || '—';
-  $id('q_entity').textContent = val('f_entity') || '—';
-  $id('q_name').textContent = val('f_name') || '—';
-  $id('q_acronym').textContent = val('f_acronym') || '—';
-  $id('q_etype').textContent = val('f_etype') || '—';
-  $id('q_addr').textContent = val('f_addr') || '—';
-  $id('q_date').textContent = fmtDate(val('f_date'));
-  $id('q_time').textContent = val('f_time') || '—';
-  $id('q_meal').textContent = val('f_meal') || '—';
-  $id('q_therapy').textContent = val('f_therapy') || '—';
-  $id('q_product').textContent = val('f_product') || '—';
-  $id('q_owner').textContent = val('f_owner') || '—';
-  $id('q_td').textContent = val('f_td') || '';
-  $id('q_notes').textContent = val('f_notes') || '';
-
-  // Attendees
-  const att = val('f_att');
-  // Use visibility:collapse (not display:none) so the rowspan on the Note cell
-  // stays accurate — display:none rows aren't counted by browsers toward rowspan.
-  $id('q_att_row').style.visibility = att ? '' : 'collapse';
-  $id('q_att').textContent = att || '';
+  $id('q_acct_mgr').textContent    = val('f_acct_mgr')       || '—';
+  $id('q_ae').textContent          = val('f_ae')             || '—';
+  $id('q_congress_mgr').textContent= val('f_congress_mgr')   || '—';
+  $id('q_therapy').textContent     = val('f_therapy')        || '—';
+  $id('q_product').textContent     = val('f_product')        || '—';
+  $id('q_show_name').textContent   = val('f_show_name')      || '—';
+  $id('q_location').textContent    = val('f_location')       || '—';
+  const shipType = document.querySelector('input[name="ship_type"]:checked')?.value;
+  const shipLabel = shipType === 'booth' ? '📍 Direct to Booth\n' : shipType === 'hotel' ? '🏨 Ship to Hotel\n' : '';
+  $id('q_delivery_addr').textContent = shipLabel + (val('f_delivery_addr') || '');
+  $id('q_open_date').textContent   = fmtDate(val('f_open_date'));
+  $id('q_close_date').textContent  = fmtDate(val('f_close_date'));
+  $id('q_exhibit_size').textContent= val('f_exhibit_size')   || '—';
+  $id('q_booth').textContent       = val('f_booth')          || '—';
+  $id('q_pfz_mktg_email').textContent = val('f_pfz_mktg_email') || '—';
+  $id('q_onsite_contact').textContent = val('f_onsite_contact')  || '—';
+  $id('q_delivery_date').textContent  = fmtDate(val('f_delivery_date'));
+  $id('q_notes').textContent       = val('f_notes')          || '';
 
   // Badge row (image capture only)
   $id('q_badge_row').style.visibility = selectedSvcs.has('image') ? '' : 'collapse';
@@ -1029,10 +1139,14 @@ function doImportObject(d, alreadyInKV){
   if(!d) return;
   _importedData = d;
 
-  // Fill event fields — map both old and new field names
+  // Fill event fields — keys match both QG element IDs and Order Form buildData() keys
   const fieldMap = {
-    f_mgr:1, f_mgr_email:1, f_pfz:1, f_entity:1, f_name:1, f_acronym:1, f_etype:1,
-    f_addr:1, f_date:1, f_time:1, f_meal:1, f_att:1, f_therapy:1, f_owner:1, f_td:1, f_notes:1,
+    // RE internal
+    f_acct_mgr:1, f_ae:1,
+    // Event info
+    f_congress_mgr:1, f_congress_email:1, f_therapy:1, f_show_name:1, f_location:1,
+    f_delivery_addr:1, f_open_date:1, f_close_date:1, f_exhibit_size:1, f_booth:1,
+    f_pfz_mktg_email:1, f_onsite_contact:1, f_delivery_date:1, f_notes:1,
     // Association / API fields (from order form)
     badge_api_available:1, assoc_vendor_name:1, assoc_contact_name:1, assoc_contact_phone:1,
     assoc_contact_email:1, provider_reg_company:1, api_badge_contact_name:1, api_badge_contact_email:1,
@@ -1040,14 +1154,20 @@ function doImportObject(d, alreadyInKV){
   };
   Object.keys(fieldMap).forEach(k => { const el=$id(k); if(el && d[k]!==undefined) el.value=d[k]; });
 
+  // Restore shipping type radio
+  if(d.ship_type){
+    const rb = document.querySelector(`input[name="ship_type"][value="${d.ship_type}"]`);
+    if(rb){ rb.checked = true; updateDeliveryUI(); }
+  }
+
   // Show association card if there's any association data
   const assocCard = $id('assoc_api_card');
   if(assocCard && (d.badge_api_available || d.assoc_vendor_name || d.assoc_contact_name || d.provider_reg_company)){
     assocCard.style.display = 'block';
   }
 
-  // Product field — if product_program is "Other", use the details field (actual product name)
-  let prod = d.product_program || d.f_product || '';
+  // Product field — handle both new (f_product) and legacy (product_program) field names
+  let prod = d.f_product || d.product_program || '';
   if(prod === 'Other' && d.product_program_details) prod = d.product_program_details;
   if($id('f_product') && prod) $id('f_product').value = prod;
 
@@ -1086,8 +1206,9 @@ function doImportObject(d, alreadyInKV){
 
   // Quantities — prefer saved Quote Generator values; fall back to original order-form values
   if($id('app_qty'))            $id('app_qty').value            = d.app_qty            || d.qty_app_licenses || 0;
-  if($id('scanner_qty_nodata')) $id('scanner_qty_nodata').value = d.scanner_qty_nodata || d.qty_scanners     || 0;
+  if($id('scanner_qty_nodata')) $id('scanner_qty_nodata').value = d.scanner_qty_nodata || d.qty_scanners || 0;
   if($id('scanner_qty_data'))   $id('scanner_qty_data').value   = d.scanner_qty_data   || 0;
+  if($id('internet_qty'))       $id('internet_qty').value       = d.internet_qty        || 0;
   if($id('qr_qty'))             $id('qr_qty').value             = d.qr_qty             || 0;
   if($id('img_qty'))            $id('img_qty').value            = d.img_qty            || 0;
   if($id('list_qty'))           $id('list_qty').value           = d.list_qty           || 0;
@@ -1118,6 +1239,53 @@ function doImportObject(d, alreadyInKV){
   $id('total_banner').style.display='block';
   $id('action_row').style.display='flex';
   liveCalc();
+
+  // Restore station rows from imported data
+  if(d.stations && Array.isArray(d.stations) && d.stations.length > 0){
+    stationCount = 0;
+    $id('stations-container').innerHTML = '';
+    d.stations.forEach(s => {
+      addStation();
+      const n = stationCount;
+      // Station name
+      const nameEl = $id('st' + n + '_name');
+      if(nameEl){
+        const isKnown = STATION_NAMES.includes(s.name);
+        if(isKnown){ nameEl.value = s.name; }
+        else { nameEl.value = 'Other'; const oth = $id('st'+n+'_name_oth'); if(oth){ oth.style.display='block'; oth.value=s.name||''; } }
+      }
+      // Survey type
+      const surveyEl = $id('st' + n + '_survey');
+      if(surveyEl){
+        const isKnown = SURVEY_TYPES.includes(s.survey);
+        if(isKnown){ surveyEl.value = s.survey; }
+        else { surveyEl.value = 'Other'; const oth = $id('st'+n+'_survey_oth'); if(oth){ oth.style.display='block'; oth.value=s.survey||''; } }
+      }
+      // Therapy
+      const therapyEl = $id('st' + n + '_therapy');
+      if(therapyEl){
+        const isKnown = THERAPY_LIST.includes(s.therapy);
+        if(isKnown){ therapyEl.value = s.therapy; }
+        else { therapyEl.value = 'Other'; const oth = $id('st'+n+'_therapy_oth'); if(oth){ oth.style.display='block'; oth.value=s.therapy||''; } }
+        stTherapyChange(n);
+      }
+      // Brand
+      const brandEl = $id('st' + n + '_brand');
+      if(brandEl && s.brand){
+        const brands = s.therapy && THERAPY_BRANDS[s.therapy] ? THERAPY_BRANDS[s.therapy] : [];
+        if(brands.includes(s.brand)){ brandEl.value = s.brand; }
+        else { brandEl.value = 'Other'; const oth = $id('st'+n+'_brand_oth'); if(oth){ oth.style.display='block'; oth.value=s.brand; } }
+      }
+      // Scanners & Apps
+      if($id('st'+n+'_scanners_nodata')) $id('st'+n+'_scanners_nodata').value = s.scanners_nodata || s.scanners || '0';
+      if($id('st'+n+'_scanners_data'))   $id('st'+n+'_scanners_data').value   = s.scanners_data   || '0';
+      if($id('st'+n+'_apps'))            $id('st'+n+'_apps').value             = s.apps            || '0';
+      // Market Manager
+      if($id('st'+n+'_mgr'))      $id('st'+n+'_mgr').value      = s.mgr      || '';
+      stUpdateTag(n);
+    });
+  }
+
   window.scrollTo({top:0,behavior:'smooth'});
 
   // If order already lives in Worker KV (loaded via ?order_id=), just capture the ID —
@@ -1142,27 +1310,29 @@ async function saveCurrentFormState(extraFields){
   const product = val('f_product');
 
   const patch = {
-    order_id:        savedOrderId,
+    order_id:            savedOrderId,
+    // RE internal
+    f_acct_mgr:          val('f_acct_mgr'),
+    f_ae:                val('f_ae'),
     // Event info
-    f_mgr:           val('f_mgr'),
-    f_mgr_email:     val('f_mgr_email'),
-    f_pfz:           val('f_pfz'),
-    f_entity:        val('f_entity'),
-    f_name:          val('f_name'),
-    f_acronym:       val('f_acronym'),
-    f_etype:         val('f_etype'),
-    f_addr:          val('f_addr'),
-    f_date:          val('f_date'),
-    f_time:          val('f_time'),
-    f_meal:          val('f_meal'),
-    f_att:           val('f_att'),
-    f_therapy:       val('f_therapy'),
-    f_product:       product,
+    f_congress_mgr:      val('f_congress_mgr'),
+    f_congress_email:    val('f_congress_email'),
+    f_therapy:           val('f_therapy'),
+    f_product:           product,
     // Keep product_program in sync so Order Management dashboard shows the correct product
-    product_program: product,
-    f_owner:         val('f_owner'),
-    f_td:            val('f_td'),
-    f_notes:         val('f_notes'),
+    product_program:     product,
+    f_show_name:         val('f_show_name'),
+    f_location:          val('f_location'),
+    ship_type:           document.querySelector('input[name="ship_type"]:checked')?.value || '',
+    f_delivery_addr:     val('f_delivery_addr'),
+    f_open_date:         val('f_open_date'),
+    f_close_date:        val('f_close_date'),
+    f_exhibit_size:      val('f_exhibit_size'),
+    f_booth:             val('f_booth'),
+    f_pfz_mktg_email:    val('f_pfz_mktg_email'),
+    f_onsite_contact:    val('f_onsite_contact'),
+    f_delivery_date:     val('f_delivery_date'),
+    f_notes:             val('f_notes'),
     // Quote details
     f_qnum:          val('f_qnum'),
     otis_quote_number: val('f_qnum'),  // keep OTIS quote number field in sync
@@ -1173,6 +1343,7 @@ async function saveCurrentFormState(extraFields){
     app_qty:            qnum('app_qty'),
     scanner_qty_nodata: qnum('scanner_qty_nodata'),
     scanner_qty_data:   qnum('scanner_qty_data'),
+    internet_qty:       qnum('internet_qty'),
     qr_qty:             qnum('qr_qty'),
     img_qty:            qnum('img_qty'),
     list_qty:           qnum('list_qty'),
@@ -1190,6 +1361,8 @@ async function saveCurrentFormState(extraFields){
     opt_prereg_img:     qbtn('opt_prereg_img')    ? '1' : '0',
     opt_expedite_img:   qbtn('opt_expedite_img')  ? '1' : '0',
     opt_expedite_list:  qbtn('opt_expedite_list') ? '1' : '0',
+    // Station scanner configuration
+    stations:           getStationsDataQG(),
     // Merge any caller-supplied fields (e.g. order_status, timestamps) into the same PATCH
     // so we never have two concurrent PATCH calls racing against each other in the Worker.
     ...(extraFields || {}),
@@ -1269,23 +1442,23 @@ function otisBusinessType(){
   return '';
 }
 
-// Project title: "2026 Pfizer ADA" format
+// Project title: "2026 Pfizer AAPA 2026" format
 function otisProjectTitle(){
-  const acronym = val('f_acronym').trim();
-  const date    = val('f_date');
+  const showName = val('f_show_name').trim();
+  const date     = val('f_open_date');
   // Parse date safely — input type="date" stores YYYY-MM-DD; fall back to current year
   let year = new Date().getFullYear();
   if(date){
     const d = new Date(date.includes('T') ? date : date + 'T12:00:00');
     if(!isNaN(d.getFullYear())) year = d.getFullYear();
   }
-  // Format: "2026 Pfizer AAP" — acronym is required
-  return year + ' Pfizer ' + acronym;
+  // Format: "2026 Pfizer AAPA 2026"
+  return year + ' Pfizer ' + (showName || 'Show');
 }
 
 async function createOTISOrder(){
-  if(!val('f_acronym')){
-    $id('otis_status').textContent = '⚠️ Fill in the Meeting Acronym first (used for OTIS project title, e.g. "AAP").';
+  if(!val('f_show_name')){
+    $id('otis_status').textContent = '⚠️ Fill in the Show Name first (used for OTIS project title).';
     return;
   }
 
@@ -1301,8 +1474,8 @@ async function createOTISOrder(){
     ProjectTitle:   otisProjectTitle(),
     SalesPerson:    'justinjackson',               // correct field name (NOT AccountOwner)
     Status:         1,                             // 1 = Quoted (confirmed from working quote)
-    CompanyName:    'Pfizer AMEX',
-    ContactName:    val('f_mgr') || val('f_pfz') || '',
+    CompanyName:    'Pfizer SPIRO',
+    ContactName:    val('f_congress_mgr') || val('f_acct_mgr') || '',
     BusinessType:   otisBusinessType() || 'app',
     QuotationDate:  qdate,                         // "YYYY-MM-DDTHH:00:00" (confirmed format)
   };
@@ -1350,14 +1523,196 @@ async function createOTISOrder(){
   }
 }
 
+// ── STATION SCANNER CONFIGURATION ──────────────────────────────────────────
+let stationCount = 0;
+
+const STATION_NAMES = [
+  'Commercial','Med Info','Med Affairs','Market Access',
+  'EPIC - Every Color is Primary','Round Table PT (TOV)',
+  'Surf Activation','FAL','Health Equity','Other'
+];
+
+const SURVEY_TYPES = [
+  'Scan & Go','Scan & Go with Notes','Attendee Type',
+  'Attendee Type with Waiver','Attendee Type with Product Survey',
+  'Attendee Type with Waiver and Product Survey',
+  'Opt In Only','TOV Capture','Other'
+];
+
+const THERAPY_LIST = ['I&I','Derm','Vaccines','Migraine','Cardio','SINJ','Other'];
+
+const THERAPY_BRANDS = {
+  'I&I':      ['Velsipity','Xeljanz','Above Brand','Unbranded','Other'],
+  'Derm':     ['Cibinqo','Litfulo','Above Brand','Unbranded','Other'],
+  'Vaccines': ['Paxlovid','Comirnaty','Prevnar 20','Abrysvo','Vyndamax','Above Brand','Unbranded','Other'],
+  'Migraine': ['Nurtec','Zavzpret','IGIV','Above Brand','Unbranded','Other'],
+  'Cardio':   ['Vyndamax','Above Brand','Unbranded','Other'],
+  'SINJ':     ['SINJ','Above Brand','Unbranded','Other'],
+  'Other':    ['Other'],
+};
+
+function sOpts(arr, ph){
+  return `<option value="">— ${ph} —</option>` +
+    arr.map(v => `<option value="${v}">${v}</option>`).join('');
+}
+
+function addStation(){
+  stationCount++;
+  const n = stationCount;
+  const el = document.createElement('div');
+  el.className = 'station-row';
+  el.id = 'station-row-' + n;
+  el.innerHTML = `
+<div class="station-row-hdr">
+  <span class="station-num-badge" id="slabel-${n}">Station ${n}</span>
+  <button class="station-remove-btn" onclick="removeStation(${n})">✕ Remove</button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:12px;">
+  <div class="fgroup">
+    <label class="lbl">Station</label>
+    <select id="st${n}_name" onchange="stOtherToggle(${n},'name',this)">${sOpts(STATION_NAMES,'Select station')}</select>
+    <input type="text" id="st${n}_name_oth" placeholder="Describe station…" style="display:none;margin-top:6px;">
+  </div>
+  <div class="fgroup">
+    <label class="lbl">Survey Type</label>
+    <select id="st${n}_survey" onchange="stOtherToggle(${n},'survey',this);liveCalc()">${sOpts(SURVEY_TYPES,'Select survey')}</select>
+    <input type="text" id="st${n}_survey_oth" placeholder="Describe survey…" style="display:none;margin-top:6px;" oninput="liveCalc()">
+  </div>
+  <div class="fgroup">
+    <label class="lbl">Therapy</label>
+    <select id="st${n}_therapy" onchange="stTherapyChange(${n})">${sOpts(THERAPY_LIST,'Select therapy')}</select>
+    <input type="text" id="st${n}_therapy_oth" placeholder="Describe therapy…" style="display:none;margin-top:6px;">
+  </div>
+  <div class="fgroup">
+    <label class="lbl">Product/Brand</label>
+    <select id="st${n}_brand" onchange="stOtherToggle(${n},'brand',this);stUpdateTag(${n});liveCalc()">
+      <option value="">— Select therapy first —</option>
+    </select>
+    <input type="text" id="st${n}_brand_oth" placeholder="Describe product/brand…" style="display:none;margin-top:6px;" oninput="stUpdateTag(${n});liveCalc()">
+  </div>
+  <div class="fgroup">
+    <label class="lbl" style="font-size:10px;">Scanners<br><span style="color:#888;font-weight:400;">No Data</span></label>
+    <input type="number" id="st${n}_scanners_nodata" min="0" value="0" oninput="liveCalc()">
+  </div>
+  <div class="fgroup">
+    <label class="lbl" style="font-size:10px;">Scanners<br><span style="color:#888;font-weight:400;">W/ Data</span></label>
+    <input type="number" id="st${n}_scanners_data" min="0" value="0" oninput="liveCalc()">
+  </div>
+  <div class="fgroup">
+    <label class="lbl">Apps</label>
+    <input type="number" id="st${n}_apps" min="0" value="0" oninput="liveCalc()">
+  </div>
+</div>
+<div style="display:grid;grid-template-columns:1fr auto;gap:12px;align-items:flex-end;margin-top:10px;">
+  <div class="fgroup">
+    <label class="lbl">Market Manager (Email)</label>
+    <input type="email" id="st${n}_mgr" placeholder="firstname.lastname@pfizer.com">
+  </div>
+  <div id="st${n}_tag" style="display:none;padding:6px 14px;background:#eef2f7;border:1px solid #c5d3e8;border-radius:6px;font-size:12px;font-weight:700;color:#1a3a5c;white-space:nowrap;margin-bottom:1px;">
+    🏷 <span id="st${n}_tagtxt"></span>
+  </div>
+</div>`;
+  $id('stations-container').appendChild(el);
+  renumberStations();
+}
+
+function removeStation(n){
+  const r = $id('station-row-' + n);
+  if(r) r.remove();
+  renumberStations();
+}
+
+function renumberStations(){
+  document.querySelectorAll('#stations-container .station-row').forEach((r, i) => {
+    const lbl = r.querySelector('[id^="slabel-"]');
+    if(lbl) lbl.textContent = 'Station ' + (i + 1);
+  });
+}
+
+function stOtherToggle(n, field, sel){
+  const oth = $id('st' + n + '_' + field + '_oth');
+  if(oth) oth.style.display = (sel.value === 'Other') ? 'block' : 'none';
+  stUpdateTag(n);
+}
+
+function stTherapyChange(n){
+  const tv  = $id('st' + n + '_therapy').value;
+  const oth = $id('st' + n + '_therapy_oth');
+  if(oth) oth.style.display = (tv === 'Other') ? 'block' : 'none';
+
+  const bSel = $id('st' + n + '_brand');
+  const bOth = $id('st' + n + '_brand_oth');
+  if(!bSel) return;
+
+  if(tv && THERAPY_BRANDS[tv]){
+    bSel.innerHTML = `<option value="">— Select product/brand —</option>` +
+      THERAPY_BRANDS[tv].map(b => `<option value="${b}">${b}</option>`).join('');
+    if(bOth) bOth.style.display = 'none';
+  } else if(tv === 'Other'){
+    bSel.innerHTML = `<option value="Other">Other</option>`;
+    if(bOth) bOth.style.display = 'block';
+  } else {
+    bSel.innerHTML = `<option value="">— Select therapy first —</option>`;
+    if(bOth) bOth.style.display = 'none';
+  }
+  stUpdateTag(n);
+}
+
+function stUpdateTag(n){
+  const tEl    = $id('st' + n + '_therapy');
+  const bEl    = $id('st' + n + '_brand');
+  const tagDiv = $id('st' + n + '_tag');
+  const tagTxt = $id('st' + n + '_tagtxt');
+  if(!tEl || !bEl || !tagDiv) return;
+
+  const t = (tEl.value === 'Other') ? (($id('st' + n + '_therapy_oth') || {}).value || '') : tEl.value;
+  const b = (bEl.value === 'Other') ? (($id('st' + n + '_brand_oth')   || {}).value || '') : bEl.value;
+
+  if(t && b){
+    tagDiv.style.display = 'inline-block';
+    tagTxt.textContent   = b + ' / ' + t;
+  } else {
+    tagDiv.style.display = 'none';
+  }
+}
+
+function getStationsDataQG(){
+  const stations = [];
+  document.querySelectorAll('#stations-container .station-row').forEach((row, i) => {
+    const id = row.id.replace('station-row-', '');
+    const nameEl    = $id('st' + id + '_name');
+    const surveyEl  = $id('st' + id + '_survey');
+    const therapyEl = $id('st' + id + '_therapy');
+    const brandEl   = $id('st' + id + '_brand');
+    const nameOth   = $id('st' + id + '_name_oth');
+    const surveyOth = $id('st' + id + '_survey_oth');
+    const therapyOth= $id('st' + id + '_therapy_oth');
+    const brandOth  = $id('st' + id + '_brand_oth');
+    const scannersNodataEl = $id('st' + id + '_scanners_nodata');
+    const scannersdataEl   = $id('st' + id + '_scanners_data');
+    const appsEl           = $id('st' + id + '_apps');
+    const mgrEl            = $id('st' + id + '_mgr');
+
+    stations.push({
+      station_num:     i + 1,
+      name:            nameEl?.value === 'Other' ? (nameOth?.value || 'Other') : (nameEl?.value || ''),
+      survey:          surveyEl?.value === 'Other' ? (surveyOth?.value || 'Other') : (surveyEl?.value || ''),
+      therapy:         therapyEl?.value === 'Other' ? (therapyOth?.value || 'Other') : (therapyEl?.value || ''),
+      brand:           brandEl?.value === 'Other' ? (brandOth?.value || 'Other') : (brandEl?.value || ''),
+      scanners_nodata: scannersNodataEl?.value || '0',
+      scanners_data:   scannersdataEl?.value   || '0',
+      apps:            appsEl?.value || '0',
+      mgr:             mgrEl?.value || '',
+    });
+  });
+  return stations;
+}
+
 function newOrder(){
   if(!confirm('Clear all data and start a new order?')) return;
   document.querySelectorAll('input[type=text],input[type=email],input[type=number],input[type=date],textarea')
-    .forEach(el => { if(el.id!=='f_entity') el.value=''; });
-  $id('f_entity').value = '1400: Pfizer Inc.';
+    .forEach(el => { el.value=''; });
   $id('f_qdate').value = new Date().toISOString().split('T')[0];
-  $id('f_etype').value = '';
-  $id('f_meal').value = '';
   document.querySelectorAll('input[name=tov]')[0].checked = true;
   document.querySelectorAll('.svc-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.svc-section').forEach(s => s.style.display='none');
@@ -1373,6 +1728,9 @@ function newOrder(){
   selectedSvcs.clear();
   document.querySelectorAll('.svc-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.svc-section').forEach(s => s.style.display = 'none');
+  // Clear stations
+  const sc = $id('stations-container'); if(sc) sc.innerHTML = '';
+  stationCount = 0;
   window.scrollTo({top:0,behavior:'smooth'});
 }
 // ── Boot: show login overlay if no session token ──────────────────────────────
