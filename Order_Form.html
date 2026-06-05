@@ -164,8 +164,12 @@ textarea{height:72px;resize:vertical;}
         <div class="svc-type-check" id="svc_qr_code" onclick="toggleServiceType('QR Code', this)">🔲 QR Code</div>
         <div class="svc-type-check" id="svc_image_capture" onclick="toggleServiceType('Image Capture', this)">📸 Image Capture</div>
         <div class="svc-type-check" id="svc_list_import" onclick="toggleServiceType('List Import', this)">📋 List Import</div>
+        <div class="svc-type-check" id="svc_list_transcription" onclick="toggleServiceType('List Transcription Matching', this)">📝 List Transcription Matching</div>
       </div>
       <div class="svc-note">Select one or more — customers may order multiple service types for the same event.</div>
+
+      <!-- Service descriptions — shown when a type is selected -->
+      <div id="svc-descriptions" style="display:none;margin-top:14px;display:flex;flex-direction:column;gap:10px;"></div>
 
       <!-- Quantity fields — shown conditionally -->
       <div id="svc_quantities" style="display:none;margin-top:16px;">
@@ -252,10 +256,6 @@ textarea{height:72px;resize:vertical;}
           <label class="lbl">Estimated # Attendees</label>
           <input type="number" id="f_att" placeholder="e.g. 100">
         </div>
-        <div class="fgroup">
-          <label class="lbl">Therapeutic Area <span class="req">*</span></label>
-          <input type="text" id="f_therapy" placeholder="e.g. Oncology">
-        </div>
         <div class="fgroup fw">
           <label class="lbl">Pfizer Project Owner (Name &amp; Email) <span class="req">*</span></label>
           <input type="text" id="f_owner" placeholder="e.g. Jane.Smith@pfizer.com">
@@ -271,20 +271,37 @@ textarea{height:72px;resize:vertical;}
       </div>
     </div>
 
-    <!-- STEP 3: PRODUCT / PROGRAM -->
+    <!-- STEP 3: PRODUCT / DRUG ASSOCIATED -->
     <div class="card">
-      <div class="card-title"><span class="step-badge">3</span>Product / Program</div>
+      <div class="card-title"><span class="step-badge">3</span>Product / Drug Associated</div>
       <div class="fg">
-        <div class="fgroup fw">
-          <label class="lbl">Product / Program <span class="req">*</span></label>
-          <input type="text" id="f_product_program" list="product_program_options"
-                 placeholder="Type or select a product…" autocomplete="off"
-                 oninput="onProductChange()" onchange="onProductChange()">
-          <datalist id="product_program_options"></datalist>
+        <div class="fgroup">
+          <label class="lbl">Therapeutic Area <span class="req">*</span></label>
+          <select id="f_therapy" onchange="onTherapyChange()">
+            <option value="">— Select Therapy —</option>
+            <option>Dermatology</option>
+            <option>Gastrointestinal</option>
+            <option>Hematology</option>
+            <option>Inflammation &amp; Immunology</option>
+            <option>Migraine</option>
+            <option>Oncology</option>
+            <option>Rare Disease</option>
+            <option>Rheumatology</option>
+            <option>Vaccines</option>
+            <option value="Other">Other</option>
+          </select>
+          <input type="text" id="f_therapy_other" placeholder="Enter therapeutic area…"
+                 style="display:none;margin-top:6px;" oninput="onTherapyOtherInput()">
+          <div style="font-size:11px;color:#888;margin-top:4px;">Selecting a therapy filters the product list</div>
         </div>
-        <div class="fgroup fw conditional-field" id="product_details_wrap">
-          <label class="lbl">Product / Program Details <span class="req">*</span></label>
-          <textarea id="f_product_details" placeholder="Please describe the product or program…"></textarea>
+        <div class="fgroup">
+          <label class="lbl">Product / Drug Associated <span class="req">*</span></label>
+          <select id="f_product_program" onchange="onProductChange()">
+            <option value="">— Select a product —</option>
+          </select>
+          <input type="text" id="f_product_other" placeholder="Enter product or drug name…"
+                 style="display:none;margin-top:6px;">
+          <div style="font-size:11px;color:#888;margin-top:4px;">Selecting a product fills in the therapy automatically</div>
         </div>
         <div class="fgroup fw conditional-field" id="clinical_name_wrap">
           <label class="lbl">Clinical / Internal Name <span style="font-size:10px;font-weight:400;color:#888;text-transform:none;letter-spacing:0;">(optional)</span></label>
@@ -396,22 +413,36 @@ textarea{height:72px;resize:vertical;}
 </div>
 
 <script>
-// ── Product List (easy to maintain) ──
-const PRODUCT_LIST = [
-  'Abrysvo','Braftovi / Mektovi','Bosulif','Cibinqo','Daurismo','Elrexfio',
-  'Emblaveo','Ibrance','Inlyta','Litfulo','Lorbrena','Ngenla','Nurtec','Padcev',
-  'Paxlovid','Prevnar 13','Prevnar 20','Talzenna','Tivdak','Tukysa','Xtandi',
-  'Above Brand / Clinical Development','Other'
-];
+// ── Therapy → Product mapping ──
+const THERAPY_PRODUCTS = {
+  'Dermatology':              ['Cibinqo','Litfulo','Ritlecitinib','Velsipity','Above Brand / Clinical Development'],
+  'Gastrointestinal':         ['Above Brand / Clinical Development'],
+  'Hematology':               ['Adcetris','Elranatamab','Oxbryta','Above Brand / Clinical Development'],
+  'Inflammation & Immunology':['Etrasimod','Velsipity','Xeljanz','Above Brand / Clinical Development'],
+  'Migraine':                 ['Nurtec','Zavegepant','Above Brand / Clinical Development'],
+  'Oncology':                 ['Braftovi / Mektovi','Elrexfio','Ibrance','Inlyta','Lorbrena','Padcev','Above Brand / Clinical Development'],
+  'Rare Disease':             ['Fordadistrogene Movaparvovec','Oxbryta','Vyndamax','Vyndaqel','Above Brand / Clinical Development'],
+  'Rheumatology':             ['Xeljanz','Above Brand / Clinical Development'],
+  'Vaccines':                 ['Abrysvo','Comirnaty','mRNA Flu','Paxlovid','Penbraya','Prevnar 20','TicoVac','Above Brand / Clinical Development'],
+};
 
-// Populate product datalist (combo box — allows both selection and free text)
+// ── Product → Therapy mapping (for reverse lookup) ──
+const PRODUCT_THERAPY = {
+  'Abrysvo':'Vaccines','Adcetris':'Hematology','Braftovi / Mektovi':'Oncology',
+  'Cibinqo':'Dermatology','Comirnaty':'Vaccines','Elranatamab':'Hematology',
+  'Elrexfio':'Oncology','Etrasimod':'Inflammation & Immunology',
+  'Fordadistrogene Movaparvovec':'Rare Disease','Ibrance':'Oncology',
+  'Inlyta':'Oncology','Litfulo':'Dermatology','Lorbrena':'Oncology',
+  'mRNA Flu':'Vaccines','Nurtec':'Migraine','Oxbryta':'Rare Disease',
+  'Padcev':'Oncology','Paxlovid':'Vaccines','Penbraya':'Vaccines',
+  'Prevnar 20':'Vaccines','Ritlecitinib':'Dermatology','TicoVac':'Vaccines',
+  'Velsipity':'Inflammation & Immunology','Vyndamax':'Rare Disease',
+  'Vyndaqel':'Rare Disease','Xeljanz':'Rheumatology','Zavegepant':'Migraine',
+};
+
+// Sync both therapy dropdowns and populate products on load
 (function(){
-  const dl = document.getElementById('product_program_options');
-  PRODUCT_LIST.forEach(p => {
-    const o = document.createElement('option');
-    o.value = p;
-    dl.appendChild(o);
-  });
+  populateProducts('');
 })();
 
 let selectedServiceTypes = new Set();
@@ -419,6 +450,92 @@ let selectedServiceTypes = new Set();
 function $id(id){ return document.getElementById(id); }
 function val(id){ return ($id(id)||{}).value?.trim() || ''; }
 function radioVal(name){ return document.querySelector(`input[name="${name}"]:checked`)?.value || ''; }
+
+// ── Service type descriptions ──
+const SERVICE_DESCRIPTIONS = {
+  'Mobile App': {
+    icon: '📱',
+    title: 'RE:nvent Mobile App',
+    items: [
+      'Custom-branded iPhone or Android app deployed to your Technical Director',
+      'Attendee check-in and badge scanning at the event',
+      'Symposia survey, post-show summary report and data export',
+      'DLU Compliance — Transfer of Value (TOV) tracking for 13 countries',
+      'Pfizer Customer Data Match run 3× weekly via CDW delivery',
+      'Remote training call with TD included',
+    ]
+  },
+  'Scanner': {
+    icon: '📷',
+    title: 'RE:nvent Mobile Scanner',
+    items: [
+      'iPhone-based badge scanner for attendee data capture',
+      'Available with or without attendee data lookup / matching',
+      'Shipping & handling ($250) included for all scanner orders',
+      'Optional API connection passthrough if venue requires it',
+    ]
+  },
+  'QR Code': {
+    icon: '🔲',
+    title: 'RE:nvent QR Code Check-In',
+    items: [
+      'Custom QR code setup for self check-in at your event',
+      'Attendees scan to register or confirm attendance',
+      'Post-show summary report and data export included',
+      'Compliance tracking and CDW delivery included',
+    ]
+  },
+  'Image Capture': {
+    icon: '📸',
+    title: 'Badge Image Capture',
+    items: [
+      'RE:nvent Mobile App used to photograph attendee badges',
+      'Badge images transcribed and matched to registration list if available',
+      'Includes full event set-up, DLU compliance, and CDW delivery',
+      'Remote training call with TD included',
+    ]
+  },
+  'List Import': {
+    icon: '📋',
+    title: 'List Import Service',
+    items: [
+      'Used when Pfizer custom scanners are not permitted at the venue',
+      'RE imports scanned attendee data from show-provided scanners',
+      'Pfizer customer ID matching, summary report, and CDW delivery',
+      'No TD contact or on-site RE scanning equipment needed',
+    ]
+  },
+  'List Transcription Matching': {
+    icon: '📝',
+    title: 'List Transcription Matching',
+    items: [
+      'Badge image transcription combined with registration list matching',
+      'Pfizer customer ID matching, summary report, and CDW delivery',
+      'No TD contact or on-site RE scanning equipment needed',
+    ]
+  },
+};
+
+function updateServiceDescriptions(){
+  const wrap = $id('svc-descriptions');
+  if(selectedServiceTypes.size === 0){
+    wrap.style.display = 'none';
+    wrap.innerHTML = '';
+    return;
+  }
+  wrap.style.display = 'flex';
+  wrap.innerHTML = [...selectedServiceTypes].map(type => {
+    const d = SERVICE_DESCRIPTIONS[type];
+    if(!d) return '';
+    return `
+      <div style="background:#f0f4f8;border-left:4px solid #1a3a5c;border-radius:0 6px 6px 0;padding:12px 16px;">
+        <div style="font-size:13px;font-weight:700;color:#1a3a5c;margin-bottom:6px;">${d.icon} ${d.title}</div>
+        <ul style="margin:0;padding-left:18px;font-size:12px;color:#444;line-height:1.8;">
+          ${d.items.map(i => `<li>${i}</li>`).join('')}
+        </ul>
+      </div>`;
+  }).join('');
+}
 
 function toggleServiceType(type, el){
   if(selectedServiceTypes.has(type)){
@@ -433,29 +550,94 @@ function toggleServiceType(type, el){
     document.querySelectorAll('.svc-type-check').forEach(r => r.classList.remove('error-border'));
   }
   updateQuantityFields();
+  updateServiceDescriptions();
 }
 
 function updateQuantityFields(){
   const hasApp     = selectedServiceTypes.has('Mobile App');
+  const hasImage   = selectedServiceTypes.has('Image Capture');
   const hasScanner = selectedServiceTypes.has('Scanner');
-  const showAny    = hasApp || hasScanner;
+  const showApp    = hasApp || hasImage;  // Image Capture also needs app quantity
+  const showAny    = showApp || hasScanner;
 
-  $id('svc_quantities').style.display  = showAny     ? 'block' : 'none';
-  $id('qty_app_wrap').style.display     = hasApp      ? 'block' : 'none';
-  $id('qty_scanner_wrap').style.display = hasScanner  ? 'block' : 'none';
+  $id('svc_quantities').style.display   = showAny    ? 'block' : 'none';
+  $id('qty_app_wrap').style.display     = showApp    ? 'block' : 'none';
+  $id('qty_scanner_wrap').style.display = hasScanner ? 'block' : 'none';
+
+  // Update label to reflect context
+  const appLabel = $id('qty_app_wrap').querySelector('label');
+  if(appLabel) appLabel.innerHTML = hasImage && !hasApp
+    ? 'Number of App Licenses <span class="req">*</span> <span style="font-size:10px;font-weight:400;color:#888;">(for Image Capture)</span>'
+    : 'Number of App Licenses <span class="req">*</span>';
 
   // Clear values when hidden
-  if(!hasApp)     $id('f_qty_app').value = '';
+  if(!showApp)    $id('f_qty_app').value = '';
   if(!hasScanner) $id('f_qty_scanner').value = '';
 }
 
+// Populate the product dropdown based on selected therapy
+function populateProducts(therapy){
+  const sel = $id('f_product_program');
+  const current = sel.value;
+  sel.innerHTML = '<option value="">— Select a product —</option>';
+  const list = (therapy && therapy !== 'Other')
+    ? (THERAPY_PRODUCTS[therapy] || [])
+    : Object.keys(PRODUCT_THERAPY).sort().concat(['Above Brand / Clinical Development']);
+  list.forEach(p => {
+    const o = document.createElement('option');
+    o.value = p; o.textContent = p;
+    if(p === current) o.selected = true;
+    sel.appendChild(o);
+  });
+  // Always add Other at the bottom
+  const other = document.createElement('option');
+  other.value = 'Other'; other.textContent = 'Other';
+  sel.appendChild(other);
+}
+
+// When therapy dropdown changes → filter product list
+function onTherapyChange(){
+  const t = $id('f_therapy').value;
+  // Show/hide Other text input
+  const isOther = (t === 'Other');
+  $id('f_therapy_other').style.display = isOther ? 'block' : 'none';
+  if(isOther){ $id('f_therapy_other').focus(); }
+  populateProducts(isOther ? '' : t);
+  // Reset product if it doesn't belong to new therapy
+  const prod = $id('f_product_program').value;
+  if(prod && !isOther && t && THERAPY_PRODUCTS[t] && !THERAPY_PRODUCTS[t].includes(prod)){
+    $id('f_product_program').value = '';
+    $id('f_product_other').style.display = 'none';
+  }
+  onProductChange();
+}
+
+// When user types in the Other therapy box → keep product list showing all
+function onTherapyOtherInput(){
+  populateProducts('');
+}
+
+// When product dropdown changes → auto-fill therapy + show Other input if needed
 function onProductChange(){
-  const v = val('f_product_program');
-  const isKnown = PRODUCT_LIST.includes(v);
-  const isAboveBrand = (v === 'Above Brand / Clinical Development');
-  // Show details box if they typed something custom (not in the list) or explicitly chose "Other"
-  $id('product_details_wrap').style.display = (!isKnown && v !== '') || v === 'Other' ? 'block' : 'none';
+  const p = $id('f_product_program').value;
+  const isOtherProduct = (p === 'Other');
+  const isAboveBrand   = (p === 'Above Brand / Clinical Development');
+
+  // Show/hide Other product text input
+  $id('f_product_other').style.display = isOtherProduct ? 'block' : 'none';
+  if(isOtherProduct){ $id('f_product_other').focus(); }
+
+  // Show clinical name field for Above Brand
   $id('clinical_name_wrap').style.display = isAboveBrand ? 'block' : 'none';
+
+  // Auto-fill therapy when product has a single known therapy
+  if(p && PRODUCT_THERAPY[p]){
+    const t = PRODUCT_THERAPY[p];
+    $id('f_therapy').value = t;
+    $id('f_therapy_other').style.display = 'none';
+    populateProducts(t);
+    $id('f_product_program').value = p; // re-select after repopulate
+  }
 }
 
 function onTOVChange(){
@@ -481,7 +663,7 @@ function fmtDate(d){
 }
 
 function validate(){
-  const required = ['f_mgr','f_mgr_email','f_pfz','f_name','f_etype','f_addr','f_date','f_meal','f_therapy','f_owner','f_product_program'];
+  const required = ['f_mgr','f_mgr_email','f_pfz','f_name','f_etype','f_addr','f_date','f_meal','f_owner','f_therapy','f_product_program'];
   let ok = true;
   required.forEach(id => {
     const el = $id(id);
@@ -496,8 +678,8 @@ function validate(){
     ok = false;
   }
 
-  // Quantity fields — required when Mobile App or Scanner selected
-  if(selectedServiceTypes.has('Mobile App')){
+  // Quantity fields — required when Mobile App, Image Capture, or Scanner selected
+  if(selectedServiceTypes.has('Mobile App') || selectedServiceTypes.has('Image Capture')){
     const el = $id('f_qty_app');
     el.classList.remove('error');
     if(!el.value.trim()){ el.classList.add('error'); ok = false; }
@@ -516,13 +698,16 @@ function validate(){
     $id('badge_api_group').style.outline = '';
   }
 
-  // Conditional: product details required when custom/unknown product entered
-  const prod = val('f_product_program');
-  const prodIsKnown = PRODUCT_LIST.includes(prod);
-  if(prod && (!prodIsKnown || prod === 'Other')){
-    const el = $id('f_product_details');
-    el.classList.remove('error');
-    if(!el.value.trim()){ el.classList.add('error'); ok = false; }
+  // Validate Other text inputs if selected
+  if(val('f_therapy') === 'Other'){
+    const el = $id('f_therapy_other');
+    el.style.border = el.value.trim() ? '1px solid #ddd' : '1px solid #e74c3c';
+    if(!el.value.trim()) ok = false;
+  }
+  if(val('f_product_program') === 'Other'){
+    const el = $id('f_product_other');
+    el.style.border = el.value.trim() ? '1px solid #ddd' : '1px solid #e74c3c';
+    if(!el.value.trim()) ok = false;
   }
 
   $id('error-box').style.display = ok ? 'none' : 'block';
@@ -546,7 +731,7 @@ function buildData(){
     f_time:             val('f_time'),
     f_meal:             val('f_meal'),
     f_att:              val('f_att'),
-    f_therapy:          val('f_therapy'),
+    f_therapy:          val('f_therapy') === 'Other' ? val('f_therapy_other') : val('f_therapy'),
     f_owner:            val('f_owner'),
     f_td:               val('f_td'),
     f_notes:            val('f_notes'),
@@ -557,7 +742,7 @@ function buildData(){
     tov:                document.querySelector('input[name="f_tov"]:checked')?.value || 'yes',
     survey_type:        '',
     survey_details:     '',
-    product_program:    val('f_product_program'),
+    product_program:    val('f_product_program') === 'Other' ? val('f_product_other') : val('f_product_program'),
     product_program_details: val('f_product_details'),
     clinical_internal_name: val('f_clinical_name'),
     assoc_contact_name: val('f_assoc_contact_name'),
@@ -584,7 +769,7 @@ function buildSummaryHTML(d){
     ['Service Type', d.service_type],
     ['App Licenses', d.qty_app_licenses],
     ['Scanners', d.qty_scanners],
-    ['Product / Program', d.product_program],
+    ['Product / Drug Associated', d.product_program],
     ['TOV Required', d.tov === 'no' ? 'No (−$500)' : 'Yes (standard)'],
     ['Badge / API Available', d.badge_api_available],
   ];
