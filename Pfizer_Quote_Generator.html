@@ -449,10 +449,18 @@ textarea{height:72px;resize:vertical;}
       <div class="alert alert-info">ℹ️ <strong>Note:</strong> No TD Contact needed for List Transcription Matching — the client will not be using RE scanning services.</div>
       <div class="svc-row green">
         <div>
-          <div class="svc-name">List Transcription Matching</div>
-          <div class="svc-desc">Badge image transcription with registration list matching, customer ID matching, summary report and CDW delivery</div>
+          <div class="svc-name">List Import</div>
+          <div class="svc-desc">In rare occasions when Pfizer custom scanners are not permitted, RE will import scanned attendees from the show provided scanners for compliance tracking, Pfizer customer ID matching, summary report and weekly data warehouse (CDW) delivery</div>
         </div>
         <span class="svc-price">$1,250 flat</span>
+        <span style="font-size:11px;color:#27ae60;font-weight:700">Auto</span>
+      </div>
+      <div class="svc-row green">
+        <div>
+          <div class="svc-name">Badge Image Transcription</div>
+          <div class="svc-desc">Badge image transcription and reg list match if available</div>
+        </div>
+        <span class="svc-price">$650 flat</span>
         <span style="font-size:11px;color:#27ae60;font-weight:700">Auto</span>
       </div>
       <div class="divider"></div>
@@ -819,8 +827,10 @@ function calcPrices(){
   }
 
   if(selectedSvcs.has('listtrans')){
-    lines.push({desc:'<strong>List Transcription Matching:</strong> Badge image transcription with registration list matching, customer ID matching, summary report and CDW delivery.',qty:null,unit:null,total:1250});
+    lines.push({desc:'<strong>List Import:</strong> In rare occasions when Pfizer custom scanners are not permitted, RE will import scanned attendees from the show provided scanners for compliance tracking, Pfizer customer ID matching, summary report and weekly data warehouse (CDW) delivery.',qty:null,unit:null,total:1250});
     ccBase += 1250;
+    lines.push({desc:'<strong>Badge Image transcription</strong> and reg list match if available',qty:null,unit:null,total:650});
+    ccBase += 650;
   }
 
   // ── ONE Event Set-up fee for the whole event (not per service type) ──
