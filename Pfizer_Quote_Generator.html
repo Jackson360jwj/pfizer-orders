@@ -319,7 +319,7 @@ textarea{height:72px;resize:vertical;}
       <button class="svc-tab" id="tab_qr"      onclick="toggleSvc('qr',this)">🔲 QR Code</button>
       <button class="svc-tab" id="tab_image"   onclick="toggleSvc('image',this)">📸 Image Capture</button>
       <button class="svc-tab" id="tab_list"    onclick="toggleSvc('list',this)">📋 List Import</button>
-      <button class="svc-tab" id="tab_listtrans" onclick="toggleSvc('listtrans',this)">📝 List Transcription Matching</button>
+      <button class="svc-tab" id="tab_listtrans" onclick="toggleSvc('listtrans',this)">📝 Attendee List Matching Import</button>
     </div>
 
     <!-- APP -->
@@ -446,7 +446,7 @@ textarea{height:72px;resize:vertical;}
 
     <!-- LIST TRANSCRIPTION MATCHING -->
     <div id="svc_listtrans" class="svc-section">
-      <div class="alert alert-info">ℹ️ <strong>Note:</strong> No TD Contact needed for List Transcription Matching — the client will not be using RE scanning services.</div>
+      <div class="alert alert-info">ℹ️ <strong>Note:</strong> No TD Contact needed for Attendee List Matching Import — the client will not be using RE scanning services.</div>
       <div class="svc-row green">
         <div>
           <div class="svc-name">List Import</div>
@@ -457,8 +457,8 @@ textarea{height:72px;resize:vertical;}
       </div>
       <div class="svc-row green">
         <div>
-          <div class="svc-name">Badge Image Transcription</div>
-          <div class="svc-desc">Badge image transcription and reg list match if available</div>
+          <div class="svc-name">Event Registration Attendee List Match</div>
+          <div class="svc-desc">Event registration attendee list match</div>
         </div>
         <span class="svc-price">$650 flat</span>
         <span style="font-size:11px;color:#27ae60;font-weight:700">Auto</span>
@@ -741,7 +741,21 @@ function onApiActualToggle(){
   liveCalc();
 }
 
-// ── Service type selection (multi-select) ──
+// ── Mutual exclusion groups ──
+// Group A (hardware/app): app, scanner, qr — can combine freely within group
+// Group B (list/image): image, list, listtrans — only ONE allowed, exclusive with Group A
+const QG_GROUP_A = new Set(['app','scanner','qr']);
+const QG_GROUP_B = new Set(['image','list','listtrans']);
+
+function deselectSvc(type){
+  selectedSvcs.delete(type);
+  const btn = $id('tab_'+type);
+  if(btn) btn.classList.remove('active');
+  const sec = $id('svc_'+type);
+  if(sec) sec.style.display = 'none';
+}
+
+// ── Service type selection (multi-select with exclusion rules) ──
 function toggleSvc(type, btn){
   if(selectedSvcs.has(type)){
     selectedSvcs.delete(type);
@@ -749,6 +763,15 @@ function toggleSvc(type, btn){
     const sec = $id('svc_'+type);
     if(sec) sec.style.display = 'none';
   } else {
+    // Enforce mutual exclusion
+    if(QG_GROUP_B.has(type)){
+      // Selecting Group B: clear all Group A and all other Group B items
+      QG_GROUP_A.forEach(t => deselectSvc(t));
+      QG_GROUP_B.forEach(t => { if(t !== type) deselectSvc(t); });
+    } else if(QG_GROUP_A.has(type)){
+      // Selecting Group A: clear all Group B items
+      QG_GROUP_B.forEach(t => deselectSvc(t));
+    }
     selectedSvcs.add(type);
     btn.classList.add('active');
     const sec = $id('svc_'+type);
@@ -829,7 +852,7 @@ function calcPrices(){
   if(selectedSvcs.has('listtrans')){
     lines.push({desc:'<strong>List Import:</strong> In rare occasions when Pfizer custom scanners are not permitted, RE will import scanned attendees from the show provided scanners for compliance tracking, Pfizer customer ID matching, summary report and weekly data warehouse (CDW) delivery.',qty:null,unit:null,total:1250});
     ccBase += 1250;
-    lines.push({desc:'<strong>Badge Image transcription</strong> and reg list match if available',qty:null,unit:null,total:650});
+    lines.push({desc:'<strong>Event registration attendee list match</strong>',qty:null,unit:null,total:650});
     ccBase += 650;
   }
 
@@ -1089,7 +1112,7 @@ function doImportObject(d, alreadyInKV){
   // Map label → internal key
   const svcLabelMap = {
     'Mobile App':'app', 'Scanner':'scanner', 'QR Code':'qr',
-    'Image Capture':'image', 'List Import':'list', 'List Transcription Matching':'listtrans'
+    'Image Capture':'image', 'List Import':'list', 'Attendee List Matching Import':'listtrans'
   };
   const svcString = d.service_type || '';
 
@@ -1202,7 +1225,7 @@ async function saveCurrentFormState(extraFields){
     otis_quote_number: val('f_qnum'),  // keep OTIS quote number field in sync
     f_qdate:         val('f_qdate'),
     // Services selected — keep service_type in sync with Order Management
-    service_type:    [...selectedSvcs].map(k => ({app:'Mobile App',scanner:'Scanner',qr:'QR Code',image:'Image Capture',list:'List Import',listtrans:'List Transcription Matching'}[k]||k)).join(', '),
+    service_type:    [...selectedSvcs].map(k => ({app:'Mobile App',scanner:'Scanner',qr:'QR Code',image:'Image Capture',list:'List Import',listtrans:'Attendee List Matching Import'}[k]||k)).join(', '),
     // Quantities
     app_qty:            qnum('app_qty'),
     scanner_qty_nodata: qnum('scanner_qty_nodata'),

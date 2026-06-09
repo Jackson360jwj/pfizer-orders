@@ -164,9 +164,9 @@ textarea{height:72px;resize:vertical;}
         <div class="svc-type-check" id="svc_qr_code" onclick="toggleServiceType('QR Code', this)">🔲 QR Code</div>
         <div class="svc-type-check" id="svc_image_capture" onclick="toggleServiceType('Image Capture', this)">📸 Image Capture</div>
         <div class="svc-type-check" id="svc_list_import" onclick="toggleServiceType('List Import', this)">📋 List Import</div>
-        <div class="svc-type-check" id="svc_list_transcription" onclick="toggleServiceType('List Transcription Matching', this)">📝 List Transcription Matching</div>
+        <div class="svc-type-check" id="svc_list_transcription" onclick="toggleServiceType('Attendee List Matching Import', this)">📝 Attendee List Matching Import</div>
       </div>
-      <div class="svc-note">Select one or more — customers may order multiple service types for the same event.</div>
+      <div class="svc-note">Mobile App, Scanner, and QR Code may be combined. Image Capture, List Import, and Attendee List Matching Import are standalone — select only one, and they cannot be combined with scanning services.</div>
 
       <!-- Service descriptions — shown when a type is selected -->
       <div id="svc-descriptions" style="display:none;margin-top:14px;display:flex;flex-direction:column;gap:10px;"></div>
@@ -505,9 +505,9 @@ const SERVICE_DESCRIPTIONS = {
       'No TD contact or on-site RE scanning equipment needed',
     ]
   },
-  'List Transcription Matching': {
+  'Attendee List Matching Import': {
     icon: '📝',
-    title: 'List Transcription Matching',
+    title: 'Attendee List Matching Import',
     items: [
       'Badge image transcription combined with registration list matching',
       'Pfizer customer ID matching, summary report, and CDW delivery',
@@ -537,11 +537,37 @@ function updateServiceDescriptions(){
   }).join('');
 }
 
+// Mutual exclusion rules:
+//   Group A (hardware): Mobile App, Scanner, QR Code — can combine freely within group
+//   Group B (list/image): Image Capture, List Import, Attendee List Matching Import — only ONE allowed, and exclusive with Group A
+const SVC_GROUP_A = new Set(['Mobile App','Scanner','QR Code']);
+const SVC_GROUP_B = new Set(['Image Capture','List Import','Attendee List Matching Import']);
+const SVC_ID_MAP  = {
+  'Mobile App':'svc_mobile_app','Scanner':'svc_scanner','QR Code':'svc_qr_code',
+  'Image Capture':'svc_image_capture','List Import':'svc_list_import',
+  'Attendee List Matching Import':'svc_list_transcription'
+};
+
+function deselect(type){
+  selectedServiceTypes.delete(type);
+  const el = $id(SVC_ID_MAP[type]);
+  if(el) el.classList.remove('selected');
+}
+
 function toggleServiceType(type, el){
   if(selectedServiceTypes.has(type)){
     selectedServiceTypes.delete(type);
     el.classList.remove('selected');
   } else {
+    // Enforce mutual exclusion
+    if(SVC_GROUP_B.has(type)){
+      // Selecting Group B: clear all Group A and all other Group B items
+      SVC_GROUP_A.forEach(t => deselect(t));
+      SVC_GROUP_B.forEach(t => { if(t !== type) deselect(t); });
+    } else if(SVC_GROUP_A.has(type)){
+      // Selecting Group A: clear all Group B items
+      SVC_GROUP_B.forEach(t => deselect(t));
+    }
     selectedServiceTypes.add(type);
     el.classList.add('selected');
   }
