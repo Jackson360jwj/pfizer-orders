@@ -436,6 +436,18 @@ textarea{height:72px;resize:vertical;}
         <span class="svc-price">$650 flat</span>
         <span style="font-size:11px;color:#27ae60;font-weight:700">Auto</span>
       </div>
+      <div class="svc-row" style="background:#fff8e1;border:1px solid #f9a825;">
+        <div>
+          <div class="svc-name">API Connection Passthrough <span style="color:#e67e22;font-size:11px;">(if required)</span></div>
+          <div class="svc-desc" style="color:#c0392b;">Event venue API cost — estimate shown. Katherine to verify exact amount before finalizing.</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <label class="opt" style="margin:0;"><input type="checkbox" id="opt_api_img" onchange="liveCalc()"> Include</label>
+          <span style="font-size:12px;color:#555;margin-left:8px;">$</span>
+          <input type="number" id="img_api_cost" value="500" min="0" style="width:80px;text-align:center;padding:5px 6px;border:1px solid #f9a825;border-radius:4px;font-size:13px;font-weight:700;" oninput="liveCalc()">
+          <span style="font-size:10px;color:#888;font-style:italic;">est.</span>
+        </div>
+      </div>
       <div class="divider"></div>
       <label class="lbl">Add-ons</label>
       <div class="opt-grid">
@@ -887,7 +899,9 @@ function calcPrices(){
     lines.push({desc:'API Connection Passthrough',qty:null,unit:null,total:scanApiCost}); api+=scanApiCost;
   }
   if(selectedSvcs.has('image') && $id('opt_api_img') && $id('opt_api_img').checked){
-    lines.push({desc:'API connection cost passthrough',qty:null,unit:null,total:500}); api+=500;
+    const imgRaw     = $id('img_api_cost') ? $id('img_api_cost').value.trim() : '';
+    const imgApiCost = (imgRaw === '' || isNaN(parseFloat(imgRaw))) ? 500 : parseFloat(imgRaw);
+    lines.push({desc:'API Connection Passthrough',qty:null,unit:null,total:imgApiCost}); api+=imgApiCost;
   }
 
   // ── Shared add-ons ──
@@ -1163,6 +1177,7 @@ function doImportObject(d, alreadyInKV){
   // API costs
   if(d.api_cost         && $id('api_cost'))         $id('api_cost').value         = d.api_cost;
   if(d.scanner_api_cost && $id('scanner_api_cost')) $id('scanner_api_cost').value = d.scanner_api_cost;
+  if(d.img_api_cost     && $id('img_api_cost'))     $id('img_api_cost').value     = d.img_api_cost;
   if($id('api_cost_actual')){ $id('api_cost_actual').checked = (d.api_cost_actual === '1'); onApiActualToggle(); }
   // Quote number — restore if previously saved
   if(d.f_qnum && $id('f_qnum')) $id('f_qnum').value = d.f_qnum;
@@ -1237,6 +1252,7 @@ async function saveCurrentFormState(extraFields){
     api_cost:        val('api_cost'),
     api_cost_actual: ($id('api_cost_actual') && $id('api_cost_actual').checked) ? '1' : '0',
     scanner_api_cost: val('scanner_api_cost'),
+    img_api_cost:    val('img_api_cost'),
     tov:             document.querySelector('input[name="tov"]:checked')?.value || '',
     payment_method:  document.querySelector('input[name="payment"]:checked')?.value || '',
     // Checkboxes
