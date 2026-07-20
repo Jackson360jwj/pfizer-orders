@@ -253,6 +253,16 @@ textarea{height:72px;resize:vertical;}
         <label class="lbl">Product Associated *</label>
         <input type="text" id="f_product" placeholder="e.g. Elrantamab" oninput="liveCalc()">
       </div>
+      <div class="fgroup">
+        <label class="lbl">Survey Type</label>
+        <select id="f_survey_type" onchange="liveCalc()">
+          <option value="">— Select Survey Type —</option>
+          <option>Comirnaty survey</option>
+          <option>Prevnar survey</option>
+          <option>Paxlovid survey</option>
+          <option>Migraine survey</option>
+        </select>
+      </div>
       <div class="fgroup fw">
         <label class="lbl">Pfizer Project Owner (Name &amp; Email)</label>
         <input type="text" id="f_owner" placeholder="e.g. Todd.A.Bugbee@pfizer.com" oninput="liveCalc()">
@@ -275,10 +285,6 @@ textarea{height:72px;resize:vertical;}
       <div class="fgroup">
         <label class="lbl">Badge / Reg API Available</label>
         <input type="text" id="badge_api_available" placeholder="Yes / No / Unknown">
-      </div>
-      <div class="fgroup">
-        <label class="lbl">Association / Vendor Name</label>
-        <input type="text" id="assoc_vendor_name" placeholder="e.g. Freeman, Cvent">
       </div>
       <div class="fgroup">
         <label class="lbl">Association Contact Name</label>
@@ -321,7 +327,7 @@ textarea{height:72px;resize:vertical;}
       <button class="svc-tab" id="tab_scanner" onclick="toggleSvc('scanner',this)">📷 Scanner</button>
       <button class="svc-tab" id="tab_qr"      onclick="toggleSvc('qr',this)">🔲 QR Code</button>
       <button class="svc-tab" id="tab_image"   onclick="toggleSvc('image',this)">📸 Image Capture</button>
-      <button class="svc-tab" id="tab_list"    onclick="toggleSvc('list',this)">📋 List Import</button>
+      <button class="svc-tab" id="tab_list"    onclick="toggleSvc('list',this)">📋 List Import <span style="font-size:10px;font-weight:400;opacity:.75;">(last resort)</span></button>
       <button class="svc-tab" id="tab_listtrans" onclick="toggleSvc('listtrans',this)">📝 Attendee List Matching Import</button>
     </div>
 
@@ -1109,9 +1115,9 @@ function doImportObject(d, alreadyInKV){
   // Fill event fields — map both old and new field names
   const fieldMap = {
     f_mgr:1, f_mgr_email:1, f_pfz:1, f_entity:1, f_name:1, f_acronym:1, f_etype:1,
-    f_addr:1, f_date:1, f_time:1, f_meal:1, f_att:1, f_therapy:1, f_owner:1, f_td:1, f_notes:1,
+    f_addr:1, f_date:1, f_time:1, f_meal:1, f_att:1, f_therapy:1, f_survey_type:1, f_owner:1, f_td:1, f_notes:1,
     // Association / API fields (from order form)
-    badge_api_available:1, assoc_vendor_name:1, assoc_contact_name:1, assoc_contact_phone:1,
+    badge_api_available:1, assoc_contact_name:1, assoc_contact_phone:1,
     assoc_contact_email:1, provider_reg_company:1, api_badge_contact_name:1, api_badge_contact_email:1,
     api_badge_notes:1
   };
@@ -1119,7 +1125,7 @@ function doImportObject(d, alreadyInKV){
 
   // Show association card if there's any association data
   const assocCard = $id('assoc_api_card');
-  if(assocCard && (d.badge_api_available || d.assoc_vendor_name || d.assoc_contact_name || d.provider_reg_company)){
+  if(assocCard && (d.badge_api_available || d.assoc_contact_name || d.provider_reg_company)){
     assocCard.style.display = 'block';
   }
 
@@ -1235,6 +1241,7 @@ async function saveCurrentFormState(extraFields){
     f_meal:          val('f_meal'),
     f_att:           val('f_att'),
     f_therapy:       val('f_therapy'),
+    f_survey_type:   val('f_survey_type'),
     f_product:       product,
     // Keep product_program in sync so Order Management dashboard shows the correct product
     product_program: product,
