@@ -817,13 +817,13 @@ function updateSharedOpts(){
 }
 
 // ── Pricing engine ──
-// NOTE: API passthrough is excluded from CC fee base (it's a direct cost passthrough)
+// NOTE: API passthrough IS included in the CC fee base (per JJ, Jul 2026)
 function calcPrices(){
   if(selectedSvcs.size === 0) return {subtotal:0, api:0, ccFee:0, grand:0, lines:[]};
   const notov = noTOV();
   const cc = isCC();
   let ccBase = 0;   // amount subject to 3% CC fee
-  let api = 0;      // passthrough — not in CC base
+  let api = 0;      // passthrough — included in CC fee base at total time
   const lines = []; // {desc, qty, unit, total, included}
 
   const setupFull = notov
@@ -933,7 +933,7 @@ function calcPrices(){
   // No remote training for QR Code or Scanner — app/image only
 
   // ── Totals ──
-  const ccFee   = cc ? Math.round(ccBase * 0.03 * 100) / 100 : 0;
+  const ccFee   = cc ? Math.round((ccBase + api) * 0.03 * 100) / 100 : 0;
   const subtotal = ccBase + api;
   const grand    = subtotal + ccFee;
 
