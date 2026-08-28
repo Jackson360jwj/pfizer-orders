@@ -153,6 +153,11 @@ textarea{height:72px;resize:vertical;}
 
   <!-- ── ORDER FORM ── -->
   <div id="order-form">
+    <div id="draft-banner" style="display:none;background:#e8f4fd;border:1px solid #7fb9e0;border-radius:6px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#1a4a6e;">
+      📝 You have an unsaved draft from <strong id="draft-time"></strong>.
+      <button onclick="restoreDraftClick()" style="margin-left:10px;padding:5px 14px;background:#1a3a5c;color:#fff;border:none;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer;">Restore Draft</button>
+      <button onclick="discardDraft()" style="margin-left:6px;padding:5px 14px;background:#fff;color:#c0392b;border:1px solid #e74c3c;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer;">Discard</button>
+    </div>
     <div class="error-box" id="error-box">⚠️ Please fill in all required fields highlighted below.</div>
 
     <!-- STEP 1: SERVICE TYPE -->
@@ -163,10 +168,10 @@ textarea{height:72px;resize:vertical;}
         <div class="svc-type-check" id="svc_scanner" onclick="toggleServiceType('Scanner', this)">📷 Scanner</div>
         <div class="svc-type-check" id="svc_qr_code" onclick="toggleServiceType('QR Code', this)">🔲 QR Code</div>
         <div class="svc-type-check" id="svc_image_capture" onclick="toggleServiceType('Image Capture', this)">📸 Image Capture</div>
-        <div class="svc-type-check" id="svc_list_import" onclick="toggleServiceType('List Import', this)">📋 List Import</div>
+        <div class="svc-type-check" id="svc_list_import" onclick="toggleServiceType('List Import', this)">📋 List Import <span style="font-size:10px;font-weight:400;color:inherit;opacity:.75;">(last resort)</span></div>
         <div class="svc-type-check" id="svc_list_transcription" onclick="toggleServiceType('Attendee List Matching Import', this)">📝 Attendee List Matching Import</div>
       </div>
-      <div class="svc-note">Mobile App, Scanner, and QR Code may be combined. Image Capture, List Import, and Attendee List Matching Import are standalone — select only one, and they cannot be combined with scanning services.</div>
+      <div class="svc-note">Mobile App, Scanner, QR Code, and Image Capture may be combined. List Import and Attendee List Matching Import are standalone — select only one, and they cannot be combined with scanning services.</div>
 
       <!-- Service descriptions — shown when a type is selected -->
       <div id="svc-descriptions" style="display:none;margin-top:14px;display:flex;flex-direction:column;gap:10px;"></div>
@@ -230,7 +235,8 @@ textarea{height:72px;resize:vertical;}
         </div>
         <div class="fgroup">
           <label class="lbl">Meeting Date <span class="req">*</span></label>
-          <input type="date" id="f_date">
+          <input type="date" id="f_date" onchange="updateExpediteWarning()">
+          <div id="expedite_warning" style="display:none;font-size:11px;color:#c0392b;font-weight:700;margin-top:4px;background:#fdf2f2;border:1px solid #e74c3c;border-radius:5px;padding:8px 10px;">⚠️ This event is under 5 business days away — a $500 Expedite Service fee will apply to your quote.</div>
         </div>
         <div class="fgroup">
           <label class="lbl">Meeting End Date</label>
@@ -256,9 +262,13 @@ textarea{height:72px;resize:vertical;}
           <label class="lbl">Estimated # Attendees</label>
           <input type="number" id="f_att" placeholder="e.g. 100">
         </div>
-        <div class="fgroup fw">
-          <label class="lbl">Pfizer Project Owner (Name &amp; Email) <span class="req">*</span></label>
-          <input type="text" id="f_owner" placeholder="e.g. Jane.Smith@pfizer.com">
+        <div class="fgroup">
+          <label class="lbl">Pfizer Project Owner Name <span class="req">*</span></label>
+          <input type="text" id="f_owner_name" placeholder="e.g. Jane Smith">
+        </div>
+        <div class="fgroup">
+          <label class="lbl">Pfizer Project Owner Email <span class="req">*</span></label>
+          <input type="email" id="f_owner_email" placeholder="e.g. Jane.Smith@pfizer.com">
         </div>
         <div class="fgroup fw">
           <label class="lbl">TD Contact (Name, Phone / Email)</label>
@@ -282,6 +292,8 @@ textarea{height:72px;resize:vertical;}
             <option>Dermatology</option>
             <option>Gastrointestinal</option>
             <option>Hematology</option>
+            <option>Antiviral</option>
+            <option>Inflammation</option>
             <option>Inflammation &amp; Immunology</option>
             <option>Migraine</option>
             <option>Oncology</option>
@@ -306,6 +318,16 @@ textarea{height:72px;resize:vertical;}
         <div class="fgroup fw conditional-field" id="clinical_name_wrap">
           <label class="lbl">Clinical / Internal Name <span style="font-size:10px;font-weight:400;color:#888;text-transform:none;letter-spacing:0;">(optional)</span></label>
           <input type="text" id="f_clinical_name" placeholder="e.g. Study XYZ-123">
+        </div>
+        <div class="fgroup">
+          <label class="lbl">Survey Type</label>
+          <select id="f_survey_type">
+            <option value="">— Select Survey Type —</option>
+            <option>Comirnaty survey</option>
+            <option>Prevnar survey</option>
+            <option>Paxlovid survey</option>
+            <option>Migraine survey</option>
+          </select>
         </div>
       </div>
     </div>
@@ -342,10 +364,6 @@ textarea{height:72px;resize:vertical;}
         <div class="fgroup">
           <label class="lbl">Association Contact Email</label>
           <input type="email" id="f_assoc_contact_email" placeholder="contact@association.org">
-        </div>
-        <div class="fgroup fw">
-          <label class="lbl">Association / Vendor Name</label>
-          <input type="text" id="f_assoc_vendor_name" placeholder="e.g. Freeman, Experient, etc.">
         </div>
       </div>
     </div>
@@ -400,6 +418,7 @@ textarea{height:72px;resize:vertical;}
       <div class="success-title">Order Submitted!</div>
       <div class="success-sub">Your order has been received by Reality Engineering.<br>You'll be contacted to confirm details and receive a quote before your event.</div>
       <div style="margin-top:8px;">
+        <button class="back-btn" onclick="downloadPDF()">⬇️ Download PDF Copy</button>
         <button class="back-btn" onclick="goBack()">← Submit Another Order</button>
       </div>
 
@@ -415,15 +434,17 @@ textarea{height:72px;resize:vertical;}
 <script>
 // ── Therapy → Product mapping ──
 const THERAPY_PRODUCTS = {
+  'Antiviral':                ['Paxlovid','Above Brand / Clinical Development'],
   'Dermatology':              ['Cibinqo','Litfulo','Ritlecitinib','Velsipity','Above Brand / Clinical Development'],
   'Gastrointestinal':         ['Above Brand / Clinical Development'],
   'Hematology':               ['Adcetris','Elranatamab','Oxbryta','Above Brand / Clinical Development'],
+  'Inflammation':             ['Above Brand / Clinical Development'],
   'Inflammation & Immunology':['Etrasimod','Velsipity','Xeljanz','Above Brand / Clinical Development'],
   'Migraine':                 ['Nurtec','Zavegepant','Above Brand / Clinical Development'],
   'Oncology':                 ['Braftovi / Mektovi','Elrexfio','Ibrance','Inlyta','Lorbrena','Padcev','Above Brand / Clinical Development'],
   'Rare Disease':             ['Fordadistrogene Movaparvovec','Oxbryta','Vyndamax','Vyndaqel','Above Brand / Clinical Development'],
   'Rheumatology':             ['Xeljanz','Above Brand / Clinical Development'],
-  'Vaccines':                 ['Abrysvo','Comirnaty','mRNA Flu','Paxlovid','Penbraya','Prevnar 20','TicoVac','Above Brand / Clinical Development'],
+  'Vaccines':                 ['Abrysvo','Comirnaty','mRNA Flu','Penbraya','Prevnar 20','TicoVac','Above Brand / Clinical Development'],
 };
 
 // ── Product → Therapy mapping (for reverse lookup) ──
@@ -434,7 +455,7 @@ const PRODUCT_THERAPY = {
   'Fordadistrogene Movaparvovec':'Rare Disease','Ibrance':'Oncology',
   'Inlyta':'Oncology','Litfulo':'Dermatology','Lorbrena':'Oncology',
   'mRNA Flu':'Vaccines','Nurtec':'Migraine','Oxbryta':'Rare Disease',
-  'Padcev':'Oncology','Paxlovid':'Vaccines','Penbraya':'Vaccines',
+  'Padcev':'Oncology','Paxlovid':'Antiviral','Penbraya':'Vaccines',
   'Prevnar 20':'Vaccines','Ritlecitinib':'Dermatology','TicoVac':'Vaccines',
   'Velsipity':'Inflammation & Immunology','Vyndamax':'Rare Disease',
   'Vyndaqel':'Rare Disease','Xeljanz':'Rheumatology','Zavegepant':'Migraine',
@@ -497,8 +518,9 @@ const SERVICE_DESCRIPTIONS = {
   },
   'List Import': {
     icon: '📋',
-    title: 'List Import Service',
+    title: 'List Import — Last Resort Only',
     items: [
+      '⚠️ Use only when no badge API is available from the venue or association',
       'Used when Pfizer custom scanners are not permitted at the venue',
       'RE imports scanned attendee data from show-provided scanners',
       'Pfizer customer ID matching, summary report, and CDW delivery',
@@ -539,10 +561,10 @@ function updateServiceDescriptions(){
 }
 
 // Mutual exclusion rules:
-//   Group A (hardware): Mobile App, Scanner, QR Code — can combine freely within group
-//   Group B (list/image): Image Capture, List Import, Attendee List Matching Import — only ONE allowed, and exclusive with Group A
-const SVC_GROUP_A = new Set(['Mobile App','Scanner','QR Code']);
-const SVC_GROUP_B = new Set(['Image Capture','List Import','Attendee List Matching Import']);
+//   Group A (hardware/capture): Mobile App, Scanner, QR Code, Image Capture — can combine freely within group
+//   Group B (list imports): List Import, Attendee List Matching Import — only ONE allowed, and exclusive with Group A
+const SVC_GROUP_A = new Set(['Mobile App','Scanner','QR Code','Image Capture']);
+const SVC_GROUP_B = new Set(['List Import','Attendee List Matching Import']);
 const SVC_ID_MAP  = {
   'Mobile App':'svc_mobile_app','Scanner':'svc_scanner','QR Code':'svc_qr_code',
   'Image Capture':'svc_image_capture','List Import':'svc_list_import',
@@ -690,7 +712,7 @@ function fmtDate(d){
 }
 
 function validate(){
-  const required = ['f_mgr','f_mgr_email','f_pfz','f_name','f_etype','f_addr','f_date','f_meal','f_owner','f_therapy','f_product_program'];
+  const required = ['f_mgr','f_mgr_email','f_pfz','f_name','f_etype','f_addr','f_date','f_meal','f_owner_name','f_owner_email','f_therapy','f_product_program'];
   let ok = true;
   required.forEach(id => {
     const el = $id(id);
@@ -715,6 +737,13 @@ function validate(){
     const el = $id('f_qty_scanner');
     el.classList.remove('error');
     if(!el.value.trim()){ el.classList.add('error'); ok = false; }
+  }
+
+  // Owner email format check
+  const ownerEmailEl = $id('f_owner_email');
+  if(ownerEmailEl && ownerEmailEl.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmailEl.value.trim())){
+    ownerEmailEl.classList.add('error');
+    ok = false;
   }
 
   // Badge API
@@ -759,7 +788,9 @@ function buildData(){
     f_meal:             val('f_meal'),
     f_att:              val('f_att'),
     f_therapy:          val('f_therapy') === 'Other' ? val('f_therapy_other') : val('f_therapy'),
-    f_owner:            val('f_owner'),
+    f_owner_name:       val('f_owner_name'),
+    f_owner_email:      val('f_owner_email'),
+    f_owner:            val('f_owner_name') + (val('f_owner_email') ? ' — ' + val('f_owner_email') : ''),
     f_td:               val('f_td'),
     f_notes:            val('f_notes'),
     // New fields
@@ -767,14 +798,13 @@ function buildData(){
     qty_app_licenses:   val('f_qty_app'),
     qty_scanners:       val('f_qty_scanner'),
     tov:                document.querySelector('input[name="f_tov"]:checked')?.value || 'yes',
-    survey_type:        '',
+    survey_type:        val('f_survey_type'),
     survey_details:     '',
     product_program:    val('f_product_program') === 'Other' ? val('f_product_other') : val('f_product_program'),
     product_program_details: val('f_product_details'),
     clinical_internal_name: val('f_clinical_name'),
     assoc_contact_name: val('f_assoc_contact_name'),
     assoc_contact_email: val('f_assoc_contact_email'),
-    assoc_vendor_name:  val('f_assoc_vendor_name'),
     badge_api_available: badgeAPI,
     provider_reg_company: val('f_provider_reg_company'),
     api_badge_contact_name: val('f_api_badge_contact_name'),
@@ -809,43 +839,183 @@ function buildSummaryHTML(d){
 
 const WORKER_URL = 'https://pfizer-order-api.realityengineeringops.workers.dev';
 
+// UTF-8-safe base64 — plain btoa() throws on em-dashes, curly quotes, accents, etc.
+// The Quote Generator decodes with TextDecoder, so this format is fully compatible.
+function b64EncodeUnicode(str){
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  bytes.forEach(b => { bin += String.fromCharCode(b); });
+  return btoa(bin);
+}
+
 async function submitOrder(){
-  if(!validate()){
-    $id('error-box').scrollIntoView({behavior:'smooth', block:'start'});
-    return;
-  }
-
   const btn = document.querySelector('.btn-submit');
-  btn.textContent = 'Submitting…';
-  btn.disabled = true;
-
-  const d = buildData();
-  const code = btoa(JSON.stringify(d));
-
   try {
-    const res = await fetch(WORKER_URL + '/submit-order', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...d, company_name: 'Pfizer AMEX' }),
-    });
+    if(!validate()){
+      $id('error-box').scrollIntoView({behavior:'smooth', block:'start'});
+      return;
+    }
+
+    btn.textContent = 'Checking…';
+    btn.disabled = true;
+
+    // ── Duplicate-submission guard ──
+    const pfz = val('f_pfz').trim().toUpperCase();
+    let dupMsg = '';
+    try {
+      const prior = JSON.parse(localStorage.getItem('pfz_amex_submitted') || '[]');
+      if(prior.includes(pfz)) dupMsg = 'An order with Pfizer Meeting # ' + pfz + ' was already submitted from this browser.';
+    } catch(e){}
+    if(!dupMsg){
+      try {
+        const dc = new AbortController();
+        const dt = setTimeout(() => dc.abort(), 8000);
+        const r = await fetch(WORKER_URL + '/check-duplicate?pfz=' + encodeURIComponent(pfz), {signal: dc.signal});
+        clearTimeout(dt);
+        if(r.ok){
+          const j = await r.json();
+          if(j.duplicate) dupMsg = 'An order with Pfizer Meeting # ' + pfz + ' has already been submitted' + (j.event_name ? ' ("' + j.event_name + '")' : '') + '.';
+        }
+      } catch(e){ /* check unavailable — fail open, don't block submission */ }
+    }
+    if(dupMsg && !confirm('⚠️ ' + dupMsg + '\n\nDo you still want to submit this as a NEW order?')){
+      return;
+    }
+
+    btn.textContent = 'Submitting…';
+
+    const d = buildData();
+    const code = b64EncodeUnicode(JSON.stringify(d));
+
+    // 30-second timeout so a dead connection never leaves the form stuck
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 30000);
+    let res;
+    try {
+      res = await fetch(WORKER_URL + '/submit-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...d, company_name: 'Pfizer AMEX' }),
+        signal: ctrl.signal,
+      });
+    } finally {
+      clearTimeout(timer);
+    }
     if (!res.ok) {
       const errData = await res.json().catch(() => ({}));
       throw new Error(errData.error || `Server error ${res.status}`);
     }
     showSuccess(d, code);
   } catch(err) {
-    btn.textContent = '✉️ Submit Order Request';
-    btn.disabled = false;
-    alert('Submission failed: ' + err.message + '\n\nPlease try again or contact Reality Engineering directly.');
+    const msg = (err && err.name === 'AbortError')
+      ? 'The request timed out. Please check your connection and try again.'
+      : (err && err.message) || 'Unexpected error';
+    alert('Submission failed: ' + msg + '\n\nPlease try again or contact Reality Engineering directly.');
+  } finally {
+    // Always restore the button — never leave it stuck on "Submitting…"
+    if(btn && $id('order-form').style.display !== 'none'){
+      btn.textContent = '✉️ Submit Order Request';
+      btn.disabled = false;
+    }
   }
 }
 
+let _lastSubmitted = null;
+
 function showSuccess(d, code){
+  _lastSubmitted = d;
+  // Clear the saved draft and remember this Meeting # for the duplicate guard
+  try {
+    localStorage.removeItem(DRAFT_KEY);
+    const pfz = (d.f_pfz || '').trim().toUpperCase();
+    if(pfz){
+      const arr = JSON.parse(localStorage.getItem('pfz_amex_submitted') || '[]');
+      if(!arr.includes(pfz)){ arr.push(pfz); localStorage.setItem('pfz_amex_submitted', JSON.stringify(arr.slice(-50))); }
+    }
+  } catch(e){}
+  $id('draft-banner').style.display = 'none';
   $id('order-form').style.display = 'none';
   $id('success-screen').style.display = 'block';
   $id('import-code-display').textContent = code;
   $id('order-summary').innerHTML = buildSummaryHTML(d);
   window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ── PDF download of the submitted order ──
+function loadJsPDF(){
+  return new Promise((resolve, reject) => {
+    if(window.jspdf && window.jspdf.jsPDF) return resolve();
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error('Could not load PDF library'));
+    document.head.appendChild(s);
+  });
+}
+
+async function downloadPDF(){
+  if(!_lastSubmitted){ alert('No submitted order found.'); return; }
+  try {
+    await loadJsPDF();
+  } catch(e){
+    alert('Could not load the PDF library. Please check your internet connection and try again.');
+    return;
+  }
+  const d = _lastSubmitted;
+  const rows = [
+    ['Meeting Manager', d.f_mgr], ['Manager Email', d.f_mgr_email],
+    ['Pfizer Meeting #', d.f_pfz], ['Legal Entity', d.f_entity],
+    ['Meeting Full Name', d.f_name], ['Meeting Acronym', d.f_acronym],
+    ['Event Type', d.f_etype], ['Meeting Site / Address', d.f_addr],
+    ['Meeting Date', fmtDate(d.f_date)], ['Meeting End Date', fmtDate(d.f_date_end)],
+    ['Meeting Time', d.f_time], ['Meal Type', d.f_meal],
+    ['Estimated # Attendees', d.f_att],
+    ['Pfizer Project Owner', d.f_owner_name], ['Project Owner Email', d.f_owner_email],
+    ['TD Contact', d.f_td], ['Notes', d.f_notes],
+    ['Service Type', d.service_type],
+    ['App Licenses', d.qty_app_licenses], ['Scanners', d.qty_scanners],
+    ['Therapeutic Area', d.f_therapy], ['Product / Drug', d.product_program],
+    ['Product Details', d.product_program_details],
+    ['Clinical / Internal Name', d.clinical_internal_name],
+    ['Survey Type', d.survey_type],
+    ['TOV Required', d.tov === 'no' ? 'No' : 'Yes (standard)'],
+    ['Association Contact', d.assoc_contact_name],
+    ['Association Contact Email', d.assoc_contact_email],
+    ['Badge / API Available', d.badge_api_available],
+    ['Provider / Reg Company', d.provider_reg_company],
+    ['API Contact Name', d.api_badge_contact_name],
+    ['API Contact Email', d.api_badge_contact_email],
+    ['API / Badge Notes', d.api_badge_notes],
+  ].filter(([,v]) => v && String(v).trim());
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({unit:'pt', format:'letter'});
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  const margin = 48, labelW = 160, lineH = 14;
+  let y = margin;
+
+  doc.setFont('helvetica','bold'); doc.setFontSize(16); doc.setTextColor(26,58,92);
+  doc.text('Pfizer Symposia Order Request', margin, y); y += 20;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(120);
+  doc.text('Reality Engineering — submitted ' + new Date().toLocaleString(), margin, y); y += 10;
+  doc.setDrawColor(26,58,92); doc.setLineWidth(1);
+  doc.line(margin, y, pageW - margin, y); y += 18;
+
+  doc.setFontSize(10);
+  rows.forEach(([k, v]) => {
+    const valLines = doc.splitTextToSize(String(v), pageW - margin*2 - labelW);
+    const blockH = Math.max(valLines.length, 1) * lineH + 4;
+    if(y + blockH > pageH - margin){ doc.addPage(); y = margin; }
+    doc.setFont('helvetica','bold'); doc.setTextColor(60);
+    doc.text(k + ':', margin, y);
+    doc.setFont('helvetica','normal'); doc.setTextColor(20);
+    doc.text(valLines, margin + labelW, y);
+    y += blockH;
+  });
+
+  const fname = 'Pfizer_Order_' + (d.f_pfz || 'Request').replace(/[^\w-]/g,'_') + '.pdf';
+  doc.save(fname);
 }
 
 function copyCode(){
@@ -860,6 +1030,114 @@ function goBack(){
   $id('success-screen').style.display='none';
   $id('order-form').style.display='block';
   window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Draft autosave (localStorage) — saves as you type, offers restore on return
+// ═══════════════════════════════════════════════════════════════════════════
+const DRAFT_KEY = 'pfz_amex_order_draft';
+let _draftTimer = null;
+
+function saveDraft(){
+  clearTimeout(_draftTimer);
+  _draftTimer = setTimeout(() => {
+    try {
+      const d = {
+        fields: {},
+        services: [...selectedServiceTypes],
+        badge_api: radioVal('badge_api') || '',
+        tov: document.querySelector('input[name="f_tov"]:checked')?.value || 'yes',
+        saved_at: Date.now(),
+      };
+      document.querySelectorAll('#order-form input[type=text],#order-form input[type=email],#order-form input[type=date],#order-form input[type=number],#order-form select,#order-form textarea')
+        .forEach(el => { if(el.id) d.fields[el.id] = el.value; });
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
+    } catch(e){ /* private browsing / storage full — ignore */ }
+  }, 600);
+}
+
+function restoreDraftClick(){
+  let d;
+  try { d = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); } catch(e){ d = null; }
+  if(!d || !d.fields){ discardDraft(); return; }
+
+  // Services first (toggling can clear qty fields)
+  (d.services || []).forEach(label => {
+    const el = $id(SVC_ID_MAP[label]);
+    if(el && !selectedServiceTypes.has(label)) toggleServiceType(label, el);
+  });
+  // Plain fields
+  Object.entries(d.fields).forEach(([id, v]) => { const el = $id(id); if(el) el.value = v; });
+  // Therapy → rebuild product list → re-apply product
+  if(d.fields.f_therapy){
+    onTherapyChange();
+    if(d.fields.f_product_program){
+      $id('f_product_program').value = d.fields.f_product_program;
+      onProductChange();
+    }
+  }
+  if(d.fields.f_therapy_other) $id('f_therapy_other').value = d.fields.f_therapy_other;
+  if(d.fields.f_product_other) $id('f_product_other').value = d.fields.f_product_other;
+  // Badge API + TOV radios
+  if(d.badge_api){
+    const r = $id('badge_api_' + d.badge_api.toLowerCase());
+    if(r){ r.checked = true; onBadgeAPIChange(d.badge_api); }
+  }
+  if(d.tov){
+    const r = $id('f_tov_' + d.tov);
+    if(r){ r.checked = true; onTOVChange(); }
+  }
+  updateExpediteWarning();
+  $id('draft-banner').style.display = 'none';
+}
+
+function discardDraft(){
+  try { localStorage.removeItem(DRAFT_KEY); } catch(e){}
+  $id('draft-banner').style.display = 'none';
+}
+
+// Wire autosave to all typing, changes, and clicks (service tiles, checkboxes, radios)
+(function(){
+  const form = $id('order-form');
+  form.addEventListener('input',  saveDraft);
+  form.addEventListener('change', saveDraft);
+  form.addEventListener('click', e => {
+    if(e.target.closest('.svc-type-check, .opt, label')) saveDraft();
+  });
+  // Offer restore if a meaningful draft exists
+  try {
+    const d = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null');
+    const hasContent = d && d.fields && (Object.values(d.fields).some(v => v && String(v).trim()) || (d.services || []).length);
+    if(hasContent){
+      $id('draft-time').textContent = d.saved_at ? new Date(d.saved_at).toLocaleString() : 'earlier';
+      $id('draft-banner').style.display = 'block';
+    }
+  } catch(e){}
+})();
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Expedite detection — warn when the event is under 5 business days away
+// ═══════════════════════════════════════════════════════════════════════════
+function bizDaysUntil(dateStr){
+  if(!dateStr) return null;
+  const today = new Date(); today.setHours(0,0,0,0);
+  const target = new Date(dateStr + 'T00:00:00');
+  if(isNaN(target)) return null;
+  if(target <= today) return 0;
+  let count = 0;
+  const d = new Date(today);
+  while(d < target){
+    d.setDate(d.getDate() + 1);
+    const w = d.getDay();
+    if(w !== 0 && w !== 6) count++;
+  }
+  return count;
+}
+
+function updateExpediteWarning(){
+  const days = bizDaysUntil(val('f_date'));
+  const warn = $id('expedite_warning');
+  if(warn) warn.style.display = (days !== null && days < 5) ? 'block' : 'none';
 }
 </script>
 </body>

@@ -525,6 +525,14 @@ textarea{height:72px;resize:vertical;}
           </label>
         </div>
       </div>
+
+      <!-- ── Custom Line Items — one-off extras with editable name and price ── -->
+      <div id="custom_lines_block" style="margin-top:16px;padding-top:16px;border-top:1px solid #eee;">
+        <label class="lbl" style="display:block;margin-bottom:4px;">Custom Line Items</label>
+        <p style="font-size:11px;color:#888;margin:0 0 10px;">Add one-off extras to the quote — name it and set a price. Appears as its own line on the quote.</p>
+        <div id="custom_lines_rows"></div>
+        <button type="button" onclick="addCustomLine()" style="padding:7px 14px;background:#fff;color:#1a3a5c;border:2px dashed #1a3a5c;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;">＋ Add Custom Line Item</button>
+      </div>
     </div>
   </div>
 
@@ -768,8 +776,8 @@ function onApiActualToggle(){
 // ── Mutual exclusion groups ──
 // Group A (hardware/app): app, scanner, qr — can combine freely within group
 // Group B (list/image): image, list, listtrans — only ONE allowed, exclusive with Group A
-const QG_GROUP_A = new Set(['app','scanner','qr']);
-const QG_GROUP_B = new Set(['image','list','listtrans']);
+const QG_GROUP_A = new Set(['app','scanner','qr','image']);
+const QG_GROUP_B = new Set(['list','listtrans']);
 
 function deselectSvc(type){
   selectedSvcs.delete(type);
@@ -861,9 +869,12 @@ function calcPrices(){
   }
 
   if(selectedSvcs.has('image')){
-    const q = parseInt(val('img_qty'))||1;
-    lines.push({desc:'<strong>RE:nvent Mobile App:</strong> Custom iPhone or Android set up instructions to primary TD',qty:q,unit:300,total:q*300});
-    ccBase += q*300;
+    // If Mobile App is also selected, its licenses are already billed above — don't double-charge
+    if(!selectedSvcs.has('app')){
+      const q = parseInt(val('img_qty'))||1;
+      lines.push({desc:'<strong>RE:nvent Mobile App:</strong> Custom iPhone or Android set up instructions to primary TD',qty:q,unit:300,total:q*300});
+      ccBase += q*300;
+    }
     lines.push({desc:'<strong>Badge Image Capture and transcription</strong> and reg list match if available',qty:null,unit:null,total:650});
     ccBase += 650;
   }
@@ -919,12 +930,20 @@ function calcPrices(){
   // ── Shared add-ons ──
   // Shipping auto-included for scanners (physical hardware) — all other services are digital
   if(selectedSvcs.has('scanner')){ lines.push({desc:'Shipping and Handling',qty:null,unit:null,total:250}); ccBase+=250; }
-  if($id('opt_prereg_app')&& $id('opt_prereg_app').checked){ lines.push({desc:'Pre-Registration Attendee List Import into RE:nvent Mobile App for attendee look-up',qty:null,unit:null,total:500}); ccBase+=500; }
-  if($id('opt_prereg_img')&& $id('opt_prereg_img').checked){ lines.push({desc:'Pre-Registration Attendee List Import into RE:nvent Mobile App for attendee look-up',qty:null,unit:null,total:500}); ccBase+=500; }
-  if($id('opt_expedite_app')&&$id('opt_expedite_app').checked){ lines.push({desc:'Expedite Service: order received less than 5 business days prior to event',qty:null,unit:null,total:500}); ccBase+=500; }
-  if($id('opt_expedite_img')&&$id('opt_expedite_img').checked){ lines.push({desc:'Expedite Service: order received less than 5 business days prior to event',qty:null,unit:null,total:500}); ccBase+=500; }
-  if($id('opt_expedite_list')&&$id('opt_expedite_list').checked){ lines.push({desc:'Expedite Service: order received less than 5 business days prior to event',qty:null,unit:null,total:500}); ccBase+=500; }
-  if($id('opt_expedite_listtrans')&&$id('opt_expedite_listtrans').checked){ lines.push({desc:'Expedite Service: order received less than 5 business days prior to event',qty:null,unit:null,total:500}); ccBase+=500; }
+  // Pre-Reg and Expedite are billed once per event even if checked in multiple service sections
+  const cbOn = id => $id(id) && $id(id).checked;
+  if(cbOn('opt_prereg_app') || cbOn('opt_prereg_img')){
+    lines.push({desc:'Pre-Registration Attendee List Import into RE:nvent Mobile App for attendee look-up',qty:null,unit:null,total:500}); ccBase+=500;
+  }
+  if(cbOn('opt_expedite_app') || cbOn('opt_expedite_img') || cbOn('opt_expedite_list') || cbOn('opt_expedite_listtrans')){
+    lines.push({desc:'Expedite Service: order received less than 5 business days prior to event',qty:null,unit:null,total:500}); ccBase+=500;
+  }
+
+  // ── Custom line items (one-off extras with editable name + price) ──
+  getCustomLines().forEach(cl => {
+    lines.push({desc: cl.name, qty:null, unit:null, total: cl.price});
+    ccBase += cl.price;
+  });
 
   // Remote Training included for app and image only (not scanner — hardware only)
   if(selectedSvcs.has('app') || selectedSvcs.has('image')){
@@ -938,6 +957,40 @@ function calcPrices(){
   const grand    = subtotal + ccFee;
 
   return {ccBase, subtotal, api, ccFee, grand, lines};
+}
+
+// ── Custom line items — add/remove/read ──
+function addCustomLine(name, price){
+  const row = document.createElement('div');
+  row.className = 'custom-line-row';
+  row.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:8px;';
+  row.innerHTML =
+    '<input type="text" class="cl-name" placeholder="e.g. On-site support day" ' +
+      'style="flex:1;padding:8px 10px;border:1px solid #ddd;border-radius:5px;font-size:13px;" oninput="liveCalc()">' +
+    '<span style="font-size:12px;color:#555;">$</span>' +
+    '<input type="number" class="cl-price" placeholder="0" min="0" step="0.01" ' +
+      'style="width:100px;padding:8px 10px;border:1px solid #ddd;border-radius:5px;font-size:13px;text-align:right;" oninput="liveCalc()">' +
+    '<button type="button" onclick="this.parentElement.remove();liveCalc();" title="Remove" ' +
+      'style="padding:6px 10px;background:#fdf2f2;color:#c0392b;border:1px solid #e74c3c;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer;">✕</button>';
+  $id('custom_lines_rows').appendChild(row);
+  if(name !== undefined)  row.querySelector('.cl-name').value  = name;
+  if(price !== undefined) row.querySelector('.cl-price').value = price;
+}
+
+function getCustomLines(){
+  const out = [];
+  document.querySelectorAll('#custom_lines_rows .custom-line-row').forEach(row => {
+    const name  = row.querySelector('.cl-name').value.trim();
+    const price = parseFloat(row.querySelector('.cl-price').value);
+    if(name && !isNaN(price)) out.push({name, price});
+  });
+  return out;
+}
+
+function setCustomLines(arr){
+  const wrap = $id('custom_lines_rows');
+  if(wrap) wrap.innerHTML = '';
+  (arr || []).forEach(cl => addCustomLine(cl.name, cl.price));
 }
 
 function liveCalc(){
@@ -1190,6 +1243,10 @@ function doImportObject(d, alreadyInKV){
   if(d.api_cost         && $id('api_cost'))         $id('api_cost').value         = d.api_cost;
   if(d.scanner_api_cost && $id('scanner_api_cost')) $id('scanner_api_cost').value = d.scanner_api_cost;
   if(d.img_api_cost     && $id('img_api_cost'))     $id('img_api_cost').value     = d.img_api_cost;
+  // Custom line items — restore from saved JSON
+  if(d.custom_lines){
+    try { setCustomLines(JSON.parse(d.custom_lines)); } catch(e){ console.error('custom_lines parse failed', e); }
+  }
   if($id('api_cost_actual')){ $id('api_cost_actual').checked = (d.api_cost_actual === '1'); onApiActualToggle(); }
   // Quote number — restore if previously saved
   if(d.f_qnum && $id('f_qnum')) $id('f_qnum').value = d.f_qnum;
@@ -1266,6 +1323,7 @@ async function saveCurrentFormState(extraFields){
     api_cost_actual: ($id('api_cost_actual') && $id('api_cost_actual').checked) ? '1' : '0',
     scanner_api_cost: val('scanner_api_cost'),
     img_api_cost:    val('img_api_cost'),
+    custom_lines:    JSON.stringify(getCustomLines()),
     tov:             document.querySelector('input[name="tov"]:checked')?.value || '',
     payment_method:  document.querySelector('input[name="payment"]:checked')?.value || '',
     // Checkboxes
