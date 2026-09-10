@@ -404,6 +404,13 @@ textarea{height:72px;resize:vertical;}
           <span style="font-size:10px;color:#888;font-style:italic;">est.</span>
         </div>
       </div>
+      <div class="svc-row">
+        <div>
+          <div class="svc-name">Internet — Venue Hotspot</div>
+          <div class="svc-desc">Check when internet is also being ordered for this event — Shipping &amp; Handling becomes $500 total (instead of $350)</div>
+        </div>
+        <label class="opt" style="margin:0;"><input type="checkbox" id="opt_internet_scanner" onchange="liveCalc()"> Ordered</label>
+      </div>
     </div>
 
     <!-- QR -->
@@ -431,7 +438,7 @@ textarea{height:72px;resize:vertical;}
         <span class="svc-price">$300 / unit</span>
         <div class="qty-wrap">
           <button class="qbtn" onclick="adj('img_qty',-1)">−</button>
-          <input class="qinput" type="number" id="img_qty" value="1" min="1" oninput="liveCalc()">
+          <input class="qinput" type="number" id="img_qty" value="1" min="0" oninput="liveCalc()">
           <button class="qbtn" onclick="adj('img_qty',1)">+</button>
         </div>
       </div>
@@ -869,11 +876,14 @@ function calcPrices(){
   }
 
   if(selectedSvcs.has('image')){
-    // If Mobile App is also selected, its licenses are already billed above — don't double-charge
+    // If Mobile App is also selected, its licenses are already billed above — don't double-charge.
+    // Only bill app units when the quantity is actually > 0 (no phantom 1-unit default).
     if(!selectedSvcs.has('app')){
-      const q = parseInt(val('img_qty'))||1;
-      lines.push({desc:'<strong>RE:nvent Mobile App:</strong> Custom iPhone or Android set up instructions to primary TD',qty:q,unit:300,total:q*300});
-      ccBase += q*300;
+      const q = parseInt(val('img_qty'))||0;
+      if(q > 0){
+        lines.push({desc:'<strong>RE:nvent Mobile App:</strong> Custom iPhone or Android set up instructions to primary TD',qty:q,unit:300,total:q*300});
+        ccBase += q*300;
+      }
     }
     lines.push({desc:'<strong>Badge Image Capture and transcription</strong> and reg list match if available',qty:null,unit:null,total:650});
     ccBase += 650;
@@ -928,8 +938,14 @@ function calcPrices(){
   }
 
   // ── Shared add-ons ──
-  // Shipping auto-included for scanners (physical hardware) — all other services are digital
-  if(selectedSvcs.has('scanner')){ lines.push({desc:'Shipping and Handling',qty:null,unit:null,total:250}); ccBase+=250; }
+  // Shipping auto-included for scanners (physical hardware) — all other services are digital.
+  // $350 base; $500 total when internet is also ordered for the event.
+  if(selectedSvcs.has('scanner')){
+    const hasInternet = $id('opt_internet_scanner') && $id('opt_internet_scanner').checked;
+    const shipTotal = hasInternet ? 500 : 350;
+    lines.push({desc:'Shipping and Handling' + (hasInternet ? ' (scanners + internet)' : ''),qty:null,unit:null,total:shipTotal});
+    ccBase += shipTotal;
+  }
   // Pre-Reg and Expedite are billed once per event even if checked in multiple service sections
   const cbOn = id => $id(id) && $id(id).checked;
   if(cbOn('opt_prereg_app') || cbOn('opt_prereg_img')){
@@ -1235,7 +1251,7 @@ function doImportObject(d, alreadyInKV){
   if(d.payment_method){ const r=document.querySelector(`input[name="payment"][value="${d.payment_method}"]`); if(r) r.checked=true; }
   // Checkboxes — includes opt_api_scanner so scanner API state is restored
   const cbMap = {opt_prereg_app:'opt_prereg_app', opt_expedite_app:'opt_expedite_app',
-    opt_api_scanner:'opt_api_scanner',
+    opt_api_scanner:'opt_api_scanner', opt_internet_scanner:'opt_internet_scanner',
     opt_api_img:'opt_api_img', opt_prereg_img:'opt_prereg_img',
     opt_expedite_img:'opt_expedite_img', opt_expedite_list:'opt_expedite_list', opt_expedite_listtrans:'opt_expedite_listtrans'};
   Object.keys(cbMap).forEach(k => { const el=$id(cbMap[k]); if(el) el.checked=(d[k]==='1'); });
@@ -1330,6 +1346,7 @@ async function saveCurrentFormState(extraFields){
     opt_prereg_app:     qbtn('opt_prereg_app')   ? '1' : '0',
     opt_expedite_app:   qbtn('opt_expedite_app') ? '1' : '0',
     opt_api_scanner:    qbtn('opt_api_scanner')  ? '1' : '0',
+    opt_internet_scanner: qbtn('opt_internet_scanner') ? '1' : '0',
     opt_api_img:        qbtn('opt_api_img')       ? '1' : '0',
     opt_prereg_img:     qbtn('opt_prereg_img')    ? '1' : '0',
     opt_expedite_img:   qbtn('opt_expedite_img')  ? '1' : '0',
