@@ -375,7 +375,7 @@ textarea{height:72px;resize:vertical;}
     <!-- SCANNER -->
     <div id="svc_scanner" class="svc-section">
       <div class="svc-row">
-        <div><div class="svc-name">RE:nvent Mobile Scanner — <em>Without Data</em></div><div class="svc-desc">iPhone Scanner, badge scan only — no attendee data lookup</div></div>
+        <div><div class="svc-name">RE:nvent Mobile Scanner — <em>Without Data</em></div><div class="svc-desc">iPhone Scanner without cellular service</div></div>
         <span class="svc-price">$350 / unit</span>
         <div class="qty-wrap">
           <button class="qbtn" onclick="adj('scanner_qty_nodata',-1)">−</button>
@@ -384,7 +384,7 @@ textarea{height:72px;resize:vertical;}
         </div>
       </div>
       <div class="svc-row">
-        <div><div class="svc-name">RE:nvent Mobile Scanner — <em>With Data</em></div><div class="svc-desc">iPhone Scanner with attendee data lookup and matching</div></div>
+        <div><div class="svc-name">RE:nvent Mobile Scanner — <em>With Data</em></div><div class="svc-desc">iPhone Scanner with cellular data service — no venue internet needed</div></div>
         <span class="svc-price">$400 / unit</span>
         <div class="qty-wrap">
           <button class="qbtn" onclick="adj('scanner_qty_data',-1)">−</button>
@@ -853,11 +853,11 @@ function calcPrices(){
     const qNoData = parseInt(val('scanner_qty_nodata'))||0;
     const qData   = parseInt(val('scanner_qty_data'))||0;
     if(qNoData > 0){
-      lines.push({desc:'<strong>RE:nvent Mobile Scanner — Without Data:</strong> iPhone Scanner, badge scan only', qty:qNoData, unit:350, total:qNoData*350});
+      lines.push({desc:'<strong>RE:nvent Mobile Scanner — Without Data:</strong> iPhone Scanner without cellular service', qty:qNoData, unit:350, total:qNoData*350});
       ccBase += qNoData*350;
     }
     if(qData > 0){
-      lines.push({desc:'<strong>RE:nvent Mobile Scanner — With Data:</strong> iPhone Scanner with attendee data lookup', qty:qData, unit:400, total:qData*400});
+      lines.push({desc:'<strong>RE:nvent Mobile Scanner — With Data:</strong> iPhone Scanner with cellular data service — no venue internet needed', qty:qData, unit:400, total:qData*400});
       ccBase += qData*400;
     }
   }
