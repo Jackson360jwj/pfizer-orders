@@ -669,6 +669,19 @@ textarea{height:72px;resize:vertical;}
       </tr>
     </table>
 
+    <!-- QR success-ticket guidance — shown only when QR Code is selected -->
+    <div id="q_qr_note" style="display:none;margin-top:14px;padding:14px 18px;background:#f0f4f8;border-left:4px solid #1a3a5c;border-radius:0 6px 6px 0;font-size:11px;color:#333;line-height:1.7;">
+      <div style="font-weight:700;color:#1a3a5c;font-size:12px;margin-bottom:6px;">QR Code — How to Get a Full Set of Records</div>
+      <p style="margin:0 0 8px;">A QR code is a gate, not a sign. When someone scans it and finishes the form, their phone shows a confirmation screen; we call it the success ticket. Entry is granted on the ticket, not on the scan. That one rule is what makes the difference between a full set of records and an almost empty one.</p>
+      <p style="margin:0 0 4px;">Three things need to be in place:</p>
+      <ol style="margin:0 0 8px;padding-left:20px;">
+        <li>A QR code poster (print at kinkos near the venue), printed sheets with the code, handed to people as they arrive. This is what actually gets scanned. A poster on its own does not work.</li>
+        <li>One person stationed at the door for the whole arrival window, checking that each attendee shows the confirmation. They should carry a code too, to catch anyone who arrives without having scanned.</li>
+        <li>Your team briefed that the ticket is the finish line, not the scan. If they think the job is done once someone has scanned, completion drops off sharply. Your team will follow your direction over ours, so it helps if the instruction comes from you as well.</li>
+      </ol>
+      <p style="margin:0;">On staffing, plan for at least two people. One holding the door, one moving along the line handing out sheets. One person cannot do both. Attendees tend to arrive across the window rather than all at once, so the queue is usually shorter than the headcount suggests.</p>
+    </div>
+
     <div class="qfooter">
       Account Executive: Justin Jackson &nbsp;360-909-3709 &nbsp;justin.jackson@realityengineering.com<br>
       Reality Engineering | 421 C St Ste 1A | Camas | WA | 98607 | 360-448-6361
@@ -1039,6 +1052,10 @@ function buildQuote(){
 
   // Badge row (image capture only)
   $id('q_badge_row').style.visibility = selectedSvcs.has('image') ? '' : 'collapse';
+
+  // QR success-ticket guidance (QR Code only) — after the total, before the footer
+  const qrNote = $id('q_qr_note');
+  if(qrNote) qrNote.style.display = selectedSvcs.has('qr') ? 'block' : 'none';
 
   // Render service lines (with editable qty, unit, total cells)
   const tbody = $id('q_lines');
