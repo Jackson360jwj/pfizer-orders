@@ -392,16 +392,22 @@ textarea{height:72px;resize:vertical;}
           <button class="qbtn" onclick="adj('scanner_qty_data',1)">+</button>
         </div>
       </div>
-      <div class="svc-row" style="background:#fff8e1;border:1px solid #f9a825;">
-        <div>
-          <div class="svc-name">API Connection Passthrough <span style="color:#e67e22;font-size:11px;">(if required)</span></div>
-          <div class="svc-desc" style="color:#c0392b;">Event venue API cost — estimate shown. Katherine to verify exact amount before finalizing.</div>
+      <div class="svc-row" style="background:#fff8e1;border:1px solid #f9a825;flex-wrap:wrap;gap:6px;">
+        <div style="flex:1;min-width:200px;">
+          <div class="svc-name">API Connection Passthrough <span style="color:#e67e22;font-size:11px;">(included by default; uncheck for venues with no API)</span></div>
+          <div class="svc-desc" id="scanner_api_desc" style="color:#c0392b;">Pass through cost for the venue API. The $1,200 placeholder prints as an estimate until "Actual cost confirmed" is checked; issue a revised quote once the venue cost is known.</div>
         </div>
-        <div style="display:flex;align-items:center;gap:6px;">
-          <label class="opt" style="margin:0;"><input type="checkbox" id="opt_api_scanner" onchange="liveCalc()"> Include</label>
-          <span style="font-size:12px;color:#555;margin-left:8px;">$</span>
-          <input type="number" id="scanner_api_cost" value="500" min="0" style="width:80px;text-align:center;padding:5px 6px;border:1px solid #f9a825;border-radius:4px;font-size:13px;font-weight:700;" oninput="liveCalc()">
-          <span style="font-size:10px;color:#888;font-style:italic;">est.</span>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <label class="opt" style="margin:0;"><input type="checkbox" id="opt_api_scanner" checked onchange="liveCalc()"> Include</label>
+          <label style="display:flex;align-items:center;gap:4px;font-size:12px;color:#555;cursor:pointer;white-space:nowrap;">
+            <input type="checkbox" id="scanner_api_actual" onchange="onScannerApiActualToggle()">
+            Actual cost confirmed
+          </label>
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span style="font-size:12px;color:#555;">$</span>
+            <input type="number" id="scanner_api_cost" value="1200" min="0" style="width:80px;text-align:center;padding:5px 6px;border:1px solid #f9a825;border-radius:4px;font-size:13px;font-weight:700;" oninput="liveCalc()">
+            <span id="scanner_api_est_label" style="font-size:10px;color:#e67e22;font-style:italic;font-weight:600;">est.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -445,16 +451,22 @@ textarea{height:72px;resize:vertical;}
         <span class="svc-price">$650 flat</span>
         <span style="font-size:11px;color:#27ae60;font-weight:700">Auto</span>
       </div>
-      <div class="svc-row" style="background:#fff8e1;border:1px solid #f9a825;">
-        <div>
-          <div class="svc-name">API Connection Passthrough <span style="color:#e67e22;font-size:11px;">(if required)</span></div>
-          <div class="svc-desc" style="color:#c0392b;">Event venue API cost — estimate shown. Katherine to verify exact amount before finalizing.</div>
+      <div class="svc-row" style="background:#fff8e1;border:1px solid #f9a825;flex-wrap:wrap;gap:6px;">
+        <div style="flex:1;min-width:200px;">
+          <div class="svc-name">API Connection Passthrough <span style="color:#e67e22;font-size:11px;">(included by default; uncheck for venues with no API)</span></div>
+          <div class="svc-desc" id="img_api_desc" style="color:#c0392b;">Pass through cost for the venue API. The $1,200 placeholder prints as an estimate until "Actual cost confirmed" is checked; issue a revised quote once the venue cost is known.</div>
         </div>
-        <div style="display:flex;align-items:center;gap:6px;">
-          <label class="opt" style="margin:0;"><input type="checkbox" id="opt_api_img" onchange="liveCalc()"> Include</label>
-          <span style="font-size:12px;color:#555;margin-left:8px;">$</span>
-          <input type="number" id="img_api_cost" value="500" min="0" style="width:80px;text-align:center;padding:5px 6px;border:1px solid #f9a825;border-radius:4px;font-size:13px;font-weight:700;" oninput="liveCalc()">
-          <span style="font-size:10px;color:#888;font-style:italic;">est.</span>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <label class="opt" style="margin:0;"><input type="checkbox" id="opt_api_img" checked onchange="liveCalc()"> Include</label>
+          <label style="display:flex;align-items:center;gap:4px;font-size:12px;color:#555;cursor:pointer;white-space:nowrap;">
+            <input type="checkbox" id="img_api_actual" onchange="onImgApiActualToggle()">
+            Actual cost confirmed
+          </label>
+          <div style="display:flex;align-items:center;gap:4px;">
+            <span style="font-size:12px;color:#555;">$</span>
+            <input type="number" id="img_api_cost" value="1200" min="0" style="width:80px;text-align:center;padding:5px 6px;border:1px solid #f9a825;border-radius:4px;font-size:13px;font-weight:700;" oninput="liveCalc()">
+            <span id="img_api_est_label" style="font-size:10px;color:#e67e22;font-style:italic;font-weight:600;">est.</span>
+          </div>
         </div>
       </div>
       <div class="divider"></div>
@@ -684,7 +696,7 @@ textarea{height:72px;resize:vertical;}
 
     <div class="qfooter">
       Account Executive: Justin Jackson &nbsp;360-909-3709 &nbsp;justin.jackson@realityengineering.com<br>
-      Reality Engineering | 421 C St Ste 1A | Camas | WA | 98607 | 360-448-6361
+      Reality Engineering | 421 C Street, Suite 1A | Washougal | WA | 98671 | 360-909-3709
     </div>
   </div>
 
@@ -785,6 +797,22 @@ function onApiActualToggle(){
   }
   liveCalc();
 }
+
+function _apiActualToggle(actualId, labelId, descId){
+  const isActual = $id(actualId) && $id(actualId).checked;
+  const estLabel = $id(labelId);
+  const descEl   = $id(descId);
+  if(estLabel) estLabel.style.display = isActual ? 'none' : 'inline';
+  if(descEl){
+    descEl.style.color = isActual ? '#27ae60' : '#c0392b';
+    descEl.textContent = isActual
+      ? 'Actual cost confirmed. The quote will print this line without the estimate note.'
+      : 'Pass through cost for the venue API. The $1,200 placeholder prints as an estimate until "Actual cost confirmed" is checked; issue a revised quote once the venue cost is known.';
+  }
+  liveCalc();
+}
+function onScannerApiActualToggle(){ _apiActualToggle('scanner_api_actual','scanner_api_est_label','scanner_api_desc'); }
+function onImgApiActualToggle(){     _apiActualToggle('img_api_actual','img_api_est_label','img_api_desc'); }
 
 // ── Mutual exclusion groups ──
 // Group A (hardware/app): app, scanner, qr — can combine freely within group
@@ -919,12 +947,14 @@ function calcPrices(){
   }
 
   // ── API passthrough (Mobile App requires it) ──
+  // Client-facing note printed next to any API amount that has not been confirmed.
+  const API_EST_NOTE = ' <em style="font-size:10px;color:#e67e22;">(estimate; final venue API cost will be confirmed and a revised quote issued)</em>';
   if(selectedSvcs.has('app')){
     const apiRaw  = $id('api_cost') ? $id('api_cost').value.trim() : '';
     const apiCost = (apiRaw === '' || isNaN(parseFloat(apiRaw))) ? 1200 : parseFloat(apiRaw);
     const apiIsEst = !($id('api_cost_actual') && $id('api_cost_actual').checked);
     if(apiCost > 0){
-      lines.push({desc:'API Connection Passthrough' + (apiIsEst ? ' <em style="font-size:10px;color:#e67e22;">(estimate — Katherine to verify exact cost)</em>' : ''), qty:null, unit:null, total:apiCost});
+      lines.push({desc:'API Connection Passthrough' + (apiIsEst ? API_EST_NOTE : ''), qty:null, unit:null, total:apiCost});
       api += apiCost;
     }
     // If cost is 0 and confirmed actual, show a $0 / no-charge line so it's explicit on the quote
@@ -934,13 +964,15 @@ function calcPrices(){
   }
   if(selectedSvcs.has('scanner') && $id('opt_api_scanner') && $id('opt_api_scanner').checked){
     const scanRaw     = $id('scanner_api_cost') ? $id('scanner_api_cost').value.trim() : '';
-    const scanApiCost = (scanRaw === '' || isNaN(parseFloat(scanRaw))) ? 500 : parseFloat(scanRaw);
-    lines.push({desc:'API Connection Passthrough',qty:null,unit:null,total:scanApiCost}); api+=scanApiCost;
+    const scanApiCost = (scanRaw === '' || isNaN(parseFloat(scanRaw))) ? 1200 : parseFloat(scanRaw);
+    const scanIsEst   = !($id('scanner_api_actual') && $id('scanner_api_actual').checked);
+    lines.push({desc:'API Connection Passthrough' + (scanIsEst ? API_EST_NOTE : ''),qty:null,unit:null,total:scanApiCost}); api+=scanApiCost;
   }
   if(selectedSvcs.has('image') && $id('opt_api_img') && $id('opt_api_img').checked){
     const imgRaw     = $id('img_api_cost') ? $id('img_api_cost').value.trim() : '';
-    const imgApiCost = (imgRaw === '' || isNaN(parseFloat(imgRaw))) ? 500 : parseFloat(imgRaw);
-    lines.push({desc:'API Connection Passthrough',qty:null,unit:null,total:imgApiCost}); api+=imgApiCost;
+    const imgApiCost = (imgRaw === '' || isNaN(parseFloat(imgRaw))) ? 1200 : parseFloat(imgRaw);
+    const imgIsEst   = !($id('img_api_actual') && $id('img_api_actual').checked);
+    lines.push({desc:'API Connection Passthrough' + (imgIsEst ? API_EST_NOTE : ''),qty:null,unit:null,total:imgApiCost}); api+=imgApiCost;
   }
 
   // ── Shared add-ons ──
@@ -1258,7 +1290,9 @@ function doImportObject(d, alreadyInKV){
     opt_api_scanner:'opt_api_scanner',
     opt_api_img:'opt_api_img', opt_prereg_img:'opt_prereg_img',
     opt_expedite_img:'opt_expedite_img', opt_expedite_list:'opt_expedite_list', opt_expedite_listtrans:'opt_expedite_listtrans'};
-  Object.keys(cbMap).forEach(k => { const el=$id(cbMap[k]); if(el) el.checked=(d[k]==='1'); });
+  // Only override a checkbox when the record actually carries the key, so records that predate
+  // a field (e.g. opt_api_scanner / opt_api_img, now on by default) keep the form default.
+  Object.keys(cbMap).forEach(k => { const el=$id(cbMap[k]); if(el && d[k] !== undefined && d[k] !== null && d[k] !== '') el.checked=(d[k]==='1'); });
   // API costs
   if(d.api_cost         && $id('api_cost'))         $id('api_cost').value         = d.api_cost;
   if(d.scanner_api_cost && $id('scanner_api_cost')) $id('scanner_api_cost').value = d.scanner_api_cost;
@@ -1268,6 +1302,8 @@ function doImportObject(d, alreadyInKV){
     try { setCustomLines(JSON.parse(d.custom_lines)); } catch(e){ console.error('custom_lines parse failed', e); }
   }
   if($id('api_cost_actual')){ $id('api_cost_actual').checked = (d.api_cost_actual === '1'); onApiActualToggle(); }
+  if($id('scanner_api_actual')){ $id('scanner_api_actual').checked = (d.scanner_api_actual === '1'); onScannerApiActualToggle(); }
+  if($id('img_api_actual')){ $id('img_api_actual').checked = (d.img_api_actual === '1'); onImgApiActualToggle(); }
   // Quote number — restore if previously saved
   if(d.f_qnum && $id('f_qnum')) $id('f_qnum').value = d.f_qnum;
   // Set today's quote date
@@ -1342,7 +1378,9 @@ async function saveCurrentFormState(extraFields){
     api_cost:        val('api_cost'),
     api_cost_actual: ($id('api_cost_actual') && $id('api_cost_actual').checked) ? '1' : '0',
     scanner_api_cost: val('scanner_api_cost'),
+    scanner_api_actual: ($id('scanner_api_actual') && $id('scanner_api_actual').checked) ? '1' : '0',
     img_api_cost:    val('img_api_cost'),
+    img_api_actual:  ($id('img_api_actual') && $id('img_api_actual').checked) ? '1' : '0',
     custom_lines:    JSON.stringify(getCustomLines()),
     tov:             document.querySelector('input[name="tov"]:checked')?.value || '',
     payment_method:  document.querySelector('input[name="payment"]:checked')?.value || '',
