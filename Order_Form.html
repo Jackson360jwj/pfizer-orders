@@ -2,433 +2,532 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Pfizer Symposia Order Request – Reality Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:Arial,sans-serif;font-size:14px;color:#222;background:#eef2f7;}
+html{color-scheme:light dark}
+*,*::before,*::after{box-sizing:border-box}
+img{max-width:100%}
+[hidden]{display:none!important}
+:root{
+  --bg:#F3F2F7; --surface:#FFFFFF; --surface-2:#F8F7FB; --surface-3:#EEECF5;
+  --ink:#171043; --text:#2A2540; --muted:#6B6683; --line:#DDDAE8; --line-strong:#C4BFD9;
+  --accent:#0072CF; --accent-soft:#E6F1FC;
+  --brand-a:#73428A; --brand-b:#D51D6C;
+  --ok:#1E7D43; --ok-bg:#E3F6EA; --warn:#8A5A00; --warn-bg:#FFF3D6; --bad:#B03A2E; --bad-bg:#FDECEA; --info:#1F4E8C; --info-bg:#E8F0FB;
+  --panel-head:#171043; --panel-head-fg:#FFFFFF; --btn:#171043; --btn-fg:#FFFFFF; --btn-hover:#241A63;
+  --shadow:0 1px 2px rgba(23,16,67,.05), 0 10px 28px -14px rgba(23,16,67,.22);
+  --radius:14px; --radius-sm:9px;
+  --font:'Archivo','Helvetica Neue',Arial,sans-serif; --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#100C2B; --surface:#1A1540; --surface-2:#211B4E; --surface-3:#2A245C;
+    --ink:#F4F2FB; --text:#E3E0F0; --muted:#A8A3C6; --line:#332D63; --line-strong:#4A4482;
+    --accent:#5FAEFF; --accent-soft:#172A4D;
+    --ok:#7BD69A; --ok-bg:#123B22; --warn:#F2C56B; --warn-bg:#3A2B08; --bad:#F19A8F; --bad-bg:#4A1B16; --info:#9CC4FF; --info-bg:#172A4D;
+    --panel-head:#0B0820; --panel-head-fg:#F4F2FB; --btn:#5FAEFF; --btn-fg:#0B0820; --btn-hover:#82C0FF;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#100C2B; --surface:#1A1540; --surface-2:#211B4E; --surface-3:#2A245C;
+  --ink:#F4F2FB; --text:#E3E0F0; --muted:#A8A3C6; --line:#332D63; --line-strong:#4A4482;
+  --accent:#5FAEFF; --accent-soft:#172A4D;
+  --ok:#7BD69A; --ok-bg:#123B22; --warn:#F2C56B; --warn-bg:#3A2B08; --bad:#F19A8F; --bad-bg:#4A1B16; --info:#9CC4FF; --info-bg:#172A4D;
+  --panel-head:#0B0820; --panel-head-fg:#F4F2FB; --btn:#5FAEFF; --btn-fg:#0B0820; --btn-hover:#82C0FF;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);font-size:15px;line-height:1.5;padding-inline:16px;padding-block:0 96px;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;color:var(--ink);text-wrap:balance}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--accent)}
+.draft-bar{background:var(--info-bg);color:var(--info);font-size:13px;text-align:center;padding:10px 16px;margin:0 -16px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
+.draft-bar button{border:none;border-radius:6px;padding:6px 12px;font-weight:700;font-size:12.5px;cursor:pointer;background:var(--ink);color:var(--surface)}
+.draft-bar button.ghost{background:transparent;color:var(--info);border:1px solid currentColor}
 
-.app{max-width:820px;margin:0 auto;padding:20px;}
+/* masthead */
+.masthead{max-width:1160px;margin:0 auto;padding:34px 0 22px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:16px}
+.logo-plate{background:#fff;border-radius:10px;padding:8px 12px;box-shadow:var(--shadow);line-height:0}
+.logo-plate img{height:40px;width:auto}
+.masthead h1{font-size:26px;font-weight:700;font-variation-settings:'wdth' 112;letter-spacing:-.01em}
+.masthead .lede{color:var(--muted);font-size:14px;margin-top:2px;max-width:56ch}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 
-/* Header */
-.app-header{text-align:center;margin-bottom:28px;}
-.sub{font-size:12px;letter-spacing:3px;color:#888;margin-top:6px;}
-.sub2{font-size:13px;color:#555;margin-top:8px;}
+/* frame */
+.frame{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;align-items:start}
+.sections{display:grid;gap:22px;min-width:0}
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px 28px;box-shadow:var(--shadow)}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.sec-num{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em}
+.sec-head h2{font-size:21px;font-weight:700;font-variation-settings:'wdth' 108;letter-spacing:-.01em}
+.sec-intro{color:var(--muted);font-size:14px;max-width:62ch;margin-bottom:20px}
 
-/* Cards */
-.card{background:#fff;border-radius:10px;padding:24px;margin-bottom:20px;box-shadow:0 2px 10px rgba(0,0,0,.08);}
-.card-title{font-size:15px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #1a3a5c;padding-bottom:8px;margin-bottom:18px;text-transform:uppercase;letter-spacing:.5px;}
-.step-badge{display:inline-block;background:#1a3a5c;color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;font-weight:700;margin-right:8px;}
+/* fields */
+.group{padding-top:18px;margin-top:18px;border-top:1px solid var(--line)}
+.group:first-of-type{padding-top:0;margin-top:0;border-top:none}
+.group-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.group-title .hint{font-weight:400;color:var(--muted);font-size:12.5px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.grid .span{grid-column:1/-1}
+.field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.field label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.field label .req{color:var(--bad)}
+.field input,.field select,.field textarea{width:100%;background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--radius-sm);padding:10px 12px;font-size:15px;color:var(--text);transition:border-color .15s,box-shadow .15s}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted);opacity:.75}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.field textarea{min-height:76px;resize:vertical}
+.field .help{font-size:12px;color:var(--muted)}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--bad);box-shadow:0 0 0 3px var(--bad-bg)}
+.mono{font-family:var(--mono)}
+.note{padding:10px 14px;border-radius:var(--radius-sm);font-size:13px;line-height:1.5}
+.note.warn{background:var(--warn-bg);color:var(--warn)}
+.note.info{background:var(--info-bg);color:var(--info)}
 
-/* Form */
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.fw{grid-column:span 2;}
-.fgroup{display:flex;flex-direction:column;gap:4px;}
-label.lbl{font-size:11px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.5px;}
-label.lbl .req{color:#e74c3c;}
-input[type=text],input[type=email],input[type=date],input[type=number],select,textarea{
-  border:1px solid #ddd;border-radius:5px;padding:8px 10px;font-size:13px;width:100%;color:#222;
-  transition:border-color .2s;}
-input:focus,select:focus,textarea:focus{outline:none;border-color:#1a3a5c;box-shadow:0 0 0 3px rgba(26,58,92,.1);}
-input.error,select.error,textarea.error{border-color:#e74c3c;background:#fff8f8;}
-textarea{height:72px;resize:vertical;}
+/* choice tiles */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{position:relative;display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;padding:14px 16px 14px 14px;border:1.5px solid var(--line-strong);border-radius:var(--radius-sm);background:var(--surface);cursor:pointer;transition:border-color .15s,background .15s,transform .15s}
+.tile:hover{border-color:var(--ink)}
+.tile input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.tile:has(input:checked){border-color:var(--ink);background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--ink)}
+.tile:has(input:focus-visible){outline:3px solid var(--accent-soft);outline-offset:2px;border-color:var(--accent)}
+.tile .ic{width:40px;height:40px;border-radius:9px;background:var(--surface-3);display:grid;place-items:center;color:var(--ink)}
+.tile:has(input:checked) .ic{background:var(--ink);color:var(--surface)}
+.tile strong{display:block;font-size:14.5px;color:var(--ink);font-weight:600;line-height:1.3}
+.tile small{display:block;font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.45}
+.tiles.invalid .tile{border-color:var(--bad)}
 
-/* Service Type checkboxes */
-.service-type-group{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;}
-.svc-type-check{display:flex;align-items:center;gap:8px;padding:10px 18px;border:2px solid #1a3a5c;
-  border-radius:7px;cursor:pointer;font-size:13px;font-weight:700;color:#1a3a5c;background:#fff;
-  transition:all .15s;flex:1;min-width:130px;justify-content:center;user-select:none;}
-.svc-type-check:hover{background:#eef2f7;}
-.svc-type-check.selected{background:#1a3a5c;color:#fff;}
-.svc-type-check.error-border{border-color:#e74c3c;}
-.svc-note{font-size:11px;color:#888;margin-top:6px;}
+/* segmented yes / no / don't know */
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seg label{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:11px 10px;border:1.5px solid var(--line-strong);border-radius:var(--radius-sm);cursor:pointer;text-align:center;font-weight:600;color:var(--ink);font-size:14px;transition:all .15s}
+.seg label small{font-weight:400;color:var(--muted);font-size:11.5px}
+.seg label:hover{border-color:var(--ink)}
+.seg input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.seg label:has(input:checked){background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.seg label:has(input:checked) small{color:var(--surface);opacity:.8}
+.seg label:has(input:focus-visible){outline:3px solid var(--accent-soft);outline-offset:2px}
+.seg.invalid label{border-color:var(--bad)}
 
-/* Options */
-.opt{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid #ddd;
-  border-radius:5px;cursor:pointer;font-size:13px;}
-.opt input{width:auto;cursor:pointer;}
-.opt:hover{background:#f7f9fc;}
-.divider{border:none;border-top:1px solid #eee;margin:14px 0;}
-.alert-info{padding:10px 14px;border-radius:5px;font-size:12px;margin-bottom:10px;
-  background:#fff8e1;border:1px solid #f9a825;color:#6d4c00;}
-.tip-note{padding:9px 13px;border-radius:5px;font-size:12px;margin-bottom:10px;
-  background:#e8f4fd;border:1px solid #7fb9e0;color:#1a4a6e;}
+/* the path (section 3) */
+.path{list-style:none;margin:0;padding:0;display:grid}
+.step{position:relative;display:grid;grid-template-columns:30px minmax(0,1fr);column-gap:16px;padding-bottom:26px}
+.step::before{content:'';position:absolute;left:14px;top:32px;bottom:0;width:2px;background:var(--line)}
+.step:last-child::before{display:none}
+.step:last-child{padding-bottom:0}
+.node{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:12px;font-weight:500;border:2px solid var(--line-strong);color:var(--muted);background:var(--surface);transition:all .2s}
+.step.active .node{border-color:var(--ink);background:var(--ink);color:var(--surface)}
+.step.done .node{border-color:var(--ok);background:var(--ok);color:#fff}
+.step.done .node svg{display:block}
+.node svg{display:none}
+.step.done .node span{display:none}
+.step-body{min-width:0;padding-top:3px}
+.step-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.step-head h3{font-size:16.5px;font-weight:600;color:var(--ink)}
+.step.done .step-head h3{color:var(--muted);font-weight:500;font-size:15px}
+.change{background:none;border:none;padding:0;color:var(--accent);font-size:13px;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px;text-decoration-color:transparent;transition:text-decoration-color .15s}
+.change:hover,.change:focus-visible{text-decoration-color:currentColor;outline:none}
+.answer{margin-top:4px;font-size:15px;color:var(--ink);font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.step-help{font-size:13.5px;color:var(--muted);margin:2px 0 14px;max-width:62ch}
+.content{display:grid;grid-template-rows:1fr;transition:grid-template-rows .28s ease}
+.content>div{overflow:hidden;min-height:0}
+.step.collapsed .content{grid-template-rows:0fr}
+.step:not(.collapsed) .content>div{overflow:visible}
+@media (prefers-reduced-motion: reduce){.content,.node,.tile,.seg label{transition:none}}
 
-/* Conditional fields */
-.conditional-field{display:none;margin-top:10px;}
+/* show lookup */
+.lookup{position:relative}
+.lookup input{width:100%;background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--radius-sm);padding:11px 12px 11px 40px;font-size:15px}
+.lookup input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.lookup .mag{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.suggest{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:30;background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--radius-sm);box-shadow:var(--shadow);max-height:280px;overflow-y:auto}
+.suggest button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;background:none;border:none;border-top:1px solid var(--line);text-align:left;cursor:pointer;font-size:14px}
+.suggest button:first-child{border-top:none}
+.suggest button:hover,.suggest button:focus-visible{background:var(--surface-2);outline:none}
+.suggest .nm{font-weight:600;color:var(--ink)}
+.suggest .nm small{font-weight:400;color:var(--muted);margin-left:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.chip::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.chip.ok{background:var(--ok-bg);color:var(--ok)}
+.chip.warn{background:var(--warn-bg);color:var(--warn)}
+.chip.bad{background:var(--bad-bg);color:var(--bad)}
+.chip.info{background:var(--info-bg);color:var(--info)}
+.chip.neutral{background:var(--surface-3);color:var(--muted)}
+.record{margin-top:12px;padding:14px 16px;border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--surface-2);display:grid;grid-template-columns:1fr auto;gap:8px 14px;align-items:start}
+.record .r-title{font-weight:600;color:var(--ink)}
+.record .r-text{font-size:13.5px;color:var(--text);grid-column:1/-1}
+.record .r-meta{font-size:12.5px;color:var(--muted);grid-column:1/-1}
+.check{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--text);margin-top:12px;cursor:pointer;line-height:1.45}
+.check input{width:16px;height:16px;margin-top:2px;accent-color:var(--ink);flex:none}
+.check.invalid{color:var(--bad)}
 
-/* Submit button */
-.btn-submit{width:100%;padding:14px;background:#1a3a5c;color:#fff;border:none;border-radius:8px;
-  font-size:16px;font-weight:700;cursor:pointer;transition:background .15s;margin-top:8px;}
-.btn-submit:hover{background:#142e4a;}
+/* result */
+.result{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-2);padding:20px 22px 22px}
+.result::before{content:'';position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--brand-a),var(--brand-b))}
+.result .r-eyebrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.result h3{font-size:22px;font-weight:700;font-variation-settings:'wdth' 108;letter-spacing:-.01em}
+.result .why{font-size:14.5px;color:var(--text);max-width:64ch;margin-top:6px}
+.result details{margin-top:12px}
+.result summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--accent);list-style:none;display:inline-flex;align-items:center;gap:6px}
+.result summary::-webkit-details-marker{display:none}
+.result summary::after{content:'';width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}
+.result details[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+.result ul{margin:10px 0 0;padding-left:18px;font-size:13.5px;color:var(--text);line-height:1.7}
+.flag{margin-top:14px;padding:11px 14px;border-radius:var(--radius-sm);font-size:13.5px;line-height:1.5}
+.flag.warn{background:var(--warn-bg);color:var(--warn)}
+.flag.bad{background:var(--bad-bg);color:var(--bad)}
+.result.review::before{background:var(--bad)}
 
-/* Error summary */
-.error-box{background:#fdf2f2;border:1px solid #e74c3c;border-radius:6px;padding:12px 16px;
-  margin-bottom:16px;display:none;font-size:13px;color:#c0392b;}
+/* setup */
+.setup .tiles{grid-template-columns:1fr}
+.qty{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px;margin-top:14px}
 
-/* SUCCESS SCREEN */
-#success-screen{display:none;}
-.success-card{background:#fff;border-radius:10px;padding:32px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.08);}
-.success-icon{font-size:56px;margin-bottom:12px;}
-.success-title{font-size:22px;font-weight:700;color:#27ae60;margin-bottom:8px;}
-.success-sub{font-size:14px;color:#555;margin-bottom:24px;}
+/* TOV cards */
+.tov{display:grid;gap:10px}
+.tov label{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:13px 16px;border:1.5px solid var(--line-strong);border-radius:var(--radius-sm);cursor:pointer}
+.tov input{accent-color:var(--ink);width:16px;height:16px}
+.tov label:has(input:checked){border-color:var(--ink);background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--ink)}
+.tov strong{color:var(--ink);font-weight:600}
+.tov small{display:block;color:var(--muted);font-size:12.5px}
+.tov .price{font-family:var(--mono);font-size:13px;color:var(--muted)}
 
-.back-btn{display:inline-block;padding:12px 24px;background:#fff;color:#1a3a5c;
-  border:2px solid #1a3a5c;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;
-  text-decoration:none;margin:6px;transition:all .15s;}
-.back-btn:hover{background:#1a3a5c;color:#fff;}
+/* glance panel */
+.glance{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.g-head{background:var(--panel-head);color:var(--panel-head-fg);padding:16px 18px 14px}
+.g-head .eyebrow{color:var(--panel-head-fg);opacity:.7}
+.g-head h2{color:var(--panel-head-fg);font-size:17px;font-weight:700;margin-top:2px;font-variation-settings:'wdth' 108}
+.meter{margin-top:12px;height:5px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand-a),var(--brand-b));transition:width .3s}
+.g-meta{display:flex;justify-content:space-between;font-size:12px;opacity:.8;margin-top:6px;font-family:var(--mono)}
+.g-body{padding:6px 18px 18px}
+.g-row{display:grid;grid-template-columns:82px minmax(0,1fr);gap:12px;padding:11px 0;border-top:1px solid var(--line);font-size:13.5px}
+.g-row:first-child{border-top:none}
+.g-row .k{color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
+.g-row .v{color:var(--ink);font-weight:500;overflow-wrap:anywhere}
+.g-row .v .sub{display:block;color:var(--muted);font-weight:400;font-size:12.5px;margin-top:2px}
+.g-row .v.empty{color:var(--muted);font-weight:400;font-style:italic}
+.todo{margin:8px 0 0;padding:12px 14px;border-radius:var(--radius-sm);background:var(--surface-2);font-size:13px}
+.todo .t-title{font-weight:600;color:var(--ink);margin-bottom:6px}
+.todo ul{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+.todo li{display:flex;gap:8px;align-items:center;color:var(--text)}
+.todo li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--warn);flex:none}
+.todo li button{background:none;border:none;padding:0;color:inherit;cursor:pointer;text-align:left;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px}
+.todo li button:hover{text-decoration-color:currentColor}
+.todo.ready{background:var(--ok-bg);color:var(--ok)}
+.todo.ready .t-title{color:var(--ok)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:14px;padding:13px 16px;border:none;border-radius:var(--radius-sm);background:var(--btn);color:var(--btn-fg);font-weight:700;font-size:15px;cursor:pointer;transition:background .15s,transform .1s}
+.btn:hover{background:var(--btn-hover)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.g-fine{font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.45}
+.g-toggle{display:none}
 
-.import-box{background:#f0f8ff;border:1px solid #3498db;border-radius:8px;padding:20px;
-  margin-top:24px;text-align:left;}
-.import-box h3{font-size:14px;font-weight:700;color:#1a3a5c;margin-bottom:6px;}
-.import-box p{font-size:12px;color:#555;margin-bottom:10px;}
-.import-code{font-family:monospace;font-size:11px;background:#fff;border:1px solid #ccc;
-  border-radius:4px;padding:10px;word-break:break-all;max-height:80px;overflow-y:auto;
-  color:#333;margin-bottom:8px;}
-.copy-btn{padding:8px 16px;background:#3498db;color:#fff;border:none;border-radius:5px;
-  font-size:12px;font-weight:700;cursor:pointer;}
-.copy-btn:hover{background:#2980b9;}
-.copy-confirm{font-size:11px;color:#27ae60;margin-left:8px;display:none;}
+/* success */
+.done-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:36px;box-shadow:var(--shadow);max-width:720px;margin:0 auto}
+.done-card .tick{width:56px;height:56px;border-radius:50%;background:var(--ok-bg);color:var(--ok);display:grid;place-items:center;margin-bottom:16px}
+.done-card h2{font-size:24px;font-variation-settings:'wdth' 110}
+.done-card p{color:var(--muted);margin-top:8px;max-width:56ch}
+.done-card .g-row{grid-template-columns:130px 1fr}
+.done-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn.ghost{width:auto;margin:0;background:transparent;color:var(--ink);border:1.5px solid var(--line-strong)}
+.btn.ghost:hover{background:var(--surface-2)}
 
-.order-summary{background:#f7f9fc;border-radius:8px;padding:16px;margin-top:16px;
-  text-align:left;font-size:12px;line-height:1.8;}
-.order-summary h3{font-size:13px;font-weight:700;color:#1a3a5c;margin-bottom:8px;}
-.order-summary .row{display:flex;gap:8px;}
-.order-summary .row .key{font-weight:700;min-width:180px;color:#555;}
+@media (max-width:960px){
+  .frame{grid-template-columns:1fr}
+  .glance{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:60;border-radius:16px 16px 0 0;max-height:72vh;overflow:auto;transform:translateY(calc(100% - 60px));transition:transform .25s}
+  .glance.open{transform:none}
+  .g-toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;background:var(--panel-head);color:var(--panel-head-fg);border:none;padding:16px 18px;font-weight:600;font-size:14px;cursor:pointer;text-align:left}
+  .g-toggle .cnt{font-family:var(--mono);font-size:12px;opacity:.85}
+  .g-head{padding-top:4px}
+  .g-head h2{display:none}
+  body{padding-block:0 120px}
+}
+@media (max-width:640px){
+  .sec{padding:20px 18px 22px}
+  .grid,.tiles,.qty{grid-template-columns:1fr}
+  .seg{grid-template-columns:1fr}
+  .seg label{flex-direction:row;justify-content:space-between}
+  .masthead h1{font-size:22px}
+  .step{column-gap:12px}
+}
 </style>
 </head>
 <body>
 
-<!-- Netlify form detection (hidden) -->
-<form name="pfizer-order" netlify netlify-honeypot="bot-field" hidden>
-  <input name="bot-field">
-  <input name="Meeting_Manager">
-  <input name="Manager_Email">
-  <input name="Pfizer_Meeting_Number">
-  <input name="Legal_Entity">
-  <input name="Meeting_Full_Name">
-  <input name="Meeting_Acronym">
-  <input name="Event_Type">
-  <input name="Meeting_Address">
-  <input name="Meeting_Date">
-  <input name="Meeting_Time">
-  <input name="Meal_Type">
-  <input name="Estimated_Attendees">
-  <input name="Therapeutic_Area">
-  <input name="Product_Associated">
-  <input name="Pfizer_Project_Owner">
-  <input name="TD_Contact">
-  <input name="Notes">
-  <input name="Service_Type">
-  <input name="Survey_Type">
-  <input name="Survey_Details">
-  <input name="Product_Program">
-  <input name="Product_Program_Details">
-  <input name="Clinical_Internal_Name">
-  <input name="Assoc_Contact_Name">
-  <input name="Assoc_Contact_Email">
-  <input name="Assoc_Vendor_Name">
-  <input name="Badge_API_Available">
-  <input name="Provider_Reg_Company">
-  <input name="API_Badge_Contact_Name">
-  <input name="API_Badge_Contact_Email">
-  <input name="API_Badge_Notes">
-  <input name="Data_Capture_Method">
-  <input name="Service_Details">
-  <input name="Qty_App_Licenses">
-  <input name="Qty_Scanners">
-  <input name="Import_Code">
-</form>
+<div class="draft-bar" id="draft_bar" hidden>You have an unsaved draft from <strong id="draft_time"></strong>. <button type="button" onclick="restoreDraft()">Restore draft</button> <button type="button" class="ghost" onclick="discardDraft()">Discard</button></div>
 
-<div class="app">
-
-  <!-- HEADER -->
-  <div class="app-header">
-    <div style="display:flex;align-items:center;justify-content:center;margin-bottom:6px;">
-      <img src="data:image/png;base64,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" alt="Reality Engineering" style="height:52px;">
-    </div>
-    <div class="sub">Pfizer Symposia — Order Request</div>
-    <div class="sub2">Please complete all required fields and click <strong>Submit Order</strong>.</div>
-  </div>
-
-  <!-- ── ORDER FORM ── -->
-  <div id="order-form">
-    <div id="draft-banner" style="display:none;background:#e8f4fd;border:1px solid #7fb9e0;border-radius:6px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#1a4a6e;">
-      📝 You have an unsaved draft from <strong id="draft-time"></strong>.
-      <button onclick="restoreDraftClick()" style="margin-left:10px;padding:5px 14px;background:#1a3a5c;color:#fff;border:none;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer;">Restore Draft</button>
-      <button onclick="discardDraft()" style="margin-left:6px;padding:5px 14px;background:#fff;color:#c0392b;border:1px solid #e74c3c;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer;">Discard</button>
-    </div>
-    <div class="error-box" id="error-box">⚠️ Please fill in all required fields highlighted below.</div>
-
-    <!-- STEP 1: SERVICE TYPE -->
-    <div class="card">
-      <div class="card-title"><span class="step-badge">1</span>Service Type <span class="req" style="font-size:11px;font-weight:400;">&nbsp;* select all that apply</span></div>
-      <div class="service-type-group" id="service_type_group">
-        <div class="svc-type-check" id="svc_mobile_app" onclick="toggleServiceType('Mobile App', this)">📱 Mobile App</div>
-        <div class="svc-type-check" id="svc_scanner" onclick="toggleServiceType('Scanner', this)">📷 Scanner</div>
-        <div class="svc-type-check" id="svc_qr_code" onclick="toggleServiceType('QR Code', this)">🔲 QR Code</div>
-        <div class="svc-type-check" id="svc_image_capture" onclick="toggleServiceType('Image Capture', this)">📸 Image Capture</div>
-        <div class="svc-type-check" id="svc_list_import" onclick="toggleServiceType('List Import', this)">📋 List Import <span style="font-size:10px;font-weight:400;color:inherit;opacity:.75;">(last resort)</span></div>
-        <div class="svc-type-check" id="svc_list_transcription" onclick="toggleServiceType('Attendee List Matching Import', this)">📝 Attendee List Matching Import</div>
-      </div>
-      <div class="svc-note">Mobile App, Scanner, QR Code, and Image Capture may be combined. List Import and Attendee List Matching Import are standalone — select only one, and they cannot be combined with scanning services.</div>
-
-      <!-- Service descriptions — shown when a type is selected -->
-      <div id="svc-descriptions" style="display:none;margin-top:14px;display:flex;flex-direction:column;gap:10px;"></div>
-
-      <!-- Quantity fields — shown conditionally -->
-      <div id="svc_quantities" style="display:none;margin-top:16px;">
-        <div class="fg">
-          <div class="fgroup" id="qty_app_wrap" style="display:none;">
-            <label class="lbl">Number of App Licenses <span class="req">*</span></label>
-            <input type="number" id="f_qty_app" placeholder="e.g. 2" min="1">
-          </div>
-          <div class="fgroup" id="qty_scanner_wrap" style="display:none;">
-            <label class="lbl">Number of Scanners <span class="req">*</span></label>
-            <input type="number" id="f_qty_scanner" placeholder="e.g. 3" min="1">
-            <p style="margin:6px 0 0;font-size:12px;color:#555;">📦 Shipping &amp; Handling ($350) will be included in your quote for scanner orders.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 2: EVENT INFO -->
-    <div class="card">
-      <div class="card-title"><span class="step-badge">2</span>Event Information</div>
-      <div class="fg">
-        <div class="fgroup">
-          <label class="lbl">Your Name (Meeting Manager) <span class="req">*</span></label>
-          <input type="text" id="f_mgr" placeholder="e.g. Sarah Mitchell">
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Your Email <span class="req">*</span></label>
-          <input type="email" id="f_mgr_email" placeholder="you@company.com">
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Pfizer Meeting # <span class="req">*</span></label>
-          <input type="text" id="f_pfz" placeholder="e.g. PFZ159560">
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Legal Entity</label>
-          <input type="text" id="f_entity" value="1400: Pfizer Inc.">
-        </div>
-        <div class="fgroup fw">
-          <label class="lbl">Meeting Full Name <span class="req">*</span></label>
-          <input type="text" id="f_name" placeholder="e.g. American College of Osteopathic Family Physicians">
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Meeting Acronym (Short Name)</label>
-          <input type="text" id="f_acronym" placeholder="e.g. ACOFP">
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Event Type <span class="req">*</span></label>
-          <select id="f_etype">
-            <option value="">— Select —</option>
-            <option>Product Theater</option>
-            <option>Symposia</option>
-            <option>Education Reception</option>
-          </select>
-        </div>
-        <div class="fgroup fw">
-          <label class="lbl">Meeting Site / Address <span class="req">*</span></label>
-          <textarea id="f_addr" placeholder="Venue name and full address"></textarea>
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Meeting Date <span class="req">*</span></label>
-          <input type="date" id="f_date" onchange="updateExpediteWarning()">
-          <div id="expedite_warning" style="display:none;font-size:11px;color:#c0392b;font-weight:700;margin-top:4px;background:#fdf2f2;border:1px solid #e74c3c;border-radius:5px;padding:8px 10px;">⚠️ This event is under 5 business days away — a $500 Expedite Service fee will apply to your quote.</div>
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Meeting End Date</label>
-          <input type="date" id="f_date_end">
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Meeting Time</label>
-          <input type="text" id="f_time" placeholder="e.g. 12:15 PM – 1:15 PM">
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Meal Type <span class="req">*</span></label>
-          <select id="f_meal">
-            <option value="">— Select —</option>
-            <option>Breakfast</option>
-            <option>Lunch</option>
-            <option>Dinner</option>
-            <option>Coffee + Tea</option>
-            <option>Snacks</option>
-            <option>No TOV (no compliance tracking)</option>
-          </select>
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Estimated # Attendees</label>
-          <input type="number" id="f_att" placeholder="e.g. 100">
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Pfizer Project Owner Name <span class="req">*</span></label>
-          <input type="text" id="f_owner_name" placeholder="e.g. Jane Smith">
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Pfizer Project Owner Email <span class="req">*</span></label>
-          <input type="email" id="f_owner_email" placeholder="e.g. Jane.Smith@pfizer.com">
-        </div>
-        <div class="fgroup fw">
-          <label class="lbl">TD Contact (Name, Phone / Email)</label>
-          <textarea id="f_td" placeholder="Name and contact info for the Technical Director who will be on-site"></textarea>
-        </div>
-        <div class="fgroup fw">
-          <label class="lbl">Notes / Special Instructions</label>
-          <textarea id="f_notes" placeholder="Any additional information…"></textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 3: PRODUCT / DRUG ASSOCIATED -->
-    <div class="card">
-      <div class="card-title"><span class="step-badge">3</span>Product / Drug Associated</div>
-      <div class="fg">
-        <div class="fgroup">
-          <label class="lbl">Therapeutic Area <span class="req">*</span></label>
-          <select id="f_therapy" onchange="onTherapyChange()">
-            <option value="">— Select Therapy —</option>
-            <option>Dermatology</option>
-            <option>Gastrointestinal</option>
-            <option>Hematology</option>
-            <option>Antiviral</option>
-            <option>Inflammation</option>
-            <option>Inflammation &amp; Immunology</option>
-            <option>Migraine</option>
-            <option>Oncology</option>
-            <option>Rare Disease</option>
-            <option>Rheumatology</option>
-            <option>Vaccines</option>
-            <option value="Other">Other</option>
-          </select>
-          <input type="text" id="f_therapy_other" placeholder="Enter therapeutic area…"
-                 style="display:none;margin-top:6px;" oninput="onTherapyOtherInput()">
-          <div style="font-size:11px;color:#888;margin-top:4px;">Selecting a therapy filters the product list</div>
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Product / Drug Associated <span class="req">*</span></label>
-          <select id="f_product_program" onchange="onProductChange()">
-            <option value="">— Select a product —</option>
-          </select>
-          <input type="text" id="f_product_other" placeholder="Enter product or drug name…"
-                 style="display:none;margin-top:6px;">
-          <div style="font-size:11px;color:#888;margin-top:4px;">Selecting a product fills in the therapy automatically</div>
-        </div>
-        <div class="fgroup fw conditional-field" id="clinical_name_wrap">
-          <label class="lbl">Clinical / Internal Name <span style="font-size:10px;font-weight:400;color:#888;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <input type="text" id="f_clinical_name" placeholder="e.g. Study XYZ-123">
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Survey Type</label>
-          <select id="f_survey_type">
-            <option value="">— Select Survey Type —</option>
-            <option>Comirnaty survey</option>
-            <option>Prevnar survey</option>
-            <option>Paxlovid survey</option>
-            <option>Migraine survey</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 4: TOV / COMPLIANCE REPORTING -->
-    <div class="card">
-      <div class="card-title"><span class="step-badge">4</span>TOV / Compliance Reporting</div>
-      <div class="fg">
-        <div class="fgroup fw">
-          <label class="lbl">Is Transfer of Value (TOV) reporting required for this event?</label>
-          <p style="font-size:12px;color:#666;margin:0 0 10px;">TOV is required by default for Pfizer AMEX events. Selecting "Not Required" reduces the price by $500.</p>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <label style="display:flex;align-items:center;gap:10px;padding:12px 16px;border:2px solid #1a3a5c;border-radius:8px;cursor:pointer;background:#f0f4f8;">
-              <input type="radio" name="f_tov" id="f_tov_yes" value="yes" checked onchange="onTOVChange()">
-              <span><strong>TOV Required (standard)</strong> — Compliance data transfer included</span>
-            </label>
-            <label style="display:flex;align-items:center;gap:10px;padding:12px 16px;border:2px solid #ddd;border-radius:8px;cursor:pointer;">
-              <input type="radio" name="f_tov" id="f_tov_no" value="no" onchange="onTOVChange()">
-              <span><strong>TOV Not Required</strong> — Reduces quote by $500</span>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 5: ASSOCIATION / VENDOR -->
-    <div class="card">
-      <div class="card-title"><span class="step-badge">5</span>Association / Vendor <span style="font-size:11px;font-weight:400;color:#888;text-transform:none;letter-spacing:0;">(optional)</span></div>
-      <div class="fg">
-        <div class="fgroup">
-          <label class="lbl">Association Contact Name</label>
-          <input type="text" id="f_assoc_contact_name" placeholder="e.g. Jane Smith">
-        </div>
-        <div class="fgroup">
-          <label class="lbl">Association Contact Email</label>
-          <input type="email" id="f_assoc_contact_email" placeholder="contact@association.org">
-        </div>
-      </div>
-    </div>
-
-    <!-- STEP 6: BADGE KIT / API -->
-    <div class="card">
-      <div class="card-title"><span class="step-badge">6</span>Badge Kit / Developer Kit / API Available <span class="req" style="font-size:11px;font-weight:400;">&nbsp;* required</span></div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:4px;" id="badge_api_group">
-        <label class="opt" style="flex:1;min-width:100px;" onclick="onBadgeAPIChange('Yes')">
-          <input type="radio" name="badge_api" value="Yes" id="badge_api_yes"> Yes
-        </label>
-        <label class="opt" style="flex:1;min-width:100px;" onclick="onBadgeAPIChange('No')">
-          <input type="radio" name="badge_api" value="No" id="badge_api_no"> No
-        </label>
-        <label class="opt" style="flex:1;min-width:100px;" onclick="onBadgeAPIChange('Unknown')">
-          <input type="radio" name="badge_api" value="Unknown" id="badge_api_unknown"> Unknown
-        </label>
-      </div>
-      <div class="conditional-field" id="badge_api_details_wrap" style="margin-top:14px;">
-        <div class="fg">
-          <div class="fgroup">
-            <label class="lbl">Provider / Registration Company</label>
-            <input type="text" id="f_provider_reg_company" placeholder="e.g. Cvent, Eventbrite">
-          </div>
-          <div class="fgroup">
-            <label class="lbl">API / Badge Kit Contact Name</label>
-            <input type="text" id="f_api_badge_contact_name" placeholder="Contact name">
-          </div>
-          <div class="fgroup">
-            <label class="lbl">API / Badge Kit Contact Email</label>
-            <input type="email" id="f_api_badge_contact_email" placeholder="api@provider.com">
-          </div>
-          <div class="fgroup fw">
-            <label class="lbl">API / Badge Kit Notes</label>
-            <textarea id="f_api_badge_notes" placeholder="Any relevant notes about the API or badge kit…"></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SUBMIT -->
-    <div class="card">
-      <p style="font-size:12px;color:#777;margin-bottom:12px;">Clicking Submit will send your order directly to Reality Engineering. You'll be contacted to confirm details and receive a quote before your event.</p>
-      <button class="btn-submit" onclick="submitOrder()">✉️ Submit Order Request</button>
+<header class="masthead">
+  <div class="brand">
+    <div class="logo-plate"><img src="data:image/png;base64,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" alt="Reality Engineering"></div>
+    <div>
+      <div class="eyebrow">Pfizer Symposia</div>
+      <h1>Order Request</h1>
+      <p class="lede">Tell us about the meeting and how attendees will be badged. We work out the right service and explain why.</p>
     </div>
   </div>
+</header>
 
-  <!-- ── SUCCESS SCREEN ── -->
-  <div id="success-screen">
-    <div class="success-card">
-      <div class="success-icon">✅</div>
-      <div class="success-title">Order Submitted!</div>
-      <div class="success-sub">Your order has been received by Reality Engineering.<br>You'll be contacted to confirm details and receive a quote before your event.</div>
-      <div style="margin-top:8px;">
-        <button class="back-btn" onclick="downloadPDF()">⬇️ Download PDF Copy</button>
-        <button class="back-btn" onclick="goBack()">← Submit Another Order</button>
+<div class="frame" id="frame">
+<main class="sections" id="sections">
+
+  <!-- 01 EVENT -->
+  <section class="sec" id="sec-event">
+    <div class="sec-head"><span class="sec-num">01</span><h2>The meeting</h2></div>
+    <p class="sec-intro">Who is ordering, what the meeting is, and who at Pfizer owns it.</p>
+
+    <div class="group">
+      <div class="group-title">You</div>
+      <div class="grid">
+        <div class="field"><label for="f_mgr">Meeting manager <span class="req">*</span></label><input type="text" id="f_mgr" placeholder="Your name" autocomplete="name"></div>
+        <div class="field"><label for="f_mgr_email">Your email <span class="req">*</span></label><input type="email" id="f_mgr_email" placeholder="you@company.com" autocomplete="email"></div>
       </div>
-
-      <!-- Import code hidden from customer — sent to RE via email notification -->
-      <div id="import-code-display" style="display:none;"></div>
-
-      <div class="order-summary" id="order-summary"></div>
     </div>
-  </div>
 
+    <div class="group">
+      <div class="group-title">The meeting</div>
+      <div class="grid">
+        <div class="field"><label for="f_pfz">Pfizer meeting # <span class="req">*</span></label><input type="text" id="f_pfz" class="mono" placeholder="PFZ159560"></div>
+        <div class="field"><label for="f_entity">Legal entity</label><input type="text" id="f_entity" value="1400: Pfizer Inc."></div>
+        <div class="field span"><label for="f_name">Meeting full name <span class="req">*</span></label><input type="text" id="f_name" placeholder="e.g. American College of Osteopathic Family Physicians"></div>
+        <div class="field"><label for="f_acronym">Acronym (short name)</label><input type="text" id="f_acronym" placeholder="e.g. ACOFP"><span class="help">Also used to find the show in Section 3.</span></div>
+        <div class="field"><label for="f_etype">Event type <span class="req">*</span></label>
+          <select id="f_etype"><option value="">Select</option><option>Product Theater</option><option>Symposia</option><option>Education Reception</option></select></div>
+        <div class="field span"><label for="f_addr">Meeting site / address <span class="req">*</span></label><textarea id="f_addr" placeholder="Venue name and full address"></textarea></div>
+        <div class="field"><label for="f_date">Meeting date <span class="req">*</span></label><input type="date" id="f_date"><span class="help" id="expedite" hidden></span></div>
+        <div class="field"><label for="f_date_end">End date</label><input type="date" id="f_date_end"></div>
+        <div class="field"><label for="f_time">Meeting time</label><input type="text" id="f_time" placeholder="e.g. 12:15 PM to 1:15 PM"></div>
+        <div class="field"><label for="f_meal">Meal type <span class="req">*</span></label>
+          <select id="f_meal"><option value="">Select</option><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Coffee + Tea</option><option>Snacks</option><option>No TOV (no compliance tracking)</option></select></div>
+        <div class="field"><label for="f_att">Estimated attendees</label><input type="number" id="f_att" placeholder="e.g. 100" min="1"></div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-title">Pfizer contacts <span class="hint">The project owner receives the reports.</span></div>
+      <div class="grid">
+        <div class="field"><label for="f_owner_name">Project owner name <span class="req">*</span></label><input type="text" id="f_owner_name" placeholder="e.g. Jane Smith"></div>
+        <div class="field"><label for="f_owner_email">Project owner email <span class="req">*</span></label><input type="email" id="f_owner_email" placeholder="jane.smith@pfizer.com"></div>
+        <div class="field span"><label for="f_td">Technical director on site</label><textarea id="f_td" placeholder="Name, phone and email. Leave blank if not assigned yet."></textarea></div>
+        <div class="field span"><label for="f_notes">Notes for Reality Engineering</label><textarea id="f_notes" placeholder="Anything else we should know"></textarea></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 PRODUCT -->
+  <section class="sec" id="sec-product">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Product</h2></div>
+    <p class="sec-intro">Pick either one; the other fills in.</p>
+    <div class="grid">
+      <div class="field"><label for="f_therapy">Therapeutic area <span class="req">*</span></label>
+        <select id="f_therapy" onchange="onTherapyChange()">
+          <option value="">Select</option>
+          <option>Dermatology</option><option>Gastrointestinal</option><option>Hematology</option><option>Antiviral</option><option>Inflammation</option><option>Inflammation &amp; Immunology</option><option>Migraine</option><option>Oncology</option><option>Rare Disease</option><option>Rheumatology</option><option>Vaccines</option><option value="Other">Other</option>
+        </select>
+        <input type="text" id="f_therapy_other" placeholder="Enter the therapeutic area" hidden style="margin-top:6px" oninput="populateProducts('')">
+      </div>
+      <div class="field"><label for="f_product_program">Product / drug <span class="req">*</span></label>
+        <select id="f_product_program" onchange="onProductChange()"><option value="">Select a product</option></select>
+        <input type="text" id="f_product_other" placeholder="Enter the product or drug name" hidden style="margin-top:6px">
+      </div>
+      <div class="field span" id="clinical_name_wrap" hidden><label for="f_clinical_name">Clinical / internal name <span class="help" style="text-transform:none;letter-spacing:0;font-weight:400">(optional)</span></label><input type="text" id="f_clinical_name" placeholder="e.g. Study XYZ-123"></div>
+    </div>
+  </section>
+
+  <!-- 03 CAPTURE -->
+  <section class="sec" id="sec-capture">
+    <div class="sec-head"><span class="sec-num">03</span><h2>How we'll capture attendees</h2></div>
+    <p class="sec-intro">A few questions about the meeting. We work out which capture method keeps it compliant and show you why. You never have to pick a service yourself.</p>
+
+    <ol class="path" id="path">
+
+      <li class="step active" id="st_badge">
+        <div class="node"><span>1</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-6.5"/></svg></div>
+        <div class="step-body">
+          <div class="step-head"><h3>What will attendees be wearing?</h3><button type="button" class="change" hidden onclick="reopen('badge')">Change</button></div>
+          <div class="answer" id="ans_badge" hidden></div>
+          <div class="content"><div>
+            <p class="step-help">Pick the one that matches this meeting.</p>
+            <div class="tiles" id="badge_tiles">
+              <label class="tile"><input type="radio" name="badge_type" value="Congress badge" onchange="answered()">
+                <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="6" width="14" height="15" rx="2"/><path d="M9 6V4h6v2M8 11h8M8 14h8M8 17h5"/></svg></span>
+                <span><strong>The official congress badge</strong><small>Issued by the congress or society meeting.</small></span></label>
+              <label class="tile"><input type="radio" name="badge_type" value="Name badge" onchange="answered()">
+                <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M7 13h10M9 4.5v3M15 4.5v3"/></svg></span>
+                <span><strong>A name badge from the agency or Pfizer</strong><small>Printed for this meeting. Name only.</small></span></label>
+              <label class="tile"><input type="radio" name="badge_type" value="No badge" onchange="answered()">
+                <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M5 5l14 14"/></svg></span>
+                <span><strong>No badge</strong><small>Nothing to scan or photograph.</small></span></label>
+            </div>
+          </div></div>
+        </div>
+      </li>
+
+      <li class="step" id="st_show" hidden>
+        <div class="node"><span>2</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-6.5"/></svg></div>
+        <div class="step-body">
+          <div class="step-head"><h3>Which congress?</h3><button type="button" class="change" hidden onclick="reopen('show')">Change</button></div>
+          <div class="answer" id="ans_show" hidden></div>
+          <div class="content"><div>
+            <p class="step-help">We keep a record of which shows offer a badge API, so you do not have to know.</p>
+            <div class="lookup">
+              <svg class="mag" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <input type="text" id="f_show_query" placeholder="Type the acronym or name" autocomplete="off" oninput="onShowQuery()" onfocus="onShowQuery()" onblur="hideSuggest()" onkeydown="showKey(event)">
+              <div class="suggest" id="suggest" hidden></div>
+            </div>
+            <div class="record" id="show_record" hidden></div>
+            <label class="check" id="notlisted_wrap"><input type="checkbox" id="f_show_notlisted" onchange="answered()"> My show isn't listed</label>
+          </div></div>
+        </div>
+      </li>
+
+      <li class="step" id="st_api" hidden>
+        <div class="node"><span>3</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-6.5"/></svg></div>
+        <div class="step-body">
+          <div class="step-head"><h3>Does the congress offer a badge API?</h3><button type="button" class="change" hidden onclick="reopen('api')">Change</button></div>
+          <div class="answer" id="ans_api" hidden></div>
+          <div class="content"><div>
+            <p class="step-help">Also called a developer kit. It lets us read the full attendee record from the badge. Exhibitor services or the registration company usually knows.</p>
+            <div class="seg" id="api_seg">
+              <label><input type="radio" name="api_answer" value="Yes" onchange="answered()">Yes</label>
+              <label><input type="radio" name="api_answer" value="No" onchange="answered()">No</label>
+              <label><input type="radio" name="api_answer" value="Unknown" onchange="answered()">I don't know<small>We'll find out for you</small></label>
+            </div>
+          </div></div>
+        </div>
+      </li>
+
+      <li class="step" id="st_outside" hidden>
+        <div class="node"><span>4</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-6.5"/></svg></div>
+        <div class="step-body">
+          <div class="step-head"><h3>Can you capture attendees with your own devices?</h3><button type="button" class="change" hidden onclick="reopen('outside')">Change</button></div>
+          <div class="answer" id="ans_outside" hidden></div>
+          <div class="content"><div>
+            <p class="step-help">Photographing badges at the door, or a check-in on a phone or tablet. Most congresses allow this inside a sponsored symposium. Some require exhibitors to use the congress's own lead retrieval or scanning system instead.</p>
+            <div class="seg" id="outside_seg">
+              <label><input type="radio" name="outside_answer" value="Yes" onchange="answered()">Yes<small>Own devices are fine</small></label>
+              <label><input type="radio" name="outside_answer" value="No" onchange="answered()">No<small>We must use the congress's own scanning system</small></label>
+              <label><input type="radio" name="outside_answer" value="Unknown" onchange="answered()">I don't know<small>We'll check with the congress</small></label>
+            </div>
+          </div></div>
+        </div>
+      </li>
+
+      <li class="step" id="st_result" hidden>
+        <div class="node"><span>&#9679;</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-6.5"/></svg></div>
+        <div class="step-body">
+          <div class="result" id="result">
+            <div class="r-eyebrow"><span class="eyebrow">What we'll order</span><span class="chip" id="r_chip"></span></div>
+            <h3 id="r_title"></h3>
+            <p class="why" id="r_why"></p>
+            <details><summary>What's included</summary><ul id="r_items"></ul></details>
+            <div class="flag" id="r_flag" hidden></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="step setup" id="st_setup" hidden>
+        <div class="node"><span>5</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-6.5"/></svg></div>
+        <div class="step-body">
+          <div class="step-head"><h3>How will your technical director run it?</h3></div>
+          <div class="content"><div>
+            <p class="step-help">Scanning and image capture both run in the RE:nvent app.</p>
+            <div class="tiles" id="device_tiles">
+              <label class="tile"><input type="radio" name="device_mode" value="App" onchange="answered()">
+                <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/></svg></span>
+                <span><strong>The app on the TD's own phone</strong><small>Most AMEX meetings choose this. Nothing to ship. Remote training call included.</small></span></label>
+              <label class="tile"><input type="radio" name="device_mode" value="Scanner" onchange="answered()">
+                <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span>
+                <span><strong>Shipped RE scanners</strong><small>iPhones with the app preinstalled, shipped to your TD. Adds $350 shipping and handling. Needs Wi-Fi on site unless cellular is ordered.</small></span></label>
+              <label class="tile"><input type="radio" name="device_mode" value="Both" onchange="answered()">
+                <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="8" height="16" rx="1.5"/><rect x="13" y="4" width="8" height="16" rx="1.5"/></svg></span>
+                <span><strong>Both</strong><small>App licenses for the TD's phone plus shipped scanners.</small></span></label>
+            </div>
+            <div class="qty">
+              <div class="field" id="qty_app_wrap" hidden><label for="f_qty_app">App licenses <span class="req">*</span></label><input type="number" id="f_qty_app" min="1" placeholder="e.g. 2" oninput="answered()"></div>
+              <div class="field" id="qty_scanner_wrap" hidden><label for="f_qty_scanner">Scanners <span class="req">*</span></label><input type="number" id="f_qty_scanner" min="1" placeholder="e.g. 3" oninput="answered()"></div>
+            </div>
+            <label class="check"><input type="checkbox" id="f_qr_addon" onchange="answered()"> Also add a QR code check-in for attendees who arrive without a badge</label>
+          </div></div>
+        </div>
+      </li>
+
+      <li class="step" id="st_notallowed" hidden>
+        <div class="node"><span>6</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-6.5"/></svg></div>
+        <div class="step-body">
+          <div class="step-head"><h3>Before we can plan an import from the congress system</h3></div>
+          <div class="content"><div>
+            <p class="step-help">We confirm this rule with the congress before quoting. A name, an email, or where it says so in the guidelines is enough.</p>
+            <div class="field"><label for="f_not_allowed_per">Who told you third-party capture is not allowed? <span class="req">*</span></label><input type="text" id="f_not_allowed_per" placeholder="e.g. Exhibitor services email, or symposia guidelines page 4" oninput="answered()"></div>
+            <label class="check" id="ack_wrap"><input type="checkbox" id="f_import_ack" onchange="answered()"> I understand that with this method the compliance survey cannot be asked at the meeting, and the congress data may not include everything AMEX compliance requires.</label>
+          </div></div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 04 TOV -->
+  <section class="sec" id="sec-tov">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Transfer of value reporting</h2></div>
+    <p class="sec-intro">Required by default for Pfizer AMEX events.</p>
+    <div class="tov">
+      <label><input type="radio" name="f_tov" value="yes" checked onchange="answered()"><span><strong>TOV required</strong><small>Compliance data transfer included. The standard choice.</small></span><span class="price">standard</span></label>
+      <label><input type="radio" name="f_tov" value="no" onchange="answered()"><span><strong>TOV not required</strong><small>No compliance data transfer for this meeting.</small></span><span class="price">&minus;$500</span></label>
+    </div>
+  </section>
+
+  <!-- 05 CONTACTS -->
+  <section class="sec" id="sec-contacts">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Association and registration contacts</h2></div>
+    <p class="sec-intro" id="contacts_intro">Optional. Anything here shortens our check with the congress.</p>
+    <div class="note info" id="contacts_note" hidden style="margin-bottom:16px">We still have to confirm the capture method for this meeting. A registration company, an exhibitor services contact, or a link to the symposia guidelines makes that quick.</div>
+    <div class="grid">
+      <div class="field"><label for="f_assoc_contact_name">Association contact</label><input type="text" id="f_assoc_contact_name" placeholder="Name"></div>
+      <div class="field"><label for="f_assoc_contact_email">Association email</label><input type="email" id="f_assoc_contact_email" placeholder="contact@association.org"></div>
+      <div class="field"><label for="f_provider_reg_company">Registration company</label><input type="text" id="f_provider_reg_company" placeholder="e.g. Maritz, Cvent, CMR"></div>
+      <div class="field"><label for="f_api_badge_contact_name">API / badge contact</label><input type="text" id="f_api_badge_contact_name" placeholder="Name"></div>
+      <div class="field"><label for="f_api_badge_contact_email">API / badge email</label><input type="email" id="f_api_badge_contact_email" placeholder="api@provider.com"></div>
+      <div class="field span"><label for="f_api_badge_notes">What the congress told you about badges or scanning</label><textarea id="f_api_badge_notes" placeholder="Or a link to the exhibitor / symposia guidelines"></textarea></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ORDER AT A GLANCE -->
+<aside class="glance" id="glance" aria-label="Order at a glance">
+  <button type="button" class="g-toggle" onclick="document.getElementById('glance').classList.toggle('open')"><span>Order at a glance</span><span class="cnt" id="g_cnt_mobile"></span></button>
+  <div class="g-head">
+    <div class="eyebrow">Order at a glance</div>
+    <h2>Fills in as you go</h2>
+    <div class="meter"><i id="meter"></i></div>
+    <div class="g-meta"><span id="g_pct">0% complete</span><span id="g_left"></span></div>
+  </div>
+  <div class="g-body">
+    <div class="g-row"><span class="k">Meeting</span><span class="v empty" id="g_meeting">Not entered yet</span></div>
+    <div class="g-row"><span class="k">When</span><span class="v empty" id="g_when">No date yet</span></div>
+    <div class="g-row"><span class="k">Product</span><span class="v empty" id="g_product">Not chosen</span></div>
+    <div class="g-row"><span class="k">Capture</span><span class="v empty" id="g_capture">Answer Section 3</span></div>
+    <div class="g-row"><span class="k">Set-up</span><span class="v empty" id="g_setup">Depends on capture</span></div>
+    <div class="g-row"><span class="k">TOV</span><span class="v" id="g_tov">Required (standard)</span></div>
+    <div class="todo" id="todo"></div>
+    <button type="button" class="btn" id="submit_btn" onclick="submitOrder()">Send order request</button>
+    <p class="g-fine">Reality Engineering confirms details and sends a quote before your event.</p>
+  </div>
+</aside>
+</div>
+
+<!-- SUCCESS -->
+<div class="done-card" id="done" hidden>
+  <div class="tick"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5 11-11"/></svg></div>
+  <h2>Order request sent</h2>
+  <p>Reality Engineering has it. You will be contacted to confirm details and receive a quote before the event.</p>
+  <div id="done_rows" style="margin-top:20px"></div>
+  <div class="done-actions"><button type="button" class="btn ghost" onclick="downloadPDF()">Download PDF copy</button><button type="button" class="btn ghost" onclick="location.reload()">Submit another order</button></div>
 </div>
 
 <script>
@@ -461,18 +560,14 @@ const PRODUCT_THERAPY = {
   'Vyndaqel':'Rare Disease','Xeljanz':'Rheumatology','Zavegepant':'Migraine',
 };
 
-// Sync both therapy dropdowns and populate products on load
-(function(){
-  populateProducts('');
-})();
 
-let selectedServiceTypes = new Set();
 
 function $id(id){ return document.getElementById(id); }
 function val(id){ return ($id(id)||{}).value?.trim() || ''; }
 function radioVal(name){ return document.querySelector(`input[name="${name}"]:checked`)?.value || ''; }
+function esc(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function fmtDate(d){ if(!d) return ''; const dt = new Date(d+'T12:00:00'); return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
 
-// ── Service type descriptions ──
 const SERVICE_DESCRIPTIONS = {
   'Mobile App': {
     icon: '📱',
@@ -481,7 +576,7 @@ const SERVICE_DESCRIPTIONS = {
       'Custom-branded iPhone or Android app deployed to your Technical Director',
       'Attendee check-in and badge scanning at the event',
       'Symposia survey, post-show summary report and data export',
-      'DLU Compliance — Transfer of Value (TOV) tracking for 13 countries',
+      'DLU Compliance: Transfer of Value (TOV) tracking for 13 countries',
       'Pfizer Customer Data Match run 3× weekly via CDW delivery',
       'Remote training call with TD included',
     ]
@@ -506,6 +601,16 @@ const SERVICE_DESCRIPTIONS = {
       'Compliance tracking and CDW delivery included',
     ]
   },
+  'List Import': {
+    icon: '📋',
+    title: 'Import from the congress scanning system',
+    items: [
+      'The congress requires its own lead retrieval or scanning system, so RE imports the attendee data that system collects after the meeting',
+      'Pfizer customer ID matching, summary report, and CDW delivery',
+      'The compliance survey cannot be asked at the meeting with this method',
+      'RE confirms the congress rule and reviews every one of these orders before quoting',
+    ]
+  },
   'Image Capture': {
     icon: '📸',
     title: 'Badge Image Capture',
@@ -516,629 +621,381 @@ const SERVICE_DESCRIPTIONS = {
       'Remote training call with TD included',
     ]
   },
-  'List Import': {
-    icon: '📋',
-    title: 'List Import — Last Resort Only',
-    items: [
-      '⚠️ Use only when no badge API is available from the venue or association',
-      'Used when Pfizer custom scanners are not permitted at the venue',
-      'RE imports scanned attendee data from show-provided scanners',
-      'Pfizer customer ID matching, summary report, and CDW delivery',
-      'No TD contact or on-site RE scanning equipment needed',
-    ]
-  },
-  'Attendee List Matching Import': {
-    icon: '📝',
-    title: 'Attendee List Matching Import',
-    items: [
-      'Matches event registration attendee list against symposia participants to identify who attended',
-      'Provides enriched HCP data by linking attendee records to Pfizer customer IDs',
-      'Pfizer customer ID matching, summary report, and CDW delivery',
-      'No TD contact or on-site RE scanning equipment needed',
-    ]
-  },
 };
 
-function updateServiceDescriptions(){
-  const wrap = $id('svc-descriptions');
-  if(selectedServiceTypes.size === 0){
-    wrap.style.display = 'none';
-    wrap.innerHTML = '';
-    return;
-  }
-  wrap.style.display = 'flex';
-  wrap.innerHTML = [...selectedServiceTypes].map(type => {
-    const d = SERVICE_DESCRIPTIONS[type];
-    if(!d) return '';
-    return `
-      <div style="background:#f0f4f8;border-left:4px solid #1a3a5c;border-radius:0 6px 6px 0;padding:12px 16px;">
-        <div style="font-size:13px;font-weight:700;color:#1a3a5c;margin-bottom:6px;">${d.icon} ${d.title}</div>
-        <ul style="margin:0;padding-left:18px;font-size:12px;color:#444;line-height:1.8;">
-          ${d.items.map(i => `<li>${i}</li>`).join('')}
-        </ul>
-      </div>`;
-  }).join('');
-}
-
-// Mutual exclusion rules:
-//   Group A (hardware/capture): Mobile App, Scanner, QR Code, Image Capture — can combine freely within group
-//   Group B (list imports): List Import, Attendee List Matching Import — only ONE allowed, and exclusive with Group A
-const SVC_GROUP_A = new Set(['Mobile App','Scanner','QR Code','Image Capture']);
-const SVC_GROUP_B = new Set(['List Import','Attendee List Matching Import']);
-const SVC_ID_MAP  = {
-  'Mobile App':'svc_mobile_app','Scanner':'svc_scanner','QR Code':'svc_qr_code',
-  'Image Capture':'svc_image_capture','List Import':'svc_list_import',
-  'Attendee List Matching Import':'svc_list_transcription'
-};
-
-function deselect(type){
-  selectedServiceTypes.delete(type);
-  const el = $id(SVC_ID_MAP[type]);
-  if(el) el.classList.remove('selected');
-}
-
-function toggleServiceType(type, el){
-  if(selectedServiceTypes.has(type)){
-    selectedServiceTypes.delete(type);
-    el.classList.remove('selected');
-  } else {
-    // Enforce mutual exclusion
-    if(SVC_GROUP_B.has(type)){
-      // Selecting Group B: clear all Group A and all other Group B items
-      SVC_GROUP_A.forEach(t => deselect(t));
-      SVC_GROUP_B.forEach(t => { if(t !== type) deselect(t); });
-    } else if(SVC_GROUP_A.has(type)){
-      // Selecting Group A: clear all Group B items
-      SVC_GROUP_B.forEach(t => deselect(t));
-    }
-    selectedServiceTypes.add(type);
-    el.classList.add('selected');
-  }
-  // Clear error state if at least one selected
-  if(selectedServiceTypes.size > 0){
-    document.querySelectorAll('.svc-type-check').forEach(r => r.classList.remove('error-border'));
-  }
-  updateQuantityFields();
-  updateServiceDescriptions();
-}
-
-function updateQuantityFields(){
-  const hasApp     = selectedServiceTypes.has('Mobile App');
-  const hasImage   = selectedServiceTypes.has('Image Capture');
-  const hasScanner = selectedServiceTypes.has('Scanner');
-  const showApp    = hasApp || hasImage;  // Image Capture also needs app quantity
-  const showAny    = showApp || hasScanner;
-
-  $id('svc_quantities').style.display   = showAny    ? 'block' : 'none';
-  $id('qty_app_wrap').style.display     = showApp    ? 'block' : 'none';
-  $id('qty_scanner_wrap').style.display = hasScanner ? 'block' : 'none';
-
-  // Update label to reflect context
-  const appLabel = $id('qty_app_wrap').querySelector('label');
-  if(appLabel) appLabel.innerHTML = hasImage && !hasApp
-    ? 'Number of App Licenses <span class="req">*</span> <span style="font-size:10px;font-weight:400;color:#888;">(for Image Capture)</span>'
-    : 'Number of App Licenses <span class="req">*</span>';
-
-  // Clear values when hidden
-  if(!showApp)    $id('f_qty_app').value = '';
-  if(!hasScanner) $id('f_qty_scanner').value = '';
-}
-
-// Populate the product dropdown based on selected therapy
+// ── product / therapy ──
 function populateProducts(therapy){
-  const sel = $id('f_product_program');
-  const current = sel.value;
-  sel.innerHTML = '<option value="">— Select a product —</option>';
-  const list = (therapy && therapy !== 'Other')
-    ? (THERAPY_PRODUCTS[therapy] || [])
-    : Object.keys(PRODUCT_THERAPY).sort().concat(['Above Brand / Clinical Development']);
-  list.forEach(p => {
-    const o = document.createElement('option');
-    o.value = p; o.textContent = p;
-    if(p === current) o.selected = true;
-    sel.appendChild(o);
-  });
-  // Always add Other at the bottom
-  const other = document.createElement('option');
-  other.value = 'Other'; other.textContent = 'Other';
-  sel.appendChild(other);
+  const sel = $id('f_product_program'); const current = sel.value;
+  sel.innerHTML = '<option value="">Select a product</option>';
+  const list = (therapy && therapy !== 'Other') ? (THERAPY_PRODUCTS[therapy] || []) : Object.keys(PRODUCT_THERAPY).sort().concat(['Above Brand / Clinical Development']);
+  list.forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = p; if(p === current) o.selected = true; sel.appendChild(o); });
+  const other = document.createElement('option'); other.value = 'Other'; other.textContent = 'Other'; sel.appendChild(other);
 }
-
-// When therapy dropdown changes → filter product list
 function onTherapyChange(){
-  const t = $id('f_therapy').value;
-  // Show/hide Other text input
-  const isOther = (t === 'Other');
-  $id('f_therapy_other').style.display = isOther ? 'block' : 'none';
-  if(isOther){ $id('f_therapy_other').focus(); }
+  const t = $id('f_therapy').value; const isOther = (t === 'Other');
+  $id('f_therapy_other').hidden = !isOther; if(isOther) $id('f_therapy_other').focus();
   populateProducts(isOther ? '' : t);
-  // Reset product if it doesn't belong to new therapy
   const prod = $id('f_product_program').value;
-  if(prod && !isOther && t && THERAPY_PRODUCTS[t] && !THERAPY_PRODUCTS[t].includes(prod)){
-    $id('f_product_program').value = '';
-    $id('f_product_other').style.display = 'none';
-  }
+  if(prod && !isOther && t && THERAPY_PRODUCTS[t] && !THERAPY_PRODUCTS[t].includes(prod)){ $id('f_product_program').value = ''; $id('f_product_other').hidden = true; }
   onProductChange();
 }
-
-// When user types in the Other therapy box → keep product list showing all
-function onTherapyOtherInput(){
-  populateProducts('');
-}
-
-// When product dropdown changes → auto-fill therapy + show Other input if needed
 function onProductChange(){
   const p = $id('f_product_program').value;
-  const isOtherProduct = (p === 'Other');
-  const isAboveBrand   = (p === 'Above Brand / Clinical Development');
+  $id('f_product_other').hidden = (p !== 'Other'); if(p === 'Other') $id('f_product_other').focus();
+  $id('clinical_name_wrap').hidden = (p !== 'Above Brand / Clinical Development');
+  if(p && PRODUCT_THERAPY[p]){ const t = PRODUCT_THERAPY[p]; $id('f_therapy').value = t; $id('f_therapy_other').hidden = true; populateProducts(t); $id('f_product_program').value = p; }
+  update();
+}
+populateProducts('');
 
-  // Show/hide Other product text input
-  $id('f_product_other').style.display = isOtherProduct ? 'block' : 'none';
-  if(isOtherProduct){ $id('f_product_other').focus(); }
-
-  // Show clinical name field for Above Brand
-  $id('clinical_name_wrap').style.display = isAboveBrand ? 'block' : 'none';
-
-  // Auto-fill therapy when product has a single known therapy
-  if(p && PRODUCT_THERAPY[p]){
-    const t = PRODUCT_THERAPY[p];
-    $id('f_therapy').value = t;
-    $id('f_therapy_other').style.display = 'none';
-    populateProducts(t);
-    $id('f_product_program').value = p; // re-select after repopulate
-  }
+// ── shows ──
+const SHOWS_URL = 'shows.json';
+let SHOWS = [], showsState = 'loading', matchedShow = null, showPicked = false;
+(async function(){
+  try {
+    const r = await fetch(SHOWS_URL, {cache:'no-cache'}); if(!r.ok) throw new Error('HTTP '+r.status);
+    const j = await r.json();
+    SHOWS = (j.shows || []).map(s => ({...s, _terms:[s.name, s.key].concat(s.aliases||[]).filter(Boolean).map(t => t.toLowerCase())}));
+    showsState = 'ready';
+  } catch(e){ showsState = 'error'; }
+  if(showsState === 'ready' && val('f_show_query') && !matchedShow){ matchedShow = findShowExact(val('f_show_query')); showPicked = !!matchedShow; }
+  update();
+})();
+function findShowExact(q){ const s = (q||'').trim().toLowerCase(); if(!s) return null; return SHOWS.find(sh => sh._terms.includes(s)) || null; }
+const API_LABEL = {yes:['API on record','ok'], check:['API before, we check','warn'], no:['No API','bad'], likely_no:['Image capture history','info'], list_only:['No API or No 3rd party scanning','bad']};
+function chipFor(sh){ const [t,c] = API_LABEL[sh.api] || ['',''] ; return `<span class="chip ${c}">${t}</span>`; }
+function onShowQuery(){
+  const q = val('f_show_query').toLowerCase(); const box = $id('suggest');
+  showPicked = false; matchedShow = findShowExact(q);
+  if(showsState !== 'ready' || !q){ box.hidden = true; box.innerHTML = ''; update(); return; }
+  const rank = sh => sh._terms.includes(q) ? 0 : sh._terms.some(t => t.startsWith(q)) ? 1 : 2;
+  const hits = SHOWS.filter(sh => sh._terms.some(t => t.includes(q))).sort((a,b) => rank(a)-rank(b) || a.name.localeCompare(b.name)).slice(0,8);
+  if(!hits.length){ box.hidden = true; box.innerHTML = ''; update(); return; }
+  box.innerHTML = hits.map(sh => `<button type="button" onmousedown="event.preventDefault();pickShow('${sh.key.replace(/'/g,"\\'")}')"><span class="nm">${esc(sh.name)}${sh.note ? `<small>${esc(sh.note)}</small>` : ''}</span>${chipFor(sh)}</button>`).join('');
+  box.hidden = false; update();
+}
+function showKey(e){
+  if(e.key === 'Enter'){ e.preventDefault(); const first = $id('suggest').querySelector('button'); if(matchedShow) pickShow(matchedShow.key); else if(first) first.dispatchEvent(new MouseEvent('mousedown')); }
+  if(e.key === 'Escape'){ $id('suggest').hidden = true; }
+}
+function hideSuggest(){ setTimeout(() => { $id('suggest').hidden = true; if(matchedShow && !showPicked){ showPicked = true; update(); } }, 120); }
+function pickShow(key){
+  const sh = SHOWS.find(s => s.key === key); if(!sh) return;
+  $id('f_show_query').value = sh.name; matchedShow = sh; showPicked = true;
+  $id('f_show_notlisted').checked = false; $id('suggest').hidden = true;
+  if(!val('f_acronym')) $id('f_acronym').value = sh.name;
+  update();
+}
+function renderRecord(sh, notListed){
+  const box = $id('show_record');
+  if(showsState === 'error'){ box.hidden = false; box.innerHTML = `<div class="r-title">Our show list could not load</div><span class="chip neutral">Answer below</span><div class="r-text">Please answer the API question. We will double-check against our records.</div>`; return; }
+  if(notListed){ box.hidden = false; box.innerHTML = `<div class="r-title">No record yet</div><span class="chip neutral">New show</span><div class="r-text">Answer the API question below. Once we confirm it, this show joins the list for the next order.</div>`; return; }
+  if(!sh){ const q = val('f_show_query'); if(!q){ box.hidden = true; return; } box.hidden = false; box.innerHTML = `<div class="r-title">No exact match for "${esc(q)}"</div><span class="chip neutral">Keep typing</span><div class="r-text">Pick your show from the suggestions, or tick "My show isn't listed".</div>`; return; }
+  const [lbl, cls] = API_LABEL[sh.api];
+  const text = {
+    yes: `We have run API badge scanning at this show${sh.api_last_year ? ' (most recently ' + sh.api_last_year + ')' : ''}. Nothing more to answer.`,
+    check: `An API was used here before${sh.api_last_year ? ' (most recently ' + sh.api_last_year + ')' : ''}, but this year's record needs a check. We confirm before quoting.`,
+    no: `This show does not offer a badge API, so we cannot read the congress badge electronically. One more question below.`,
+    likely_no: `We have captured badges here with our own app${sh.image_last_year ? ' (most recently ' + sh.image_last_year + ')' : ''}. No API is on record; we confirm nothing has changed.`,
+    list_only: `No badge API is on record, and we have previously imported attendee data from the congress's own scanning system here (most recently ${sh.list_import_last_year}). Please answer the question below about this year.`,
+  }[sh.api];
+  const meta = [sh.provider ? 'Registration provider: ' + esc(sh.provider) : '', sh.note ? esc(sh.note) : '', (sh.list_import_last_year && sh.api !== 'list_only') ? 'Also imported from the congress scanning system here in ' + sh.list_import_last_year : ''].filter(Boolean).join(' · ');
+  box.hidden = false;
+  box.innerHTML = `<div class="r-title">${esc(sh.name)}</div><span class="chip ${cls}">${lbl}</span><div class="r-text">${text}</div>${meta ? `<div class="r-meta">${meta}</div>` : ''}`;
 }
 
-function onTOVChange(){
-  // Highlight the selected radio card
-  document.querySelectorAll('input[name="f_tov"]').forEach(r => {
-    const card = r.closest('label');
-    if(card) card.style.borderColor = r.checked ? '#1a3a5c' : '#ddd';
-    if(card) card.style.background  = r.checked ? '#f0f4f8' : '';
-  });
+// ── capture logic (same rules as the live form) ──
+function captureState(){
+  const st = { badge: radioVal('badge_type'), base:'', services:[], determination:'', title:'', why:'', flag:'', flagClass:'',
+    apiStatus:'', apiSource:'', outside:'', showMatch:'', showApiRecord:'', showQuery: val('f_show_query'),
+    askShow:false, askApi:false, askOutside:false, askNotAllowed:false, askDevices:false, complete:false,
+    notAllowedPer: val('f_not_allowed_per'), importAck: $id('f_import_ack').checked, deviceMode: radioVal('device_mode'), qrAddon: $id('f_qr_addon').checked };
+  if(!st.badge) return st;
+  if(st.badge === 'No badge'){ st.base='QR Code'; st.determination='Confirmed'; st.complete=true; st.title='QR code check-in'; st.why='With no badge to read, attendees scan a QR code at your meeting and complete their own details on their own device. The compliance questions are built into that check-in, so the meeting stays compliant without any scanning equipment.'; st.apiSource='n/a'; st.services=[st.base]; return st; }
+  if(st.badge === 'Name badge'){ st.base='Image Capture'; st.determination='Confirmed'; st.title='Badge image capture'; st.why='A badge printed by the agency or Pfizer carries a name only and has no API behind it, so the RE:nvent app photographs each badge at the door. The compliance questions are asked at the meeting and the name is transcribed from the image.'; st.apiStatus='No'; st.apiSource='n/a (agency or Pfizer badge)'; st.askDevices=true; return finishDevices(st); }
+  st.askShow = true;
+  const notListed = $id('f_show_notlisted').checked;
+  const useRecord = showsState === 'ready' && !notListed && matchedShow && showPicked;
+  if(useRecord){
+    st.showMatch = matchedShow.name; st.showApiRecord = matchedShow.api; st.apiSource = 'RE record';
+    if(matchedShow.api === 'yes'){ st.apiStatus='Yes'; st.base='scan'; st.determination='Confirmed'; }
+    else if(matchedShow.api === 'check'){ st.apiStatus='Yes'; st.base='scan'; st.determination='RE to confirm'; st.flag='Our records show an API at this show in a past year but need a check for this one. We confirm before your quote goes out. If the API is not available this year, we switch the order to badge image capture, which is still compliant, with nothing more for you to do.'; }
+    else if(matchedShow.api === 'likely_no'){ st.apiStatus='Unknown'; st.base='Image Capture'; st.determination='RE to confirm'; st.flag='We have run image capture at this show before and no API is on record. We confirm nothing has changed. If an API is now available, we switch the order to badge scanning with nothing more for you to do.'; }
+    else { st.apiStatus='No'; st.askOutside=true; }
+  } else if(notListed || showsState === 'error'){
+    st.askApi = true; const a = radioVal('api_answer'); if(!a) return st;
+    st.apiStatus = a; st.apiSource = 'Meeting manager';
+    if(a === 'Yes'){ st.base='scan'; st.determination='Confirmed'; }
+    else if(a === 'Unknown'){ st.base='Image Capture'; st.determination='RE to confirm'; st.flag='We will check with the congress or its registration company. If an API is available, we switch the order to badge scanning with nothing more for you to do. Either way the meeting stays compliant.'; }
+    else { st.askOutside = true; }
+  } else { return st; }
+  if(st.askOutside){
+    const o = radioVal('outside_answer'); if(!o) return st; st.outside = o;
+    if(o === 'Yes'){ st.base='Image Capture'; st.determination='Confirmed'; }
+    else if(o === 'Unknown'){ st.base='Image Capture'; st.determination='RE to confirm'; st.flag='We will confirm with the congress that your own devices may be used. Image capture is planned so the compliance questions can be asked; we adjust the order if the congress says otherwise.'; }
+    else { st.base='List Import'; st.determination='Needs review'; st.askNotAllowed=true; st.title='Import from the congress scanning system'; st.why='The congress requires its own lead retrieval or scanning system, so we import the attendee data that system collects after the meeting and match it to Pfizer customer IDs for the summary report and CDW delivery.'; st.flag='Held for review. With this method the compliance survey cannot be asked at the meeting, and congress data may not include everything AMEX compliance requires. We confirm the congress rule and contact you before quoting.'; st.flagClass='bad'; st.services=[st.base]; st.complete = !!st.notAllowedPer && st.importAck; return st; }
+  }
+  if(st.base === 'scan'){ st.title='Badge scanning'; st.why='The congress badge carries a full attendee record. We read it through the show\'s badge API and run the compliance survey with each HCP at the meeting. The strongest option for AMEX compliance.'; }
+  else { st.title='Badge image capture'; st.why='There is no API to read the congress badge, so the RE:nvent app photographs each badge instead. The compliance questions are still asked at the meeting, and the name is transcribed from the badge image.'; }
+  st.askDevices = true; return finishDevices(st);
+}
+function finishDevices(st){
+  st.flagClass = st.flagClass || (st.determination === 'RE to confirm' ? 'warn' : '');
+  const mode = st.deviceMode, svcs = [];
+  if(st.base === 'scan'){ if(mode==='App'||mode==='Both') svcs.push('Mobile App'); if(mode==='Scanner'||mode==='Both') svcs.push('Scanner'); }
+  else { svcs.push('Image Capture'); if(mode==='Scanner'||mode==='Both') svcs.push('Scanner'); }
+  if(st.qrAddon) svcs.push('QR Code');
+  st.services = svcs; st.needApp = (mode==='App'||mode==='Both'); st.needScanner = (mode==='Scanner'||mode==='Both');
+  st.complete = !!mode && (!st.needApp || +val('f_qty_app') > 0) && (!st.needScanner || +val('f_qty_scanner') > 0);
+  return st;
 }
 
-function onBadgeAPIChange(val_){
-  document.querySelectorAll('input[name="badge_api"]').forEach(r => {
-    if(r.value === val_) r.checked = true;
-  });
-  $id('badge_api_details_wrap').style.display = (val_ === 'Yes') ? 'block' : 'none';
-}
+// ── path UI ──
+let openStep = null;
+function reopen(key){ openStep = key; update(); const el = $id('st_'+key); el.querySelector('input,button.change') ; el.querySelector('input')?.focus({preventScroll:true}); }
+function answered(){ openStep = null; update(); }
+const DET_CHIP = {'Confirmed':['Confirmed','ok'], 'RE to confirm':['RE will confirm','warn'], 'Needs review':['Held for review','bad']};
+const SERVICE_DISPLAY = {'List Import':'Import from congress scanning system'};
+function svcDisplay(s){ return String(s || '').split(',').map(x => x.trim()).filter(Boolean).map(x => SERVICE_DISPLAY[x] || x).join(', '); }
 
-function fmtDate(d){
-  if(!d) return '';
-  const dt = new Date(d+'T12:00:00');
-  return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-}
-
-function validate(){
-  const required = ['f_mgr','f_mgr_email','f_pfz','f_name','f_etype','f_addr','f_date','f_meal','f_owner_name','f_owner_email','f_therapy','f_product_program'];
-  let ok = true;
-  required.forEach(id => {
-    const el = $id(id);
-    if(!el) return;
-    el.classList.remove('error');
-    if(!el.value.trim()){ el.classList.add('error'); ok = false; }
-  });
-
-  // Service type — at least one must be selected
-  if(selectedServiceTypes.size === 0){
-    document.querySelectorAll('.svc-type-check').forEach(r => r.classList.add('error-border'));
-    ok = false;
+function update(){
+  const st = captureState();
+  // prefill the show search from the acronym
+  if(st.askShow && !val('f_show_query') && val('f_acronym') && showsState === 'ready'){
+    $id('f_show_query').value = val('f_acronym'); matchedShow = findShowExact(val('f_acronym')); showPicked = !!matchedShow;
+    return update();
   }
-
-  // Quantity fields — required when Mobile App, Image Capture, or Scanner selected
-  if(selectedServiceTypes.has('Mobile App') || selectedServiceTypes.has('Image Capture')){
-    const el = $id('f_qty_app');
-    el.classList.remove('error');
-    if(!el.value.trim()){ el.classList.add('error'); ok = false; }
-  }
-  if(selectedServiceTypes.has('Scanner')){
-    const el = $id('f_qty_scanner');
-    el.classList.remove('error');
-    if(!el.value.trim()){ el.classList.add('error'); ok = false; }
-  }
-
-  // Owner email format check
-  const ownerEmailEl = $id('f_owner_email');
-  if(ownerEmailEl && ownerEmailEl.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmailEl.value.trim())){
-    ownerEmailEl.classList.add('error');
-    ok = false;
-  }
-
-  // Badge API
-  if(!radioVal('badge_api')){
-    $id('badge_api_group').style.outline = '2px solid #e74c3c';
-    ok = false;
-  } else {
-    $id('badge_api_group').style.outline = '';
-  }
-
-  // Validate Other text inputs if selected
-  if(val('f_therapy') === 'Other'){
-    const el = $id('f_therapy_other');
-    el.style.border = el.value.trim() ? '1px solid #ddd' : '1px solid #e74c3c';
-    if(!el.value.trim()) ok = false;
-  }
-  if(val('f_product_program') === 'Other'){
-    const el = $id('f_product_other');
-    el.style.border = el.value.trim() ? '1px solid #ddd' : '1px solid #e74c3c';
-    if(!el.value.trim()) ok = false;
-  }
-
-  $id('error-box').style.display = ok ? 'none' : 'block';
-  return ok;
-}
-
-function buildData(){
-  const badgeAPI = radioVal('badge_api');
-  const d = {
-    // Core fields
-    f_mgr:              val('f_mgr'),
-    f_mgr_email:        val('f_mgr_email'),
-    f_pfz:              val('f_pfz'),
-    f_entity:           val('f_entity'),
-    f_name:             val('f_name'),
-    f_acronym:          val('f_acronym'),
-    f_etype:            val('f_etype'),
-    f_addr:             val('f_addr'),
-    f_date:             val('f_date'),
-    f_date_end:         val('f_date_end'),
-    f_time:             val('f_time'),
-    f_meal:             val('f_meal'),
-    f_att:              val('f_att'),
-    f_therapy:          val('f_therapy') === 'Other' ? val('f_therapy_other') : val('f_therapy'),
-    f_owner_name:       val('f_owner_name'),
-    f_owner_email:      val('f_owner_email'),
-    f_owner:            val('f_owner_name') + (val('f_owner_email') ? ' — ' + val('f_owner_email') : ''),
-    f_td:               val('f_td'),
-    f_notes:            val('f_notes'),
-    // New fields
-    service_type:       Array.from(selectedServiceTypes).join(', '),
-    qty_app_licenses:   val('f_qty_app'),
-    qty_scanners:       val('f_qty_scanner'),
-    tov:                document.querySelector('input[name="f_tov"]:checked')?.value || 'yes',
-    survey_type:        val('f_survey_type'),
-    survey_details:     '',
-    product_program:    val('f_product_program') === 'Other' ? val('f_product_other') : val('f_product_program'),
-    product_program_details: val('f_product_details'),
-    clinical_internal_name: val('f_clinical_name'),
-    assoc_contact_name: val('f_assoc_contact_name'),
-    assoc_contact_email: val('f_assoc_contact_email'),
-    badge_api_available: badgeAPI,
-    provider_reg_company: val('f_provider_reg_company'),
-    api_badge_contact_name: val('f_api_badge_contact_name'),
-    api_badge_contact_email: val('f_api_badge_contact_email'),
-    api_badge_notes:    val('f_api_badge_notes'),
+  const notListed = $id('f_show_notlisted').checked;
+  const steps = {
+    badge:   { show:true, answered: !!st.badge, text: st.badge ? {'Congress badge':'The official congress badge','Name badge':'A name badge from the agency or Pfizer','No badge':'No badge'}[st.badge] : '' },
+    show:    { show: st.askShow, answered: st.askShow && (showsState === 'error' || notListed || (matchedShow && showPicked)),
+               text: showsState === 'error' ? 'Show list unavailable' : notListed ? (val('f_show_query') ? esc(val('f_show_query')) + ' <span class="chip neutral">Not in our list</span>' : '<span class="chip neutral">Not in our list</span>') : (matchedShow ? esc(matchedShow.name) + ' ' + chipFor(matchedShow) : '') },
+    api:     { show: st.askApi, answered: !!radioVal('api_answer'), text: {Yes:'Yes, the congress offers an API', No:'No API', Unknown:'Not known yet. We will find out'}[radioVal('api_answer')] || '' },
+    outside: { show: st.askOutside, answered: !!radioVal('outside_answer'), text: {Yes:'Yes, own devices are allowed', No:'No, the congress requires its own scanning system', Unknown:'Not known yet. We will check'}[radioVal('outside_answer')] || '' },
   };
-  return d;
-}
-
-function buildSummaryHTML(d){
-  const rows = [
-    ['Meeting Manager', d.f_mgr],
-    ['Email', d.f_mgr_email],
-    ['Pfizer Meeting #', d.f_pfz],
-    ['Meeting Full Name', d.f_name],
-    ['Event Type', d.f_etype],
-    ['Date', fmtDate(d.f_date)],
-    ['Address', d.f_addr],
-    ['Service Type', d.service_type],
-    ['App Licenses', d.qty_app_licenses],
-    ['Scanners', d.qty_scanners],
-    ['Product / Drug Associated', d.product_program],
-    ['TOV Required', d.tov === 'no' ? 'No (−$500)' : 'Yes (standard)'],
-    ['Badge / API Available', d.badge_api_available],
-  ];
-  let html = '<h3>Order Summary</h3>';
-  rows.forEach(([k,v]) => {
-    if(v) html += `<div class="row"><span class="key">${k}:</span><span>${v}</span></div>`;
+  let activeSet = false;
+  Object.entries(steps).forEach(([key, s]) => {
+    const li = $id('st_'+key); li.hidden = !s.show; if(!s.show) return;
+    const collapsed = s.answered && openStep !== key;
+    li.classList.toggle('collapsed', collapsed); li.classList.toggle('done', s.answered);
+    const active = !s.answered && !activeSet; if(active) activeSet = true; li.classList.toggle('active', active || openStep === key);
+    li.querySelector('.change').hidden = !collapsed;
+    const ans = $id('ans_'+key); ans.hidden = !collapsed; ans.innerHTML = s.text;
   });
-  return html;
+  if(st.askShow) renderRecord(matchedShow && showPicked ? matchedShow : (matchedShow || null), notListed);
+  $id('notlisted_wrap').hidden = showsState !== 'ready';
+  // result
+  const rs = $id('st_result'); rs.hidden = !st.base;
+  if(st.base){
+    rs.classList.add('done');
+    const [lbl, cls] = DET_CHIP[st.determination]; const chip = $id('r_chip'); chip.textContent = lbl; chip.className = 'chip ' + cls;
+    $id('result').classList.toggle('review', st.determination === 'Needs review');
+    $id('r_title').textContent = st.title; $id('r_why').textContent = st.why;
+    const items = (SERVICE_DESCRIPTIONS[st.base === 'scan' ? 'Mobile App' : st.base] || {items:[]}).items; $id('r_items').innerHTML = items.map(i => `<li>${i}</li>`).join('');
+    const fl = $id('r_flag'); fl.hidden = !st.flag; fl.className = 'flag ' + (st.flagClass || 'warn'); fl.textContent = st.flag;
+  }
+  // setup / ack
+  const su = $id('st_setup'); su.hidden = !st.askDevices; su.classList.toggle('done', st.askDevices && st.complete); su.classList.toggle('active', st.askDevices && !st.complete);
+  $id('qty_app_wrap').hidden = !(st.askDevices && st.needApp); $id('qty_scanner_wrap').hidden = !(st.askDevices && st.needScanner);
+  const na = $id('st_notallowed'); na.hidden = !st.askNotAllowed; na.classList.toggle('done', st.askNotAllowed && st.complete); na.classList.toggle('active', st.askNotAllowed && !st.complete);
+  // contacts nudge
+  const needs = st.determination === 'RE to confirm' || st.determination === 'Needs review';
+  $id('contacts_note').hidden = !needs; $id('contacts_intro').textContent = needs ? 'Worth a minute for this order.' : 'Optional. Anything here shortens our check with the congress.';
+  renderGlance(st);
+  return st;
 }
 
+// ── required items + glance ──
+function missingItems(st){
+  const m = [];
+  const req = [['f_mgr','Your name'],['f_mgr_email','Your email'],['f_pfz','Pfizer meeting #'],['f_name','Meeting name'],['f_etype','Event type'],['f_addr','Meeting address'],['f_date','Meeting date'],['f_meal','Meal type'],['f_owner_name','Project owner name'],['f_owner_email','Project owner email'],['f_therapy','Therapeutic area'],['f_product_program','Product']];
+  req.forEach(([id,label]) => { if(!val(id)) m.push({id, label}); });
+  if(val('f_therapy') === 'Other' && !val('f_therapy_other')) m.push({id:'f_therapy_other', label:'Therapeutic area (other)'});
+  if(val('f_product_program') === 'Other' && !val('f_product_other')) m.push({id:'f_product_other', label:'Product name (other)'});
+  const oe = val('f_owner_email'); if(oe && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(oe)) m.push({id:'f_owner_email', label:'Project owner email (check format)'});
+  if(!st.badge) m.push({id:'st_badge', label:'What attendees wear', step:'badge'});
+  else {
+    if(st.askShow && showsState === 'ready' && !$id('f_show_notlisted').checked && !(matchedShow && showPicked)) m.push({id:'f_show_query', label:'Which congress', step:'show'});
+    if(st.askApi && !radioVal('api_answer')) m.push({id:'st_api', label:'Badge API question', step:'api'});
+    if(st.askOutside && !radioVal('outside_answer')) m.push({id:'st_outside', label:'Own devices question', step:'outside'});
+    if(st.askDevices){ if(!st.deviceMode) m.push({id:'st_setup', label:'How the TD runs it'}); if(st.needApp && !(+val('f_qty_app')>0)) m.push({id:'f_qty_app', label:'App licenses'}); if(st.needScanner && !(+val('f_qty_scanner')>0)) m.push({id:'f_qty_scanner', label:'Number of scanners'}); }
+    if(st.askNotAllowed){ if(!st.notAllowedPer) m.push({id:'f_not_allowed_per', label:'Who said capture is not allowed'}); if(!st.importAck) m.push({id:'f_import_ack', label:'Compliance acknowledgment'}); }
+  }
+  return m;
+}
+const TOTAL_REQ = 14;
+function renderGlance(st){
+  const set = (id, html, empty) => { const el = $id(id); el.innerHTML = html; el.classList.toggle('empty', !!empty); };
+  const name = val('f_name'), acr = val('f_acronym'), pfz = val('f_pfz');
+  set('g_meeting', name ? esc(name) + (acr ? `<span class="sub">${esc(acr)}</span>` : '') + (pfz ? `<span class="sub mono">${esc(pfz)}</span>` : '') : 'Not entered yet', !name);
+  const d = val('f_date'), de = val('f_date_end'), days = bizDaysUntil(d);
+  set('g_when', d ? fmtDate(d) + (de ? ' to ' + fmtDate(de) : '') + (days !== null && days < 5 ? '<span class="sub" style="color:var(--warn)">Under 5 business days: expedite</span>' : '') : 'No date yet', !d);
+  const prod = val('f_product_program') === 'Other' ? val('f_product_other') : val('f_product_program'), ther = val('f_therapy') === 'Other' ? val('f_therapy_other') : val('f_therapy');
+  set('g_product', prod ? esc(prod) + (ther ? `<span class="sub">${esc(ther)}</span>` : '') : 'Not chosen', !prod);
+  if(st.base){ const [lbl, cls] = DET_CHIP[st.determination]; set('g_capture', `${esc(st.title)} <span class="chip ${cls}" style="margin-left:4px">${lbl}</span>` + (st.showMatch ? `<span class="sub">${esc(st.showMatch)}</span>` : '')); }
+  else set('g_capture', st.badge ? 'Answering' : 'Answer Section 3', true);
+  if(st.askDevices){ const parts = []; if(st.deviceMode==='App'||st.deviceMode==='Both') parts.push((val('f_qty_app')||'?') + ' app license' + (val('f_qty_app')==='1'?'':'s')); if(st.deviceMode==='Scanner'||st.deviceMode==='Both') parts.push((val('f_qty_scanner')||'?') + ' scanner' + (val('f_qty_scanner')==='1'?'':'s')); if(st.qrAddon) parts.push('QR check-in'); set('g_setup', parts.length ? esc(parts.join(' · ')) : 'Choose app or scanners', !parts.length); }
+  else set('g_setup', st.base ? 'None needed' : 'Depends on capture', !st.base);
+  set('g_tov', radioVal('f_tov') === 'no' ? 'Not required (&minus;$500)' : 'Required (standard)');
+  const miss = missingItems(st); const done = Math.max(0, TOTAL_REQ - Math.min(miss.length, TOTAL_REQ)); const pct = Math.round(done / TOTAL_REQ * 100);
+  $id('meter').style.width = pct + '%'; $id('g_pct').textContent = pct + '% complete'; $id('g_left').textContent = miss.length ? miss.length + ' to go' : 'ready'; $id('g_cnt_mobile').textContent = miss.length ? miss.length + ' to go' : 'Ready to send';
+  const todo = $id('todo'); todo.classList.toggle('ready', !miss.length);
+  todo.innerHTML = miss.length ? `<div class="t-title">Still needed</div><ul>${miss.slice(0,8).map(x => `<li><button type="button" onclick="goTo('${x.id}','${x.step||''}')">${esc(x.label)}</button></li>`).join('')}${miss.length > 8 ? `<li>and ${miss.length-8} more</li>` : ''}</ul>` : `<div class="t-title">Everything is filled in</div>Review the summary above, then send.`;
+}
+function goTo(id, step){
+  if(step) openStep = step; update();
+  const el = $id(id); if(!el) return; $id('glance').classList.remove('open');
+  el.scrollIntoView({behavior:'smooth', block:'center'}); const f = el.matches('input,select,textarea') ? el : el.querySelector('input,select,textarea'); if(f) setTimeout(() => f.focus({preventScroll:true}), 350);
+}
+function bizDaysUntil(dateStr){ if(!dateStr) return null; const today = new Date(); today.setHours(0,0,0,0); const t = new Date(dateStr+'T00:00:00'); if(isNaN(t)) return null; if(t <= today) return 0; let c = 0; const d = new Date(today); while(d < t){ d.setDate(d.getDate()+1); const w = d.getDay(); if(w !== 0 && w !== 6) c++; } return c; }
+function updateExpedite(){ const days = bizDaysUntil(val('f_date')); const w = $id('expedite'); w.hidden = !(days !== null && days < 5); w.textContent = 'Under 5 business days away. Expedite fees may apply.'; w.style.color = 'var(--warn)'; }
+
+// ── submit (concept: sends nothing) ──
+function buildData(){
+  const st = captureState();
+  return { f_mgr:val('f_mgr'), f_mgr_email:val('f_mgr_email'), f_pfz:val('f_pfz'), f_entity:val('f_entity'), f_name:val('f_name'), f_acronym:val('f_acronym'), f_etype:val('f_etype'), f_addr:val('f_addr'), f_date:val('f_date'), f_date_end:val('f_date_end'), f_time:val('f_time'), f_meal:val('f_meal'), f_att:val('f_att'),
+    f_therapy: val('f_therapy')==='Other' ? val('f_therapy_other') : val('f_therapy'), f_owner_name:val('f_owner_name'), f_owner_email:val('f_owner_email'),
+    f_owner: val('f_owner_name') + (val('f_owner_email') ? ' (' + val('f_owner_email') + ')' : ''), f_td:val('f_td'), f_notes:val('f_notes'),
+    service_type: st.services.join(', '), qty_app_licenses: st.askDevices && st.needApp ? val('f_qty_app') : '', qty_scanners: st.askDevices && st.needScanner ? val('f_qty_scanner') : '', tov: radioVal('f_tov') || 'yes',
+    product_program: val('f_product_program')==='Other' ? val('f_product_other') : val('f_product_program'), product_program_details: '', clinical_internal_name: val('f_clinical_name'),
+    assoc_contact_name:val('f_assoc_contact_name'), assoc_contact_email:val('f_assoc_contact_email'), badge_api_available: st.apiStatus, provider_reg_company:val('f_provider_reg_company'), api_badge_contact_name:val('f_api_badge_contact_name'), api_badge_contact_email:val('f_api_badge_contact_email'), api_badge_notes:val('f_api_badge_notes'),
+    badge_type:st.badge, show_match:st.showMatch, show_query: st.askShow ? st.showQuery : '', show_api_record:st.showApiRecord, api_source:st.apiSource, outside_capture_allowed:st.outside, capture_determination:st.determination, capture_reason:st.why, device_mode: st.askDevices ? st.deviceMode : '', qr_addon: st.askDevices && st.qrAddon ? 'Yes' : '', capture_not_allowed_per: st.askNotAllowed ? st.notAllowedPer : '', import_ack: st.askNotAllowed && st.importAck ? 'Yes' : '' };
+}
 const WORKER_URL = 'https://pfizer-order-api.realityengineeringops.workers.dev';
+const DRAFT_KEY = 'pfz_amex_order_draft_v2';
+let _lastSubmitted = null;
+function normPfz(v){ return String(v || '').replace(/\s+/g, '').toUpperCase(); }
+function b64EncodeUnicode(str){ const bytes = new TextEncoder().encode(str); let bin = ''; bytes.forEach(b => { bin += String.fromCharCode(b); }); return btoa(bin); }
 
-// UTF-8-safe base64 — plain btoa() throws on em-dashes, curly quotes, accents, etc.
-// The Quote Generator decodes with TextDecoder, so this format is fully compatible.
-function b64EncodeUnicode(str){
-  const bytes = new TextEncoder().encode(str);
-  let bin = '';
-  bytes.forEach(b => { bin += String.fromCharCode(b); });
-  return btoa(bin);
+function markInvalid(st, miss){
+  document.querySelectorAll('.field.invalid,.tiles.invalid,.seg.invalid,.check.invalid').forEach(e => e.classList.remove('invalid'));
+  miss.forEach(x => { const el = $id(x.id); if(!el) return; if(el.classList.contains('tiles') || el.classList.contains('seg')) el.classList.add('invalid'); else if(el.matches('input,select,textarea')) el.closest('.field,.check')?.classList.add('invalid'); });
+  if(!st.badge) $id('badge_tiles').classList.add('invalid'); if(st.askApi && !radioVal('api_answer')) $id('api_seg').classList.add('invalid'); if(st.askOutside && !radioVal('outside_answer')) $id('outside_seg').classList.add('invalid'); if(st.askDevices && !st.deviceMode) $id('device_tiles').classList.add('invalid'); if(st.askNotAllowed && !st.importAck) $id('ack_wrap').classList.add('invalid');
 }
+function validate(){ const st = update(); const miss = missingItems(st); markInvalid(st, miss); return miss.length === 0; }
 
 async function submitOrder(){
-  const btn = document.querySelector('.btn-submit');
+  const btn = $id('submit_btn');
+  const st = update(); const miss = missingItems(st);
+  markInvalid(st, miss);
+  if(miss.length){ goTo(miss[0].id, miss[0].step); return; }
+  btn.disabled = true; btn.textContent = 'Checking';
   try {
-    if(!validate()){
-      $id('error-box').scrollIntoView({behavior:'smooth', block:'start'});
-      return;
-    }
-
-    btn.textContent = 'Checking…';
-    btn.disabled = true;
-
-    // ── Duplicate-submission guard ──
-    const pfz = val('f_pfz').trim().toUpperCase();
+    // Duplicate guard: this browser first, then the order queue
+    const pfz = normPfz(val('f_pfz'));
     let dupMsg = '';
-    try {
-      const prior = JSON.parse(localStorage.getItem('pfz_amex_submitted') || '[]');
-      if(prior.includes(pfz)) dupMsg = 'An order with Pfizer Meeting # ' + pfz + ' was already submitted from this browser.';
-    } catch(e){}
+    try { const prior = JSON.parse(localStorage.getItem('pfz_amex_submitted') || '[]'); if(prior.includes(pfz)) dupMsg = 'An order with Pfizer meeting # ' + pfz + ' was already submitted from this browser.'; } catch(e){}
     if(!dupMsg){
       try {
-        const dc = new AbortController();
-        const dt = setTimeout(() => dc.abort(), 8000);
-        const r = await fetch(WORKER_URL + '/check-duplicate?pfz=' + encodeURIComponent(pfz), {signal: dc.signal});
-        clearTimeout(dt);
-        if(r.ok){
-          const j = await r.json();
-          if(j.duplicate) dupMsg = 'An order with Pfizer Meeting # ' + pfz + ' has already been submitted' + (j.event_name ? ' ("' + j.event_name + '")' : '') + '.';
-        }
-      } catch(e){ /* check unavailable — fail open, don't block submission */ }
+        const dc = new AbortController(); const dt = setTimeout(() => dc.abort(), 8000);
+        const r = await fetch(WORKER_URL + '/check-duplicate?pfz=' + encodeURIComponent(pfz), {signal: dc.signal}); clearTimeout(dt);
+        if(r.ok){ const j = await r.json(); if(j.duplicate) dupMsg = 'An order with Pfizer meeting # ' + pfz + ' has already been submitted' + (j.event_name ? ' ("' + j.event_name + '")' : '') + '.'; }
+      } catch(e){ /* check unavailable: do not block the order */ }
     }
-    if(dupMsg && !confirm('⚠️ ' + dupMsg + '\n\nDo you still want to submit this as a NEW order?')){
-      return;
-    }
-
-    btn.textContent = 'Submitting…';
-
+    if(dupMsg && !confirm(dupMsg + '\n\nSend this as a new order anyway?')) return;
+    btn.textContent = 'Sending';
     const d = buildData();
-    const code = b64EncodeUnicode(JSON.stringify(d));
-
-    // 30-second timeout so a dead connection never leaves the form stuck
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 30000);
+    const ctrl = new AbortController(); const timer = setTimeout(() => ctrl.abort(), 30000);
     let res;
     try {
-      res = await fetch(WORKER_URL + '/submit-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...d, company_name: 'Pfizer AMEX' }),
-        signal: ctrl.signal,
-      });
-    } finally {
-      clearTimeout(timer);
-    }
-    if (!res.ok) {
-      const errData = await res.json().catch(() => ({}));
-      throw new Error(errData.error || `Server error ${res.status}`);
-    }
-    showSuccess(d, code);
-  } catch(err) {
-    const msg = (err && err.name === 'AbortError')
-      ? 'The request timed out. Please check your connection and try again.'
-      : (err && err.message) || 'Unexpected error';
-    alert('Submission failed: ' + msg + '\n\nPlease try again or contact Reality Engineering directly.');
+      res = await fetch(WORKER_URL + '/submit-order', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ ...d, company_name: 'Pfizer AMEX' }), signal: ctrl.signal });
+    } finally { clearTimeout(timer); }
+    if(!res.ok){ const err = await res.json().catch(() => ({})); throw new Error(err.error || ('Server error ' + res.status)); }
+    showSuccess(d);
+  } catch(err){
+    const msg = (err && err.name === 'AbortError') ? 'The request timed out. Check your connection and try again.' : ((err && err.message) || 'Unexpected error');
+    alert('The order could not be sent: ' + msg + '\n\nPlease try again or contact Reality Engineering.');
   } finally {
-    // Always restore the button — never leave it stuck on "Submitting…"
-    if(btn && $id('order-form').style.display !== 'none'){
-      btn.textContent = '✉️ Submit Order Request';
-      btn.disabled = false;
-    }
+    if(!$id('frame').hidden){ btn.disabled = false; btn.textContent = 'Send order request'; }
   }
 }
 
-let _lastSubmitted = null;
-
-function showSuccess(d, code){
+function showSuccess(d){
   _lastSubmitted = d;
-  // Clear the saved draft and remember this Meeting # for the duplicate guard
-  try {
-    localStorage.removeItem(DRAFT_KEY);
-    const pfz = (d.f_pfz || '').trim().toUpperCase();
-    if(pfz){
-      const arr = JSON.parse(localStorage.getItem('pfz_amex_submitted') || '[]');
-      if(!arr.includes(pfz)){ arr.push(pfz); localStorage.setItem('pfz_amex_submitted', JSON.stringify(arr.slice(-50))); }
-    }
-  } catch(e){}
-  $id('draft-banner').style.display = 'none';
-  $id('order-form').style.display = 'none';
-  $id('success-screen').style.display = 'block';
-  $id('import-code-display').textContent = code;
-  $id('order-summary').innerHTML = buildSummaryHTML(d);
-  window.scrollTo({top:0, behavior:'smooth'});
+  try { localStorage.removeItem(DRAFT_KEY); const pfz = normPfz(d.f_pfz); if(pfz){ const arr = JSON.parse(localStorage.getItem('pfz_amex_submitted') || '[]'); if(!arr.includes(pfz)){ arr.push(pfz); localStorage.setItem('pfz_amex_submitted', JSON.stringify(arr.slice(-50))); } } } catch(e){}
+  $id('draft_bar').hidden = true;
+  const rows = doneRows(d);
+  $id('done_rows').innerHTML = rows.map(([k,v]) => `<div class="g-row"><span class="k">${esc(k)}</span><span class="v">${esc(v)}</span></div>`).join('');
+  $id('frame').hidden = true; $id('done').hidden = false; window.scrollTo({top:0, behavior:'smooth'});
+}
+function doneRows(d){
+  return [['Meeting', d.f_name + (d.f_acronym ? ' (' + d.f_acronym + ')' : '')], ['Pfizer meeting #', d.f_pfz], ['Date', fmtDate(d.f_date) + (d.f_date_end ? ' to ' + fmtDate(d.f_date_end) : '')], ['Product', d.product_program], ['Attendees wear', d.badge_type], ['Congress', d.show_match || d.show_query], ['Service', svcDisplay(d.service_type)], ['Capture status', d.capture_determination], ['Set-up', [d.device_mode, d.qty_app_licenses ? d.qty_app_licenses + ' app licenses' : '', d.qty_scanners ? d.qty_scanners + ' scanners' : '', d.qr_addon ? 'QR check-in' : ''].filter(Boolean).join(' · ')], ['TOV', d.tov === 'no' ? 'Not required' : 'Required (standard)'], ['Project owner', d.f_owner_name + ' <' + d.f_owner_email + '>']].filter(([,v]) => v && String(v).trim());
 }
 
-// ── PDF download of the submitted order ──
+// ── PDF copy of the submitted order ──
 function loadJsPDF(){
   return new Promise((resolve, reject) => {
     if(window.jspdf && window.jspdf.jsPDF) return resolve();
-    const s = document.createElement('script');
-    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-    s.onload = () => resolve();
-    s.onerror = () => reject(new Error('Could not load PDF library'));
-    document.head.appendChild(s);
+    const sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    sc.onload = () => resolve(); sc.onerror = () => reject(new Error('Could not load the PDF library')); document.head.appendChild(sc);
   });
 }
-
 async function downloadPDF(){
   if(!_lastSubmitted){ alert('No submitted order found.'); return; }
-  try {
-    await loadJsPDF();
-  } catch(e){
-    alert('Could not load the PDF library. Please check your internet connection and try again.');
-    return;
-  }
+  try { await loadJsPDF(); } catch(e){ alert('Could not load the PDF library. Check your connection and try again.'); return; }
   const d = _lastSubmitted;
   const rows = [
-    ['Meeting Manager', d.f_mgr], ['Manager Email', d.f_mgr_email],
-    ['Pfizer Meeting #', d.f_pfz], ['Legal Entity', d.f_entity],
-    ['Meeting Full Name', d.f_name], ['Meeting Acronym', d.f_acronym],
-    ['Event Type', d.f_etype], ['Meeting Site / Address', d.f_addr],
-    ['Meeting Date', fmtDate(d.f_date)], ['Meeting End Date', fmtDate(d.f_date_end)],
-    ['Meeting Time', d.f_time], ['Meal Type', d.f_meal],
-    ['Estimated # Attendees', d.f_att],
-    ['Pfizer Project Owner', d.f_owner_name], ['Project Owner Email', d.f_owner_email],
-    ['TD Contact', d.f_td], ['Notes', d.f_notes],
-    ['Service Type', d.service_type],
-    ['App Licenses', d.qty_app_licenses], ['Scanners', d.qty_scanners],
-    ['Therapeutic Area', d.f_therapy], ['Product / Drug', d.product_program],
-    ['Product Details', d.product_program_details],
-    ['Clinical / Internal Name', d.clinical_internal_name],
-    ['Survey Type', d.survey_type],
-    ['TOV Required', d.tov === 'no' ? 'No' : 'Yes (standard)'],
-    ['Association Contact', d.assoc_contact_name],
-    ['Association Contact Email', d.assoc_contact_email],
-    ['Badge / API Available', d.badge_api_available],
-    ['Provider / Reg Company', d.provider_reg_company],
-    ['API Contact Name', d.api_badge_contact_name],
-    ['API Contact Email', d.api_badge_contact_email],
-    ['API / Badge Notes', d.api_badge_notes],
+    ['Meeting Manager', d.f_mgr], ['Manager Email', d.f_mgr_email], ['Pfizer Meeting #', d.f_pfz], ['Legal Entity', d.f_entity],
+    ['Meeting Full Name', d.f_name], ['Meeting Acronym', d.f_acronym], ['Event Type', d.f_etype], ['Meeting Site / Address', d.f_addr],
+    ['Meeting Date', fmtDate(d.f_date)], ['Meeting End Date', fmtDate(d.f_date_end)], ['Meeting Time', d.f_time], ['Meal Type', d.f_meal],
+    ['Estimated # Attendees', d.f_att], ['Pfizer Project Owner', d.f_owner_name], ['Project Owner Email', d.f_owner_email], ['TD Contact', d.f_td], ['Notes', d.f_notes],
+    ['Attendees Wear', d.badge_type], ['Congress / Show', d.show_match || d.show_query], ['Service Type', svcDisplay(d.service_type)], ['Capture Status', d.capture_determination], ['Why', d.capture_reason],
+    ['Devices', d.device_mode], ['QR Add-on', d.qr_addon], ['App Licenses', d.qty_app_licenses], ['Scanners', d.qty_scanners], ['Own Devices Allowed', d.outside_capture_allowed],
+    ['Capture Not Allowed Per', d.capture_not_allowed_per], ['Import Acknowledged', d.import_ack],
+    ['Therapeutic Area', d.f_therapy], ['Product / Drug', d.product_program], ['Clinical / Internal Name', d.clinical_internal_name],
+    ['TOV Required', d.tov === 'no' ? 'No' : 'Yes (standard)'], ['Association Contact', d.assoc_contact_name], ['Association Contact Email', d.assoc_contact_email],
+    ['Badge / API Available', d.badge_api_available], ['API Source', d.api_source], ['Provider / Reg Company', d.provider_reg_company], ['API Contact Name', d.api_badge_contact_name], ['API Contact Email', d.api_badge_contact_email], ['API / Badge Notes', d.api_badge_notes],
   ].filter(([,v]) => v && String(v).trim());
-
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({unit:'pt', format:'letter'});
-  const pageW = doc.internal.pageSize.getWidth();
-  const pageH = doc.internal.pageSize.getHeight();
-  const margin = 48, labelW = 160, lineH = 14;
-  let y = margin;
-
-  doc.setFont('helvetica','bold'); doc.setFontSize(16); doc.setTextColor(26,58,92);
-  doc.text('Pfizer Symposia Order Request', margin, y); y += 20;
-  doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(120);
-  doc.text('Reality Engineering — submitted ' + new Date().toLocaleString(), margin, y); y += 10;
-  doc.setDrawColor(26,58,92); doc.setLineWidth(1);
-  doc.line(margin, y, pageW - margin, y); y += 18;
-
-  doc.setFontSize(10);
-  rows.forEach(([k, v]) => {
-    const valLines = doc.splitTextToSize(String(v), pageW - margin*2 - labelW);
-    const blockH = Math.max(valLines.length, 1) * lineH + 4;
-    if(y + blockH > pageH - margin){ doc.addPage(); y = margin; }
-    doc.setFont('helvetica','bold'); doc.setTextColor(60);
-    doc.text(k + ':', margin, y);
-    doc.setFont('helvetica','normal'); doc.setTextColor(20);
-    doc.text(valLines, margin + labelW, y);
-    y += blockH;
-  });
-
-  const fname = 'Pfizer_Order_' + (d.f_pfz || 'Request').replace(/[^\w-]/g,'_') + '.pdf';
-  doc.save(fname);
+  const { jsPDF } = window.jspdf; const doc = new jsPDF({unit:'pt', format:'letter'});
+  const pageW = doc.internal.pageSize.getWidth(), pageH = doc.internal.pageSize.getHeight(); const margin = 48, labelW = 160, lineH = 14; let y = margin;
+  doc.setFont('helvetica','bold'); doc.setFontSize(16); doc.setTextColor(23,16,67); doc.text('Pfizer Symposia Order Request', margin, y); y += 20;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(120); doc.text('Reality Engineering. Submitted ' + new Date().toLocaleString(), margin, y); y += 10;
+  doc.setDrawColor(23,16,67); doc.setLineWidth(1); doc.line(margin, y, pageW - margin, y); y += 18; doc.setFontSize(10);
+  rows.forEach(([k, v]) => { const lines = doc.splitTextToSize(String(v), pageW - margin*2 - labelW); const blockH = Math.max(lines.length, 1) * lineH + 4; if(y + blockH > pageH - margin){ doc.addPage(); y = margin; } doc.setFont('helvetica','bold'); doc.setTextColor(60); doc.text(k + ':', margin, y); doc.setFont('helvetica','normal'); doc.setTextColor(20); doc.text(lines, margin + labelW, y); y += blockH; });
+  doc.save('Pfizer_Order_' + (d.f_pfz || 'Request').replace(/[^\w-]/g, '_') + '.pdf');
 }
 
-function copyCode(){
-  const code = $id('import-code-display').textContent;
-  navigator.clipboard.writeText(code).then(() => {
-    $id('copy-confirm').style.display = 'inline';
-    setTimeout(() => $id('copy-confirm').style.display='none', 2000);
-  });
-}
-
-function goBack(){
-  $id('success-screen').style.display='none';
-  $id('order-form').style.display='block';
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// Draft autosave (localStorage) — saves as you type, offers restore on return
-// ═══════════════════════════════════════════════════════════════════════════
-const DRAFT_KEY = 'pfz_amex_order_draft';
+// ── Draft autosave (this browser only) ──
 let _draftTimer = null;
-
 function saveDraft(){
   clearTimeout(_draftTimer);
   _draftTimer = setTimeout(() => {
     try {
-      const d = {
-        fields: {},
-        services: [...selectedServiceTypes],
-        badge_api: radioVal('badge_api') || '',
-        tov: document.querySelector('input[name="f_tov"]:checked')?.value || 'yes',
-        saved_at: Date.now(),
-      };
-      document.querySelectorAll('#order-form input[type=text],#order-form input[type=email],#order-form input[type=date],#order-form input[type=number],#order-form select,#order-form textarea')
-        .forEach(el => { if(el.id) d.fields[el.id] = el.value; });
+      const d = { fields:{}, radios:{ badge_type: radioVal('badge_type'), api_answer: radioVal('api_answer'), outside_answer: radioVal('outside_answer'), device_mode: radioVal('device_mode'), f_tov: radioVal('f_tov') },
+        checks:{ f_show_notlisted: $id('f_show_notlisted').checked, f_qr_addon: $id('f_qr_addon').checked, f_import_ack: $id('f_import_ack').checked }, showPicked, saved_at: Date.now() };
+      document.querySelectorAll('#sections input[type=text],#sections input[type=email],#sections input[type=date],#sections input[type=number],#sections select,#sections textarea').forEach(el => { if(el.id) d.fields[el.id] = el.value; });
       localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
-    } catch(e){ /* private browsing / storage full — ignore */ }
+    } catch(e){}
   }, 600);
 }
-
-function restoreDraftClick(){
-  let d;
-  try { d = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); } catch(e){ d = null; }
+function restoreDraft(){
+  let d; try { d = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null'); } catch(e){ d = null; }
   if(!d || !d.fields){ discardDraft(); return; }
-
-  // Services first (toggling can clear qty fields)
-  (d.services || []).forEach(label => {
-    const el = $id(SVC_ID_MAP[label]);
-    if(el && !selectedServiceTypes.has(label)) toggleServiceType(label, el);
-  });
-  // Plain fields
   Object.entries(d.fields).forEach(([id, v]) => { const el = $id(id); if(el) el.value = v; });
-  // Therapy → rebuild product list → re-apply product
-  if(d.fields.f_therapy){
-    onTherapyChange();
-    if(d.fields.f_product_program){
-      $id('f_product_program').value = d.fields.f_product_program;
-      onProductChange();
-    }
-  }
+  if(d.fields.f_therapy){ onTherapyChange(); if(d.fields.f_product_program){ $id('f_product_program').value = d.fields.f_product_program; onProductChange(); } }
   if(d.fields.f_therapy_other) $id('f_therapy_other').value = d.fields.f_therapy_other;
   if(d.fields.f_product_other) $id('f_product_other').value = d.fields.f_product_other;
-  // Badge API + TOV radios
-  if(d.badge_api){
-    const r = $id('badge_api_' + d.badge_api.toLowerCase());
-    if(r){ r.checked = true; onBadgeAPIChange(d.badge_api); }
-  }
-  if(d.tov){
-    const r = $id('f_tov_' + d.tov);
-    if(r){ r.checked = true; onTOVChange(); }
-  }
-  updateExpediteWarning();
-  $id('draft-banner').style.display = 'none';
+  Object.entries(d.radios || {}).forEach(([name, v]) => { if(!v) return; const r = document.querySelector(`input[name="${name}"][value="${v}"]`); if(r) r.checked = true; });
+  Object.entries(d.checks || {}).forEach(([id, v]) => { const el = $id(id); if(el) el.checked = !!v; });
+  matchedShow = findShowExact(val('f_show_query')); showPicked = !!matchedShow && (d.showPicked !== false);
+  openStep = null; $id('draft_bar').hidden = true; updateExpedite(); update();
 }
+function discardDraft(){ try { localStorage.removeItem(DRAFT_KEY); } catch(e){} $id('draft_bar').hidden = true; }
 
-function discardDraft(){
-  try { localStorage.removeItem(DRAFT_KEY); } catch(e){}
-  $id('draft-banner').style.display = 'none';
-}
-
-// Wire autosave to all typing, changes, and clicks (service tiles, checkboxes, radios)
+// wire everything
 (function(){
-  const form = $id('order-form');
-  form.addEventListener('input',  saveDraft);
-  form.addEventListener('change', saveDraft);
-  form.addEventListener('click', e => {
-    if(e.target.closest('.svc-type-check, .opt, label')) saveDraft();
-  });
-  // Offer restore if a meaningful draft exists
+  const sections = $id('sections');
+  sections.addEventListener('input', update); sections.addEventListener('change', update);
+  sections.addEventListener('input', saveDraft); sections.addEventListener('change', saveDraft);
+  sections.addEventListener('click', e => { if(e.target.closest('.tile, .seg label, .tov label, .check')) saveDraft(); });
+  $id('f_date').addEventListener('change', updateExpedite);
   try {
     const d = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null');
-    const hasContent = d && d.fields && (Object.values(d.fields).some(v => v && String(v).trim()) || (d.services || []).length);
-    if(hasContent){
-      $id('draft-time').textContent = d.saved_at ? new Date(d.saved_at).toLocaleString() : 'earlier';
-      $id('draft-banner').style.display = 'block';
-    }
+    const has = d && d.fields && (Object.values(d.fields).some(v => v && String(v).trim()) || Object.values(d.radios || {}).some(Boolean));
+    if(has){ $id('draft_time').textContent = d.saved_at ? new Date(d.saved_at).toLocaleString() : 'earlier'; $id('draft_bar').hidden = false; }
   } catch(e){}
+  update();
 })();
-
-// ═══════════════════════════════════════════════════════════════════════════
-// Expedite detection — warn when the event is under 5 business days away
-// ═══════════════════════════════════════════════════════════════════════════
-function bizDaysUntil(dateStr){
-  if(!dateStr) return null;
-  const today = new Date(); today.setHours(0,0,0,0);
-  const target = new Date(dateStr + 'T00:00:00');
-  if(isNaN(target)) return null;
-  if(target <= today) return 0;
-  let count = 0;
-  const d = new Date(today);
-  while(d < target){
-    d.setDate(d.getDate() + 1);
-    const w = d.getDay();
-    if(w !== 0 && w !== 6) count++;
-  }
-  return count;
-}
-
-function updateExpediteWarning(){
-  const days = bizDaysUntil(val('f_date'));
-  const warn = $id('expedite_warning');
-  if(warn) warn.style.display = (days !== null && days < 5) ? 'block' : 'none';
-}
 </script>
 </body>
 </html>

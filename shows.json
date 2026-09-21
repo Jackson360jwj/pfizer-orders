@@ -1,0 +1,4268 @@
+{
+ "_doc": "Sanitized show list for the Pfizer AMEX Order Form. Built by build_shows_json.py from the dev kit history index. Contains no costs, contacts or credentials. A show missing from this list has no record since 2024, which is not proof that no badge API is available.",
+ "built": "2026-09-21",
+ "source_built": "2026-09-14",
+ "years_covered": [
+  "2024",
+  "2025",
+  "2026"
+ ],
+ "show_count": 467,
+ "shows": [
+  {
+   "key": "AAAAI",
+   "name": "AAAAI",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "CMR"
+  },
+  {
+   "key": "AAAAI MED PIPELINE",
+   "name": "AAAAI Med Pipeline",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AACE",
+   "name": "AACE",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AACN",
+   "name": "AACN",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AACN MAGNET",
+   "name": "AACN Magnet",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AACN-NTI",
+   "name": "AACN NTI",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "aliases": [
+    "AACN-NTI"
+   ]
+  },
+  {
+   "key": "AACP",
+   "name": "AACP",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AACR",
+   "name": "AACR",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Event Citadel"
+  },
+  {
+   "key": "AAD",
+   "name": "AAD",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": 2024,
+   "provider": "Maritz"
+  },
+  {
+   "key": "AAD INNOVATION ACADEMY",
+   "name": "AAD Innovation Academy",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AAD MEETING ROOM",
+   "name": "AAD Meeting Room",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AAFP",
+   "name": "AAFP",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AAFP FMX",
+   "name": "AAFP FMX",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null,
+   "note": "AAFP Family Medicine Experience - NOT AAFP Future"
+  },
+  {
+   "key": "AAFP FUTURE",
+   "name": "AAFP Future",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "note": "AAFP Future of Family Medicine - NOT AAFP FMX"
+  },
+  {
+   "key": "AAHFN",
+   "name": "AAHFN",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AAHKS",
+   "name": "AAHKS",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AAN",
+   "name": "AAN",
+   "api": "check",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "CMR"
+  },
+  {
+   "key": "AAN FALL",
+   "name": "AAN Fall",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": 2026,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AAN TRAFFIC TRACKER",
+   "name": "AAN Traffic Tracker",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AANEM",
+   "name": "AANEM",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AANP",
+   "name": "AANP",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "ATS"
+  },
+  {
+   "key": "AANP PT",
+   "name": "AANP PT",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "AANS",
+   "name": "AANS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AAO-HNSF",
+   "name": "AAO-HNSF",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AAOMS",
+   "name": "AAOMS",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AAOPH",
+   "name": "AAOph",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "note": "American Academy of Ophthalmology - NOT AAOpt (Optometry)"
+  },
+  {
+   "key": "AAOPH LEADS & INTERNET",
+   "name": "AAOph Leads & Internet",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AAOPT",
+   "name": "AAOpt",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "note": "American Academy of Optometry - NOT AAOph (Ophthalmology)"
+  },
+  {
+   "key": "AAOS",
+   "name": "AAOS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AAP",
+   "name": "AAP",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "ATS",
+   "note": "American Academy of Pediatrics - NOT AAPA (Physician Assistants)"
+  },
+  {
+   "key": "AAPA",
+   "name": "AAPA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Maritz",
+   "note": "American Academy of Physician Associates - NOT AAP"
+  },
+  {
+   "key": "AAPA PT",
+   "name": "AAPA PT",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AAPM",
+   "name": "AAPM",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Maritz"
+  },
+  {
+   "key": "AASLD",
+   "name": "AASLD",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACAAI",
+   "name": "ACAAI",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Eshow"
+  },
+  {
+   "key": "ACC",
+   "name": "ACC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Maritz"
+  },
+  {
+   "key": "ACEP",
+   "name": "ACEP",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACFAS",
+   "name": "ACFAS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACG",
+   "name": "ACG",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": "Other"
+  },
+  {
+   "key": "ACG LEADS",
+   "name": "ACG Leads",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACG MEDICAL TRAFFIC TRACKER",
+   "name": "ACG Medical Traffic Tracker",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACHA",
+   "name": "ACHA",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACOFP PT",
+   "name": "ACOFP PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACOG",
+   "name": "ACOG",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "ACOG DISTRICT XII",
+   "name": "ACOG District XII",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACOG PT",
+   "name": "ACOG PT",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "ACP",
+   "name": "ACP",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "ACPA",
+   "name": "ACPA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACR",
+   "name": "ACR",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACR CONVERGENCE",
+   "name": "ACR Convergence",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACR ELITERATURE",
+   "name": "ACR eLiterature",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACR MEDICAL",
+   "name": "ACR Medical",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACR TREMFYA PHOTO",
+   "name": "ACR Tremfya Photo",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACT",
+   "name": "ACT",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACT EXPO",
+   "name": "ACT Expo",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACTRIMS",
+   "name": "ACTRIMS",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ACVIM",
+   "name": "ACVIM",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ADA",
+   "name": "ADA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ADCES",
+   "name": "ADCES",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AGS",
+   "name": "AGS",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AHA",
+   "name": "AHA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AHA LP",
+   "name": "AHA LP",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AHIP",
+   "name": "AHIP",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AHIP INSTITUTE",
+   "name": "AHIP Institute",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AHNS",
+   "name": "AHNS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AHR",
+   "name": "AHR",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Maritz"
+  },
+  {
+   "key": "AHR 2025",
+   "name": "AHR 2025",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AHR- SCANNING",
+   "name": "AHR- Scanning",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AHS",
+   "name": "AHS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": 2025,
+   "list_import_last_year": 2025,
+   "provider": null,
+   "aliases": [
+    "AHS December"
+   ]
+  },
+  {
+   "key": "AIBD",
+   "name": "AIBD",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "note": "AIBD national - NOT AIBD MW or AIBD Houston"
+  },
+  {
+   "key": "AIBD HOUSTON",
+   "name": "AIBD Houston",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AIBD MEDICAL BOOTH",
+   "name": "AIBD Medical Booth",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AIBD MW",
+   "name": "AIBD MW",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AIBD PT",
+   "name": "AIBD PT",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AIRA",
+   "name": "AIRA",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AMCP",
+   "name": "AMCP",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AMCP NEXUS",
+   "name": "AMCP Nexus",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AMCP NEXUS ADVISORY BOARD",
+   "name": "AMCP Nexus Advisory Board",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AMDA",
+   "name": "AMDA",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AMGA",
+   "name": "AMGA",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "CVENT"
+  },
+  {
+   "key": "AMP",
+   "name": "AMP",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AMP PT",
+   "name": "AMP PT",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ANC",
+   "name": "ANC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "aliases": [
+    "ANC (SNA)"
+   ]
+  },
+  {
+   "key": "ANCC MAGNET",
+   "name": "ANCC Magnet",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AOA",
+   "name": "AOA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "CVENT"
+  },
+  {
+   "key": "AOFAS",
+   "name": "AOFAS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AORN",
+   "name": "AORN",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "MCI"
+  },
+  {
+   "key": "APA",
+   "name": "APA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "APA BOOTH 1124",
+   "name": "APA Booth 1124",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "APHA",
+   "name": "APHA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Expo Logic"
+  },
+  {
+   "key": "APHA PT",
+   "name": "APhA PT",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "APHON",
+   "name": "APHON",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "APHON PT",
+   "name": "APHON PT",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "APNA",
+   "name": "APNA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "APPOS PT",
+   "name": "APPOS PT",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ARS",
+   "name": "ARS",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "aliases": [
+    "ARS Fall"
+   ]
+  },
+  {
+   "key": "ASCO",
+   "name": "ASCO",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASCO BLADDER ER 6/2",
+   "name": "ASCO Bladder ER 6/2",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASCO GI",
+   "name": "ASCO GI",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASCO GU",
+   "name": "ASCO GU",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASCO GU KOL RECEPTION",
+   "name": "ASCO GU KOL Reception",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASCO KOL ER",
+   "name": "ASCO KOL ER",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASCO MEETING ROOMS",
+   "name": "ASCO Meeting  Rooms",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASCP",
+   "name": "ASCP",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASCRS",
+   "name": "ASCRS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASDP PT",
+   "name": "ASDP PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASE",
+   "name": "ASE",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASEMBIA",
+   "name": "Asembia",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASH",
+   "name": "ASH",
+   "api": "check",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASH RECEPTION",
+   "name": "ASH Reception",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASHP",
+   "name": "ASHP",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Spargo",
+   "aliases": [
+    "ASHP Midyear"
+   ]
+  },
+  {
+   "key": "ASN",
+   "name": "ASN",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASNC",
+   "name": "ASNC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASNC PT",
+   "name": "ASNC PT",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASPE",
+   "name": "ASPE",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASRS",
+   "name": "ASRS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASSH",
+   "name": "ASSH",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASTRO",
+   "name": "ASTRO",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ATA",
+   "name": "ATA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "aliases": [
+    "ATA MCE"
+   ]
+  },
+  {
+   "key": "ATA MC&E",
+   "name": "ATA MC&E",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ATDC",
+   "name": "ATDC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ATLANTIC DERM",
+   "name": "Atlantic Derm",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ATOPP PT",
+   "name": "ATOPP PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ATS",
+   "name": "ATS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ATTD",
+   "name": "ATTD",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AUA",
+   "name": "AUA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Event Citadel"
+  },
+  {
+   "key": "AUA ER",
+   "name": "AUA ER",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AUA MID ATLANTIC",
+   "name": "AUA Mid Atlantic",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AVMA",
+   "name": "AVMA",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AWHONN",
+   "name": "AWHONN",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Maritz"
+  },
+  {
+   "key": "BARCELONA HAIR",
+   "name": "Barcelona Hair",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "BAUS",
+   "name": "BAUS",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "BCLA",
+   "name": "BCLA",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "BENDCARE SUMMIT #2 APP",
+   "name": "Bendcare Summit #2 App",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "BENDCARE SUMMIT PT",
+   "name": "Bendcare Summit PT",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "BSAVA",
+   "name": "BSAVA",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "BSS",
+   "name": "BSS",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "BSS EAHP",
+   "name": "BSS EAHP",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CALDERM SOUTH PT",
+   "name": "CalDerm South PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CARDINAL HEALTH RBC",
+   "name": "Cardinal Health RBC",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CCC",
+   "name": "CCC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CCC COMMERCIAL",
+   "name": "CCC Commercial",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CCC MEDICAL LEADS",
+   "name": "CCC Medical Leads",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CCC PT",
+   "name": "CCC PT",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CCD PT",
+   "name": "CCD PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CCR WEST PT",
+   "name": "CCR West PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": 2024,
+   "provider": null
+  },
+  {
+   "key": "CDPAS PT",
+   "name": "CDPAS PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CES",
+   "name": "CES",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CHB",
+   "name": "CHB",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CHEST",
+   "name": "CHEST",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CHF",
+   "name": "CHF",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CHOS",
+   "name": "CHOS",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CIS",
+   "name": "CIS",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CISTM PT",
+   "name": "CISTM PT",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "CMSC",
+   "name": "CMSC",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CNS",
+   "name": "CNS",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CONEXPO CON AGG",
+   "name": "ConExpo Con Agg",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CONEXPO/CON-AGG",
+   "name": "ConExpo/Con-Agg",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "COSM",
+   "name": "COSM",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CRM INTEGRATION",
+   "name": "CRM Integration",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CSD&DS",
+   "name": "CSD&DS",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "CT NPPA PT",
+   "name": "CT NPPA PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "DDW",
+   "name": "DDW",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "DERM SUMMIT EUROPE BADGE PRINT & CHECK-IN",
+   "name": "Derm Summit Europe Badge Print & Check-in",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "DGU",
+   "name": "DGU",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "DHCREF PT",
+   "name": "DHCREF PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "DID",
+   "name": "DID",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "DIS",
+   "name": "DIS",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "EAACI",
+   "name": "EAACI",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "EADV",
+   "name": "EADV",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "EADV AA",
+   "name": "EADV AA",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "EAN",
+   "name": "EAN",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "EAU",
+   "name": "EAU",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": 2023,
+   "provider": null
+  },
+  {
+   "key": "EBCOG",
+   "name": "EBCOG",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "ESCMID",
+   "name": "ECCMID",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": 2026,
+   "list_import_last_year": 2026,
+   "provider": "Key4Events",
+   "aliases": [
+    "ESCMID"
+   ]
+  },
+  {
+   "key": "ECCMID MEET THE EXPERT",
+   "name": "ECCMID Meet the Expert",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ECIM PT",
+   "name": "ECIM PT",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": 2024,
+   "provider": null
+  },
+  {
+   "key": "EHA",
+   "name": "EHA",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "EHC",
+   "name": "EHC",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2024,
+   "provider": null
+  },
+  {
+   "key": "ELCC",
+   "name": "ELCC",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "ELEVATE 2025",
+   "name": "ELEVATE 2025",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "EMS",
+   "name": "EMS",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "EMS WORLD",
+   "name": "EMS World",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "EMS WORLD EXPO",
+   "name": "EMS World Expo",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ENA",
+   "name": "ENA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ENA BREAKFAST",
+   "name": "ENA Breakfast",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ENDO",
+   "name": "ENDO",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "CDS Xpressleads"
+  },
+  {
+   "key": "EPIC XGM",
+   "name": "Epic XGM",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ERS",
+   "name": "ERS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": 2024,
+   "provider": null
+  },
+  {
+   "key": "ESC",
+   "name": "ESC",
+   "api": "no",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "ESC HF",
+   "name": "ESC HF",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ESCMID PT",
+   "name": "ESCMID PT",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "ESMO",
+   "name": "ESMO",
+   "api": "check",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ESMO BC",
+   "name": "ESMO BC",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "ESMO GI",
+   "name": "ESMO GI",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "ESMO GYNAE",
+   "name": "ESMO Gynae",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ESMO-GI",
+   "name": "ESMO-GI",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "ESPD",
+   "name": "ESPD",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "ESPID",
+   "name": "ESPID",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "EXPOCAM",
+   "name": "ExpoCam",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "FABTECH",
+   "name": "Fabtech",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "FALL CLINICAL PT",
+   "name": "Fall  Clinical PT",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "FALL CLINICAL PA NP PT",
+   "name": "Fall Clinical PA NP PT",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "FDIC",
+   "name": "FDIC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Event Citadel"
+  },
+  {
+   "key": "FETCH",
+   "name": "FETCH",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "FIERCE",
+   "name": "Fierce",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "FMX",
+   "name": "FMX",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "FNCE",
+   "name": "FNCE",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "FSCDR",
+   "name": "FSCDR",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2023,
+   "provider": null
+  },
+  {
+   "key": "FSDCR PT",
+   "name": "FSDCR PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "GBTA",
+   "name": "GBTA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "GEORGIA PEARLS",
+   "name": "Georgia Pearls",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "GFX",
+   "name": "GFX",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "GHAAP MEDICAL",
+   "name": "GHAAP Medical",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "GLAONS",
+   "name": "GLAONS",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "GLOBAL DERM MASTER CLASS",
+   "name": "Global Derm Master Class",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2024,
+   "provider": null
+  },
+  {
+   "key": "GUILD MAUI",
+   "name": "GUILD Maui",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HAWAII DERM",
+   "name": "Hawaii Derm",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2024,
+   "provider": null
+  },
+  {
+   "key": "HCNE",
+   "name": "HCNE",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "HCOP WINTER CONFERENCE PT",
+   "name": "HCOP Winter Conference PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HEDIS",
+   "name": "HEDIS",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HEMATOLOGY EVENT AT ASH KOL",
+   "name": "Hematology Event at ASH KOL",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HFM ECHO",
+   "name": "HFM ECHO",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HFPEF",
+   "name": "HFpEF",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HFSA",
+   "name": "HFSA",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HIMSS",
+   "name": "HIMSS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HLTH",
+   "name": "HLTH",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HMP PT",
+   "name": "HMP PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HOPA",
+   "name": "HOPA",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HOPA PT",
+   "name": "HOPA PT",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HOPCON PT",
+   "name": "HOPCON PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HOUSTEX",
+   "name": "Houstex",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HRS",
+   "name": "HRS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": "Event Citadel"
+  },
+  {
+   "key": "HRS INNOVATION",
+   "name": "HRS Innovation",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HSFA",
+   "name": "HSFA",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HSPA",
+   "name": "HSPA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HTRS PT",
+   "name": "HTRS PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "HTS",
+   "name": "HTS",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "IACP",
+   "name": "IACP",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ICM",
+   "name": "ICM",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "ID WEEK",
+   "name": "ID Week",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "IDWEEK",
+   "name": "IDWeek",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": 2026,
+   "list_import_last_year": null,
+   "provider": "Maritz"
+  },
+  {
+   "key": "IDWEEK PT",
+   "name": "IDWeek PT",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": 2024,
+   "list_import_last_year": 2024,
+   "provider": null
+  },
+  {
+   "key": "IFM AIC",
+   "name": "IFM AIC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "IFM'S ANNUAL INTERNATIONAL CONFERENCE",
+   "name": "IFM's Annual International Conference",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "IFPE",
+   "name": "IFPE",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "IGNS",
+   "name": "IGNS",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "IHR PT",
+   "name": "IHR PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "IMS",
+   "name": "IMS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Spargo"
+  },
+  {
+   "key": "INDY HEM",
+   "name": "Indy Hem",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "INFOCOMM",
+   "name": "InfoComm",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "INFORMA PATIENT SUPPORT SERVICES CONGRESS",
+   "name": "Informa Patient Support Services Congress",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "INS",
+   "name": "INS",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "INSPIRED",
+   "name": "INSPiRED",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "INTER[ACTION]",
+   "name": "INTER[action]",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ISC",
+   "name": "ISC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ISDS",
+   "name": "ISDS",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ISDS PT",
+   "name": "ISDS PT",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2023,
+   "provider": null
+  },
+  {
+   "key": "ISHLT",
+   "name": "ISHLT",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ISID",
+   "name": "ISID",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ISPAD",
+   "name": "ISPAD",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ISPPD",
+   "name": "ISPPD",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "ISSS",
+   "name": "ISSS",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ISTH",
+   "name": "ISTH",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ISTH RBD & MED",
+   "name": "ISTH RBD & Med",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "IVECCS",
+   "name": "IVECCS",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "JADPRO",
+   "name": "JADPRO",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "JADPRO PT",
+   "name": "JADPRO PT",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "JOHNSON CONTROLS",
+   "name": "Johnson Controls",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "JUA",
+   "name": "JUA",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "KEYSTONE PDPA",
+   "name": "Keystone PDPA",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "KLAS K2 SUMMIT",
+   "name": "KLAS K2 Summit",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "LDI",
+   "name": "LDI",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "LEAPPS",
+   "name": "LEAPPS",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "LEIPZIG",
+   "name": "LEIPZIG",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "LIFESTYLE MEDICINE CONFERENCE",
+   "name": "Lifestyle Medicine Conference",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "LONDON VET",
+   "name": "London Vet",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "LUGPA 2026 UROLOGY RESIDENT SUMMIT & JOB FAIR",
+   "name": "LUGPA 2026 Urology Resident Summit & Job Fair",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "LYNN SAGE PT",
+   "name": "Lynn Sage PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": 2024,
+   "provider": null
+  },
+  {
+   "key": "MASS DERM",
+   "name": "Mass Derm",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "MASTERCLASS TOKYO",
+   "name": "Masterclass Tokyo",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "MATOS",
+   "name": "MATOS",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "MAUI DERM",
+   "name": "Maui Derm",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "MAUI DERM CARIBBEAN",
+   "name": "Maui Derm Caribbean",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "MAUI DERM NPPA SUMMER PT",
+   "name": "Maui Derm NPPA Summer PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "MAYO CARDIOLOGY PT",
+   "name": "MAYO Cardiology PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "MCD",
+   "name": "MCD",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "MCKESSON ACCELERATE",
+   "name": "McKesson Accelerate",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "MCKESSON IDEA SHARE",
+   "name": "McKesson Idea Share",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "MDA",
+   "name": "MDA",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "MEET THE EXPERTS",
+   "name": "Meet the Experts",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "MHK",
+   "name": "MHK",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "MOPD-SBS",
+   "name": "MOPD",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "CONEXSYS",
+   "aliases": [
+    "MOPD-SBS"
+   ]
+  },
+  {
+   "key": "MT. SINAI WINTER SYMPOSIUM PT",
+   "name": "Mt. Sinai Winter Symposium PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "MYOLOGY",
+   "name": "Myology",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NAB",
+   "name": "NAB",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NACCHO",
+   "name": "NACCHO",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NACDS TSE",
+   "name": "NACDS TSE",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "NACFUS",
+   "name": "NACFUS",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NACS",
+   "name": "NACS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NACUFS",
+   "name": "NACUFS",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NAHN",
+   "name": "NAHN",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NAMA",
+   "name": "NAMA",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NAMCP",
+   "name": "NAMCP",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NAON",
+   "name": "NAON",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NAPNAP",
+   "name": "NAPNAP",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NASBS",
+   "name": "NASB",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "aliases": [
+    "NASBS"
+   ]
+  },
+  {
+   "key": "NASCC PT",
+   "name": "NASCC PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NASP PT",
+   "name": "NASP PT",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NASS",
+   "name": "NASS",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NBNA PT",
+   "name": "NBNA PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NCNS",
+   "name": "NCNS",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NCPA",
+   "name": "NCPA",
+   "api": "check",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Spargo"
+  },
+  {
+   "key": "NCQA",
+   "name": "NCQA",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NCSC ACC",
+   "name": "NCSC ACC",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NCSG PT",
+   "name": "NCSG PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NECTM",
+   "name": "NECTM",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NEI",
+   "name": "NEI",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "ExpoBadge"
+  },
+  {
+   "key": "NEI COMM & MED INTERNET",
+   "name": "NEI Comm & Med Internet",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NEI FALL",
+   "name": "NEI Fall",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NEI SPRING",
+   "name": "NEI Spring",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NEI SYNAPSE",
+   "name": "NEI Synapse",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NEURONET",
+   "name": "NeuroNet",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "NHF",
+   "name": "NHF",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NHIA",
+   "name": "NHIA",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NHTS",
+   "name": "NHTS",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NKF",
+   "name": "NKF",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NMA",
+   "name": "NMA",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NMSG",
+   "name": "NMSG",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NNP",
+   "name": "NNP",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "NORTHEAST DERMATOLOGY CONFERENCE",
+   "name": "Northeast Dermatology Conference",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NPA",
+   "name": "NPA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NPI LEADS",
+   "name": "NPI Leads",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NRA",
+   "name": "NRA",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WORK TRUCK WEEK",
+   "name": "NTEA - Work Truck Week",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "aliases": [
+    "Work Truck Week",
+    "WTW"
+   ]
+  },
+  {
+   "key": "NTEA WORK TRUCK WEEK",
+   "name": "NTEA Work Truck Week",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NWD PT",
+   "name": "NWD PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NWPC PT",
+   "name": "NWPC PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NY VET",
+   "name": "NY Vet",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NYAD",
+   "name": "NYAD",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "OBESITY WEEK",
+   "name": "Obesity Week",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ODS",
+   "name": "ODS",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "OMED",
+   "name": "OMED",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ONS",
+   "name": "ONS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": "Maritz"
+  },
+  {
+   "key": "OPTIONS XIII CONFERENCE",
+   "name": "Options XIII Conference",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "OR MANAGER",
+   "name": "OR Manager",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "OTA",
+   "name": "OTA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "OTC",
+   "name": "OTC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Maritz"
+  },
+  {
+   "key": "OVMA",
+   "name": "OVMA",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PA DERM PT",
+   "name": "PA Derm PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PACK EXPO",
+   "name": "Pack Expo",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PAINWEEK",
+   "name": "PAINWeek",
+   "api": "no",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PAINWEEK PT",
+   "name": "PAINWeek PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PANP360",
+   "name": "PANP360",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "PAOS",
+   "name": "PAOS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PBMI",
+   "name": "PBMI",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "PCPA",
+   "name": "PCPA",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PCPA INSTITUTE",
+   "name": "PCPA Institute",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PDA PT",
+   "name": "PDA PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PDPA 2024 KEYSTONE DERM. CONF. PT",
+   "name": "PDPA 2024 Keystone Derm. Conf. PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PENN SOCIETY DERM",
+   "name": "Penn Society Derm",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PHPN",
+   "name": "PHPN",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PIZZA EXPO",
+   "name": "Pizza Expo",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PMAAPP",
+   "name": "PMAAPP",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "PME",
+   "name": "PME",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PMMW",
+   "name": "PMMW",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PMS",
+   "name": "PMS",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PMSW",
+   "name": "PMSW",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PMTS",
+   "name": "PMTS",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PMW",
+   "name": "PMW",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PPC2026 PT",
+   "name": "PPC2026 PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PRI-MED EAST",
+   "name": "Pri-Med East",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null,
+   "note": "Distinct Pri-Med regional meeting"
+  },
+  {
+   "key": "PRI-MED MIDWEST",
+   "name": "Pri-Med Midwest",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "note": "Distinct Pri-Med regional meeting"
+  },
+  {
+   "key": "PRI-MED SOUTH",
+   "name": "Pri-Med South",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "note": "Distinct Pri-Med regional meeting"
+  },
+  {
+   "key": "PRI-MED SOUTHWEST",
+   "name": "Pri-Med Southwest",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "note": "Distinct Pri-Med regional meeting"
+  },
+  {
+   "key": "PRI-MED WEST",
+   "name": "Pri-Med West",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": 2024,
+   "provider": null,
+   "note": "Distinct Pri-Med regional meeting"
+  },
+  {
+   "key": "PROPERTY",
+   "name": "Property",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PSYCH CONGRESS",
+   "name": "Psych Congress",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PSYCH CONGRESS ANNUAL",
+   "name": "Psych Congress Annual",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PSYCH CONGRESS PA INSTITUTE",
+   "name": "Psych Congress PA Institute",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "PSYCH CONGRESS TREATMENT PRACTICE BOOTH LEADS & TT",
+   "name": "Psych Congress Treatment Practice Booth Leads & TT",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "RAD PT",
+   "name": "RAD PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "REUTERS PHARMA CUSTOMER ENGAGEMENT USA",
+   "name": "Reuters Pharma Customer Engagement USA",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "RFMA",
+   "name": "RFMA",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "RIMS",
+   "name": "RIMS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "RIMS RISK WORLD",
+   "name": "RIMS Risk World",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "RISE NATIONAL",
+   "name": "Rise National",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "RUSH",
+   "name": "RUSH",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "RWDR PT",
+   "name": "RWDR PT",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "SABCS",
+   "name": "SABCS",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SABCS ER",
+   "name": "SABCS ER",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SAEM",
+   "name": "SAEM",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SAWC",
+   "name": "SAWC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SBS/MOPD",
+   "name": "SBS/MOPD",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SCAC PT",
+   "name": "SCAC PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SCGA",
+   "name": "SCGA",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SCRIPPS CC",
+   "name": "Scripps CC",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SCRIPPS PT",
+   "name": "Scripps PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SDDS",
+   "name": "SDDS",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SDHF WINTER SYMPOSIUM PT",
+   "name": "SDHF Winter Symposium PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SDPA FALL",
+   "name": "SDPA Fall",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SECO",
+   "name": "SECO",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Event Citadel"
+  },
+  {
+   "key": "SEMA",
+   "name": "SEMA",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SEMPA",
+   "name": "SEMPA",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2023,
+   "provider": null
+  },
+  {
+   "key": "SF DERM ECZEMA",
+   "name": "SF Derm Eczema",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SGNA",
+   "name": "SGNA",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SGO",
+   "name": "SGO",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SHM",
+   "name": "SHM",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SHRM",
+   "name": "SHRM",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SIR",
+   "name": "SIR",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SITC",
+   "name": "SITC",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SLEEP",
+   "name": "SLEEP",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SMFM",
+   "name": "SMFM",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SMFM PT",
+   "name": "SMFM PT",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "SMISS",
+   "name": "SMISS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SMR",
+   "name": "SMR",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SNMMI",
+   "name": "SNMMI",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SOHO",
+   "name": "SOHO",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SPCS PT",
+   "name": "SPCS PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SPD",
+   "name": "SPD",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SPEAKER TRAINING EVENT",
+   "name": "Speaker Training Event",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "SSW",
+   "name": "SSW",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "STS",
+   "name": "STS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SUO PT",
+   "name": "SUO PT",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "SWFLCIS",
+   "name": "SWFLCIS",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "SWVS",
+   "name": "SWVS",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "TANDEM MEETINGS",
+   "name": "Tandem Meetings",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "TANDEM UTAH PT",
+   "name": "Tandem Utah PT",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "TCT",
+   "name": "TCT",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "TCT LEADS & TRAFFIC TRACKER",
+   "name": "TCT Leads & Traffic Tracker",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "THE UTILITY EXPO",
+   "name": "The Utility Expo",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "THOUGHTSPOT 2025",
+   "name": "ThoughtSpot 2025",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "THSNA",
+   "name": "THSNA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "THT",
+   "name": "THT",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2023,
+   "provider": null
+  },
+  {
+   "key": "TMC",
+   "name": "TMC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "UCA",
+   "name": "UCA",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": 2025,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "UCC",
+   "name": "UCC",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "UEGW",
+   "name": "UEGW",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "USCP NP INSTITUTE",
+   "name": "USCP NP Institute",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "USPC ANNUAL",
+   "name": "USPC Annual",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "USPC ELEVATE",
+   "name": "USPC Elevate",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "aliases": [
+    "USPC Elevate (Psych Congress)"
+   ]
+  },
+  {
+   "key": "USPC NP INSTITUTE",
+   "name": "USPC NP",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "aliases": [
+    "USPC NP Institute"
+   ]
+  },
+  {
+   "key": "VEEVA CRM INTEGRATION",
+   "name": "Veeva CRM Integration",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "VIVA/VEINS",
+   "name": "VIVA/VEINS",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "VIVE",
+   "name": "ViVE",
+   "api": "yes",
+   "api_last_year": 2024,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "VMX",
+   "name": "VMX",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "Aventri"
+  },
+  {
+   "key": "VISION SOURCE EXCHANGE",
+   "name": "VSE",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null,
+   "aliases": [
+    "Vision Source Exchange"
+   ]
+  },
+  {
+   "key": "VYN MASS ACC PT",
+   "name": "Vyn Mass ACC PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WASTE EXPO",
+   "name": "Waste Expo",
+   "api": "yes",
+   "api_last_year": 2025,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WCD",
+   "name": "WCD",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2023,
+   "provider": null
+  },
+  {
+   "key": "WCH",
+   "name": "WCH",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "WCHR",
+   "name": "WCHR",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WCI",
+   "name": "WCI",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WCLC",
+   "name": "WCLC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WCM",
+   "name": "WCM",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "WCM PT",
+   "name": "WCM PT",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2024,
+   "provider": null
+  },
+  {
+   "key": "WCPH VPRD",
+   "name": "WCPH VPRD",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2023,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WEST COAST DERM",
+   "name": "West Coast Derm",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WFH",
+   "name": "WFH",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
+  },
+  {
+   "key": "WINTER CLINICAL MIAMI PT",
+   "name": "Winter Clinical Miami PT",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2025,
+   "provider": null
+  },
+  {
+   "key": "WINTER HCNE",
+   "name": "Winter HCNE",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WOC",
+   "name": "WOC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WOCN",
+   "name": "WOCN",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WORLD AT WORK",
+   "name": "World at Work",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WORLD OF CONCRETE",
+   "name": "World of Concrete",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WSPID",
+   "name": "WSPID",
+   "api": "yes",
+   "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "WVC",
+   "name": "WVC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": "ATS"
+  }
+ ]
+}

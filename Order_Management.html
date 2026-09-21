@@ -44,6 +44,9 @@ tr.selected td{background:#e8f0fe;}
 .badge-qsent{background:#fef9c3;color:#713f12;}
 .badge-approved{background:#d1fae5;color:#065f46;}
 .badge-closed{background:#374151;color:#f9fafb;}
+.cap-confirm{background:#fff3cd;color:#8a5a00;}
+.cap-review{background:#fdecea;color:#b03a2e;}
+.cap-ok{background:#e3f6ea;color:#1e7d43;}
 
 /* ── DETAIL PANEL ── */
 .detail-pane{width:0;overflow:hidden;transition:width .25s ease;background:#fff;border-left:1px solid #ddd;display:flex;flex-direction:column;}
@@ -149,6 +152,16 @@ tr.selected td{background:#e8f0fe;}
           <option value="">All Service Types</option>
           <option>Mobile App</option>
           <option>Scanner</option>
+          <option>Image Capture</option>
+          <option>QR Code</option>
+          <option>List Import</option>
+          <option>Attendee List Matching Import</option>
+        </select>
+        <select class="filter-select" id="filter-capture" onchange="applyFilters()">
+          <option value="">All Capture Statuses</option>
+          <option value="RE to confirm">RE to confirm</option>
+          <option value="Needs review">Needs review (congress requires its own scanning)</option>
+          <option value="Confirmed">Confirmed</option>
         </select>
         <select class="filter-select" id="filter-product" onchange="applyFilters()">
           <option value="">All Products</option>
@@ -277,6 +290,13 @@ function fmtDateTime(iso){
   }catch(e){ return iso; }
 }
 
+function captureChip(o){
+  const c = o.capture_determination;
+  if(!c || c === 'Confirmed') return '';
+  const cls = c === 'Needs review' ? 'cap-review' : 'cap-confirm';
+  return `<br><span class="badge ${cls}">${c}</span>`;
+}
+
 function badge(status){
   const cls = STATUS_BADGE[status] || 'badge-submitted';
   return `<span class="badge ${cls}">${status || '—'}</span>`;
@@ -323,16 +343,19 @@ function applyFilters(){
   const search  = document.getElementById('search').value.toLowerCase();
   const fStatus = document.getElementById('filter-status').value;
   const fSvc    = document.getElementById('filter-service').value;
+  const fCap    = document.getElementById('filter-capture').value;
   const fProd   = document.getElementById('filter-product').value;
 
   filteredOrders = allOrders.filter(o => {
     const txt = [o.event_name, o.requester_name, o.requester_email,
                  o.product_program, o.survey_type, o.service_type, o.order_status,
                  o.order_id, o.otis_quote_number, o.f_pfz, o.f_acronym,
+                 o.badge_type, o.show_match, o.capture_determination,
                  o.import_code ? '' : ''].join(' ').toLowerCase();
     if(search && !txt.includes(search)) return false;
     if(fStatus && o.order_status !== fStatus) return false;
-    if(fSvc && o.service_type !== fSvc) return false;
+    if(fSvc && !(o.service_type || '').split(',').map(x => x.trim()).includes(fSvc)) return false;
+    if(fCap && (o.capture_determination || '') !== fCap) return false;
     if(fProd && o.product_program !== fProd) return false;
     return true;
   });
@@ -353,7 +376,7 @@ function renderTable(){
       <td style="color:#2563eb;">${o.requester_email || '—'}</td>
       <td title="${o.event_name || ''}">${o.event_name || '—'}</td>
       <td style="white-space:nowrap;">${fmtDate(o.event_start_date)}${o.event_end_date ? '<br><span style=color:#999>→ '+fmtDate(o.event_end_date)+'</span>' : ''}</td>
-      <td>${o.service_type || '—'}</td>
+      <td>${o.service_type || '—'}${captureChip(o)}</td>
       <td title="${o.product_program || ''}">${o.product_program || '—'}</td>
       <td title="${o.survey_type || ''}">${o.survey_type || '—'}</td>
       <td>${badge(o.order_status)}</td>
@@ -420,24 +443,28 @@ function openDetail(orderId){
         <div class="detail-field"><label>Start Date</label><span>${dv(fmtDate(o.event_start_date))}</span></div>
         <div class="detail-field"><label>End Date</label><span>${dv(fmtDate(o.event_end_date))}</span></div>
       </div>
-      <div class="detail-field"><label>Pfizer Meeting #</label><span>${dv(o.pfizer_meeting_number)}</span></div>
-      <div class="detail-field"><label>Address / Venue</label><span style="white-space:pre-line;">${dv(o.meeting_address)}</span></div>
+      <div class="detail-field"><label>Pfizer Meeting #</label><span>${dv(o.pfizer_meeting_number || o.f_pfz)}</span></div>
+      <div class="detail-field"><label>Address / Venue</label><span style="white-space:pre-line;">${dv(o.meeting_address || o.f_addr)}</span></div>
       <div class="detail-2col">
-        <div class="detail-field"><label>Event Type</label><span>${dv(o.event_type)}</span></div>
-        <div class="detail-field"><label>Meal Type</label><span>${dv(o.meal_type)}</span></div>
+        <div class="detail-field"><label>Event Type</label><span>${dv(o.event_type || o.f_etype)}</span></div>
+        <div class="detail-field"><label>Meal Type</label><span>${dv(o.meal_type || o.f_meal)}</span></div>
       </div>
       <div class="detail-2col">
-        <div class="detail-field"><label>Attendees (est.)</label><span>${dv(o.estimated_attendees)}</span></div>
-        <div class="detail-field"><label>Therapy Area</label><span>${dv(o.therapy_area)}</span></div>
+        <div class="detail-field"><label>Attendees (est.)</label><span>${dv(o.estimated_attendees || o.f_att)}</span></div>
+        <div class="detail-field"><label>Therapy Area</label><span>${dv(o.therapy_area || o.f_therapy)}</span></div>
       </div>
-      <div class="detail-field"><label>Pfizer Project Owner</label><span>${dv(o.pfizer_project_owner)}</span></div>
+      <div class="detail-field"><label>Pfizer Project Owner</label><span>${dv(o.pfizer_project_owner || o.f_owner || o.f_owner_name)}</span></div>
     </div>
 
     <div class="detail-section">
       <div class="detail-section-title">Service & Product</div>
       <div class="detail-2col">
         <div class="detail-field"><label>Service Type</label><span>${dv(o.service_type)}</span></div>
-        <div class="detail-field"><label>Quantity</label><span>${dv(o.quantity)}</span></div>
+        <div class="detail-field"><label>Quantities</label><span>${dv(o.quantity || [o.qty_app_licenses ? o.qty_app_licenses + ' app license' + (o.qty_app_licenses == 1 ? '' : 's') : '', o.qty_scanners ? o.qty_scanners + ' scanner' + (o.qty_scanners == 1 ? '' : 's') : '', o.qr_addon === 'Yes' ? 'QR check-in add-on' : ''].filter(Boolean).join(', '))}</span></div>
+      </div>
+      <div class="detail-2col">
+        <div class="detail-field"><label>TOV reporting</label><span>${o.tov === 'no' ? 'Not required (reduces quote by $500)' : o.tov ? 'Required (standard)' : dv('')}</span></div>
+        <div class="detail-field"><label>Devices</label><span>${dv(o.device_mode)}</span></div>
       </div>
       <div class="detail-field"><label>Product / Program</label><span>${dv(o.product_program)}</span></div>
       ${o.product_program_details ? `<div class="detail-field"><label>Product Details</label><span>${o.product_program_details}</span></div>` : ''}
@@ -446,10 +473,29 @@ function openDetail(orderId){
       ${o.survey_details ? `<div class="detail-field"><label>Survey Details</label><span>${o.survey_details}</span></div>` : ''}
     </div>
 
+    ${o.badge_type ? `
+    <div class="detail-section">
+      <div class="detail-section-title">Attendee Capture (from order form)</div>
+      <div class="detail-2col">
+        <div class="detail-field"><label>Attendees wear</label><span>${dv(o.badge_type)}</span></div>
+        <div class="detail-field"><label>Capture status</label><span>${o.capture_determination ? `<span class="badge ${o.capture_determination === 'Needs review' ? 'cap-review' : o.capture_determination === 'RE to confirm' ? 'cap-confirm' : 'cap-ok'}">${o.capture_determination}</span>` : dv('')}</span></div>
+        <div class="detail-field"><label>Congress / show</label><span>${dv(o.show_match || o.show_query)}</span></div>
+        <div class="detail-field"><label>Show record</label><span>${dv({yes:'API on record',check:'API before, RE to check',no:'No API',likely_no:'Image capture history',list_only:'No API or No 3rd party scanning'}[o.show_api_record] || '')}</span></div>
+        <div class="detail-field"><label>API source</label><span>${dv(o.api_source)}</span></div>
+        <div class="detail-field"><label>Own devices allowed</label><span>${dv(o.outside_capture_allowed)}</span></div>
+        <div class="detail-field"><label>Devices</label><span>${dv(o.device_mode)}</span></div>
+        <div class="detail-field"><label>QR add-on</label><span>${dv(o.qr_addon)}</span></div>
+      </div>
+      ${o.capture_reason ? `<div class="detail-field"><label>What the manager was told</label><span>${o.capture_reason}</span></div>` : ''}
+      ${(o.capture_not_allowed_per || o.list_import_authority) ? `<div class="detail-field"><label>Capture reported not allowed per</label><span>${o.capture_not_allowed_per || o.list_import_authority}</span></div>` : ''}
+      ${o.import_ack ? `<div class="detail-field"><label>Manager acknowledged</label><span>Yes: compliance survey cannot be asked at the meeting with this method</span></div>` : ''}
+      ${o.capture_determination === 'Needs review' ? `<div class="detail-field"><label>RE action</label><span>Manager reports the congress requires its own scanning system. Confirm that with the congress before quoting the List Import; if third-party capture is in fact allowed, switch the order to image capture.</span></div>` : ''}
+    </div>` : ''}
+
     <div class="detail-section">
       <div class="detail-section-title">Badge Kit / API</div>
       <div class="detail-field"><label>API Available?</label><span>${dv(o.badge_api_available)}</span></div>
-      ${o.badge_api_available === 'Yes' ? `
+      ${(o.badge_api_available === 'Yes' || o.provider_registration_company || o.api_badge_contact_name || o.api_badge_contact_email || o.api_badge_notes) ? `
       <div class="detail-2col">
         <div class="detail-field"><label>Provider / Reg. Company</label><span>${dv(o.provider_registration_company)}</span></div>
         <div class="detail-field"><label>Contact Name</label><span>${dv(o.api_badge_contact_name)}</span></div>

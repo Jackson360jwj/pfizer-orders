@@ -253,16 +253,6 @@ textarea{height:72px;resize:vertical;}
         <label class="lbl">Product Associated *</label>
         <input type="text" id="f_product" placeholder="e.g. Elrantamab" oninput="liveCalc()">
       </div>
-      <div class="fgroup">
-        <label class="lbl">Survey Type</label>
-        <select id="f_survey_type" onchange="liveCalc()">
-          <option value="">— Select Survey Type —</option>
-          <option>Comirnaty survey</option>
-          <option>Prevnar survey</option>
-          <option>Paxlovid survey</option>
-          <option>Migraine survey</option>
-        </select>
-      </div>
       <div class="fgroup fw">
         <label class="lbl">Pfizer Project Owner (Name &amp; Email)</label>
         <input type="text" id="f_owner" placeholder="e.g. Todd.A.Bugbee@pfizer.com" oninput="liveCalc()">
@@ -281,6 +271,7 @@ textarea{height:72px;resize:vertical;}
   <!-- ── ASSOCIATION / API INFO (populated from order form when order is opened) ── -->
   <div class="card" id="assoc_api_card" style="display:none;">
     <div class="card-title" style="font-size:13px;">Association / Badge API Information <span style="font-weight:400;color:#888;font-size:11px;text-transform:none;letter-spacing:0;"> — from order form</span></div>
+    <div id="capture_flag_note" style="display:none;margin:0 0 12px;padding:10px 14px;border-radius:6px;font-size:12.5px;line-height:1.5;"></div>
     <div class="fg">
       <div class="fgroup">
         <label class="lbl">Badge / Reg API Available</label>
@@ -1220,7 +1211,7 @@ function doImportObject(d, alreadyInKV){
   // Fill event fields — map both old and new field names
   const fieldMap = {
     f_mgr:1, f_mgr_email:1, f_pfz:1, f_entity:1, f_name:1, f_acronym:1, f_etype:1,
-    f_addr:1, f_date:1, f_time:1, f_meal:1, f_att:1, f_therapy:1, f_survey_type:1, f_owner:1, f_td:1, f_notes:1,
+    f_addr:1, f_date:1, f_time:1, f_meal:1, f_att:1, f_therapy:1, f_owner:1, f_td:1, f_notes:1,
     // Association / API fields (from order form)
     badge_api_available:1, assoc_contact_name:1, assoc_contact_phone:1,
     assoc_contact_email:1, provider_reg_company:1, api_badge_contact_name:1, api_badge_contact_email:1,
@@ -1230,8 +1221,32 @@ function doImportObject(d, alreadyInKV){
 
   // Show association card if there's any association data
   const assocCard = $id('assoc_api_card');
-  if(assocCard && (d.badge_api_available || d.assoc_contact_name || d.provider_reg_company)){
+  if(assocCard && (d.badge_api_available || d.assoc_contact_name || d.provider_reg_company || d.capture_determination)){
     assocCard.style.display = 'block';
+  }
+  // Guided order form (Sep 2026): surface the capture determination so the quote matches what RE still has to confirm
+  const capNote = $id('capture_flag_note');
+  if(capNote){
+    const cap = d.capture_determination || '';
+    const bits = [];
+    if(d.badge_type) bits.push('Attendees wear: ' + d.badge_type);
+    if(d.show_match || d.show_query) bits.push('Show: ' + (d.show_match || d.show_query + ' (not in RE list)'));
+    if(d.badge_api_available) bits.push('API: ' + d.badge_api_available + (d.api_source ? ' per ' + d.api_source : ''));
+    if(d.outside_capture_allowed) bits.push('Own devices allowed: ' + d.outside_capture_allowed);
+    if(d.capture_not_allowed_per || d.list_import_authority) bits.push('Congress rule per: ' + (d.capture_not_allowed_per || d.list_import_authority));
+    if(d.import_ack) bits.push('Manager acknowledged the compliance limitation');
+    if(cap === 'RE to confirm'){
+      capNote.style.cssText = 'display:block;margin:0 0 12px;padding:10px 14px;border-radius:6px;font-size:12.5px;line-height:1.5;background:#fff8e1;border:1px solid #f9a825;color:#6d4c00;';
+      capNote.innerHTML = '<strong>RE to confirm capture method.</strong> The API situation for this show is not settled (' + (d.api_source === 'RE record' ? 'RE\'s own record needs a check' : 'the manager could not confirm it') + '), so the form ordered ' + (d.service_type || 'a provisional service') + '. Check the dev kit history and switch scanning / image capture before sending.' + (bits.length ? '<br>' + bits.join(' | ') : '');
+    } else if(cap === 'Needs review'){
+      capNote.style.cssText = 'display:block;margin:0 0 12px;padding:10px 14px;border-radius:6px;font-size:12.5px;line-height:1.5;background:#fdecea;border:1px solid #e74c3c;color:#7b241c;';
+      capNote.innerHTML = '<strong>Held for review: the manager reports the congress requires its own scanning system.</strong> The order form planned a List Import (shown to the manager as an import from the congress system) and took a source plus an acknowledgment. Confirm the rule with the congress before quoting; if third-party capture is in fact allowed, switch this to image capture.' + (bits.length ? '<br>' + bits.join(' | ') : '');
+    } else if(cap){
+      capNote.style.cssText = 'display:block;margin:0 0 12px;padding:10px 14px;border-radius:6px;font-size:12.5px;line-height:1.5;background:#e3f6ea;border:1px solid #9fdcb6;color:#14532d;';
+      capNote.innerHTML = '<strong>Capture method confirmed by the order form.</strong>' + (bits.length ? '<br>' + bits.join(' | ') : '');
+    } else {
+      capNote.style.display = 'none';
+    }
   }
 
   // Product field — if product_program is "Other", use the details field (actual product name)
@@ -1276,8 +1291,13 @@ function doImportObject(d, alreadyInKV){
   if($id('app_qty'))            $id('app_qty').value            = d.app_qty            || d.qty_app_licenses || 0;
   if($id('scanner_qty_nodata')) $id('scanner_qty_nodata').value = d.scanner_qty_nodata || d.qty_scanners     || 0;
   if($id('scanner_qty_data'))   $id('scanner_qty_data').value   = d.scanner_qty_data   || 0;
-  if($id('qr_qty'))             $id('qr_qty').value             = d.qr_qty             || 0;
-  if($id('img_qty'))            $id('img_qty').value            = d.img_qty            || 0;
+  // Orders from the form carry no per-service quantity for QR (one set-up per event) and put
+  // image-capture app licenses in qty_app_licenses, so derive both from what the form ordered.
+  const _fromForm = String(d.service_type || '').split(',').map(x => x.trim());
+  const _hasApp = _fromForm.includes('Mobile App'), _hasImg = _fromForm.includes('Image Capture'), _hasQr = _fromForm.includes('QR Code'), _hasScan = _fromForm.includes('Scanner');
+  if($id('qr_qty'))             $id('qr_qty').value             = d.qr_qty             || (_hasQr ? 1 : 0);
+  if($id('img_qty'))            $id('img_qty').value            = d.img_qty            || ((_hasImg && !_hasApp) ? (d.qty_app_licenses || 0) : 0);
+  if($id('app_qty') && _hasImg && !_hasApp && d.app_qty === undefined) $id('app_qty').value = 0;
   if($id('list_qty'))           $id('list_qty').value           = d.list_qty           || 0;
 
   // TOV — restore radio selection and update card highlight
@@ -1293,6 +1313,13 @@ function doImportObject(d, alreadyInKV){
   // Only override a checkbox when the record actually carries the key, so records that predate
   // a field (e.g. opt_api_scanner / opt_api_img, now on by default) keep the form default.
   Object.keys(cbMap).forEach(k => { const el=$id(cbMap[k]); if(el && d[k] !== undefined && d[k] !== null && d[k] !== '') el.checked=(d[k]==='1'); });
+  // First import from the order form (no saved opt_api_* yet): one venue API line at most, and none
+  // when the form established there is no API. Mobile App always carries its own API line.
+  if(d.opt_api_scanner === undefined && d.opt_api_img === undefined && d.service_type){
+    const noApi = d.badge_api_available === 'No';
+    if($id('opt_api_scanner')) $id('opt_api_scanner').checked = !noApi && _hasScan && !_hasApp && !_hasImg;
+    if($id('opt_api_img'))     $id('opt_api_img').checked     = !noApi && _hasImg && !_hasApp;
+  }
   // API costs
   if(d.api_cost         && $id('api_cost'))         $id('api_cost').value         = d.api_cost;
   if(d.scanner_api_cost && $id('scanner_api_cost')) $id('scanner_api_cost').value = d.scanner_api_cost;
@@ -1354,7 +1381,6 @@ async function saveCurrentFormState(extraFields){
     f_meal:          val('f_meal'),
     f_att:           val('f_att'),
     f_therapy:       val('f_therapy'),
-    f_survey_type:   val('f_survey_type'),
     f_product:       product,
     // Keep product_program in sync so Order Management dashboard shows the correct product
     product_program: product,
