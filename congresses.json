@@ -1,0 +1,1498 @@
+{
+ "_doc": "Full congress names for the Pfizer AMEX order form type-ahead. Source: DPC event metadata names 2022-2026, cross-checked with OTIS Compliance Info. Names and acronyms only.",
+ "built": "2026-09-23",
+ "count": 237,
+ "congresses": [
+  {
+   "name": "Advanced Topics for Oncology Pharmacy Professionals Summit",
+   "acronym": "ATOPP",
+   "aliases": [],
+   "show_key": "ATOPP PT"
+  },
+  {
+   "name": "Advances in Inflammatory Bowel Diseases Conference",
+   "acronym": "AIBD",
+   "aliases": [],
+   "show_key": "AIBD"
+  },
+  {
+   "name": "Advances in Inflammatory Bowel Diseases Regional Meeting",
+   "acronym": "AIBD",
+   "aliases": [
+    "AIBD Regionals"
+   ],
+   "show_key": "AIBD"
+  },
+  {
+   "name": "Alabama Primary Health Care Association Annual Conference & Expo",
+   "acronym": "APHCA",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Alabama Society of Dermatology Professionals Annual Fall Meeting",
+   "acronym": "ASDP",
+   "aliases": [],
+   "show_key": "ASDP PT"
+  },
+  {
+   "name": "AMDA The Society for Post-Acute and Long-Term Care Medicine Annual Conference",
+   "acronym": "AMDA",
+   "aliases": [
+    "PALTC"
+   ],
+   "show_key": "AMDA"
+  },
+  {
+   "name": "American Academy of Allergy, Asthma & Immunology Annual Meeting",
+   "acronym": "AAAAI",
+   "aliases": [],
+   "show_key": "AAAAI"
+  },
+  {
+   "name": "American Academy of Dermatology Annual Meeting",
+   "acronym": "AAD",
+   "aliases": [
+    "American Academy of Dermatology"
+   ],
+   "show_key": "AAD"
+  },
+  {
+   "name": "American Academy of Dermatology Innovation Academy",
+   "acronym": "AAD",
+   "aliases": [
+    "AAD Summer"
+   ],
+   "show_key": "AAD"
+  },
+  {
+   "name": "American Academy of Family Physicians FMX Family Medicine Conference",
+   "acronym": "AAFP",
+   "aliases": [
+    "FMX"
+   ],
+   "show_key": "AAFP"
+  },
+  {
+   "name": "American Academy of Neurology Annual Meeting",
+   "acronym": "AAN",
+   "aliases": [],
+   "show_key": "AAN"
+  },
+  {
+   "name": "American Academy of Pediatrics National Conference & Exhibition",
+   "acronym": "AAP",
+   "aliases": [],
+   "show_key": "AAP"
+  },
+  {
+   "name": "American Academy of Physician Associates",
+   "acronym": "AAPA",
+   "aliases": [
+    "American Academy of Physician Assistants"
+   ],
+   "show_key": "AAPA"
+  },
+  {
+   "name": "American Association of Critical-Care Nurses National Teaching Institute & Critical Care Exposition",
+   "acronym": "AACN",
+   "aliases": [
+    "NTI",
+    "AACN-NTI"
+   ],
+   "show_key": "AACN"
+  },
+  {
+   "name": "American Association of Heart Failure Nurses Annual Meeting",
+   "acronym": "AAHFN",
+   "aliases": [],
+   "show_key": "AAHFN"
+  },
+  {
+   "name": "American Association of Nurse Practitioners National Conference",
+   "acronym": "AANP",
+   "aliases": [],
+   "show_key": "AANP"
+  },
+  {
+   "name": "American College Health Association Annual Meeting",
+   "acronym": "ACHA",
+   "aliases": [],
+   "show_key": "ACHA"
+  },
+  {
+   "name": "American College of Allergy, Asthma & Immunology Annual Scientific Meeting",
+   "acronym": "ACAAI",
+   "aliases": [],
+   "show_key": "ACAAI"
+  },
+  {
+   "name": "American College of Cardiology Annual Scientific Session & Expo",
+   "acronym": "ACC",
+   "aliases": [],
+   "show_key": "ACC"
+  },
+  {
+   "name": "American College of Cardiology-Massachusetts Annual Meeting",
+   "acronym": "ACC-MA",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "American College of Emergency Physicians Scientific Assembly",
+   "acronym": "ACEP",
+   "aliases": [],
+   "show_key": "ACEP"
+  },
+  {
+   "name": "American College of Gastroenterology / Florida Gastroenterology Society Annual Spring Symposium",
+   "acronym": "ACG",
+   "aliases": [],
+   "show_key": "ACG"
+  },
+  {
+   "name": "American College of Gastroenterology Annual Scientific Meeting & Postgraduate Course",
+   "acronym": "ACG",
+   "aliases": [],
+   "show_key": "ACG"
+  },
+  {
+   "name": "American College of Gastroenterology IBD School and Eastern Regional Postgraduate Course",
+   "acronym": "ACG",
+   "aliases": [],
+   "show_key": "ACG"
+  },
+  {
+   "name": "American College of Obstetricians and Gynecologists Annual Clinical & Scientific Meeting",
+   "acronym": "ACOG",
+   "aliases": [],
+   "show_key": "ACOG"
+  },
+  {
+   "name": "American College of Obstetricians and Gynecologists Annual District Meeting",
+   "acronym": "ACOG",
+   "aliases": [
+    "District XII",
+    "District V"
+   ],
+   "show_key": "ACOG"
+  },
+  {
+   "name": "American College of Osteopathic Family Physicians",
+   "acronym": "ACOFP",
+   "aliases": [],
+   "show_key": "ACOFP PT"
+  },
+  {
+   "name": "American College of Physicians Internal Medicine Meeting",
+   "acronym": "ACP",
+   "aliases": [],
+   "show_key": "ACP"
+  },
+  {
+   "name": "American College of Rheumatology Convergence",
+   "acronym": "ACR",
+   "aliases": [],
+   "show_key": "ACR"
+  },
+  {
+   "name": "American Diabetes Association Scientific Sessions",
+   "acronym": "ADA",
+   "aliases": [],
+   "show_key": "ADA"
+  },
+  {
+   "name": "American Geriatrics Society Annual Scientific Meeting",
+   "acronym": "AGS",
+   "aliases": [],
+   "show_key": "AGS"
+  },
+  {
+   "name": "American Headache Society Annual Scientific Meeting",
+   "acronym": "AHS",
+   "aliases": [],
+   "show_key": "AHS"
+  },
+  {
+   "name": "American Headache Society Scottsdale Headache Symposium",
+   "acronym": "AHS",
+   "aliases": [
+    "Scottsdale Headache Symposium"
+   ],
+   "show_key": "AHS"
+  },
+  {
+   "name": "American Heart Association Scientific Sessions",
+   "acronym": "AHA",
+   "aliases": [],
+   "show_key": "AHA"
+  },
+  {
+   "name": "American Immunization Registry Association National Meeting",
+   "acronym": "AIRA",
+   "aliases": [],
+   "show_key": "AIRA"
+  },
+  {
+   "name": "American Medical Group Association Annual Conference",
+   "acronym": "AMGA",
+   "aliases": [],
+   "show_key": "AMGA"
+  },
+  {
+   "name": "American Nurses Credentialing Center National Magnet Conference",
+   "acronym": "ANCC",
+   "aliases": [
+    "Magnet"
+   ],
+   "show_key": "ANCC MAGNET"
+  },
+  {
+   "name": "American Pharmacists Association Annual Meeting & Exposition",
+   "acronym": "APhA",
+   "aliases": [],
+   "show_key": "APHA"
+  },
+  {
+   "name": "American Public Health Association Annual Meeting & Exposition",
+   "acronym": "APHA",
+   "aliases": [],
+   "show_key": "APHA"
+  },
+  {
+   "name": "American Society of Clinical Oncology Annual Meeting",
+   "acronym": "ASCO",
+   "aliases": [],
+   "show_key": "ASCO"
+  },
+  {
+   "name": "American Society of Clinical Oncology Gastrointestinal Cancers Symposium",
+   "acronym": "ASCO GI",
+   "aliases": [],
+   "show_key": "ASCO GI"
+  },
+  {
+   "name": "American Society of Clinical Oncology Genitourinary Cancers Symposium",
+   "acronym": "ASCO GU",
+   "aliases": [],
+   "show_key": "ASCO GU"
+  },
+  {
+   "name": "American Society of Consultant Pharmacists Annual Meeting & Exhibition",
+   "acronym": "ASCP",
+   "aliases": [],
+   "show_key": "ASCP"
+  },
+  {
+   "name": "American Society of Echocardiography",
+   "acronym": "ASE",
+   "aliases": [],
+   "show_key": "ASE"
+  },
+  {
+   "name": "American Society of Health-System Pharmacists Midyear Clinical Meeting & Exhibition",
+   "acronym": "ASHP",
+   "aliases": [
+    "ASHP Midyear"
+   ],
+   "show_key": "ASHP"
+  },
+  {
+   "name": "American Society of Health-System Pharmacists Summer Meetings & Exhibition",
+   "acronym": "ASHP",
+   "aliases": [],
+   "show_key": "ASHP"
+  },
+  {
+   "name": "American Society of Hematology Annual Meeting and Exposition",
+   "acronym": "ASH",
+   "aliases": [],
+   "show_key": "ASH"
+  },
+  {
+   "name": "American Society of Nuclear Cardiology Annual Scientific Session & Exhibition",
+   "acronym": "ASNC",
+   "aliases": [],
+   "show_key": "ASNC"
+  },
+  {
+   "name": "American Telemedicine Association Annual Conference & Expo",
+   "acronym": "ATA",
+   "aliases": [],
+   "show_key": "ATA"
+  },
+  {
+   "name": "American Urological Association",
+   "acronym": "AUA",
+   "aliases": [
+    "American Urology Association"
+   ],
+   "show_key": "AUA"
+  },
+  {
+   "name": "Amplify Urgent Care Convention",
+   "acronym": "UCA",
+   "aliases": [
+    "Urgent Care Convention"
+   ],
+   "show_key": "UCA"
+  },
+  {
+   "name": "Association of Pediatric Hematology/Oncology Nurses Annual Conference",
+   "acronym": "APHON",
+   "aliases": [],
+   "show_key": "APHON"
+  },
+  {
+   "name": "Atlantic Dermatology Conference",
+   "acronym": "Atlantic",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Bendcare Summit",
+   "acronym": "Bendcare",
+   "aliases": [],
+   "show_key": "BENDCARE SUMMIT PT"
+  },
+  {
+   "name": "CalDerm Northern California",
+   "acronym": "CalDerm",
+   "aliases": [
+    "CalDerm NorCal"
+   ],
+   "show_key": null
+  },
+  {
+   "name": "CalDerm South Fall Symposium",
+   "acronym": "CalDerm",
+   "aliases": [],
+   "show_key": "CALDERM SOUTH PT"
+  },
+  {
+   "name": "California Dermatology Physician Assistant Symposium",
+   "acronym": "CDPAS",
+   "aliases": [],
+   "show_key": "CDPAS PT"
+  },
+  {
+   "name": "California Society of Dermatology & Dermatologic Surgery CalDerm Symposium",
+   "acronym": "CalDerm",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Cardinal Health Oncology Summit",
+   "acronym": "CHOS",
+   "aliases": [],
+   "show_key": "CHOS"
+  },
+  {
+   "name": "Cardinal Health Retail Business Conference",
+   "acronym": "Cardinal",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Cardiology in Colorado",
+   "acronym": "Mayo",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Cardiomyopathy and Cardio-Oncology Symposium",
+   "acronym": "Scripps",
+   "aliases": [],
+   "show_key": "SCRIPPS PT"
+  },
+  {
+   "name": "Champions for Health Seminar",
+   "acronym": "CSHP",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Chicago Hemodynamic Forum",
+   "acronym": "CHF",
+   "aliases": [],
+   "show_key": "CHF"
+  },
+  {
+   "name": "Christopher G. Wood Advances in Urologic Oncology Symposium",
+   "acronym": "UTMD",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Clinical Hematology & Oncology, Presented by Scripps Cancer Center",
+   "acronym": "Scripps",
+   "aliases": [],
+   "show_key": "SCRIPPS PT"
+  },
+  {
+   "name": "Clinical Immunology Society Annual Meeting",
+   "acronym": "CIS",
+   "aliases": [],
+   "show_key": "CIS"
+  },
+  {
+   "name": "Conference of the International Society of Travel Medicine",
+   "acronym": "CISTM",
+   "aliases": [],
+   "show_key": "CISTM PT"
+  },
+  {
+   "name": "Congress of Clinical Dermatology",
+   "acronym": "CCD",
+   "aliases": [],
+   "show_key": "CCD PT"
+  },
+  {
+   "name": "Congress of Clinical Rheumatology East",
+   "acronym": "CCR",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Congress of Clinical Rheumatology West",
+   "acronym": "CCR",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Congress of European Crohn's and Colitis Organisation",
+   "acronym": "ECCO",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Congress of the European Academy of Neurology",
+   "acronym": "EAN",
+   "aliases": [],
+   "show_key": "EAN"
+  },
+  {
+   "name": "Congress of the European Society of Clinical Microbiology and Infectious Diseases Global",
+   "acronym": "ESCMID",
+   "aliases": [
+    "ESCMID Global",
+    "European Congress of Clinical Microbiology & Infectious Diseases",
+    "ECCMID",
+    "European Society of Clinical Microbiology and Infectious Diseases"
+   ],
+   "show_key": "ESCMID"
+  },
+  {
+   "name": "Connecticut Dermatology and Dermatologic Surgery Society Regional Scientific Meeting",
+   "acronym": "CSD&DS",
+   "aliases": [],
+   "show_key": "CSD&DS"
+  },
+  {
+   "name": "Connecticut Dermatology NP & PA Organization Northeast Dermatology Conference",
+   "acronym": "Northeast",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Crohn's & Colitis Congress",
+   "acronym": "CCC",
+   "aliases": [
+    "Crohns and Colitis Congress"
+   ],
+   "show_key": "CCC"
+  },
+  {
+   "name": "Dermatologists of Central States Fall Provider Summit",
+   "acronym": "DOCS",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Dermatology Innovation Symposium",
+   "acronym": "DIS",
+   "aliases": [],
+   "show_key": "DIS"
+  },
+  {
+   "name": "Dermatology Refresher Symposium for Nurse Practitioners and Physician Assistants",
+   "acronym": "DRS",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Diamond Headache Clinic Launching Empowered Advanced Practice Providers & Headache Medicine",
+   "acronym": "DHC",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Diamond Headache Foundation",
+   "acronym": "DHF",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Digestive Disease Week",
+   "acronym": "DDW",
+   "aliases": [],
+   "show_key": "DDW"
+  },
+  {
+   "name": "Diversity in Dermatology Conference",
+   "acronym": "DID",
+   "aliases": [],
+   "show_key": "DID"
+  },
+  {
+   "name": "Eastern Allergy Conference",
+   "acronym": "EAC",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Echo Revolution Symposium",
+   "acronym": "Echo",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Elevate Dermatology Conference",
+   "acronym": "Elevate",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Endocrine Medical Society",
+   "acronym": "ENDO",
+   "aliases": [],
+   "show_key": "ENDO"
+  },
+  {
+   "name": "European Academy of Dermatology and Venereology",
+   "acronym": "EADV",
+   "aliases": [],
+   "show_key": "EADV"
+  },
+  {
+   "name": "European Academy of Dermatology and Venereology Symposium",
+   "acronym": "EADV",
+   "aliases": [
+    "EADV Spring Symposium"
+   ],
+   "show_key": "EADV"
+  },
+  {
+   "name": "European Association of Hospital Pharmacists Biosimilars Sustainability Summit",
+   "acronym": "BSS",
+   "aliases": [],
+   "show_key": "BSS"
+  },
+  {
+   "name": "European Association of Urology",
+   "acronym": "EAU",
+   "aliases": [],
+   "show_key": "EAU"
+  },
+  {
+   "name": "European Breast Cancer Conference",
+   "acronym": "EBCC",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "European Congress of Internal Medicine",
+   "acronym": "ECIM",
+   "aliases": [],
+   "show_key": "ECIM PT"
+  },
+  {
+   "name": "European Congress of Obstetrics and Gynaecology",
+   "acronym": "EBCOG",
+   "aliases": [],
+   "show_key": "EBCOG"
+  },
+  {
+   "name": "European Geriatric Medicine Society International Congress",
+   "acronym": "EuGMS",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "European Headache Congress",
+   "acronym": "EHC",
+   "aliases": [],
+   "show_key": "EHC"
+  },
+  {
+   "name": "European Hematology Association Congress",
+   "acronym": "EHA",
+   "aliases": [],
+   "show_key": "EHA"
+  },
+  {
+   "name": "European Lung Cancer Congress",
+   "acronym": "ELCC",
+   "aliases": [],
+   "show_key": "ELCC"
+  },
+  {
+   "name": "European Paediatric Rheumatology Congress",
+   "acronym": "PReS",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "European Respiratory Society Congress",
+   "acronym": "ERS",
+   "aliases": [],
+   "show_key": "ERS"
+  },
+  {
+   "name": "European Society for Dermatological Research",
+   "acronym": "ESDR",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "European Society for Medical Oncology Asia Congress",
+   "acronym": "ESMO Asia",
+   "aliases": [],
+   "show_key": "ESMO"
+  },
+  {
+   "name": "European Society for Medical Oncology Breast Cancer",
+   "acronym": "ESMO Breast",
+   "aliases": [],
+   "show_key": "ESMO"
+  },
+  {
+   "name": "European Society for Medical Oncology Congress",
+   "acronym": "ESMO",
+   "aliases": [],
+   "show_key": "ESMO"
+  },
+  {
+   "name": "European Society for Medical Oncology Gastrointestinal Cancers Congress",
+   "acronym": "ESMO GI",
+   "aliases": [],
+   "show_key": "ESMO GI"
+  },
+  {
+   "name": "European Society for Medical Oncology Lung Symposium",
+   "acronym": "ESMO Lung",
+   "aliases": [],
+   "show_key": "ESMO"
+  },
+  {
+   "name": "European Society for Pediatric Dermatology Congress",
+   "acronym": "ESPD",
+   "aliases": [],
+   "show_key": "ESPD"
+  },
+  {
+   "name": "European Society for Pediatric Infectious Diseases",
+   "acronym": "ESPID",
+   "aliases": [],
+   "show_key": "ESPID"
+  },
+  {
+   "name": "European Society of Cardiology Heart Failure Congress",
+   "acronym": "ESC-HF",
+   "aliases": [],
+   "show_key": "ESC HF"
+  },
+  {
+   "name": "Fall Clinical Dermatology Conference",
+   "acronym": "Fall Clinical",
+   "aliases": [
+    "FCD"
+   ],
+   "show_key": "FALL CLINICAL PT"
+  },
+  {
+   "name": "Fall Clinical Dermatology Conference for PAs and NPs",
+   "acronym": "Fall Clinical",
+   "aliases": [
+    "FCD NP PA"
+   ],
+   "show_key": "FALL CLINICAL PA NP PT"
+  },
+  {
+   "name": "Foundation for Sickle Cell Disease Research",
+   "acronym": "FSCDR",
+   "aliases": [],
+   "show_key": "FSCDR"
+  },
+  {
+   "name": "Gastroenterology Updates: IBD, Liver Disease Conference",
+   "acronym": "GUILD",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Georgia Dermatology Physician Assistants Dermatology Pearls Conference",
+   "acronym": "GDPA",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "GLAONS Oncology Summit",
+   "acronym": "GLAONS",
+   "aliases": [],
+   "show_key": "GLAONS"
+  },
+  {
+   "name": "Hawaii Dermatology Seminar",
+   "acronym": "Hawaii",
+   "aliases": [],
+   "show_key": "HAWAII DERM"
+  },
+  {
+   "name": "Headache Cooperative of the Pacific Winter Conference",
+   "acronym": "HCOP",
+   "aliases": [],
+   "show_key": "HCOP WINTER CONFERENCE PT"
+  },
+  {
+   "name": "Headache Management Paradigm",
+   "acronym": "HMP",
+   "aliases": [],
+   "show_key": "HMP PT"
+  },
+  {
+   "name": "Heart Failure Management ECHO Florida",
+   "acronym": "HFM",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Heart Failure Society of America Annual Scientific Meeting",
+   "acronym": "HFSA",
+   "aliases": [],
+   "show_key": "HFSA"
+  },
+  {
+   "name": "Heart Rhythm",
+   "acronym": "HRS",
+   "aliases": [],
+   "show_key": "HRS"
+  },
+  {
+   "name": "Heart Team Summit Congress",
+   "acronym": "HTS",
+   "aliases": [],
+   "show_key": "HTS"
+  },
+  {
+   "name": "Hematology Oncology Pharmacy Conference",
+   "acronym": "HOPCON",
+   "aliases": [],
+   "show_key": "HOPCON PT"
+  },
+  {
+   "name": "Hematology/Oncology Pharmacy Association Annual Conference",
+   "acronym": "HOPA",
+   "aliases": [],
+   "show_key": "HOPA"
+  },
+  {
+   "name": "Hemostasis and Thrombosis Research Society Scientific Symposium",
+   "acronym": "HTRS",
+   "aliases": [],
+   "show_key": "HTRS PT"
+  },
+  {
+   "name": "Icahn School of Medicine at Mount Sinai Winter Symposium",
+   "acronym": "MSWS",
+   "aliases": [
+    "Mount Sinai Winter Symposium"
+   ],
+   "show_key": "MT. SINAI WINTER SYMPOSIUM PT"
+  },
+  {
+   "name": "IDWeek",
+   "acronym": "IDWeek",
+   "aliases": [
+    "ID Week",
+    "Infectious Disease Week"
+   ],
+   "show_key": "IDWEEK"
+  },
+  {
+   "name": "Illinois Public Health Association Annual Conference",
+   "acronym": "IPHA",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Immunoglobulin National Society National Conference",
+   "acronym": "IgNS",
+   "aliases": [],
+   "show_key": "IGNS"
+  },
+  {
+   "name": "Indy Hematology Review",
+   "acronym": "IHR",
+   "aliases": [],
+   "show_key": "IHR PT"
+  },
+  {
+   "name": "Inflammatory Skin Disease Summit",
+   "acronym": "ISDS",
+   "aliases": [],
+   "show_key": "ISDS"
+  },
+  {
+   "name": "Infusion Nurses Society Meeting",
+   "acronym": "INS",
+   "aliases": [],
+   "show_key": "INS"
+  },
+  {
+   "name": "Innovations in Dermatology Symposium",
+   "acronym": "Innovations",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "International Association for the Study of Lung Cancer World Conference on Lung Cancer",
+   "acronym": "WCLC",
+   "aliases": [
+    "IASLC"
+   ],
+   "show_key": "WCLC"
+  },
+  {
+   "name": "International Confederation of Midwives Triennial Congress",
+   "acronym": "ICM",
+   "aliases": [],
+   "show_key": "ICM"
+  },
+  {
+   "name": "International Congress of the Society for Melanoma Research",
+   "acronym": "SMR",
+   "aliases": [],
+   "show_key": "SMR"
+  },
+  {
+   "name": "International Congress on Infectious Diseases",
+   "acronym": "ISID",
+   "aliases": [],
+   "show_key": "ISID"
+  },
+  {
+   "name": "International Menopause Society World Congress on Menopause",
+   "acronym": "IMS",
+   "aliases": [],
+   "show_key": "IMS"
+  },
+  {
+   "name": "International Myeloma Society Annual Meeting",
+   "acronym": "IMS",
+   "aliases": [],
+   "show_key": "IMS"
+  },
+  {
+   "name": "International Society for Respiratory Viruses Options for the Control of Influenza Conference",
+   "acronym": "Options",
+   "aliases": [],
+   "show_key": "OPTIONS XIII CONFERENCE"
+  },
+  {
+   "name": "International Society of Pediatric Respiratory Diseases Congress",
+   "acronym": "INSPIRED",
+   "aliases": [],
+   "show_key": "INSPIRED"
+  },
+  {
+   "name": "International Society on Thrombosis and Haemostasis Congress",
+   "acronym": "ISTH",
+   "aliases": [],
+   "show_key": "ISTH"
+  },
+  {
+   "name": "International Symposium on Pneumococci and Pneumococcal Diseases",
+   "acronym": "ISPPD",
+   "aliases": [
+    "International Society of Pneumonia & Pneumococcal Diseases"
+   ],
+   "show_key": "ISPPD"
+  },
+  {
+   "name": "Journal of the Advanced Practitioner in Oncology LIVE",
+   "acronym": "JADPRO",
+   "aliases": [],
+   "show_key": "JADPRO"
+  },
+  {
+   "name": "Launching Empowered Advanced Practice Providers in Headache Management",
+   "acronym": "LEAPPS",
+   "aliases": [],
+   "show_key": "LEAPPS"
+  },
+  {
+   "name": "Lynn Sage Breast Cancer Symposium",
+   "acronym": "Lynn Sage",
+   "aliases": [],
+   "show_key": "LYNN SAGE PT"
+  },
+  {
+   "name": "Massachusetts Academy of Dermatology Spring Meeting",
+   "acronym": "MAD",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Masterclasses in Dermatology",
+   "acronym": "MCD",
+   "aliases": [],
+   "show_key": "MCD"
+  },
+  {
+   "name": "Masters in Therapeutic Oncology Summit",
+   "acronym": "MATOS",
+   "aliases": [],
+   "show_key": "MATOS"
+  },
+  {
+   "name": "Masters of Pediatric Dermatology Symposium",
+   "acronym": "MOPD",
+   "aliases": [
+    "South Beach Symposium",
+    "MOPD-SBS"
+   ],
+   "show_key": "MOPD-SBS"
+  },
+  {
+   "name": "Maui Derm Caribbean",
+   "acronym": "Maui Derm",
+   "aliases": [],
+   "show_key": "MAUI DERM CARIBBEAN"
+  },
+  {
+   "name": "Maui Derm Hawaii",
+   "acronym": "Maui Derm",
+   "aliases": [],
+   "show_key": "MAUI DERM"
+  },
+  {
+   "name": "Maui Derm NP+PA Summer",
+   "acronym": "Maui Derm",
+   "aliases": [],
+   "show_key": "MAUI DERM NPPA SUMMER PT"
+  },
+  {
+   "name": "Mayo Clinic Headache Symposium",
+   "acronym": "Mayo",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "McKesson IdeaShare",
+   "acronym": "McKesson",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Muscular Dystrophy Association Clinical and Scientific Conference",
+   "acronym": "MDA",
+   "aliases": [],
+   "show_key": "MDA"
+  },
+  {
+   "name": "Music City Symposium for Cosmetic Advances & Laser Education",
+   "acronym": "Music City",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Myology International Congress",
+   "acronym": "Myology",
+   "aliases": [],
+   "show_key": "MYOLOGY"
+  },
+  {
+   "name": "National Alliance of Sickle Cell Centers Annual Sickle Cell Disease Centers Meeting & Consensus Conference",
+   "acronym": "NASCC",
+   "aliases": [],
+   "show_key": "NASCC PT"
+  },
+  {
+   "name": "National Association of County and City Health Officials",
+   "acronym": "NACCHO",
+   "aliases": [],
+   "show_key": "NACCHO"
+  },
+  {
+   "name": "National Association of Hispanic Nurses Annual Conference",
+   "acronym": "NAHN",
+   "aliases": [],
+   "show_key": "NAHN"
+  },
+  {
+   "name": "National Association of Orthopaedic Nurses Annual Conference",
+   "acronym": "NAON",
+   "aliases": [],
+   "show_key": "NAON"
+  },
+  {
+   "name": "National Association of Pediatric Nurse Practitioners National Conference on Pediatric Health Care",
+   "acronym": "NAPNAP",
+   "aliases": [],
+   "show_key": "NAPNAP"
+  },
+  {
+   "name": "National Black Nurses Association Annual Institute and Conference",
+   "acronym": "NBNA",
+   "aliases": [],
+   "show_key": "NBNA PT"
+  },
+  {
+   "name": "National Community Pharmacists Association Annual Convention",
+   "acronym": "NCPA",
+   "aliases": [],
+   "show_key": "NCPA"
+  },
+  {
+   "name": "National Conference for Immunization Coalitions and Partnerships",
+   "acronym": "NCICP",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "National Home Infusion Association Annual Conference",
+   "acronym": "NHIA",
+   "aliases": [],
+   "show_key": "NHIA"
+  },
+  {
+   "name": "National Kidney Foundation Spring Clinical Meetings",
+   "acronym": "NKF",
+   "aliases": [],
+   "show_key": "NKF"
+  },
+  {
+   "name": "National Medical Association Annual Convention and Scientific Assembly",
+   "acronym": "NMA",
+   "aliases": [],
+   "show_key": "NMA"
+  },
+  {
+   "name": "Neuromuscular Study Group Annual Scientific Meeting",
+   "acronym": "NMSG",
+   "aliases": [],
+   "show_key": "NMSG"
+  },
+  {
+   "name": "NeuroNet PRO Annual Summit",
+   "acronym": "NeuroNet",
+   "aliases": [],
+   "show_key": "NEURONET"
+  },
+  {
+   "name": "New Wave Dermatology",
+   "acronym": "NWD",
+   "aliases": [],
+   "show_key": "NWD PT"
+  },
+  {
+   "name": "New York Advances in Dermatology",
+   "acronym": "NYAD",
+   "aliases": [],
+   "show_key": "NYAD"
+  },
+  {
+   "name": "North & South Carolina Chapters of the American College of Cardiology Joint Meeting",
+   "acronym": "NCSC",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "North American Heart Failure with Preserved Ejection Fraction (HFpEF) Summit",
+   "acronym": "HFpEF",
+   "aliases": [],
+   "show_key": "HFPEF"
+  },
+  {
+   "name": "North Carolina Neurological Society Annual Meeting",
+   "acronym": "NCNS",
+   "aliases": [],
+   "show_key": "NCNS"
+  },
+  {
+   "name": "North Carolina Society of Gastroenterology Annual Conference",
+   "acronym": "NCSG",
+   "aliases": [],
+   "show_key": "NCSG PT"
+  },
+  {
+   "name": "Northern European Conference on Travel Medicine",
+   "acronym": "NECTM",
+   "aliases": [],
+   "show_key": "NECTM"
+  },
+  {
+   "name": "Northwest Pharmacy Convention",
+   "acronym": "NWPC",
+   "aliases": [],
+   "show_key": "NWPC PT"
+  },
+  {
+   "name": "Northwestern Heart Team Summit",
+   "acronym": "NHTS",
+   "aliases": [],
+   "show_key": "NHTS"
+  },
+  {
+   "name": "Oncology Nursing Society Congress",
+   "acronym": "ONS",
+   "aliases": [],
+   "show_key": "ONS"
+  },
+  {
+   "name": "Oregon Dermatology Society",
+   "acronym": "ODS",
+   "aliases": [],
+   "show_key": "ODS"
+  },
+  {
+   "name": "Pacific Dermatologic Association Annual Meeting",
+   "acronym": "PDA",
+   "aliases": [],
+   "show_key": "PDA PT"
+  },
+  {
+   "name": "Pain Medicine Academy of Advanced Practice Providers",
+   "acronym": "PMAAPP",
+   "aliases": [],
+   "show_key": "PMAAPP"
+  },
+  {
+   "name": "PAINWeek",
+   "acronym": "PAINWeek",
+   "aliases": [],
+   "show_key": "PAINWEEK"
+  },
+  {
+   "name": "Pan American Congress of Rheumatology",
+   "acronym": "PANLAR",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Pan Pacific Lymphoma Conference",
+   "acronym": "PPLC",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "PANP360 Scottsdale",
+   "acronym": "PANP360",
+   "aliases": [],
+   "show_key": "PANP360"
+  },
+  {
+   "name": "Pennsylvania Academy of Dermatology and Dermatologic Surgery Annual Scientific Meeting",
+   "acronym": "PADDS",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Pennsylvania Dermatology Physician Assistants Keystone Dermatology Conference",
+   "acronym": "PDPA",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Peripheral Nerve Society Annual Meeting",
+   "acronym": "PNS",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Pri-Med East",
+   "acronym": "Pri-Med",
+   "aliases": [
+    "Primed East"
+   ],
+   "show_key": "PRI-MED EAST"
+  },
+  {
+   "name": "Pri-Med Midwest",
+   "acronym": "Pri-Med",
+   "aliases": [
+    "Primed Midwest"
+   ],
+   "show_key": "PRI-MED MIDWEST"
+  },
+  {
+   "name": "Pri-Med South",
+   "acronym": "Pri-Med",
+   "aliases": [
+    "Primed South"
+   ],
+   "show_key": "PRI-MED SOUTH"
+  },
+  {
+   "name": "Pri-Med Southwest",
+   "acronym": "Pri-Med",
+   "aliases": [
+    "Primed Southwest"
+   ],
+   "show_key": "PRI-MED SOUTHWEST"
+  },
+  {
+   "name": "Pri-Med West",
+   "acronym": "Pri-Med",
+   "aliases": [
+    "Primed West"
+   ],
+   "show_key": "PRI-MED WEST"
+  },
+  {
+   "name": "Real World Dermatology for Residents",
+   "acronym": "RWD",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Revolutionizing Atopic Dermatitis Spring Conference",
+   "acronym": "RAD",
+   "aliases": [],
+   "show_key": "RAD PT"
+  },
+  {
+   "name": "San Antonio Breast Cancer Symposium",
+   "acronym": "SABCS",
+   "aliases": [],
+   "show_key": "SABCS"
+  },
+  {
+   "name": "San Diego Dermatology Symposium",
+   "acronym": "SDDS",
+   "aliases": [],
+   "show_key": "SDDS"
+  },
+  {
+   "name": "San Diego Heart Failure Winter Symposium",
+   "acronym": "SDHF",
+   "aliases": [],
+   "show_key": "SDHF WINTER SYMPOSIUM PT"
+  },
+  {
+   "name": "San Francisco Dermatology Eczema Symposium",
+   "acronym": "SF Derm",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Scripps Cancer Care Symposium",
+   "acronym": "Scripps",
+   "aliases": [],
+   "show_key": "SCRIPPS CC"
+  },
+  {
+   "name": "SIAC International Congress of Cardiology",
+   "acronym": "SIAC",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Society for Academic Emergency Medicine Annual Meeting",
+   "acronym": "SAEM",
+   "aliases": [],
+   "show_key": "SAEM"
+  },
+  {
+   "name": "Society for Maternal-Fetal Medicine Pregnancy Meeting",
+   "acronym": "SMFM",
+   "aliases": [],
+   "show_key": "SMFM"
+  },
+  {
+   "name": "Society of Dermatology Physician Assistants Fall Dermatology Conference",
+   "acronym": "SDPA",
+   "aliases": [],
+   "show_key": "SDPA FALL"
+  },
+  {
+   "name": "Society of Dermatology Physician Assistants Summer Dermatology Conference",
+   "acronym": "SDPA",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Society of Emergency Medicine Physician Assistants 360",
+   "acronym": "SEMPA",
+   "aliases": [],
+   "show_key": "SEMPA"
+  },
+  {
+   "name": "Society of Gynecologic Oncology Allied Health Professionals Meeting",
+   "acronym": "SGO",
+   "aliases": [],
+   "show_key": "SGO"
+  },
+  {
+   "name": "Society of Gynecologic Oncology Annual Meeting on Women's Cancer",
+   "acronym": "SGO",
+   "aliases": [],
+   "show_key": "SGO"
+  },
+  {
+   "name": "Society of Hospital Medicine Converge",
+   "acronym": "SHM",
+   "aliases": [],
+   "show_key": "SHM"
+  },
+  {
+   "name": "Society of Nuclear Medicine and Molecular Imaging Annual Meeting",
+   "acronym": "SNMMI",
+   "aliases": [],
+   "show_key": "SNMMI"
+  },
+  {
+   "name": "Society of Pediatric Dermatology Annual Meeting",
+   "acronym": "SPD",
+   "aliases": [],
+   "show_key": "SPD"
+  },
+  {
+   "name": "Society of Urologic Oncology Annual Meeting",
+   "acronym": "SUO",
+   "aliases": [],
+   "show_key": "SUO PT"
+  },
+  {
+   "name": "South Beach Symposium",
+   "acronym": "SBS",
+   "aliases": [],
+   "show_key": "SBS/MOPD"
+  },
+  {
+   "name": "South Carolina Gastroenterology Association Annual Meeting",
+   "acronym": "SCGA",
+   "aliases": [],
+   "show_key": "SCGA"
+  },
+  {
+   "name": "Southeastern Allergy, Asthma and Immunology Society Annual Meeting",
+   "acronym": "SEAAI",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "Southern California Allergy Conference",
+   "acronym": "SCAC",
+   "aliases": [],
+   "show_key": "SCAC PT"
+  },
+  {
+   "name": "Southwest Florida Cardiovascular Imaging Symposium",
+   "acronym": "SWFLCIS",
+   "aliases": [],
+   "show_key": "SWFLCIS"
+  },
+  {
+   "name": "Southwest Prostate Cancer Symposium",
+   "acronym": "SPCS",
+   "aliases": [],
+   "show_key": "SPCS PT"
+  },
+  {
+   "name": "Tandem Meetings: Transplantation & Cellular Therapy Meetings",
+   "acronym": "Tandem",
+   "aliases": [],
+   "show_key": "TANDEM MEETINGS"
+  },
+  {
+   "name": "Technology and Heart Failure Therapeutics",
+   "acronym": "THT",
+   "aliases": [],
+   "show_key": "THT"
+  },
+  {
+   "name": "Thrombosis & Hemostasis Summit of North America",
+   "acronym": "THSNA",
+   "aliases": [],
+   "show_key": "THSNA"
+  },
+  {
+   "name": "United European Gastroenterology Week",
+   "acronym": "UEGW",
+   "aliases": [],
+   "show_key": "UEGW"
+  },
+  {
+   "name": "West Coast Dermatology",
+   "acronym": "West Coast Derm",
+   "aliases": [],
+   "show_key": "WEST COAST DERM"
+  },
+  {
+   "name": "Winter Clinical Dermatology Conference Hawaii",
+   "acronym": "WCH",
+   "aliases": [
+    "Winter Clinical Hawaii"
+   ],
+   "show_key": "WCH"
+  },
+  {
+   "name": "Winter Clinical Dermatology Conference Miami",
+   "acronym": "WCM",
+   "aliases": [
+    "Winter Clinical Miami"
+   ],
+   "show_key": "WCM"
+  },
+  {
+   "name": "Winter Headache Cooperative of New England Headache Symposium",
+   "acronym": "HCNE",
+   "aliases": [],
+   "show_key": "HCNE"
+  },
+  {
+   "name": "World Congress for Hair Research",
+   "acronym": "WCHR",
+   "aliases": [],
+   "show_key": "WCHR"
+  },
+  {
+   "name": "World Congress of Dermatology",
+   "acronym": "WCD",
+   "aliases": [],
+   "show_key": "WCD"
+  },
+  {
+   "name": "World Congress of the World Society for Pediatric Infectious Diseases",
+   "acronym": "WSPID",
+   "aliases": [],
+   "show_key": "WSPID"
+  },
+  {
+   "name": "World Congress on Itch",
+   "acronym": "WCI",
+   "aliases": [],
+   "show_key": "WCI"
+  },
+  {
+   "name": "World Congress on Public Health",
+   "acronym": "WCPH",
+   "aliases": [],
+   "show_key": null
+  },
+  {
+   "name": "World Federation of Hemophilia World Congress",
+   "acronym": "WFH",
+   "aliases": [],
+   "show_key": "WFH"
+  },
+  {
+   "name": "World Organization of Family Doctors Europe Conference",
+   "acronym": "WONCA",
+   "aliases": [],
+   "show_key": null
+  }
+ ]
+}

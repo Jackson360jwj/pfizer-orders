@@ -1,13 +1,13 @@
 {
  "_doc": "Sanitized show list for the Pfizer AMEX Order Form. Built by build_shows_json.py from the dev kit history index. Contains no costs, contacts or credentials. A show missing from this list has no record since 2024, which is not proof that no badge API is available.",
- "built": "2026-09-21",
+ "built": "2026-09-23",
  "source_built": "2026-09-14",
  "years_covered": [
   "2024",
   "2025",
   "2026"
  ],
- "show_count": 467,
+ "show_count": 469,
  "shows": [
   {
    "key": "AAAAI",
@@ -1780,6 +1780,15 @@
    "api": "yes",
    "api_last_year": 2025,
    "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ESMO ER",
+   "name": "ESMO ER",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
    "list_import_last_year": 2026,
    "provider": null
   },
@@ -3038,6 +3047,15 @@
    "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NPWH PT",
+   "name": "NPWH PT",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
    "provider": null
   },
   {

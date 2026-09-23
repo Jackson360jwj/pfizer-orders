@@ -294,8 +294,16 @@ a{color:var(--accent)}
       <div class="grid">
         <div class="field"><label for="f_pfz">Pfizer meeting # <span class="req">*</span></label><input type="text" id="f_pfz" class="mono" placeholder="PFZ159560"></div>
         <div class="field"><label for="f_entity">Legal entity</label><input type="text" id="f_entity" value="1400: Pfizer Inc."></div>
-        <div class="field span"><label for="f_name">Meeting full name <span class="req">*</span></label><input type="text" id="f_name" placeholder="e.g. American College of Osteopathic Family Physicians"></div>
-        <div class="field"><label for="f_acronym">Acronym (short name)</label><input type="text" id="f_acronym" placeholder="e.g. ACOFP"><span class="help">Also used to find the show in Section 3.</span></div>
+        <div class="field span"><label for="f_name">Full name of the congress or event <span class="req">*</span></label>
+          <div class="lookup">
+            <svg class="mag" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input type="text" id="f_name" placeholder="Start typing, e.g. Digestive Disease Week" autocomplete="off" oninput="onEventQuery()" onfocus="onEventQuery()" onblur="hideEventSuggest()" onkeydown="eventKey(event)">
+            <div class="suggest" id="ev_suggest" hidden></div>
+          </div>
+          <span class="help">The congress or society meeting your symposium is part of, not the name of your product theater or symposium.</span>
+          <label class="check" id="ev_notlisted_wrap" hidden><input type="checkbox" id="f_event_notlisted" onchange="onEventNotListed()"> My event isn't listed. I typed the full name.</label>
+          <input type="hidden" id="f_acronym">
+        </div>
         <div class="field"><label for="f_etype">Event type <span class="req">*</span></label>
           <select id="f_etype"><option value="">Select</option><option>Product Theater</option><option>Symposia</option><option>Education Reception</option></select></div>
         <div class="field span"><label for="f_addr">Meeting site / address <span class="req">*</span></label><textarea id="f_addr" placeholder="Venue name and full address"></textarea></div>
@@ -313,7 +321,7 @@ a{color:var(--accent)}
       <div class="grid">
         <div class="field"><label for="f_owner_name">Project owner name <span class="req">*</span></label><input type="text" id="f_owner_name" placeholder="e.g. Jane Smith"></div>
         <div class="field"><label for="f_owner_email">Project owner email <span class="req">*</span></label><input type="email" id="f_owner_email" placeholder="jane.smith@pfizer.com"></div>
-        <div class="field span"><label for="f_td">Technical director on site</label><textarea id="f_td" placeholder="Name, phone and email. Leave blank if not assigned yet."></textarea></div>
+        <div class="field span"><label for="f_td">Travel director (TD) on site</label><textarea id="f_td" placeholder="Name, phone and email. Leave blank if not assigned yet."></textarea></div>
         <div class="field span"><label for="f_notes">Notes for Reality Engineering</label><textarea id="f_notes" placeholder="Anything else we should know"></textarea></div>
       </div>
     </div>
@@ -322,14 +330,15 @@ a{color:var(--accent)}
   <!-- 02 PRODUCT -->
   <section class="sec" id="sec-product">
     <div class="sec-head"><span class="sec-num">02</span><h2>Product</h2></div>
-    <p class="sec-intro">Pick either one; the other fills in.</p>
+    <p class="sec-intro">Choose the therapeutic area to narrow the product list, or pick the product first.</p>
     <div class="grid">
       <div class="field"><label for="f_therapy">Therapeutic area <span class="req">*</span></label>
         <select id="f_therapy" onchange="onTherapyChange()">
           <option value="">Select</option>
-          <option>Dermatology</option><option>Gastrointestinal</option><option>Hematology</option><option>Antiviral</option><option>Inflammation</option><option>Inflammation &amp; Immunology</option><option>Migraine</option><option>Oncology</option><option>Rare Disease</option><option>Rheumatology</option><option>Vaccines</option><option value="Other">Other</option>
+          <option>Anti Viral</option><option>Dermatology</option><option>Hospital</option><option>Inflammation</option><option>Inflammation &amp; Immunology</option><option>Migraines</option><option>Oncology</option><option>Rare Diseases</option><option>Sterile Injectables</option><option>Vaccines</option><option value="Other">Other</option>
         </select>
         <input type="text" id="f_therapy_other" placeholder="Enter the therapeutic area" hidden style="margin-top:6px" oninput="populateProducts('')">
+        <span class="help" id="therapy_hint" hidden></span>
       </div>
       <div class="field"><label for="f_product_program">Product / drug <span class="req">*</span></label>
         <select id="f_product_program" onchange="onProductChange()"><option value="">Select a product</option></select>
@@ -349,7 +358,7 @@ a{color:var(--accent)}
       <li class="step active" id="st_badge">
         <div class="node"><span>1</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-6.5"/></svg></div>
         <div class="step-body">
-          <div class="step-head"><h3>What will attendees be wearing?</h3><button type="button" class="change" hidden onclick="reopen('badge')">Change</button></div>
+          <div class="step-head"><h3>What type of badge will attendees be given?</h3><button type="button" class="change" hidden onclick="reopen('badge')">Change</button></div>
           <div class="answer" id="ans_badge" hidden></div>
           <div class="content"><div>
             <p class="step-help">Pick the one that matches this meeting.</p>
@@ -434,7 +443,7 @@ a{color:var(--accent)}
       <li class="step setup" id="st_setup" hidden>
         <div class="node"><span>5</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-6.5"/></svg></div>
         <div class="step-body">
-          <div class="step-head"><h3>How will your technical director run it?</h3></div>
+          <div class="step-head"><h3>How will your travel director (TD) run it?</h3></div>
           <div class="content"><div>
             <p class="step-help">Scanning and image capture both run in the RE:nvent app.</p>
             <div class="tiles" id="device_tiles">
@@ -452,7 +461,6 @@ a{color:var(--accent)}
               <div class="field" id="qty_app_wrap" hidden><label for="f_qty_app">App licenses <span class="req">*</span></label><input type="number" id="f_qty_app" min="1" placeholder="e.g. 2" oninput="answered()"></div>
               <div class="field" id="qty_scanner_wrap" hidden><label for="f_qty_scanner">Scanners <span class="req">*</span></label><input type="number" id="f_qty_scanner" min="1" placeholder="e.g. 3" oninput="answered()"></div>
             </div>
-            <label class="check"><input type="checkbox" id="f_qr_addon" onchange="answered()"> Also add a QR code check-in for attendees who arrive without a badge</label>
           </div></div>
         </div>
       </li>
@@ -462,9 +470,9 @@ a{color:var(--accent)}
         <div class="step-body">
           <div class="step-head"><h3>Before we can plan an import from the congress system</h3></div>
           <div class="content"><div>
-            <p class="step-help">We confirm this rule with the congress before quoting. A name, an email, or where it says so in the guidelines is enough.</p>
-            <div class="field"><label for="f_not_allowed_per">Who told you third-party capture is not allowed? <span class="req">*</span></label><input type="text" id="f_not_allowed_per" placeholder="e.g. Exhibitor services email, or symposia guidelines page 4" oninput="answered()"></div>
-            <label class="check" id="ack_wrap"><input type="checkbox" id="f_import_ack" onchange="answered()"> I understand that with this method the compliance survey cannot be asked at the meeting, and the congress data may not include everything AMEX compliance requires.</label>
+            <p class="step-help">We confirm this rule with the congress before quoting.</p>
+            <div class="flag warn" style="margin:0 0 12px">After the meeting, send the attendee list as a spreadsheet: Excel (.xlsx) or .csv. Handwritten sign-in sheets, photos, scans and PDFs cannot be accepted.</div>
+            <label class="check" id="ack_wrap"><input type="checkbox" id="f_import_ack" onchange="answered()"> I understand that with this method the compliance survey cannot be asked at the meeting, and the congress data may not include everything Pfizer compliance requires.</label>
           </div></div>
         </div>
       </li>
@@ -532,35 +540,27 @@ a{color:var(--accent)}
 
 <script>
 // ── Therapy → Product mapping ──
+// Names follow the DPC event metadata lists (Pfizer org). Pairings come from the product and
+// therapeutic area recorded together on past Pfizer events in DPC, cross-checked against OTIS
+// Compliance Info (2022-2026). Katherine's Sep 23, 2026 review removed Raylumis, Duavee,
+// Unbranded APC and Trumenba, and the Gastrointestinal, Hematology and Rheumatology areas.
 const THERAPY_PRODUCTS = {
-  'Antiviral':                ['Paxlovid','Above Brand / Clinical Development'],
-  'Dermatology':              ['Cibinqo','Litfulo','Ritlecitinib','Velsipity','Above Brand / Clinical Development'],
-  'Gastrointestinal':         ['Above Brand / Clinical Development'],
-  'Hematology':               ['Adcetris','Elranatamab','Oxbryta','Above Brand / Clinical Development'],
-  'Inflammation':             ['Above Brand / Clinical Development'],
-  'Inflammation & Immunology':['Etrasimod','Velsipity','Xeljanz','Above Brand / Clinical Development'],
-  'Migraine':                 ['Nurtec','Zavegepant','Above Brand / Clinical Development'],
-  'Oncology':                 ['Braftovi / Mektovi','Elrexfio','Ibrance','Inlyta','Lorbrena','Padcev','Above Brand / Clinical Development'],
-  'Rare Disease':             ['Fordadistrogene Movaparvovec','Oxbryta','Vyndamax','Vyndaqel','Above Brand / Clinical Development'],
-  'Rheumatology':             ['Xeljanz','Above Brand / Clinical Development'],
-  'Vaccines':                 ['Abrysvo','Comirnaty','mRNA Flu','Penbraya','Prevnar 20','TicoVac','Above Brand / Clinical Development'],
+  'Anti Viral':                ['Paxlovid'],
+  'Dermatology':               ['Above Brand','Cibinqo','Etrasimod','Eucrisa','Litfulo','Unbranded','Velsipity'],
+  'Hospital':                  ['Above Brand','Biosimilars','Comirnaty','Cutaquig','Nexject','Octagam','Panzyga','SI Product A'],
+  'Inflammation':              ['Above Brand','Cibinqo','Etrasimod','Litfulo','Velsipity','Xeljanz'],
+  'Inflammation & Immunology': ['Above Brand','Cibinqo','Etrasimod','Litfulo','Octagam','Unbranded','Velsipity','Xeljanz'],
+  'Migraines':                 ['Above Brand','Nurtec','Unbranded','Zavzpret'],
+  'Oncology':                  ['Above Brand','Adcetris','Bavencio','Besponsa','Biosimilars','Braftovi','Elranatamab','Ibrance','Inlyta','Lorbrena','Padcev','Talzenna','Tivdak','Tukysa','Unbranded','Xtandi'],
+  'Rare Diseases':             ['Above Brand','Genotropin','Hympavzi','Oxbryta','Somavert','Vyndamax','Vyndaqel'],
+  'Sterile Injectables':       ['Above Brand'],
+  'Vaccines':                  ['Above Brand','Abrysvo','Comirnaty','Lucira by Pfizer','Paxlovid','Penbraya','Prevnar','Prevnar 13','Prevnar 20','Ticovac','Unbranded'],
 };
-
-// ── Product → Therapy mapping (for reverse lookup) ──
-const PRODUCT_THERAPY = {
-  'Abrysvo':'Vaccines','Adcetris':'Hematology','Braftovi / Mektovi':'Oncology',
-  'Cibinqo':'Dermatology','Comirnaty':'Vaccines','Elranatamab':'Hematology',
-  'Elrexfio':'Oncology','Etrasimod':'Inflammation & Immunology',
-  'Fordadistrogene Movaparvovec':'Rare Disease','Ibrance':'Oncology',
-  'Inlyta':'Oncology','Litfulo':'Dermatology','Lorbrena':'Oncology',
-  'mRNA Flu':'Vaccines','Nurtec':'Migraine','Oxbryta':'Rare Disease',
-  'Padcev':'Oncology','Paxlovid':'Antiviral','Penbraya':'Vaccines',
-  'Prevnar 20':'Vaccines','Ritlecitinib':'Dermatology','TicoVac':'Vaccines',
-  'Velsipity':'Inflammation & Immunology','Vyndamax':'Rare Disease',
-  'Vyndaqel':'Rare Disease','Xeljanz':'Rheumatology','Zavegepant':'Migraine',
-};
-
-
+// Every product on the form (also shown when no area is chosen, or the area is Other).
+const ALL_PRODUCTS = ['Above Brand','Abrysvo','Adcetris','Bavencio','Besponsa','Biosimilars','Braftovi','Cibinqo','Comirnaty','Cutaquig','Eliquis','Elranatamab','Etrasimod','Eucrisa','Genotropin','Hympavzi','Ibrance','Inlyta','Litfulo','Lorbrena','Lucira by Pfizer','Nexject','Nurtec','Octagam','Oxbryta','Padcev','Panzyga','Paxlovid','Penbraya','Prevnar','Prevnar 13','Prevnar 20','SI Product A','Somavert','Talzenna','Thrombin','Ticovac','Tivdak','Tukysa','Unbranded','Velsipity','Vyndamax','Vyndaqel','Xeljanz','Xtandi','Zavzpret'];
+// Product → the areas it has been filed under (reverse lookup).
+const PRODUCT_THERAPY = {};
+Object.entries(THERAPY_PRODUCTS).forEach(([t, ps]) => ps.forEach(p => { (PRODUCT_THERAPY[p] = PRODUCT_THERAPY[p] || []).push(t); }));
 
 function $id(id){ return document.getElementById(id); }
 function val(id){ return ($id(id)||{}).value?.trim() || ''; }
@@ -573,7 +573,7 @@ const SERVICE_DESCRIPTIONS = {
     icon: '📱',
     title: 'RE:nvent Mobile App',
     items: [
-      'Custom-branded iPhone or Android app deployed to your Technical Director',
+      'Custom-branded iPhone or Android app deployed to your Travel Director (TD)',
       'Attendee check-in and badge scanning at the event',
       'Symposia survey, post-show summary report and data export',
       'DLU Compliance: Transfer of Value (TOV) tracking for 13 countries',
@@ -608,6 +608,7 @@ const SERVICE_DESCRIPTIONS = {
       'The congress requires its own lead retrieval or scanning system, so RE imports the attendee data that system collects after the meeting',
       'Pfizer customer ID matching, summary report, and CDW delivery',
       'The compliance survey cannot be asked at the meeting with this method',
+      'The attendee list must be a spreadsheet (Excel or .csv). Handwritten sign-in sheets, photos, scans and PDFs cannot be accepted',
       'RE confirms the congress rule and reviews every one of these orders before quoting',
     ]
   },
@@ -627,7 +628,7 @@ const SERVICE_DESCRIPTIONS = {
 function populateProducts(therapy){
   const sel = $id('f_product_program'); const current = sel.value;
   sel.innerHTML = '<option value="">Select a product</option>';
-  const list = (therapy && therapy !== 'Other') ? (THERAPY_PRODUCTS[therapy] || []) : Object.keys(PRODUCT_THERAPY).sort().concat(['Above Brand / Clinical Development']);
+  const list = (therapy && therapy !== 'Other') ? (THERAPY_PRODUCTS[therapy] || []) : ALL_PRODUCTS;
   list.forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = p; if(p === current) o.selected = true; sel.appendChild(o); });
   const other = document.createElement('option'); other.value = 'Other'; other.textContent = 'Other'; sel.appendChild(other);
 }
@@ -637,16 +638,73 @@ function onTherapyChange(){
   populateProducts(isOther ? '' : t);
   const prod = $id('f_product_program').value;
   if(prod && !isOther && t && THERAPY_PRODUCTS[t] && !THERAPY_PRODUCTS[t].includes(prod)){ $id('f_product_program').value = ''; $id('f_product_other').hidden = true; }
-  onProductChange();
+  onProductChange(true);
 }
-function onProductChange(){
+function onProductChange(fromTherapy){
   const p = $id('f_product_program').value;
   $id('f_product_other').hidden = (p !== 'Other'); if(p === 'Other') $id('f_product_other').focus();
-  $id('clinical_name_wrap').hidden = (p !== 'Above Brand / Clinical Development');
-  if(p && PRODUCT_THERAPY[p]){ const t = PRODUCT_THERAPY[p]; $id('f_therapy').value = t; $id('f_therapy_other').hidden = true; populateProducts(t); $id('f_product_program').value = p; }
+  $id('clinical_name_wrap').hidden = (p !== 'Above Brand');
+  // Fill the area only when the product has one; otherwise leave the manager's choice alone.
+  const ts = PRODUCT_THERAPY[p] || [], cur = $id('f_therapy').value;
+  if(!fromTherapy && p && ts.length === 1 && cur !== ts[0]){ $id('f_therapy').value = ts[0]; $id('f_therapy_other').hidden = true; populateProducts(ts[0]); $id('f_product_program').value = p; }
+  $id('therapy_hint').hidden = !(p && ts.length > 1 && !ts.includes(cur));
+  $id('therapy_hint').textContent = (p && ts.length > 1) ? p + ' has been filed under ' + ts.join(', ') + '. Choose the one for this meeting.' : '';
   update();
 }
 populateProducts('');
+
+// ── congress / event full names (congresses.json) ──
+const CONGRESSES_URL = 'congresses.json';
+let CONGRESSES = [], congressState = 'loading', pickedCongress = null, showFromEvent = false;
+(async function(){
+  try {
+    const r = await fetch(CONGRESSES_URL, {cache:'no-cache'}); if(!r.ok) throw new Error('HTTP '+r.status);
+    const j = await r.json();
+    CONGRESSES = (j.congresses || []).map(c => ({...c, _terms:[c.name].concat(c.aliases||[]).filter(Boolean).map(t => t.toLowerCase())}));
+    congressState = 'ready';
+  } catch(e){ congressState = 'error'; }
+  if(congressState === 'ready' && val('f_name') && !pickedCongress) pickedCongress = findCongressExact(val('f_name'));
+  $id('ev_notlisted_wrap').hidden = congressState !== 'ready' || !val('f_name') || !!pickedCongress;
+  update();
+})();
+function findCongressExact(q){ const s = (q||'').trim().toLowerCase(); if(!s) return null; return CONGRESSES.find(c => c.name.toLowerCase() === s) || null; }
+function onEventQuery(){
+  const q = val('f_name').toLowerCase(); const box = $id('ev_suggest');
+  if(pickedCongress && pickedCongress.name.toLowerCase() !== q){ pickedCongress = null; $id('f_acronym').value = ''; clearShowFromEvent(); }
+  if(!pickedCongress){ const exact = findCongressExact(q); if(exact){ pickedCongress = exact; $id('f_acronym').value = exact.acronym || ''; } }
+  $id('ev_notlisted_wrap').hidden = congressState !== 'ready' || !q || !!pickedCongress;
+  if(congressState !== 'ready' || q.length < 2 || pickedCongress){ box.hidden = true; box.innerHTML = ''; return; }
+  const words = q.split(/\s+/).filter(Boolean);
+  const score = c => c._terms.some(t => t.startsWith(q)) ? 0 : c._terms.some(t => t.includes(q)) ? 1 : 2;
+  const hits = CONGRESSES.filter(c => c._terms.some(t => words.every(w => t.includes(w)))).sort((a,b) => score(a)-score(b) || a.name.localeCompare(b.name)).slice(0,8);
+  if(!hits.length){ box.hidden = true; box.innerHTML = ''; return; }
+  box.innerHTML = hits.map(c => `<button type="button" onmousedown="event.preventDefault();pickEvent(${CONGRESSES.indexOf(c)})"><span class="nm">${esc(c.name)}</span></button>`).join('');
+  box.hidden = false;
+}
+function eventKey(e){
+  if(e.key === 'Enter'){ e.preventDefault(); const first = $id('ev_suggest').querySelector('button'); if(first && !$id('ev_suggest').hidden) first.dispatchEvent(new MouseEvent('mousedown')); }
+  if(e.key === 'Escape'){ $id('ev_suggest').hidden = true; }
+}
+function hideEventSuggest(){ setTimeout(() => { $id('ev_suggest').hidden = true; }, 120); }
+function pickEvent(i){
+  const c = CONGRESSES[i]; if(!c) return;
+  $id('f_name').value = c.name; $id('f_acronym').value = c.acronym || ''; pickedCongress = c;
+  $id('f_event_notlisted').checked = false; $id('ev_notlisted_wrap').hidden = true; $id('ev_suggest').hidden = true;
+  clearShowFromEvent(); syncShowFromEvent(); update(); saveDraft();
+}
+function onEventNotListed(){ update(); }
+// The picked event fills the congress question in Section 3, so the manager is not asked twice.
+function syncShowFromEvent(){
+  if(!pickedCongress || showsState !== 'ready') return;
+  const sh = pickedCongress.show_key ? SHOWS.find(s => s.key === pickedCongress.show_key) : null;
+  if(sh){ $id('f_show_query').value = sh.name; matchedShow = sh; showPicked = true; $id('f_show_notlisted').checked = false; }
+  else { $id('f_show_query').value = pickedCongress.name; matchedShow = null; showPicked = false; $id('f_show_notlisted').checked = true; }
+  showFromEvent = true;
+}
+function clearShowFromEvent(){
+  if(!showFromEvent) return;
+  $id('f_show_query').value = ''; matchedShow = null; showPicked = false; $id('f_show_notlisted').checked = false; showFromEvent = false;
+}
 
 // ── shows ──
 const SHOWS_URL = 'shows.json';
@@ -659,6 +717,7 @@ let SHOWS = [], showsState = 'loading', matchedShow = null, showPicked = false;
     showsState = 'ready';
   } catch(e){ showsState = 'error'; }
   if(showsState === 'ready' && val('f_show_query') && !matchedShow){ matchedShow = findShowExact(val('f_show_query')); showPicked = !!matchedShow; }
+  if(showsState === 'ready' && pickedCongress && !val('f_show_query')) syncShowFromEvent();
   update();
 })();
 function findShowExact(q){ const s = (q||'').trim().toLowerCase(); if(!s) return null; return SHOWS.find(sh => sh._terms.includes(s)) || null; }
@@ -666,7 +725,7 @@ const API_LABEL = {yes:['API on record','ok'], check:['API before, we check','wa
 function chipFor(sh){ const [t,c] = API_LABEL[sh.api] || ['',''] ; return `<span class="chip ${c}">${t}</span>`; }
 function onShowQuery(){
   const q = val('f_show_query').toLowerCase(); const box = $id('suggest');
-  showPicked = false; matchedShow = findShowExact(q);
+  showPicked = false; showFromEvent = false; matchedShow = findShowExact(q);
   if(showsState !== 'ready' || !q){ box.hidden = true; box.innerHTML = ''; update(); return; }
   const rank = sh => sh._terms.includes(q) ? 0 : sh._terms.some(t => t.startsWith(q)) ? 1 : 2;
   const hits = SHOWS.filter(sh => sh._terms.some(t => t.includes(q))).sort((a,b) => rank(a)-rank(b) || a.name.localeCompare(b.name)).slice(0,8);
@@ -683,7 +742,6 @@ function pickShow(key){
   const sh = SHOWS.find(s => s.key === key); if(!sh) return;
   $id('f_show_query').value = sh.name; matchedShow = sh; showPicked = true;
   $id('f_show_notlisted').checked = false; $id('suggest').hidden = true;
-  if(!val('f_acronym')) $id('f_acronym').value = sh.name;
   update();
 }
 function renderRecord(sh, notListed){
@@ -709,7 +767,7 @@ function captureState(){
   const st = { badge: radioVal('badge_type'), base:'', services:[], determination:'', title:'', why:'', flag:'', flagClass:'',
     apiStatus:'', apiSource:'', outside:'', showMatch:'', showApiRecord:'', showQuery: val('f_show_query'),
     askShow:false, askApi:false, askOutside:false, askNotAllowed:false, askDevices:false, complete:false,
-    notAllowedPer: val('f_not_allowed_per'), importAck: $id('f_import_ack').checked, deviceMode: radioVal('device_mode'), qrAddon: $id('f_qr_addon').checked };
+    notAllowedPer: '', importAck: $id('f_import_ack').checked, deviceMode: radioVal('device_mode'), qrAddon: false };
   if(!st.badge) return st;
   if(st.badge === 'No badge'){ st.base='QR Code'; st.determination='Confirmed'; st.complete=true; st.title='QR code check-in'; st.why='With no badge to read, attendees scan a QR code at your meeting and complete their own details on their own device. The compliance questions are built into that check-in, so the meeting stays compliant without any scanning equipment.'; st.apiSource='n/a'; st.services=[st.base]; return st; }
   if(st.badge === 'Name badge'){ st.base='Image Capture'; st.determination='Confirmed'; st.title='Badge image capture'; st.why='A badge printed by the agency or Pfizer carries a name only and has no API behind it, so the RE:nvent app photographs each badge at the door. The compliance questions are asked at the meeting and the name is transcribed from the image.'; st.apiStatus='No'; st.apiSource='n/a (agency or Pfizer badge)'; st.askDevices=true; return finishDevices(st); }
@@ -733,9 +791,9 @@ function captureState(){
     const o = radioVal('outside_answer'); if(!o) return st; st.outside = o;
     if(o === 'Yes'){ st.base='Image Capture'; st.determination='Confirmed'; }
     else if(o === 'Unknown'){ st.base='Image Capture'; st.determination='RE to confirm'; st.flag='We will confirm with the congress that your own devices may be used. Image capture is planned so the compliance questions can be asked; we adjust the order if the congress says otherwise.'; }
-    else { st.base='List Import'; st.determination='Needs review'; st.askNotAllowed=true; st.title='Import from the congress scanning system'; st.why='The congress requires its own lead retrieval or scanning system, so we import the attendee data that system collects after the meeting and match it to Pfizer customer IDs for the summary report and CDW delivery.'; st.flag='Held for review. With this method the compliance survey cannot be asked at the meeting, and congress data may not include everything AMEX compliance requires. We confirm the congress rule and contact you before quoting.'; st.flagClass='bad'; st.services=[st.base]; st.complete = !!st.notAllowedPer && st.importAck; return st; }
+    else { st.base='List Import'; st.determination='Needs review'; st.askNotAllowed=true; st.title='Import from the congress scanning system'; st.why='The congress requires its own lead retrieval or scanning system, so we import the attendee data that system collects after the meeting and match it to Pfizer customer IDs for the summary report and CDW delivery. The attendee list must come to us as a spreadsheet (Excel or .csv); handwritten sign-in sheets, photos, scans and PDFs cannot be accepted.'; st.flag='Held for review. With this method the compliance survey cannot be asked at the meeting, and congress data may not include everything Pfizer compliance requires. We confirm the congress rule and contact you before quoting.'; st.flagClass='bad'; st.services=[st.base]; st.complete = st.importAck; return st; }
   }
-  if(st.base === 'scan'){ st.title='Badge scanning'; st.why='The congress badge carries a full attendee record. We read it through the show\'s badge API and run the compliance survey with each HCP at the meeting. The strongest option for AMEX compliance.'; }
+  if(st.base === 'scan'){ st.title='Badge scanning'; st.why='The congress badge carries a full attendee record. We read it through the show\'s badge API and run the compliance survey with each HCP at the meeting. The strongest option for Pfizer compliance.'; }
   else { st.title='Badge image capture'; st.why='There is no API to read the congress badge, so the RE:nvent app photographs each badge instead. The compliance questions are still asked at the meeting, and the name is transcribed from the badge image.'; }
   st.askDevices = true; return finishDevices(st);
 }
@@ -761,9 +819,8 @@ function svcDisplay(s){ return String(s || '').split(',').map(x => x.trim()).fil
 function update(){
   const st = captureState();
   // prefill the show search from the acronym
-  if(st.askShow && !val('f_show_query') && val('f_acronym') && showsState === 'ready'){
-    $id('f_show_query').value = val('f_acronym'); matchedShow = findShowExact(val('f_acronym')); showPicked = !!matchedShow;
-    return update();
+  if(st.askShow && !val('f_show_query') && pickedCongress && showsState === 'ready'){
+    syncShowFromEvent(); return update();
   }
   const notListed = $id('f_show_notlisted').checked;
   const steps = {
@@ -808,18 +865,19 @@ function update(){
 // ── required items + glance ──
 function missingItems(st){
   const m = [];
-  const req = [['f_mgr','Your name'],['f_mgr_email','Your email'],['f_pfz','Pfizer meeting #'],['f_name','Meeting name'],['f_etype','Event type'],['f_addr','Meeting address'],['f_date','Meeting date'],['f_meal','Meal type'],['f_owner_name','Project owner name'],['f_owner_email','Project owner email'],['f_therapy','Therapeutic area'],['f_product_program','Product']];
+  const req = [['f_mgr','Your name'],['f_mgr_email','Your email'],['f_pfz','Pfizer meeting #'],['f_name','Congress or event name'],['f_etype','Event type'],['f_addr','Meeting address'],['f_date','Meeting date'],['f_meal','Meal type'],['f_owner_name','Project owner name'],['f_owner_email','Project owner email'],['f_therapy','Therapeutic area'],['f_product_program','Product']];
   req.forEach(([id,label]) => { if(!val(id)) m.push({id, label}); });
+  if(val('f_name') && congressState === 'ready' && !pickedCongress && !$id('f_event_notlisted').checked) m.push({id:'f_name', label:'Pick the event from the list, or tick not listed'});
   if(val('f_therapy') === 'Other' && !val('f_therapy_other')) m.push({id:'f_therapy_other', label:'Therapeutic area (other)'});
   if(val('f_product_program') === 'Other' && !val('f_product_other')) m.push({id:'f_product_other', label:'Product name (other)'});
   const oe = val('f_owner_email'); if(oe && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(oe)) m.push({id:'f_owner_email', label:'Project owner email (check format)'});
-  if(!st.badge) m.push({id:'st_badge', label:'What attendees wear', step:'badge'});
+  if(!st.badge) m.push({id:'st_badge', label:'Attendee badge type', step:'badge'});
   else {
     if(st.askShow && showsState === 'ready' && !$id('f_show_notlisted').checked && !(matchedShow && showPicked)) m.push({id:'f_show_query', label:'Which congress', step:'show'});
     if(st.askApi && !radioVal('api_answer')) m.push({id:'st_api', label:'Badge API question', step:'api'});
     if(st.askOutside && !radioVal('outside_answer')) m.push({id:'st_outside', label:'Own devices question', step:'outside'});
     if(st.askDevices){ if(!st.deviceMode) m.push({id:'st_setup', label:'How the TD runs it'}); if(st.needApp && !(+val('f_qty_app')>0)) m.push({id:'f_qty_app', label:'App licenses'}); if(st.needScanner && !(+val('f_qty_scanner')>0)) m.push({id:'f_qty_scanner', label:'Number of scanners'}); }
-    if(st.askNotAllowed){ if(!st.notAllowedPer) m.push({id:'f_not_allowed_per', label:'Who said capture is not allowed'}); if(!st.importAck) m.push({id:'f_import_ack', label:'Compliance acknowledgment'}); }
+    if(st.askNotAllowed){ if(!st.importAck) m.push({id:'f_import_ack', label:'Compliance acknowledgment'}); }
   }
   return m;
 }
@@ -919,7 +977,7 @@ function showSuccess(d){
   $id('frame').hidden = true; $id('done').hidden = false; window.scrollTo({top:0, behavior:'smooth'});
 }
 function doneRows(d){
-  return [['Meeting', d.f_name + (d.f_acronym ? ' (' + d.f_acronym + ')' : '')], ['Pfizer meeting #', d.f_pfz], ['Date', fmtDate(d.f_date) + (d.f_date_end ? ' to ' + fmtDate(d.f_date_end) : '')], ['Product', d.product_program], ['Attendees wear', d.badge_type], ['Congress', d.show_match || d.show_query], ['Service', svcDisplay(d.service_type)], ['Capture status', d.capture_determination], ['Set-up', [d.device_mode, d.qty_app_licenses ? d.qty_app_licenses + ' app licenses' : '', d.qty_scanners ? d.qty_scanners + ' scanners' : '', d.qr_addon ? 'QR check-in' : ''].filter(Boolean).join(' · ')], ['TOV', d.tov === 'no' ? 'Not required' : 'Required (standard)'], ['Project owner', d.f_owner_name + ' <' + d.f_owner_email + '>']].filter(([,v]) => v && String(v).trim());
+  return [['Meeting', d.f_name + (d.f_acronym ? ' (' + d.f_acronym + ')' : '')], ['Pfizer meeting #', d.f_pfz], ['Date', fmtDate(d.f_date) + (d.f_date_end ? ' to ' + fmtDate(d.f_date_end) : '')], ['Product', d.product_program], ['Attendee badge', d.badge_type], ['Congress', d.show_match || d.show_query], ['Service', svcDisplay(d.service_type)], ['Capture status', d.capture_determination], ['Set-up', [d.device_mode, d.qty_app_licenses ? d.qty_app_licenses + ' app licenses' : '', d.qty_scanners ? d.qty_scanners + ' scanners' : '', d.qr_addon ? 'QR check-in' : ''].filter(Boolean).join(' · ')], ['TOV', d.tov === 'no' ? 'Not required' : 'Required (standard)'], ['Project owner', d.f_owner_name + ' <' + d.f_owner_email + '>']].filter(([,v]) => v && String(v).trim());
 }
 
 // ── PDF copy of the submitted order ──
@@ -962,7 +1020,7 @@ function saveDraft(){
   _draftTimer = setTimeout(() => {
     try {
       const d = { fields:{}, radios:{ badge_type: radioVal('badge_type'), api_answer: radioVal('api_answer'), outside_answer: radioVal('outside_answer'), device_mode: radioVal('device_mode'), f_tov: radioVal('f_tov') },
-        checks:{ f_show_notlisted: $id('f_show_notlisted').checked, f_qr_addon: $id('f_qr_addon').checked, f_import_ack: $id('f_import_ack').checked }, showPicked, saved_at: Date.now() };
+        checks:{ f_event_notlisted: $id('f_event_notlisted').checked, f_show_notlisted: $id('f_show_notlisted').checked, f_import_ack: $id('f_import_ack').checked }, showPicked, saved_at: Date.now() };
       document.querySelectorAll('#sections input[type=text],#sections input[type=email],#sections input[type=date],#sections input[type=number],#sections select,#sections textarea').forEach(el => { if(el.id) d.fields[el.id] = el.value; });
       localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
     } catch(e){}
@@ -978,6 +1036,7 @@ function restoreDraft(){
   Object.entries(d.radios || {}).forEach(([name, v]) => { if(!v) return; const r = document.querySelector(`input[name="${name}"][value="${v}"]`); if(r) r.checked = true; });
   Object.entries(d.checks || {}).forEach(([id, v]) => { const el = $id(id); if(el) el.checked = !!v; });
   matchedShow = findShowExact(val('f_show_query')); showPicked = !!matchedShow && (d.showPicked !== false);
+  pickedCongress = findCongressExact(val('f_name'));
   openStep = null; $id('draft_bar').hidden = true; updateExpedite(); update();
 }
 function discardDraft(){ try { localStorage.removeItem(DRAFT_KEY); } catch(e){} $id('draft_bar').hidden = true; }
