@@ -443,20 +443,10 @@ a{color:var(--accent)}
       <li class="step setup" id="st_setup" hidden>
         <div class="node"><span>5</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5l3 3 6-6.5"/></svg></div>
         <div class="step-body">
-          <div class="step-head"><h3>How will your travel director (TD) run it?</h3></div>
+          <div class="step-head"><h3>How many app licenses?</h3></div>
           <div class="content"><div>
-            <p class="step-help">Scanning and image capture both run in the RE:nvent app.</p>
-            <div class="tiles" id="device_tiles">
-              <label class="tile"><input type="radio" name="device_mode" value="App" onchange="answered()">
-                <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/></svg></span>
-                <span><strong>The app on the TD's own phone</strong><small>Most AMEX meetings choose this. Nothing to ship. Remote training call included.</small></span></label>
-              <label class="tile"><input type="radio" name="device_mode" value="Scanner" onchange="answered()">
-                <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span>
-                <span><strong>Shipped RE scanners</strong><small>iPhones with the app preinstalled, shipped to your TD. Adds $350 shipping and handling. Needs Wi-Fi on site unless cellular is ordered.</small></span></label>
-              <label class="tile"><input type="radio" name="device_mode" value="Both" onchange="answered()">
-                <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="8" height="16" rx="1.5"/><rect x="13" y="4" width="8" height="16" rx="1.5"/></svg></span>
-                <span><strong>Both</strong><small>App licenses for the TD's phone plus shipped scanners.</small></span></label>
-            </div>
+            <p class="step-help">Your travel directors (TDs) use the RE:nvent app on their own phones. We send app download and setup instructions a few days before the event, and set up a remote training call if needed. One license per phone.</p>
+            <div id="device_tiles" hidden><input type="radio" name="device_mode" value="App" checked></div>
             <div class="qty">
               <div class="field" id="qty_app_wrap" hidden><label for="f_qty_app">App licenses <span class="req">*</span></label><input type="number" id="f_qty_app" min="1" placeholder="e.g. 2" oninput="answered()"></div>
               <div class="field" id="qty_scanner_wrap" hidden><label for="f_qty_scanner">Scanners <span class="req">*</span></label><input type="number" id="f_qty_scanner" min="1" placeholder="e.g. 3" oninput="answered()"></div>
@@ -573,12 +563,12 @@ const SERVICE_DESCRIPTIONS = {
     icon: '📱',
     title: 'RE:nvent Mobile App',
     items: [
-      'Custom-branded iPhone or Android app deployed to your Travel Director (TD)',
-      'Attendee check-in and badge scanning at the event',
+      'Custom-branded iPhone or Android app on your travel director\'s (TD\'s) own phone',
+      'Attendee badge scanning at the event',
       'Symposia survey, post-show summary report and data export',
       'DLU Compliance: Transfer of Value (TOV) tracking for 13 countries',
-      'Pfizer Customer Data Match run 3× weekly via CDW delivery',
-      'Remote training call with TD included',
+      'Pfizer Customer Data Match run daily via CDW delivery',
+      'App download and setup instructions sent a few days before the event; remote training call if needed',
     ]
   },
   'Scanner': {
@@ -619,7 +609,7 @@ const SERVICE_DESCRIPTIONS = {
       'RE:nvent Mobile App used to photograph attendee badges',
       'Badge images transcribed and matched to registration list if available',
       'Includes full event set-up, DLU compliance, and CDW delivery',
-      'Remote training call with TD included',
+      'App download and setup instructions sent a few days before the event; remote training call if needed',
     ]
   },
 };
@@ -671,8 +661,9 @@ function findCongressExact(q){ const s = (q||'').trim().toLowerCase(); if(!s) re
 function onEventQuery(){
   const q = val('f_name').toLowerCase(); const box = $id('ev_suggest');
   if(pickedCongress && pickedCongress.name.toLowerCase() !== q){ pickedCongress = null; $id('f_acronym').value = ''; clearShowFromEvent(); }
-  if(!pickedCongress){ const exact = findCongressExact(q); if(exact){ pickedCongress = exact; $id('f_acronym').value = exact.acronym || ''; } }
+  if(!pickedCongress){ const exact = findCongressExact(q); if(exact){ pickedCongress = exact; $id('f_acronym').value = exact.acronym || ''; $id('f_event_notlisted').checked = false; clearShowFromEvent(); syncShowFromEvent(); } }
   $id('ev_notlisted_wrap').hidden = congressState !== 'ready' || !q || !!pickedCongress;
+  if(!pickedCongress && $id('f_event_notlisted').checked && (showFromEvent || !val('f_show_query'))){ if(q) syncShowFromEvent(); else clearShowFromEvent(); }
   if(congressState !== 'ready' || q.length < 2 || pickedCongress){ box.hidden = true; box.innerHTML = ''; return; }
   const words = q.split(/\s+/).filter(Boolean);
   const score = c => c._terms.some(t => t.startsWith(q)) ? 0 : c._terms.some(t => t.includes(q)) ? 1 : 2;
@@ -692,10 +683,14 @@ function pickEvent(i){
   $id('f_event_notlisted').checked = false; $id('ev_notlisted_wrap').hidden = true; $id('ev_suggest').hidden = true;
   clearShowFromEvent(); syncShowFromEvent(); update(); saveDraft();
 }
-function onEventNotListed(){ update(); }
+function onEventNotListed(){ clearShowFromEvent(); if($id('f_event_notlisted').checked) syncShowFromEvent(); update(); saveDraft(); }
 // The picked event fills the congress question in Section 3, so the manager is not asked twice.
+function typedEventName(){ return (!pickedCongress && $id('f_event_notlisted').checked) ? val('f_name') : ''; }
 function syncShowFromEvent(){
-  if(!pickedCongress || showsState !== 'ready') return;
+  if(showsState !== 'ready') return;
+  const typed = typedEventName();
+  if(!pickedCongress && !typed) return;
+  if(!pickedCongress){ $id('f_show_query').value = typed; matchedShow = null; showPicked = false; $id('f_show_notlisted').checked = true; showFromEvent = true; return; }
   const sh = pickedCongress.show_key ? SHOWS.find(s => s.key === pickedCongress.show_key) : null;
   if(sh){ $id('f_show_query').value = sh.name; matchedShow = sh; showPicked = true; $id('f_show_notlisted').checked = false; }
   else { $id('f_show_query').value = pickedCongress.name; matchedShow = null; showPicked = false; $id('f_show_notlisted').checked = true; }
@@ -717,7 +712,7 @@ let SHOWS = [], showsState = 'loading', matchedShow = null, showPicked = false;
     showsState = 'ready';
   } catch(e){ showsState = 'error'; }
   if(showsState === 'ready' && val('f_show_query') && !matchedShow){ matchedShow = findShowExact(val('f_show_query')); showPicked = !!matchedShow; }
-  if(showsState === 'ready' && pickedCongress && !val('f_show_query')) syncShowFromEvent();
+  if(showsState === 'ready' && (pickedCongress || typedEventName()) && !val('f_show_query')) syncShowFromEvent();
   update();
 })();
 function findShowExact(q){ const s = (q||'').trim().toLowerCase(); if(!s) return null; return SHOWS.find(sh => sh._terms.includes(s)) || null; }
@@ -767,7 +762,7 @@ function captureState(){
   const st = { badge: radioVal('badge_type'), base:'', services:[], determination:'', title:'', why:'', flag:'', flagClass:'',
     apiStatus:'', apiSource:'', outside:'', showMatch:'', showApiRecord:'', showQuery: val('f_show_query'),
     askShow:false, askApi:false, askOutside:false, askNotAllowed:false, askDevices:false, complete:false,
-    notAllowedPer: '', importAck: $id('f_import_ack').checked, deviceMode: radioVal('device_mode'), qrAddon: false };
+    notAllowedPer: '', importAck: $id('f_import_ack').checked, deviceMode: 'App', qrAddon: false };
   if(!st.badge) return st;
   if(st.badge === 'No badge'){ st.base='QR Code'; st.determination='Confirmed'; st.complete=true; st.title='QR code check-in'; st.why='With no badge to read, attendees scan a QR code at your meeting and complete their own details on their own device. The compliance questions are built into that check-in, so the meeting stays compliant without any scanning equipment.'; st.apiSource='n/a'; st.services=[st.base]; return st; }
   if(st.badge === 'Name badge'){ st.base='Image Capture'; st.determination='Confirmed'; st.title='Badge image capture'; st.why='A badge printed by the agency or Pfizer carries a name only and has no API behind it, so the RE:nvent app photographs each badge at the door. The compliance questions are asked at the meeting and the name is transcribed from the image.'; st.apiStatus='No'; st.apiSource='n/a (agency or Pfizer badge)'; st.askDevices=true; return finishDevices(st); }
@@ -819,14 +814,14 @@ function svcDisplay(s){ return String(s || '').split(',').map(x => x.trim()).fil
 function update(){
   const st = captureState();
   // prefill the show search from the acronym
-  if(st.askShow && !val('f_show_query') && pickedCongress && showsState === 'ready'){
+  if(st.askShow && !val('f_show_query') && (pickedCongress || typedEventName()) && showsState === 'ready'){
     syncShowFromEvent(); return update();
   }
   const notListed = $id('f_show_notlisted').checked;
   const steps = {
     badge:   { show:true, answered: !!st.badge, text: st.badge ? {'Congress badge':'The official congress badge','Name badge':'A name badge from the agency or Pfizer','No badge':'No badge'}[st.badge] : '' },
     show:    { show: st.askShow, answered: st.askShow && (showsState === 'error' || notListed || (matchedShow && showPicked)),
-               text: showsState === 'error' ? 'Show list unavailable' : notListed ? (val('f_show_query') ? esc(val('f_show_query')) + ' <span class="chip neutral">Not in our list</span>' : '<span class="chip neutral">Not in our list</span>') : (matchedShow ? esc(matchedShow.name) + ' ' + chipFor(matchedShow) : '') },
+               text: showsState === 'error' ? 'Show list unavailable' : notListed ? (val('f_show_query') ? esc(val('f_show_query')) + ' <span class="chip neutral">New show</span>' : '<span class="chip neutral">New show</span>') : (matchedShow ? esc(matchedShow.name) + ' ' + chipFor(matchedShow) : '') },
     api:     { show: st.askApi, answered: !!radioVal('api_answer'), text: {Yes:'Yes, the congress offers an API', No:'No API', Unknown:'Not known yet. We will find out'}[radioVal('api_answer')] || '' },
     outside: { show: st.askOutside, answered: !!radioVal('outside_answer'), text: {Yes:'Yes, own devices are allowed', No:'No, the congress requires its own scanning system', Unknown:'Not known yet. We will check'}[radioVal('outside_answer')] || '' },
   };
@@ -876,7 +871,7 @@ function missingItems(st){
     if(st.askShow && showsState === 'ready' && !$id('f_show_notlisted').checked && !(matchedShow && showPicked)) m.push({id:'f_show_query', label:'Which congress', step:'show'});
     if(st.askApi && !radioVal('api_answer')) m.push({id:'st_api', label:'Badge API question', step:'api'});
     if(st.askOutside && !radioVal('outside_answer')) m.push({id:'st_outside', label:'Own devices question', step:'outside'});
-    if(st.askDevices){ if(!st.deviceMode) m.push({id:'st_setup', label:'How the TD runs it'}); if(st.needApp && !(+val('f_qty_app')>0)) m.push({id:'f_qty_app', label:'App licenses'}); if(st.needScanner && !(+val('f_qty_scanner')>0)) m.push({id:'f_qty_scanner', label:'Number of scanners'}); }
+    if(st.askDevices){ if(st.needApp && !(+val('f_qty_app')>0)) m.push({id:'f_qty_app', label:'App licenses'}); if(st.needScanner && !(+val('f_qty_scanner')>0)) m.push({id:'f_qty_scanner', label:'Number of scanners'}); }
     if(st.askNotAllowed){ if(!st.importAck) m.push({id:'f_import_ack', label:'Compliance acknowledgment'}); }
   }
   return m;
@@ -892,7 +887,7 @@ function renderGlance(st){
   set('g_product', prod ? esc(prod) + (ther ? `<span class="sub">${esc(ther)}</span>` : '') : 'Not chosen', !prod);
   if(st.base){ const [lbl, cls] = DET_CHIP[st.determination]; set('g_capture', `${esc(st.title)} <span class="chip ${cls}" style="margin-left:4px">${lbl}</span>` + (st.showMatch ? `<span class="sub">${esc(st.showMatch)}</span>` : '')); }
   else set('g_capture', st.badge ? 'Answering' : 'Answer Section 3', true);
-  if(st.askDevices){ const parts = []; if(st.deviceMode==='App'||st.deviceMode==='Both') parts.push((val('f_qty_app')||'?') + ' app license' + (val('f_qty_app')==='1'?'':'s')); if(st.deviceMode==='Scanner'||st.deviceMode==='Both') parts.push((val('f_qty_scanner')||'?') + ' scanner' + (val('f_qty_scanner')==='1'?'':'s')); if(st.qrAddon) parts.push('QR check-in'); set('g_setup', parts.length ? esc(parts.join(' · ')) : 'Choose app or scanners', !parts.length); }
+  if(st.askDevices){ const parts = []; if(st.deviceMode==='App'||st.deviceMode==='Both') parts.push((val('f_qty_app')||'?') + ' app license' + (val('f_qty_app')==='1'?'':'s')); if(st.deviceMode==='Scanner'||st.deviceMode==='Both') parts.push((val('f_qty_scanner')||'?') + ' scanner' + (val('f_qty_scanner')==='1'?'':'s')); if(st.qrAddon) parts.push('QR check-in'); set('g_setup', parts.length ? esc(parts.join(' · ')) : 'App licenses needed', !parts.length); }
   else set('g_setup', st.base ? 'None needed' : 'Depends on capture', !st.base);
   set('g_tov', radioVal('f_tov') === 'no' ? 'Not required (&minus;$500)' : 'Required (standard)');
   const miss = missingItems(st); const done = Math.max(0, TOTAL_REQ - Math.min(miss.length, TOTAL_REQ)); const pct = Math.round(done / TOTAL_REQ * 100);
