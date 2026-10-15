@@ -1,13 +1,13 @@
 {
  "_doc": "Sanitized show list for the Pfizer AMEX Order Form. Built by build_shows_json.py from the dev kit history index. Contains no costs, contacts or credentials. A show missing from this list has no record since 2024, which is not proof that no badge API is available.",
- "built": "2026-09-24",
+ "built": "2026-10-15",
  "source_built": "2026-09-14",
  "years_covered": [
   "2024",
   "2025",
   "2026"
  ],
- "show_count": 469,
+ "show_count": 472,
  "shows": [
   {
    "key": "AAAAI",
@@ -161,18 +161,18 @@
   {
    "key": "AAN",
    "name": "AAN",
-   "api": "check",
+   "api": "yes",
    "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
-   "provider": "CMR"
+   "provider": null
   },
   {
    "key": "AAN FALL",
    "name": "AAN Fall",
    "api": "yes",
    "api_last_year": 2026,
-   "image_last_year": 2026,
+   "image_last_year": null,
    "list_import_last_year": null,
    "provider": null
   },
@@ -225,16 +225,16 @@
    "key": "AAO-HNSF",
    "name": "AAO-HNSF",
    "api": "yes",
-   "api_last_year": 2025,
+   "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
-   "provider": null
+   "provider": "Spargo"
   },
   {
    "key": "AAOMS",
    "name": "AAOMS",
    "api": "yes",
-   "api_last_year": 2025,
+   "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
    "provider": null
@@ -284,7 +284,7 @@
    "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
-   "provider": "ATS",
+   "provider": null,
    "note": "American Academy of Pediatrics - NOT AAPA (Physician Assistants)"
   },
   {
@@ -314,6 +314,15 @@
    "image_last_year": null,
    "list_import_last_year": null,
    "provider": "Maritz"
+  },
+  {
+   "key": "AARC",
+   "name": "AARC",
+   "api": "yes",
+   "api_last_year": 2026,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
   },
   {
    "key": "AASLD",
@@ -367,7 +376,7 @@
    "api_last_year": 2026,
    "image_last_year": 2024,
    "list_import_last_year": null,
-   "provider": "Other"
+   "provider": null
   },
   {
    "key": "ACG LEADS",
@@ -776,7 +785,7 @@
    "key": "ANCC MAGNET",
    "name": "ANCC Magnet",
    "api": "yes",
-   "api_last_year": 2025,
+   "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
    "provider": null
@@ -874,9 +883,9 @@
   {
    "key": "APPOS PT",
    "name": "APPOS PT",
-   "api": "yes",
-   "api_last_year": 2026,
-   "image_last_year": null,
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
    "list_import_last_year": null,
    "provider": null
   },
@@ -884,13 +893,22 @@
    "key": "ARS",
    "name": "ARS",
    "api": "yes",
-   "api_last_year": 2025,
+   "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
    "provider": null,
    "aliases": [
     "ARS Fall"
    ]
+  },
+  {
+   "key": "ASCAT",
+   "name": "ASCAT",
+   "api": "list_only",
+   "api_last_year": null,
+   "image_last_year": null,
+   "list_import_last_year": 2026,
+   "provider": null
   },
   {
    "key": "ASCO",
@@ -960,7 +978,16 @@
    "name": "ASCP",
    "api": "likely_no",
    "api_last_year": null,
-   "image_last_year": 2025,
+   "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "ASCP PT",
+   "name": "ASCP PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
    "list_import_last_year": null,
    "provider": null
   },
@@ -1004,7 +1031,7 @@
    "key": "ASH",
    "name": "ASH",
    "api": "check",
-   "api_last_year": 2025,
+   "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
    "provider": null
@@ -1771,7 +1798,7 @@
    "api": "check",
    "api_last_year": 2026,
    "image_last_year": null,
-   "list_import_last_year": null,
+   "list_import_last_year": 2026,
    "provider": null
   },
   {
@@ -1781,15 +1808,6 @@
    "api_last_year": 2025,
    "image_last_year": null,
    "list_import_last_year": null,
-   "provider": null
-  },
-  {
-   "key": "ESMO ER",
-   "name": "ESMO ER",
-   "api": "yes",
-   "api_last_year": 2026,
-   "image_last_year": null,
-   "list_import_last_year": 2026,
    "provider": null
   },
   {
@@ -1856,8 +1874,8 @@
    "provider": null
   },
   {
-   "key": "FALL CLINICAL PT",
-   "name": "Fall  Clinical PT",
+   "key": "FALL CLINICAL PA NP PT",
+   "name": "Fall Clinical PA NP PT",
    "api": "list_only",
    "api_last_year": null,
    "image_last_year": null,
@@ -1865,12 +1883,12 @@
    "provider": null
   },
   {
-   "key": "FALL CLINICAL PA NP PT",
-   "name": "Fall Clinical PA NP PT",
+   "key": "FALL CLINICAL PT",
+   "name": "Fall Clinical PT",
    "api": "list_only",
    "api_last_year": null,
    "image_last_year": null,
-   "list_import_last_year": 2025,
+   "list_import_last_year": 2026,
    "provider": null
   },
   {
@@ -2220,7 +2238,7 @@
    "name": "IDWeek",
    "api": "yes",
    "api_last_year": 2026,
-   "image_last_year": 2026,
+   "image_last_year": 2025,
    "list_import_last_year": null,
    "provider": "Maritz"
   },
@@ -2408,7 +2426,7 @@
    "key": "ISSS",
    "name": "ISSS",
    "api": "yes",
-   "api_last_year": 2025,
+   "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
    "provider": null
@@ -2863,7 +2881,7 @@
   {
    "key": "NCPA",
    "name": "NCPA",
-   "api": "check",
+   "api": "yes",
    "api_last_year": 2025,
    "image_last_year": null,
    "list_import_last_year": null,
@@ -2909,7 +2927,7 @@
    "key": "NEI",
    "name": "NEI",
    "api": "yes",
-   "api_last_year": 2025,
+   "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
    "provider": "ExpoBadge"
@@ -3028,6 +3046,15 @@
    "api": "likely_no",
    "api_last_year": null,
    "image_last_year": 2024,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "NOSHS PT",
+   "name": "NOSHS PT",
+   "api": "likely_no",
+   "api_last_year": null,
+   "image_last_year": 2026,
    "list_import_last_year": null,
    "provider": null
   },
@@ -3575,7 +3602,7 @@
    "key": "SABCS",
    "name": "SABCS",
    "api": "yes",
-   "api_last_year": 2024,
+   "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
    "provider": null
@@ -3727,7 +3754,7 @@
   {
    "key": "SGO",
    "name": "SGO",
-   "api": "yes",
+   "api": "check",
    "api_last_year": 2026,
    "image_last_year": 2025,
    "list_import_last_year": null,
