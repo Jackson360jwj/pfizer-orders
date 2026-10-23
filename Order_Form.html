@@ -716,14 +716,22 @@ let SHOWS = [], showsState = 'loading', matchedShow = null, showPicked = false;
   update();
 })();
 function findShowExact(q){ const s = (q||'').trim().toLowerCase(); if(!s) return null; return SHOWS.find(sh => sh._terms.includes(s)) || null; }
+/* A meeting name typed in full ("AHS Scottsdale 2026 Unbranded Symposium") still finds its congress:
+   match a show whose name or alias appears in the typed text as a whole word (3+ characters).
+   Added Oct 23 2026 after an AHS order missed the API on record because the search only matched
+   when the typed text sat inside a show name. */
+function _escRe(t){ return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+function termInQuery(q, t){ return t.length >= 3 && new RegExp('(^|[^a-z0-9])' + _escRe(t) + '([^a-z0-9]|$)').test(q); }
+function showsInQuery(q){ return SHOWS.filter(sh => sh._terms.some(t => termInQuery(q, t))); }
 const API_LABEL = {yes:['API on record','ok'], check:['API before, we check','warn'], no:['No API','bad'], likely_no:['Image capture history','info'], list_only:['No API or No 3rd party scanning','bad']};
 function chipFor(sh){ const [t,c] = API_LABEL[sh.api] || ['',''] ; return `<span class="chip ${c}">${t}</span>`; }
 function onShowQuery(){
   const q = val('f_show_query').toLowerCase(); const box = $id('suggest');
   showPicked = false; showFromEvent = false; matchedShow = findShowExact(q);
+  const inQ = showsInQuery(q); if(!matchedShow && inQ.length === 1) matchedShow = inQ[0];
   if(showsState !== 'ready' || !q){ box.hidden = true; box.innerHTML = ''; update(); return; }
-  const rank = sh => sh._terms.includes(q) ? 0 : sh._terms.some(t => t.startsWith(q)) ? 1 : 2;
-  const hits = SHOWS.filter(sh => sh._terms.some(t => t.includes(q))).sort((a,b) => rank(a)-rank(b) || a.name.localeCompare(b.name)).slice(0,8);
+  const rank = sh => sh._terms.includes(q) ? 0 : sh._terms.some(t => t.startsWith(q)) ? 1 : sh._terms.some(t => t.includes(q)) ? 2 : 3;
+  const hits = SHOWS.filter(sh => sh._terms.some(t => t.includes(q)) || inQ.includes(sh)).sort((a,b) => rank(a)-rank(b) || a.name.localeCompare(b.name)).slice(0,8);
   if(!hits.length){ box.hidden = true; box.innerHTML = ''; update(); return; }
   box.innerHTML = hits.map(sh => `<button type="button" onmousedown="event.preventDefault();pickShow('${sh.key.replace(/'/g,"\\'")}')"><span class="nm">${esc(sh.name)}${sh.note ? `<small>${esc(sh.note)}</small>` : ''}</span>${chipFor(sh)}</button>`).join('');
   box.hidden = false; update();
