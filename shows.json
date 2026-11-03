@@ -7,7 +7,7 @@
   "2025",
   "2026"
  ],
- "show_count": 474,
+ "show_count": 475,
  "shows": [
   {
    "key": "AAAAI",
@@ -581,6 +581,15 @@
    "name": "AHA LP",
    "api": "yes",
    "api_last_year": 2023,
+   "image_last_year": null,
+   "list_import_last_year": null,
+   "provider": null
+  },
+  {
+   "key": "AHA PT",
+   "name": "AHA PT",
+   "api": "yes",
+   "api_last_year": 2025,
    "image_last_year": null,
    "list_import_last_year": null,
    "provider": null
