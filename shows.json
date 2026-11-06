@@ -1,7 +1,7 @@
 {
  "_doc": "Sanitized show list for the Pfizer AMEX Order Form. Built by build_shows_json.py from the dev kit history index. Contains no costs, contacts or credentials. A show missing from this list has no record since 2024, which is not proof that no badge API is available.",
  "built": "2026-11-06",
- "source_built": "2026-09-14; 2026 Oct-Dec re-read 2026-10-28 (ops-sync); 2026 Nov-Dec re-read 2026-11-05 (ops-sync): ACR added to 11 Nov",
+ "source_built": "2026-09-14; 2026 Oct-Dec re-read 2026-10-28 (ops-sync); 2026 Nov-Dec re-read 2026-11-05 (ops-sync): ACR added to 11 Nov; 2026 Nov-Dec re-read 2026-11-06 (ops-sync): London Vet added to 11 Nov (2027 folder not present)",
  "years_covered": [
   "2024",
   "2025",
@@ -2570,7 +2570,7 @@
    "key": "LONDON VET",
    "name": "London Vet",
    "api": "yes",
-   "api_last_year": 2025,
+   "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
    "provider": null
