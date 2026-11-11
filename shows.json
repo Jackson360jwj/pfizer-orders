@@ -644,7 +644,7 @@
    "name": "AHS",
    "api": "check",
    "api_last_year": 2026,
-   "image_last_year": 2025,
+   "image_last_year": 2026,
    "list_import_last_year": 2025,
    "provider": null,
    "aliases": [
@@ -654,7 +654,7 @@
   {
    "key": "AIBD",
    "name": "AIBD",
-   "api": "check",
+   "api": "yes",
    "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
@@ -1030,11 +1030,11 @@
   {
    "key": "ASH",
    "name": "ASH",
-   "api": "check",
+   "api": "yes",
    "api_last_year": 2026,
    "image_last_year": null,
    "list_import_last_year": null,
-   "provider": null
+   "provider": "Spargo"
   },
   {
    "key": "ASH RECEPTION",
