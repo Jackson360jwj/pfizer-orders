@@ -444,11 +444,11 @@ textarea{height:72px;resize:vertical;}
       </div>
       <div class="svc-row" style="background:#fff8e1;border:1px solid #f9a825;flex-wrap:wrap;gap:6px;">
         <div style="flex:1;min-width:200px;">
-          <div class="svc-name">API Connection Passthrough <span style="color:#e67e22;font-size:11px;">(included by default; uncheck for venues with no API)</span></div>
+          <div class="svc-name">API Connection Passthrough <span style="color:#e67e22;font-size:11px;">(off by default: image capture is the service for venues WITHOUT a badge API; never quote both)</span></div>
           <div class="svc-desc" id="img_api_desc" style="color:#c0392b;">Pass through cost for the venue API. The $1,200 placeholder prints as an estimate until "Actual cost confirmed" is checked; issue a revised quote once the venue cost is known.</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-          <label class="opt" style="margin:0;"><input type="checkbox" id="opt_api_img" checked onchange="liveCalc()"> Include</label>
+          <label class="opt" style="margin:0;"><input type="checkbox" id="opt_api_img" onchange="liveCalc()"> Include</label>
           <label style="display:flex;align-items:center;gap:4px;font-size:12px;color:#555;cursor:pointer;white-space:nowrap;">
             <input type="checkbox" id="img_api_actual" onchange="onImgApiActualToggle()">
             Actual cost confirmed
@@ -1320,7 +1320,8 @@ function doImportObject(d, alreadyInKV){
   if(d.opt_api_scanner === undefined && d.opt_api_img === undefined && d.service_type){
     const noApi = d.badge_api_available === 'No';
     if($id('opt_api_scanner')) $id('opt_api_scanner').checked = !noApi && _hasScan && !_hasApp && !_hasImg;
-    if($id('opt_api_img'))     $id('opt_api_img').checked     = !noApi && _hasImg && !_hasApp;
+    // Image capture is the no-API service (JJ, Oct 23 2026, matching the online generator): never auto-add an API line to it.
+    if($id('opt_api_img'))     $id('opt_api_img').checked     = false;
   }
   // API costs
   if(d.api_cost         && $id('api_cost'))         $id('api_cost').value         = d.api_cost;
