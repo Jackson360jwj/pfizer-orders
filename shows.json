@@ -1678,9 +1678,9 @@
   {
    "key": "EHC",
    "name": "EHC",
-   "api": "list_only",
+   "api": "likely_no",
    "api_last_year": null,
-   "image_last_year": null,
+   "image_last_year": 2026,
    "list_import_last_year": 2024,
    "provider": null
   },
