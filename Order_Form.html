@@ -197,7 +197,7 @@ a{color:var(--accent)}
 .tov .price{font-family:var(--mono);font-size:13px;color:var(--muted)}
 
 /* glance panel */
-.glance{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.glance{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;overflow-y:auto;max-height:calc(100vh - 32px)}
 .g-head{background:var(--panel-head);color:var(--panel-head-fg);padding:16px 18px 14px}
 .g-head .eyebrow{color:var(--panel-head-fg);opacity:.7}
 .g-head h2{color:var(--panel-head-fg);font-size:17px;font-weight:700;margin-top:2px;font-variation-settings:'wdth' 108}
@@ -226,6 +226,12 @@ a{color:var(--accent)}
 .btn:focus-visible{outline:3px solid var(--accent-soft);outline-offset:2px}
 .btn[disabled]{opacity:.55;cursor:not-allowed}
 .g-fine{font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.45}
+.send-fail{margin-top:14px;padding:14px;border-radius:var(--radius-sm);background:var(--bad-bg);border:1.5px solid var(--bad);color:var(--text);font-size:13px;line-height:1.5}
+.send-fail .sf-title{font-weight:700;color:var(--bad);font-size:14px;margin-bottom:4px}
+.send-fail p{margin:6px 0}
+.send-fail .sf-reason{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.send-fail .btn{width:100%;margin-top:8px;font-size:13.5px;padding:10px 12px}
+.send-fail .btn.ghost{width:100%;margin-top:8px;background:var(--surface)}
 .g-toggle{display:none}
 
 /* success */
@@ -514,6 +520,15 @@ a{color:var(--accent)}
     <div class="g-row"><span class="k">TOV</span><span class="v" id="g_tov">Required (standard)</span></div>
     <div class="todo" id="todo"></div>
     <button type="button" class="btn" id="submit_btn" onclick="submitOrder()">Send order request</button>
+    <div class="send-fail" id="send_fail" hidden role="alert">
+      <div class="sf-title">Your order could not be sent online</div>
+      <p class="sf-reason" id="sf_reason"></p>
+      <p>Your answers are saved in this browser. Send them to us another way and we will take it from there:</p>
+      <button type="button" class="btn" onclick="emailOrder()">Email my order to Reality Engineering</button>
+      <button type="button" class="btn ghost" id="sf_copy" onclick="copyOrder()">Copy order details</button>
+      <button type="button" class="btn ghost" onclick="downloadPDF()">Download PDF of my order</button>
+      <p class="g-fine">You can also try sending again later.</p>
+    </div>
     <p class="g-fine">Reality Engineering confirms details and sends a quote before your event.</p>
   </div>
 </aside>
@@ -941,6 +956,8 @@ async function submitOrder(){
   markInvalid(st, miss);
   if(miss.length){ goTo(miss[0].id, miss[0].step); return; }
   btn.disabled = true; btn.textContent = 'Checking';
+  $id('send_fail').hidden = true;
+  let d = null;
   try {
     // Duplicate guard: this browser first, then the order queue
     const pfz = normPfz(val('f_pfz'));
@@ -955,7 +972,7 @@ async function submitOrder(){
     }
     if(dupMsg && !confirm(dupMsg + '\n\nSend this as a new order anyway?')) return;
     btn.textContent = 'Sending';
-    const d = buildData();
+    d = buildData();
     const ctrl = new AbortController(); const timer = setTimeout(() => ctrl.abort(), 30000);
     let res;
     try {
@@ -964,8 +981,7 @@ async function submitOrder(){
     if(!res.ok){ const err = await res.json().catch(() => ({})); throw new Error(err.error || ('Server error ' + res.status)); }
     showSuccess(d);
   } catch(err){
-    const msg = (err && err.name === 'AbortError') ? 'The request timed out. Check your connection and try again.' : ((err && err.message) || 'Unexpected error');
-    alert('The order could not be sent: ' + msg + '\n\nPlease try again or contact Reality Engineering.');
+    showSendFail(err, d);
   } finally {
     if(!$id('frame').hidden){ btn.disabled = false; btn.textContent = 'Send order request'; }
   }
@@ -991,11 +1007,8 @@ function loadJsPDF(){
     sc.onload = () => resolve(); sc.onerror = () => reject(new Error('Could not load the PDF library')); document.head.appendChild(sc);
   });
 }
-async function downloadPDF(){
-  if(!_lastSubmitted){ alert('No submitted order found.'); return; }
-  try { await loadJsPDF(); } catch(e){ alert('Could not load the PDF library. Check your connection and try again.'); return; }
-  const d = _lastSubmitted;
-  const rows = [
+function orderRows(d){
+  return [
     ['Meeting Manager', d.f_mgr], ['Manager Email', d.f_mgr_email], ['Pfizer Meeting #', d.f_pfz], ['Legal Entity', d.f_entity],
     ['Meeting Full Name', d.f_name], ['Meeting Acronym', d.f_acronym], ['Event Type', d.f_etype], ['Meeting Site / Address', d.f_addr],
     ['Meeting Date', fmtDate(d.f_date)], ['Meeting End Date', fmtDate(d.f_date_end)], ['Meeting Time', d.f_time], ['Meal Type', d.f_meal],
@@ -1007,10 +1020,65 @@ async function downloadPDF(){
     ['TOV Required', d.tov === 'no' ? 'No' : 'Yes (standard)'], ['Association Contact', d.assoc_contact_name], ['Association Contact Email', d.assoc_contact_email],
     ['Badge / API Available', d.badge_api_available], ['API Source', d.api_source], ['Provider / Reg Company', d.provider_reg_company], ['API Contact Name', d.api_badge_contact_name], ['API Contact Email', d.api_badge_contact_email], ['API / Badge Notes', d.api_badge_notes],
   ].filter(([,v]) => v && String(v).trim());
+}
+
+// ── When the online send fails (Nov 17 2026: an AMEX planner's submit never reached the order server,
+//    most likely a company network blocking it). Explain why and offer email / copy / PDF instead of a bare alert. ──
+let _failedOrder = null, _failReason = '';
+const ORDER_EMAIL_TO = 'justin.jackson@realityengineering.com';
+const ORDER_EMAIL_CC = 'Michelle.Bradford@realityengineering.com,Katherine.Nelson@realityengineering.com';
+function showSendFail(err, d){
+  _failedOrder = d || buildData();
+  const raw = (err && err.message) || 'Unexpected error';
+  if(err && err.name === 'AbortError') _failReason = 'The order server did not answer within 30 seconds.';
+  else if(err && err.name === 'TypeError') _failReason = 'Your browser could not reach our order server ("' + raw + '"). This usually means a company network or firewall is blocking it, so trying another browser will not help.';
+  else _failReason = 'Our order server returned an error: ' + raw;
+  $id('sf_reason').textContent = _failReason;
+  $id('sf_copy').textContent = 'Copy order details';
+  $id('send_fail').hidden = false;
+  $id('glance').classList.add('open');
+  try { console.error('[order form] send failed', err); } catch(e){}
+  $id('send_fail').scrollIntoView({behavior:'smooth', block:'center'});
+}
+function orderText(d){
+  return orderRows(d).filter(([k]) => k !== 'Why').map(([k, v]) => k + ': ' + String(v).replace(/\s+/g, ' ').trim()).join('\n');
+}
+function orderSubject(d){ return 'Pfizer symposia order request: ' + [d.f_pfz, d.f_acronym || d.f_name, d.f_date ? fmtDate(d.f_date) : ''].filter(Boolean).join(', '); }
+async function copyOrder(){
+  const d = _failedOrder || buildData();
+  const txt = orderSubject(d) + '\n\n' + orderText(d);
+  let ok = false;
+  try { await navigator.clipboard.writeText(txt); ok = true; } catch(e){
+    try { const ta = document.createElement('textarea'); ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); ok = document.execCommand('copy'); ta.remove(); } catch(e2){}
+  }
+  $id('sf_copy').textContent = ok ? 'Copied. Paste it into an email to ' + ORDER_EMAIL_TO : 'Copy failed. Use Download PDF instead.';
+  return ok;
+}
+async function emailOrder(){
+  const d = _failedOrder || buildData();
+  const intro = 'The online order form could not send this order' + (_failReason ? ' (' + _failReason + ')' : '') + '.\n\nOrder details:\n\n';
+  let body = intro + orderText(d);
+  // mailto links over ~1,900 characters break in some mail programs: send the essentials and put the full text on the clipboard.
+  const enc = s => encodeURIComponent(s);
+  if(enc(body).length > 1900){
+    const copied = await copyOrder();
+    const keep = ['Meeting Manager','Manager Email','Pfizer Meeting #','Meeting Full Name','Meeting Date','Meeting Time','Meal Type','Estimated # Attendees','Pfizer Project Owner','Project Owner Email','Product / Drug','Service Type','App Licenses','Scanners','Notes'];
+    const short = orderRows(d).filter(([k]) => keep.includes(k)).map(([k, v]) => k + ': ' + String(v).replace(/\s+/g, ' ').trim()).join('\n');
+    body = 'The online order form could not send this order.\n\n' + short + '\n\n' + (copied ? '(Full order details were copied: paste them here.)' : '(Please attach the PDF of the order from the form.)');
+    if(enc(body).length > 1900) body = body.slice(0, 1200);
+  }
+  location.href = 'mailto:' + ORDER_EMAIL_TO + '?cc=' + enc(ORDER_EMAIL_CC) + '&subject=' + enc(orderSubject(d)) + '&body=' + enc(body);
+}
+
+async function downloadPDF(){
+  const d = _lastSubmitted || _failedOrder;
+  if(!d){ alert('No order found.'); return; }
+  try { await loadJsPDF(); } catch(e){ alert('Could not load the PDF tool. Use your browser\'s Print (Save as PDF) instead.'); return; }
+  const rows = orderRows(d);
   const { jsPDF } = window.jspdf; const doc = new jsPDF({unit:'pt', format:'letter'});
   const pageW = doc.internal.pageSize.getWidth(), pageH = doc.internal.pageSize.getHeight(); const margin = 48, labelW = 160, lineH = 14; let y = margin;
   doc.setFont('helvetica','bold'); doc.setFontSize(16); doc.setTextColor(23,16,67); doc.text('Pfizer Symposia Order Request', margin, y); y += 20;
-  doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(120); doc.text('Reality Engineering. Submitted ' + new Date().toLocaleString(), margin, y); y += 10;
+  doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(120); doc.text('Reality Engineering. ' + (_lastSubmitted ? 'Submitted ' : 'Prepared (NOT sent online; email this to ' + ORDER_EMAIL_TO + ') ') + new Date().toLocaleString(), margin, y); y += 10;
   doc.setDrawColor(23,16,67); doc.setLineWidth(1); doc.line(margin, y, pageW - margin, y); y += 18; doc.setFontSize(10);
   rows.forEach(([k, v]) => { const lines = doc.splitTextToSize(String(v), pageW - margin*2 - labelW); const blockH = Math.max(lines.length, 1) * lineH + 4; if(y + blockH > pageH - margin){ doc.addPage(); y = margin; } doc.setFont('helvetica','bold'); doc.setTextColor(60); doc.text(k + ':', margin, y); doc.setFont('helvetica','normal'); doc.setTextColor(20); doc.text(lines, margin + labelW, y); y += blockH; });
   doc.save('Pfizer_Order_' + (d.f_pfz || 'Request').replace(/[^\w-]/g, '_') + '.pdf');
